@@ -12,15 +12,3 @@ Route::get('/app/db/migrate', function () {
             'output' => Artisan::output()
       ]);
 });
-
-Route::get('/app/system/install', function () {
-
-      Artisan::call('app:install-dependencies');
-      $output = Artisan::output();
-
-      return response()->json([
-            'success' => true,
-            'message' => 'Dependencies installed successfully',
-            'output' => json_encode($output, true)
-      ]);
-});
