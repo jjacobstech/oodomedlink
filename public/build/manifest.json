@@ -1,0 +1,432 @@
+{
+  "_AdminAuthLayout.vue_vue_type_script_setup_true_lang-B-axylz5.js": {
+    "file": "assets/AdminAuthLayout.vue_vue_type_script_setup_true_lang-B-axylz5.js",
+    "name": "AdminAuthLayout.vue_vue_type_script_setup_true_lang",
+    "imports": [
+      "resources/js/app.ts",
+      "_Wind-LiKkUfSx-B1iWjYKl.js"
+    ]
+  },
+  "_AuthLayout-DmSwVsKr.js": {
+    "file": "assets/AuthLayout-DmSwVsKr.js",
+    "name": "AuthLayout",
+    "imports": [
+      "__plugin-vue_export-helper-DlAUqK2U.js",
+      "resources/js/app.ts"
+    ]
+  },
+  "_AuthenticatedLayout-BLSf5RCD.css": {
+    "file": "assets/AuthenticatedLayout-BLSf5RCD.css",
+    "src": "_AuthenticatedLayout-BLSf5RCD.css"
+  },
+  "_AuthenticatedLayout.vue_vue_type_script_setup_true_lang-ZPc7eeLI.js": {
+    "file": "assets/AuthenticatedLayout.vue_vue_type_script_setup_true_lang-ZPc7eeLI.js",
+    "name": "AuthenticatedLayout.vue_vue_type_script_setup_true_lang",
+    "imports": [
+      "_index-DhpHanJW.js",
+      "_Wind-LiKkUfSx-B1iWjYKl.js",
+      "resources/js/app.ts",
+      "_x-YtxciTW9.js",
+      "__plugin-vue_export-helper-DlAUqK2U.js"
+    ],
+    "css": [
+      "assets/AuthenticatedLayout-BLSf5RCD.css"
+    ]
+  },
+  "_PasswordInput-AZTodQ9t.js": {
+    "file": "assets/PasswordInput-AZTodQ9t.js",
+    "name": "PasswordInput",
+    "imports": [
+      "_x-YtxciTW9.js",
+      "resources/js/app.ts",
+      "_index-DlfGbzmo.js"
+    ]
+  },
+  "_Wind-LiKkUfSx-B1iWjYKl.js": {
+    "file": "assets/Wind-LiKkUfSx-B1iWjYKl.js",
+    "name": "Wind-LiKkUfSx",
+    "imports": [
+      "_index-DlfGbzmo.js",
+      "resources/js/app.ts"
+    ]
+  },
+  "__plugin-vue_export-helper-DlAUqK2U.js": {
+    "file": "assets/_plugin-vue_export-helper-DlAUqK2U.js",
+    "name": "_plugin-vue_export-helper"
+  },
+  "_index-DhpHanJW.js": {
+    "file": "assets/index-DhpHanJW.js",
+    "name": "index",
+    "imports": [
+      "_index-DlfGbzmo.js",
+      "_x-YtxciTW9.js",
+      "resources/js/app.ts",
+      "_Wind-LiKkUfSx-B1iWjYKl.js"
+    ]
+  },
+  "_index-DlfGbzmo.js": {
+    "file": "assets/index-DlfGbzmo.js",
+    "name": "index",
+    "imports": [
+      "resources/js/app.ts"
+    ]
+  },
+  "_x-YtxciTW9.js": {
+    "file": "assets/x-YtxciTW9.js",
+    "name": "x",
+    "imports": [
+      "_index-DlfGbzmo.js",
+      "resources/js/app.ts"
+    ]
+  },
+  "resources/css/font/fonts/Chillax-Bold.ttf": {
+    "file": "assets/Chillax-Bold-Cs_FQL2h.ttf",
+    "src": "resources/css/font/fonts/Chillax-Bold.ttf"
+  },
+  "resources/css/font/fonts/Chillax-Bold.woff": {
+    "file": "assets/Chillax-Bold-CsVFzx3Z.woff",
+    "src": "resources/css/font/fonts/Chillax-Bold.woff"
+  },
+  "resources/css/font/fonts/Chillax-Bold.woff2": {
+    "file": "assets/Chillax-Bold-CjEtuJG9.woff2",
+    "src": "resources/css/font/fonts/Chillax-Bold.woff2"
+  },
+  "resources/css/font/fonts/Chillax-Extralight.ttf": {
+    "file": "assets/Chillax-Extralight-DLbQ9yzW.ttf",
+    "src": "resources/css/font/fonts/Chillax-Extralight.ttf"
+  },
+  "resources/css/font/fonts/Chillax-Extralight.woff": {
+    "file": "assets/Chillax-Extralight-pP43wGuU.woff",
+    "src": "resources/css/font/fonts/Chillax-Extralight.woff"
+  },
+  "resources/css/font/fonts/Chillax-Extralight.woff2": {
+    "file": "assets/Chillax-Extralight-Cutl3tgX.woff2",
+    "src": "resources/css/font/fonts/Chillax-Extralight.woff2"
+  },
+  "resources/css/font/fonts/Chillax-Light.ttf": {
+    "file": "assets/Chillax-Light-iMpqqy7B.ttf",
+    "src": "resources/css/font/fonts/Chillax-Light.ttf"
+  },
+  "resources/css/font/fonts/Chillax-Light.woff": {
+    "file": "assets/Chillax-Light-CP6aeztD.woff",
+    "src": "resources/css/font/fonts/Chillax-Light.woff"
+  },
+  "resources/css/font/fonts/Chillax-Light.woff2": {
+    "file": "assets/Chillax-Light-D1bgFOD4.woff2",
+    "src": "resources/css/font/fonts/Chillax-Light.woff2"
+  },
+  "resources/css/font/fonts/Chillax-Medium.ttf": {
+    "file": "assets/Chillax-Medium-BtSjD5k2.ttf",
+    "src": "resources/css/font/fonts/Chillax-Medium.ttf"
+  },
+  "resources/css/font/fonts/Chillax-Medium.woff": {
+    "file": "assets/Chillax-Medium-CS_sKsD0.woff",
+    "src": "resources/css/font/fonts/Chillax-Medium.woff"
+  },
+  "resources/css/font/fonts/Chillax-Medium.woff2": {
+    "file": "assets/Chillax-Medium-BmL3CiFe.woff2",
+    "src": "resources/css/font/fonts/Chillax-Medium.woff2"
+  },
+  "resources/css/font/fonts/Chillax-Regular.ttf": {
+    "file": "assets/Chillax-Regular-DDL1LzvV.ttf",
+    "src": "resources/css/font/fonts/Chillax-Regular.ttf"
+  },
+  "resources/css/font/fonts/Chillax-Regular.woff": {
+    "file": "assets/Chillax-Regular-WYnASVe4.woff",
+    "src": "resources/css/font/fonts/Chillax-Regular.woff"
+  },
+  "resources/css/font/fonts/Chillax-Regular.woff2": {
+    "file": "assets/Chillax-Regular-DCEovDrN.woff2",
+    "src": "resources/css/font/fonts/Chillax-Regular.woff2"
+  },
+  "resources/css/font/fonts/Chillax-Semibold.ttf": {
+    "file": "assets/Chillax-Semibold-BuTpcDIC.ttf",
+    "src": "resources/css/font/fonts/Chillax-Semibold.ttf"
+  },
+  "resources/css/font/fonts/Chillax-Semibold.woff": {
+    "file": "assets/Chillax-Semibold-DsOt7cUk.woff",
+    "src": "resources/css/font/fonts/Chillax-Semibold.woff"
+  },
+  "resources/css/font/fonts/Chillax-Semibold.woff2": {
+    "file": "assets/Chillax-Semibold-BeOZ2uPm.woff2",
+    "src": "resources/css/font/fonts/Chillax-Semibold.woff2"
+  },
+  "resources/css/font/fonts/Chillax-Variable.ttf": {
+    "file": "assets/Chillax-Variable-adSItSd9.ttf",
+    "src": "resources/css/font/fonts/Chillax-Variable.ttf"
+  },
+  "resources/css/font/fonts/Chillax-Variable.woff": {
+    "file": "assets/Chillax-Variable-DJzWk0KB.woff",
+    "src": "resources/css/font/fonts/Chillax-Variable.woff"
+  },
+  "resources/css/font/fonts/Chillax-Variable.woff2": {
+    "file": "assets/Chillax-Variable-3OGwrkmm.woff2",
+    "src": "resources/css/font/fonts/Chillax-Variable.woff2"
+  },
+  "resources/js/Pages/Admin/Dashboard.vue": {
+    "file": "assets/Dashboard-CWyTz1Do.js",
+    "name": "Dashboard",
+    "src": "resources/js/Pages/Admin/Dashboard.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.ts",
+      "_index-DhpHanJW.js",
+      "_Wind-LiKkUfSx-B1iWjYKl.js",
+      "__plugin-vue_export-helper-DlAUqK2U.js",
+      "_index-DlfGbzmo.js",
+      "_x-YtxciTW9.js"
+    ],
+    "css": [
+      "assets/Dashboard-BPffLjBP.css"
+    ]
+  },
+  "resources/js/Pages/Admin/Emails.vue": {
+    "file": "assets/Emails-eYRVxC8R.js",
+    "name": "Emails",
+    "src": "resources/js/Pages/Admin/Emails.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.ts",
+      "_AuthenticatedLayout.vue_vue_type_script_setup_true_lang-ZPc7eeLI.js",
+      "_index-DhpHanJW.js",
+      "_index-DlfGbzmo.js",
+      "_x-YtxciTW9.js",
+      "_Wind-LiKkUfSx-B1iWjYKl.js",
+      "__plugin-vue_export-helper-DlAUqK2U.js"
+    ]
+  },
+  "resources/js/Pages/Admin/Patients.vue": {
+    "file": "assets/Patients-Cnm-s230.js",
+    "name": "Patients",
+    "src": "resources/js/Pages/Admin/Patients.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.ts",
+      "_AuthenticatedLayout.vue_vue_type_script_setup_true_lang-ZPc7eeLI.js",
+      "_index-DhpHanJW.js",
+      "_index-DlfGbzmo.js",
+      "_x-YtxciTW9.js",
+      "_Wind-LiKkUfSx-B1iWjYKl.js",
+      "__plugin-vue_export-helper-DlAUqK2U.js"
+    ]
+  },
+  "resources/js/Pages/Admin/Settings.vue": {
+    "file": "assets/Settings-Ddy3h64a.js",
+    "name": "Settings",
+    "src": "resources/js/Pages/Admin/Settings.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.ts",
+      "_AuthenticatedLayout.vue_vue_type_script_setup_true_lang-ZPc7eeLI.js",
+      "_index-DhpHanJW.js",
+      "_index-DlfGbzmo.js",
+      "_x-YtxciTW9.js",
+      "_Wind-LiKkUfSx-B1iWjYKl.js",
+      "__plugin-vue_export-helper-DlAUqK2U.js"
+    ]
+  },
+  "resources/js/Pages/Auth/Admin/ForgotPassword.vue": {
+    "file": "assets/ForgotPassword-DGa0mhIw.js",
+    "name": "ForgotPassword",
+    "src": "resources/js/Pages/Auth/Admin/ForgotPassword.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.ts",
+      "_AdminAuthLayout.vue_vue_type_script_setup_true_lang-B-axylz5.js",
+      "_PasswordInput-AZTodQ9t.js",
+      "_Wind-LiKkUfSx-B1iWjYKl.js",
+      "_index-DlfGbzmo.js",
+      "_x-YtxciTW9.js"
+    ]
+  },
+  "resources/js/Pages/Auth/Admin/Login.vue": {
+    "file": "assets/Login-z1OIDxDk.js",
+    "name": "Login",
+    "src": "resources/js/Pages/Auth/Admin/Login.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.ts",
+      "_PasswordInput-AZTodQ9t.js",
+      "_AdminAuthLayout.vue_vue_type_script_setup_true_lang-B-axylz5.js",
+      "_x-YtxciTW9.js",
+      "_index-DlfGbzmo.js",
+      "_Wind-LiKkUfSx-B1iWjYKl.js"
+    ]
+  },
+  "resources/js/Pages/Auth/Admin/Register.vue": {
+    "file": "assets/Register-5SL0XJHW.js",
+    "name": "Register",
+    "src": "resources/js/Pages/Auth/Admin/Register.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.ts",
+      "_AdminAuthLayout.vue_vue_type_script_setup_true_lang-B-axylz5.js",
+      "_PasswordInput-AZTodQ9t.js",
+      "_Wind-LiKkUfSx-B1iWjYKl.js",
+      "_index-DlfGbzmo.js",
+      "_x-YtxciTW9.js"
+    ]
+  },
+  "resources/js/Pages/Auth/User/ForgotPassword.vue": {
+    "file": "assets/ForgotPassword-CazAuLQF.js",
+    "name": "ForgotPassword",
+    "src": "resources/js/Pages/Auth/User/ForgotPassword.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.ts",
+      "_AuthLayout-DmSwVsKr.js",
+      "_PasswordInput-AZTodQ9t.js",
+      "__plugin-vue_export-helper-DlAUqK2U.js",
+      "_x-YtxciTW9.js",
+      "_index-DlfGbzmo.js"
+    ]
+  },
+  "resources/js/Pages/Auth/User/Login.vue": {
+    "file": "assets/Login-CpJyipeM.js",
+    "name": "Login",
+    "src": "resources/js/Pages/Auth/User/Login.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.ts",
+      "_PasswordInput-AZTodQ9t.js",
+      "_AuthLayout-DmSwVsKr.js",
+      "_x-YtxciTW9.js",
+      "_index-DlfGbzmo.js",
+      "__plugin-vue_export-helper-DlAUqK2U.js"
+    ]
+  },
+  "resources/js/Pages/Auth/User/Register.vue": {
+    "file": "assets/Register-L3GuLOOT.js",
+    "name": "Register",
+    "src": "resources/js/Pages/Auth/User/Register.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.ts",
+      "_AuthLayout-DmSwVsKr.js",
+      "_PasswordInput-AZTodQ9t.js",
+      "__plugin-vue_export-helper-DlAUqK2U.js",
+      "_x-YtxciTW9.js",
+      "_index-DlfGbzmo.js"
+    ]
+  },
+  "resources/js/Pages/User/Dashboard.vue": {
+    "file": "assets/Dashboard-BBmMbCjF.js",
+    "name": "Dashboard",
+    "src": "resources/js/Pages/User/Dashboard.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.ts",
+      "_AuthenticatedLayout.vue_vue_type_script_setup_true_lang-ZPc7eeLI.js",
+      "_index-DhpHanJW.js",
+      "_index-DlfGbzmo.js",
+      "_x-YtxciTW9.js",
+      "_Wind-LiKkUfSx-B1iWjYKl.js",
+      "__plugin-vue_export-helper-DlAUqK2U.js"
+    ]
+  },
+  "resources/js/Pages/User/Emails.vue": {
+    "file": "assets/Emails-pb990zWJ.js",
+    "name": "Emails",
+    "src": "resources/js/Pages/User/Emails.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.ts",
+      "_AuthenticatedLayout.vue_vue_type_script_setup_true_lang-ZPc7eeLI.js",
+      "_index-DhpHanJW.js",
+      "_index-DlfGbzmo.js",
+      "_x-YtxciTW9.js",
+      "_Wind-LiKkUfSx-B1iWjYKl.js",
+      "__plugin-vue_export-helper-DlAUqK2U.js"
+    ]
+  },
+  "resources/js/Pages/User/Patients.vue": {
+    "file": "assets/Patients-xZDmTPh5.js",
+    "name": "Patients",
+    "src": "resources/js/Pages/User/Patients.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.ts",
+      "_AuthenticatedLayout.vue_vue_type_script_setup_true_lang-ZPc7eeLI.js",
+      "_index-DhpHanJW.js",
+      "_index-DlfGbzmo.js",
+      "_x-YtxciTW9.js",
+      "_Wind-LiKkUfSx-B1iWjYKl.js",
+      "__plugin-vue_export-helper-DlAUqK2U.js"
+    ]
+  },
+  "resources/js/Pages/User/Settings.vue": {
+    "file": "assets/Settings-J9NLSRVY.js",
+    "name": "Settings",
+    "src": "resources/js/Pages/User/Settings.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.ts",
+      "_AuthenticatedLayout.vue_vue_type_script_setup_true_lang-ZPc7eeLI.js",
+      "_index-DhpHanJW.js",
+      "_index-DlfGbzmo.js",
+      "_x-YtxciTW9.js",
+      "_Wind-LiKkUfSx-B1iWjYKl.js",
+      "__plugin-vue_export-helper-DlAUqK2U.js"
+    ]
+  },
+  "resources/js/Pages/Welcome.vue": {
+    "file": "assets/Welcome-BWQ6QVLz.js",
+    "name": "Welcome",
+    "src": "resources/js/Pages/Welcome.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.ts",
+      "_Wind-LiKkUfSx-B1iWjYKl.js",
+      "_index-DlfGbzmo.js"
+    ]
+  },
+  "resources/js/app.ts": {
+    "file": "assets/app-a2O_f4J7.js",
+    "name": "app",
+    "src": "resources/js/app.ts",
+    "isEntry": true,
+    "dynamicImports": [
+      "resources/js/Pages/Admin/Dashboard.vue",
+      "resources/js/Pages/Admin/Emails.vue",
+      "resources/js/Pages/Admin/Patients.vue",
+      "resources/js/Pages/Admin/Settings.vue",
+      "resources/js/Pages/Auth/Admin/ForgotPassword.vue",
+      "resources/js/Pages/Auth/Admin/Login.vue",
+      "resources/js/Pages/Auth/Admin/Register.vue",
+      "resources/js/Pages/Auth/User/ForgotPassword.vue",
+      "resources/js/Pages/Auth/User/Login.vue",
+      "resources/js/Pages/Auth/User/Register.vue",
+      "resources/js/Pages/User/Dashboard.vue",
+      "resources/js/Pages/User/Emails.vue",
+      "resources/js/Pages/User/Patients.vue",
+      "resources/js/Pages/User/Settings.vue",
+      "resources/js/Pages/Welcome.vue"
+    ],
+    "css": [
+      "assets/app-DiNyedXh.css"
+    ],
+    "assets": [
+      "assets/Chillax-Extralight-Cutl3tgX.woff2",
+      "assets/Chillax-Extralight-pP43wGuU.woff",
+      "assets/Chillax-Extralight-DLbQ9yzW.ttf",
+      "assets/Chillax-Light-D1bgFOD4.woff2",
+      "assets/Chillax-Light-CP6aeztD.woff",
+      "assets/Chillax-Light-iMpqqy7B.ttf",
+      "assets/Chillax-Regular-DCEovDrN.woff2",
+      "assets/Chillax-Regular-WYnASVe4.woff",
+      "assets/Chillax-Regular-DDL1LzvV.ttf",
+      "assets/Chillax-Medium-BmL3CiFe.woff2",
+      "assets/Chillax-Medium-CS_sKsD0.woff",
+      "assets/Chillax-Medium-BtSjD5k2.ttf",
+      "assets/Chillax-Semibold-BeOZ2uPm.woff2",
+      "assets/Chillax-Semibold-DsOt7cUk.woff",
+      "assets/Chillax-Semibold-BuTpcDIC.ttf",
+      "assets/Chillax-Bold-CjEtuJG9.woff2",
+      "assets/Chillax-Bold-CsVFzx3Z.woff",
+      "assets/Chillax-Bold-Cs_FQL2h.ttf",
+      "assets/Chillax-Variable-3OGwrkmm.woff2",
+      "assets/Chillax-Variable-DJzWk0KB.woff",
+      "assets/Chillax-Variable-adSItSd9.ttf"
+    ]
+  }
+}
