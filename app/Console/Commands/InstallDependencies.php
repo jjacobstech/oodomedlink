@@ -8,6 +8,12 @@ class InstallDependencies extends Command
 {
     protected $signature = 'app:install-dependencies';
 
+
+    private function stripAnsiCodes($string)
+    {
+        return preg_replace('/\x1b\[[0-9;]*m/', '', $string);
+    }
+
     public function handle()
     {
 
@@ -18,11 +24,15 @@ class InstallDependencies extends Command
 
         $this->info('Installing Composer dependencies...');
         exec('cd .. && composer install 2>&1', $output, $return);
-        $this->line(implode("\n", $output));
+        foreach ($output as $line) {
+            $this->line($this->stripAnsiCodes($line));
+        }
 
         $this->info('Installing NPM dependencies...');
         exec('cd .. && npm install 2>&1', $output, $return);
-        $this->line(implode("\n", $output));
+        foreach ($output as $line) {
+            $this->line($this->stripAnsiCodes($line));
+        }
 
         return 0;
     }
