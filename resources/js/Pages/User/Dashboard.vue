@@ -313,7 +313,7 @@ const getFileIcon = (fileType: string) => {
                                                       class="transition-colors hover:bg-gray-50">
                                                       <td class="px-4 py-4 text-sm font-medium text-gray-900">{{
                                                             result.patient_name
-                                                      }}
+}}
                                                       </td>
                                                       <td class="px-4 py-4 text-sm text-gray-700">{{ result.result_type
                                                       }}</td>
@@ -362,8 +362,8 @@ const getFileIcon = (fileType: string) => {
 
                         <!-- Upload Modal -->
                         <div v-if="showUploadModal"
-                              class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-                              <div class="w-1/2 p-20 bg-white rounded-xl">
+                              class="fixed inset-0 z-50 flex items-center justify-center bg-black py-10 bg-opacity-50">
+                              <div class="w-1/2 p-10 2xl:p-20 bg-white rounded-xl">
                                     <h3 class="mb-4 text-2xl font-bold text-gray-800">Upload Patient Result</h3>
 
                                     <form @submit.prevent="submitUpload" class="space-y-4 ">
@@ -374,13 +374,21 @@ const getFileIcon = (fileType: string) => {
                                                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                                                       placeholder="Enter patient name">
                                           </div>
+                                          <div>
+                                                <label class="block mb-2 text-sm font-medium text-gray-700">Patient
+                                                      Email</label>
+                                                <input v-model="uploadForm.patient_name" type="text" required
+                                                      class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                                      placeholder="Enter patient name">
+                                          </div>
 
                                           <div>
                                                 <label class="block mb-2 text-sm font-medium text-gray-700">Result
                                                       Type</label>
                                                 <select v-model="uploadForm.result_type" required
                                                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                                                      <option value="">Select result type</option>
+                                                      <option class="font-chillax-bold" value="">Select result type
+                                                      </option>
                                                       <option value="Blood Test">Blood Test</option>
                                                       <option value="X-Ray">X-Ray</option>
                                                       <option value="MRI">MRI</option>
@@ -394,7 +402,7 @@ const getFileIcon = (fileType: string) => {
                                           <div @dragenter="handleFileChange" @drop="console.log('drop')"
                                                 class="flex items-center justify-center w-full">
                                                 <label for="dropzone-file"
-                                                      class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                                                      class="flex flex-col items-center justify-center w-full group h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50  hover:bg-deepblue/30 ">
                                                       <div class="flex flex-col items-center justify-center pt-5 pb-6">
                                                             <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
                                                                   aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -403,11 +411,11 @@ const getFileIcon = (fileType: string) => {
                                                                         stroke-linejoin="round" stroke-width="2"
                                                                         d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
                                                             </svg>
-                                                            <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                                                                  <span class="font-semibold">Click to upload</span> or
+                                                            <p class="mb-2 text-lg text-gray-500 dark:text-gray-400">
+                                                                  <span class="font-bold">Click to upload</span> or
                                                                   drag and drop
                                                             </p>
-                                                            <p class="text-xs text-gray-500 dark:text-gray-400">SVG,
+                                                            <p class="text-md text-gray-500 dark:text-gray-400">SVG,
                                                                   PNG, JPG or GIF (MAX. 800x400px)</p>
                                                       </div>
                                                       <input id="dropzone-file" type="file" class="hidden" />
@@ -415,11 +423,17 @@ const getFileIcon = (fileType: string) => {
                                           </div>
 
 
-                                          <div class=" flex justify-end">
+                                          <div class=" flex justify-between">
+                                                <div class="flex items-center gap-3 w-1/2 pt-4">
+                                                      <input type="checkbox"
+                                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                                                      <span>Click to upload and send result</span>
+                                                </div>
                                                 <div class="flex gap-3 w-1/2 pt-4">
                                                       <button type="submit" :disabled="uploadForm.processing"
                                                             class="flex-1 hover:-translate-y-1  duration-150 px-4 py-2 font-semibold text-white transition-all bg-blue-600 rounded-lg hover:bg-blue-700 disabled:bg-gray-400">
-                                                            {{ uploadForm.processing ? 'Uploading...' : 'Upload' }}
+                                                            {{ uploadForm.processing ? 'Uploading...' :
+                                                                  'Upload' }}
                                                       </button>
                                                       <button type="button" @click="showUploadModal = false"
                                                             class="flex-1 px-4 py-2 font-semibold text-gray-700 transition-all hover:-translate-y-1  duration-150 bg-gray-200 rounded-lg hover:bg-gray-300">

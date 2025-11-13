@@ -49,7 +49,7 @@ const logout = () => {
                   <SidebarGroup class="space-y-5">
                         <div v-for="item in menuItems" :key="item.href">
                               <SidebarMenuButton
-                                    class="relative overflow-hidden group  text-2xl text-white font-extrabold">
+                                    class="relative overflow-hidden group  text-xl text-white font-extrabold">
                                     <Link :href="item.href"
                                           class="flex items-center gap-3 w-full relative z-10 transition-all duration-300">
                                     <!-- Animated gradient background on hover -->
@@ -59,7 +59,8 @@ const logout = () => {
 
                                     <!-- Active indicator -->
                                     <div v-if="isActive(item.href)"
-                                          class="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-gradient-to-b rounded-r-full animate-pulse">
+                                          class="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-black rounded-r-full animate-pulse">
+
                                     </div>
 
                                     <!-- Icon with gradient on active -->

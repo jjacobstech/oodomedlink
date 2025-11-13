@@ -630,11 +630,11 @@ const getStatusColor = (status: string) => {
                                                             <td class="px-4 py-4 text-sm font-medium text-gray-900">{{
                                                                   clinic.name }}</td>
                                                             <td class="px-4 py-4 text-sm text-gray-700">{{ clinic.email
-                                                                  }}</td>
+                                                            }}</td>
                                                             <td class="px-4 py-4 text-sm text-gray-700">{{
                                                                   clinic.phone_no }}</td>
                                                             <td class="px-4 py-4 text-sm text-gray-700">{{ clinic.state
-                                                                  }}, {{ clinic.country }}</td>
+                                                            }}, {{ clinic.country }}</td>
                                                             <td class="px-4 py-4 text-sm">
                                                                   <span :class="getStatusColor(clinic.status)"
                                                                         class="px-3 py-1 text-xs font-semibold rounded-full">
@@ -720,7 +720,7 @@ const getStatusColor = (status: string) => {
                                                             <td class="px-4 py-4 text-sm text-gray-700">{{
                                                                   patient.full_name }}</td>
                                                             <td class="px-4 py-4 text-sm text-gray-700">{{ patient.email
-                                                                  }}</td>
+                                                            }}</td>
                                                             <td class="px-4 py-4 text-sm text-gray-700">{{
                                                                   patient.phone_no }}</td>
                                                             <td class="px-4 py-4 text-sm text-gray-700">
@@ -824,7 +824,7 @@ const getStatusColor = (status: string) => {
                                                                   formatDate(result.test_date) }}</td>
                                                             <td class="px-4 py-4 text-sm text-gray-700">
                                                                   <span class="uppercase">{{ result.file_type || 'N/A'
-                                                                        }}</span>
+                                                                  }}</span>
                                                             </td>
                                                             <td class="px-4 py-4 text-sm">
                                                                   <span :class="getStatusColor(result.status)"
@@ -836,7 +836,6 @@ const getStatusColor = (status: string) => {
                                                                   formatDate(result.uploaded_at) }}</td>
                                                             <td class="px-4 py-4 text-sm">
                                                                   <button v-if="result.file_path"
-                                                                        @click="window.open(result.file_path, '_blank')"
                                                                         class="px-3 py-1 text-xs font-medium text-green-700 bg-green-100 rounded hover:bg-green-200">
                                                                         View
                                                                   </button>
@@ -913,9 +912,9 @@ const getStatusColor = (status: string) => {
                                                             <td class="px-4 py-4 text-sm font-medium text-gray-900">{{
                                                                   email.patient_email }}</td>
                                                             <td class="px-4 py-4 text-sm text-gray-700">{{ email.subject
-                                                                  }}</td>
+                                                            }}</td>
                                                             <td class="px-4 py-4 text-sm text-gray-700">{{ email.sent_by
-                                                                  }}</td>
+                                                            }}</td>
                                                             <td class="px-4 py-4 text-sm">
                                                                   <span :class="getStatusColor(email.status)"
                                                                         class="px-3 py-1 text-xs font-semibold rounded-full">
@@ -935,11 +934,11 @@ const getStatusColor = (status: string) => {
                                                                   <span v-else class="text-xs text-gray-400">-</span>
                                                             </td>
                                                       </tr>
-                                                      <tr v-if="email.error_message" class="bg-red-50">
-                                                            <td colspan="7" class="px-4 py-2 text-xs text-red-700">
-                                                                  Error: {{ email.error_message }}
-                                                            </td>
-                                                      </tr>
+                                                      <!-- <tr v-if="email.error_message" class="bg-red-50"> -->
+                                                      <!-- <td colspan="7" class="px-4 py-2 text-xs text-red-700"> -->
+                                                      <!-- Error: {{ email.error_message }} -->
+                                                      <!-- </td> -->
+                                                      <!-- </tr> -->
                                                 </tbody>
                                           </table>
                                     </div>
@@ -991,7 +990,7 @@ const getStatusColor = (status: string) => {
                                                             <td class="px-4 py-4 text-sm font-medium text-gray-900">{{
                                                                   admin.name }}</td>
                                                             <td class="px-4 py-4 text-sm text-gray-700">{{ admin.email
-                                                                  }}</td>
+                                                            }}</td>
                                                             <td class="px-4 py-4 text-sm text-gray-700">{{
                                                                   admin.phone_no }}</td>
                                                             <td class="px-4 py-4 text-sm">

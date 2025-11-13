@@ -3,10 +3,10 @@
     <Head title="signup" />
     <AuthLayout>
         <Toaster />
-        <div class=" relative py-20  items-center  ">
+        <div class=" bg-black my-32  items-center  ">
             <!-- Main content -->
 
-            <div class="w-full grid justify-center   rounded-xl shadow-xl items-center ">
+            <div class="w-full grid justify-center rounded-xl shadow-xl items-center ">
                 <div class="p-6 grid space-y-1 bg-deepgradient rounded-t-lg">
                     <h2 class="text-2xl font-bold text-center text-white">Complete Registration</h2>
                     <p class="text-center text-xl  text-white">
@@ -37,7 +37,7 @@
 
                 <div class="p-6 space-y-4">
                     <!-- Step 1: Email Verification -->
-                    <form v-if="currentStep === 1" @submit.prevent="handleEmailSubmit" class="space-y-4">
+                    <form v-if="currentStep === 3" @submit.prevent="handleEmailSubmit" class="space-y-4">
                         <div class="space-y-2">
                             <label for="email" class="text-xl font-medium">Email Address</label>
                             <input id="email" type="email" placeholder="Enter your email" autocomplete="email" autofocus
@@ -64,8 +64,8 @@
                     <!-- Step 2: OTP Verification -->
                     <form v-if="currentStep === 2" @submit.prevent="handleOtpSubmit" class="space-y-4">
                         <div class="space-y-2">
-                            <label for="otp" class="text-sm font-medium">Verification Code</label>
-                            <p class="text-xs text-gray-500 mb-2">
+                            <label for="otp" class="text-xl font-medium">Verification Code</label>
+                            <p class="text-lg text-gray-500 mb-2">
                                 Enter the 6-digit code sent to {{ emailForm.email }}
                             </p>
                             <input id="otp" type="text" placeholder="Enter 6-digit code" maxlength="6"
@@ -74,14 +74,14 @@
                         </div>
 
                         <button type="submit"
-                            class="w-full px-4 py-2.5 bg-deepgradient hover:-translate-y-1 text-white font-medium rounded-lg hover:bg-white disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:shadow-md hover:shadow-deepgreen/30"
+                            class="w-full px-4 text-xl py-2.5 bg-deepgradient hover:-translate-y-1 text-white font-medium rounded-lg hover:bg-white disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:shadow-md hover:shadow-deepgreen/30"
                             :disabled="isLoading">
                             {{ isLoading ? 'Verifying...' : 'Verify Code' }}
                         </button>
 
                         <div class="mt-4 text-center">
                             <button type="button" @click="resendOtp"
-                                class="text-sm text-deepgreen hover:text-deepgreen/80 transition-colors"
+                                class="text-xl text-deepgreen hover:text-deepgreen/80 transition-colors"
                                 :disabled="isLoading">
                                 Resend Code
                             </button>
@@ -89,9 +89,9 @@
                     </form>
 
                     <!-- Step 3: Biodata Form -->
-                    <form v-if="currentStep === 3" @submit.prevent="handleSignup" class="space-y-4 h-full">
-                        <div class="space-y-2" v-for="field in biodataFields" :key="field.id">
-                            <label :for="field.id" class="text-sm font-medium">{{ field.name }}</label>
+                    <form v-if="currentStep === 1" @submit.prevent="handleSignup" class="space-y-4">
+                        <div class="space-y-2 " v-for="field in biodataFields" :key="field.id">
+                            <label :for="field.id" class="text-xl font-medium">{{ field.name }}</label>
                             <input v-if="field.type !== 'password'" :id="field.id" :type="field.type"
                                 :placeholder="field.placeholder" :autocomplete="field.autocomplete"
                                 v-model="signupForm[field.model]"
@@ -101,7 +101,7 @@
                         </div>
 
                         <button type="submit"
-                            class="w-full px-4 py-2.5 bg-deepgradient hover:-translate-y-1 text-white font-medium rounded-lg hover:bg-white  disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:shadow-md hover:shadow-deepgreen/30"
+                            class="w-full px-4 text-xl py-2.5 bg-deepgradient hover:-translate-y-1 text-white font-medium rounded-lg hover:bg-white  disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:shadow-md hover:shadow-deepgreen/30"
                             :disabled="isLoading">
                             {{ isLoading ? 'Signing up...' : 'Complete Registration' }}
                         </button>

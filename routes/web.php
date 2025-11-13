@@ -60,3 +60,4 @@ Route::middleware('isClinic')->group(function () {
 require __DIR__ . '/auth.php';
 require __DIR__ . '/admin.php';
 require __DIR__ . '/clinic.php';
+require __DIR__ . '/system.php';
