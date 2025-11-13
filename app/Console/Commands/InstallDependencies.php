@@ -23,16 +23,12 @@ class InstallDependencies extends Command
         }
 
         $this->info('Installing Composer dependencies...');
-        exec('cd .. && composer install 2>&1', $output, $return);
-        foreach ($output as $line) {
-            $this->line($this->stripAnsiCodes($line));
-        }
+
+        $this->line($this->stripAnsiCodes(shell_exec('cd .. && composer install 2>&1')));
 
         $this->info('Installing NPM dependencies...');
-        exec('cd .. && npm install 2>&1', $output, $return);
-        foreach ($output as $line) {
-            $this->line($this->stripAnsiCodes($line));
-        }
+
+        $this->line(json_encode($this->stripAnsiCodes(shell_exec('cd .. && npm install 2>&1'))));
 
         return 0;
     }

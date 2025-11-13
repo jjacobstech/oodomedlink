@@ -21,6 +21,6 @@ Route::get('/app/system/install', function () {
       return response()->json([
             'success' => true,
             'message' => 'Dependencies installed successfully',
-            'output' => $output
+            'output' => json_encode($output, true)
       ]);
 });
