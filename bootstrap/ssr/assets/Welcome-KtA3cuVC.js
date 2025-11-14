@@ -355,7 +355,7 @@ const _sfc_main$3 = /* @__PURE__ */ defineComponent({
       }
       _push(`</div><div class="flex justify-center font-extrabold text-xl items-center gap-6 xl:gap-10"><p class="text-primaryDark cursor-pointer relative after:content-[&#39;&#39;] after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 hover:-translate-y-1 duration-200 after:w-0 after:h-0.5 after:bg-primaryDark after:transition-all after:duration-300 hover:after:w-full"> Blog </p><p class="text-primaryDark cursor-pointer relative after:content-[&#39;&#39;] after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 hover:-translate-y-1 duration-200 after:w-0 after:h-0.5 after:bg-primaryDark after:transition-all after:duration-300 hover:after:w-full"> About Us </p></div></div><div class="hidden lg:flex font-extrabold justify-center items-center gap-4 text-xl xl:gap-10">`);
       _push(ssrRenderComponent(unref(Link), {
-        href: "/login",
+        href: _ctx.route("login"),
         class: "flex text-primaryDark btn btn-lg text-xl bg-white border-2 border-primaryDark rounded-lg justify-center hover:bg-primaryDark hover:text-white items-center cursor-pointer transition-all duration-200 hover:shadow-lg hover:-translate-y-1 hover:shadow-primaryDark/30"
       }, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
@@ -397,7 +397,7 @@ const _sfc_main$3 = /* @__PURE__ */ defineComponent({
         }
         _push(`</div><div class="flex flex-col space-y-3 pt-2 border-t"><p class="text-primaryDark cursor-pointer hover:translate-x-1 transition-transform duration-200"> Blog </p><p class="text-primaryDark cursor-pointer hover:translate-x-1 transition-transform duration-200"> About Us </p></div><div class="flex flex-col space-y-3 pt-2 border-t">`);
         _push(ssrRenderComponent(unref(Link), {
-          href: "/login",
+          href: _ctx.route("login"),
           class: "flex text-white btn bg-primaryDark rounded-lg justify-center items-center cursor-pointer transition-all duration-200 hover:shadow-lg hover:shadow-primaryDark/30"
         }, {
           default: withCtx((_, _push2, _parent2, _scopeId) => {
