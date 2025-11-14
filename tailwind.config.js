@@ -24,13 +24,8 @@ export default {
 				'chillax-bold': 'Chillax-Bold'
 			},
 			colors: {
-				deepblue: '#0466fc',
-				deepgreen: '#0466fc ',
-				deeppurple: '#6e2fff',
-				deeppink: '#ff00ff',
-				deepred: '#ff0000',
-				deepyellow: '#ffff00',
-				deep: 'linear-gradient(to bottom right, #0466fc, #4CAF50, #ffffff)',
+				primaryLight: "#E8F1FF",
+				primaryDark: "#0E4EAF",
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
 				card: {
@@ -81,10 +76,6 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				}
-			},
-			backgroundImage: {
-				deepgradient: 'linear-gradient(to bottom right, #0466fc,#0466fc , #0466fc)',
-				deeptextgradient: 'linear-gradient(to bottom right, #ffffff, #4CAF50, #0466fc)'
 			},
 			borderRadius: {
 				lg: 'var(--radius)',

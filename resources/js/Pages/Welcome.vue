@@ -22,10 +22,10 @@
                     <div class="flex flex-col sm:flex-row gap-3 sm:gap-4">
                         <label for="email-input" class="sr-only">Email address</label>
                         <input type="email" id="email-input" v-model="email"
-                            class="flex-1 px-4 py-3 font-extrabold text-lg rounded-md border text-xl border-gray-300 focus:outline-none focus:ring-2 focus:ring-deepblue focus:border-transparent"
+                            class="flex-1 px-4 py-3 font-extrabold  rounded-md border text-xl border-gray-300 focus:outline-none focus:ring-2 focus:ring-primaaryDark focus:border-transparent"
                             placeholder="Enter your email" aria-label="Enter your email address">
                         <button @click="startNow"
-                            class="px-6 py-3 bg-gradient-to-br text-xl from-deepblue to-deepgreen rounded-md text-white font-medium hover:opacity-90 transition-opacity duration-300 focus:ring-2 focus:ring-deepblue focus:outline-none whitespace-nowrap"
+                            class="px-6 py-3 font-extrabold  bg-primaryDark text-xl rounded-md text-white  hover:opacity-90 transition-opacity duration-300 focus:ring-2 focus:ring-primaaryDark focus:outline-none whitespace-nowrap"
                             aria-label="Start now">
                             Start Now
                         </button>
@@ -58,7 +58,7 @@
                                 <div class="transition-opacity duration-300"
                                     :class="index === selectedIndex ? 'opacity-100' : 'opacity-50'">
                                     <div class="h-2 rounded-full transition-all duration-300"
-                                        :class="index === selectedIndex ? 'w-20 bg-gradient-to-br from-deepblue to-deepgreen' : 'w-8 bg-gray-400'">
+                                        :class="index === selectedIndex ? 'w-20 bg-primaryDark' : 'w-8 bg-gray-400'">
                                     </div>
                                 </div>
                             </CarouselItem>
@@ -72,24 +72,24 @@
         <section class="py-24 bg-gradient-to-b from-background to-secondary/20">
             <div class="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center max-w-3xl mx-auto mb-16">
-                    <h2 class="text-4xl sm:text-5xl font-bold mb-4 2xl:text-7xl">
+                    <h2 class="text-4xl sm:text-5xl font-extrabold mb-4 2xl:text-7xl">
                         Everything You Need
                     </h2>
-                    <p class="text-xl 2xl:text-2xl text-muted-foreground">
+                    <p class="text-xl 2xl:text-2xl font-extrabold text-muted-foreground">
                         Powerful features designed specifically for modern clinics
                     </p>
                 </div>
 
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <Card :key="index" v-for="(feature, index) in features"
-                        class="p-8 hover:shadow-lg hover:bg-gradient-to-br group hover:text-white hover:from-deepblue hover:via-deepgreen hover:to-white transition-all duration-300 border-border hover:border-none bg-card/50 backdrop-blur-sm group hover:-translate-y-1">
+                        class="p-8 hover:shadow-lg hover:bg-primaryDark group hover:text-white   transition-all duration-300 border-border hover:border-none bg-card/50 backdrop-blur-sm group hover:-translate-y-1">
 
                         <div
                             class="h-14 w-14 group-hover:bg-white rounded-2xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors">
                             <component :is="feature.icon" class="h-6 w-6 text-primary" />
                         </div>
-                        <h3 class="text-xl font-semibold mb-3">{{ feature.title }}</h3>
-                        <p class="text-muted-foreground group-hover:text-white text-xl leading-relaxed">
+                        <h3 class="text-2xl font-extrabold mb-3">{{ feature.title }}</h3>
+                        <p class="text-muted-foreground group-hover:text-white text-xl font-extrabold leading-relaxed">
                             {{ feature.description }}
                         </p>
                     </Card>
@@ -98,29 +98,29 @@
         </section>
 
         <!-- Benefit Section -->
-        <section class="py-24 bg-card ">
-            <div class="container mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
-                <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <section class="py-24 bg-primaryLight ">
+            <div class=" container mx-auto px-4 sm:px-6 lg:px-5  grid space-y-28">
+                <div class="grid lg:grid-cols-1  gap-16 items-center">
                     <!-- Left: Text content -->
-                    <div class="space-y-8">
+                    <div class="space-y-8 ">
                         <div>
-                            <h2 class="text-4xl 2xl:text-6xl sm:text-5xl font-bold mb-4">
+                            <h2 class="text-4xl 2xl:text-6xl sm:text-5xl font-extrabold mb-4">
                                 Why Clinics Choose Us
                             </h2>
-                            <p class="text-xl 2xl:text-3xl text-muted-foreground">
+                            <p class="text-xl 2xl:text-3xl font-extrabold ">
                                 Join hundreds of healthcare providers who have transformed their workflow
                             </p>
                         </div>
 
-                        <div class="space-y-6">
+                        <div class="space-y-6 font-extrabold ">
                             <div :key='benefit.title' v-for="benefit in benefits">
                                 <div class="flex-shrink-0 mt-1">
                                     <CheckCircle
                                         class="h-6 w-6 text-primary group-hover:scale-110 transition-transform" />
                                 </div>
                                 <div>
-                                    <h3 class="text-2xl font-semibold mb-2">{{ benefit.title }}</h3>
-                                    <p class="text-muted-foreground text-xl leading-relaxed">
+                                    <h3 class="text-3xl font-extrabold mb-2">{{ benefit.title }}</h3>
+                                    <p class="text-muted-foreground text-2xl leading-relaxed">
                                         {{ benefit.description }}
                                     </p>
                                 </div>
@@ -132,10 +132,10 @@
                 <!-- Right: Stats cards  -->
                 <div class="space-y-6">
                     <div v-for="stat in stats" :key="stat.title"
-                        class="bg-gradient-to-br from-deepblue via-deepgreen to-white p-8 text-white rounded-2xl border border-none shadow-lg">
-                        <div class="text-5xl font-bold text-white mb-2 2xl:text-6xl">{{ stat.title }}</div>
-                        <div class="text-lg font-semibold mb-2 2xl:text-2xl">{{ stat.subject }}</div>
-                        <p class="bg-gradient-to-br  from-white to-deepblue bg-clip-text 2xl:text-xl">
+                        class="bg-primaryDark  p-8 text-white rounded-2xl border border-none shadow-lg">
+                        <div class="text-5xl font-extrabold text-white mb-2 2xl:text-6xl">{{ stat.title }}</div>
+                        <div class="text-lg font-extrabold mb-2 2xl:text-2xl">{{ stat.subject }}</div>
+                        <p class="bg-primaryDark font-extrabold bg-clip-text 2xl:text-xl">
                             {{ stat.description }}
                         </p>
                     </div>

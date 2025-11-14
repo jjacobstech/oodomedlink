@@ -3,11 +3,11 @@
     <Head title="signup" />
     <AuthLayout>
         <Toaster />
-        <div class=" bg-black my-32  items-center  ">
+        <div class=" my-32  py-20 overflow-y-scroll items-center  ">
             <!-- Main content -->
 
             <div class="w-full grid justify-center rounded-xl shadow-xl items-center ">
-                <div class="p-6 grid space-y-1 bg-deepgradient rounded-t-lg">
+                <div class="p-6 grid space-y-1 bg-primaryDark rounded-t-lg">
                     <h2 class="text-2xl font-bold text-center text-white">Complete Registration</h2>
                     <p class="text-center text-xl  text-white">
                         Create an account - Step {{ currentStep }} of 3
@@ -21,13 +21,13 @@
                             <div class="flex items-center">
                                 <div :class="[
                                     'w-10 h-10 rounded-full flex items-center justify-center text-2xl font-medium transition-all',
-                                    currentStep >= step ? 'bg-deepgradient text-white' : 'bg-gray-200 text-gray-500'
-                                ]">
+    currentStep >= step ? 'bg-primaryDark text-white' : 'bg-gray-200 text-gray-500'
+]">
                                     {{ step }}
                                 </div>
                                 <div v-if="step < 3" :class="[
                                     'flex-1 h-1 mx-2 w-20 transition-all',
-                                    currentStep > step ? 'bg-deepgradient' : 'bg-gray-200'
+    currentStep > step ? 'bg-primaryDark' : 'bg-gray-200'
                                 ]">
                                 </div>
                             </div>
@@ -37,15 +37,15 @@
 
                 <div class="p-6 space-y-4">
                     <!-- Step 1: Email Verification -->
-                    <form v-if="currentStep === 3" @submit.prevent="handleEmailSubmit" class="space-y-4">
+                    <form v-if="currentStep === 1" @submit.prevent="handleEmailSubmit" class="space-y-4">
                         <div class="space-y-2">
                             <label for="email" class="text-xl font-medium">Email Address</label>
                             <input id="email" type="email" placeholder="Enter your email" autocomplete="email" autofocus
                                 v-model="emailForm.email"
-                                class="w-full px-3 py-2 text-lg border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-deepgreen" />
+                                class="w-full px-3 py-2 text-lg border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primaryDark" />
                         </div>
                         <button type="submit"
-                            class="w-full px-4 py-2.5 text-xl bg-deepgradient text-white font-medium rounded-lg hover:bg-white hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:shadow-md hover:shadow-deepgreen/30"
+                            class="w-full px-4 py-2.5 text-xl bg-primaryDark hover:text-primaryDark text-white font-medium rounded-lg hover:bg-white hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:shadow-md hover:shadow-primaryring-primaryDark/30"
                             :disabled="isLoading">
                             {{ isLoading ? 'Sending OTP...' : 'Send Verification Code' }}
                         </button>
@@ -54,7 +54,7 @@
                             <p class="text-xl text-gray-600">
                                 Already have an account?
                                 <Link href="/login"
-                                    class="text-deepgreen font-medium hover:text-deepgreen/80 transition-colors">
+                                    class="text-primaryring-primaryDark font-medium hover:text-primaryring-primaryDark/80 transition-colors">
                                 Login
                                 </Link>
                             </p>
@@ -70,18 +70,18 @@
                             </p>
                             <input id="otp" type="text" placeholder="Enter 6-digit code" maxlength="6"
                                 v-model="otpForm.otp"
-                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-deepgreen text-center text-2xl tracking-widest" />
+                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primaryDark text-center text-2xl tracking-widest" />
                         </div>
 
                         <button type="submit"
-                            class="w-full px-4 text-xl py-2.5 bg-deepgradient hover:-translate-y-1 text-white font-medium rounded-lg hover:bg-white disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:shadow-md hover:shadow-deepgreen/30"
+                            class="w-full px-4 text-xl py-2.5 bg-primaryDark hover:-translate-y-1 text-white hover:text-primaryDark font-medium rounded-lg hover:bg-white disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:shadow-md hover:shadow-primaryring-primaryDark/30"
                             :disabled="isLoading">
                             {{ isLoading ? 'Verifying...' : 'Verify Code' }}
                         </button>
 
                         <div class="mt-4 text-center">
                             <button type="button" @click="resendOtp"
-                                class="text-xl text-deepgreen hover:text-deepgreen/80 transition-colors"
+                                class="text-xl text-primary ring-primaryDark hover:text-primary ring-primaryDark/80 transition-colors"
                                 :disabled="isLoading">
                                 Resend Code
                             </button>
@@ -89,19 +89,19 @@
                     </form>
 
                     <!-- Step 3: Biodata Form -->
-                    <form v-if="currentStep === 1" @submit.prevent="handleSignup" class="space-y-4">
+                    <form v-if="currentStep === 3" @submit.prevent="handleSignup" class="space-y-4">
                         <div class="space-y-2 " v-for="field in biodataFields" :key="field.id">
                             <label :for="field.id" class="text-xl font-medium">{{ field.name }}</label>
                             <input v-if="field.type !== 'password'" :id="field.id" :type="field.type"
                                 :placeholder="field.placeholder" :autocomplete="field.autocomplete"
                                 v-model="signupForm[field.model]"
-                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-deepgreen" />
+                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primaryDark" />
                             <PasswordInput v-else :id="field.id" :placeholder="field.placeholder"
                                 v-model="signupForm[field.model]" />
                         </div>
 
                         <button type="submit"
-                            class="w-full px-4 text-xl py-2.5 bg-deepgradient hover:-translate-y-1 text-white font-medium rounded-lg hover:bg-white  disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:shadow-md hover:shadow-deepgreen/30"
+                            class="w-full px-4 text-xl py-2.5 bg-primaryDark hover:-translate-y-1 text-white font-medium rounded-lg hover:bg-white hover:text-primaryDark disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:shadow-md hover:shadow-primaryring-primaryDark/30"
                             :disabled="isLoading">
                             {{ isLoading ? 'Signing up...' : 'Complete Registration' }}
                         </button>
@@ -266,7 +266,7 @@ const handleEmailSubmit = async () => {
             title: 'Validation Error',
             description: error.message,
             variant: 'destructive',
-            class: 'text-deepblue bg-white shadow-lg',
+            class: 'text-primaryDark bg-white shadow-lg',
         });
         isLoading.value = false;
         return;
@@ -279,7 +279,7 @@ const handleEmailSubmit = async () => {
                 toast({
                     title: 'Verification Code Sent',
                     description: 'Please check your email for the verification code',
-                    class: 'text-deepblue bg-white shadow-lg',
+                    class: 'text-primaryDark bg-white shadow-lg',
                 });
                 currentStep.value = 2;
 
@@ -291,7 +291,7 @@ const handleEmailSubmit = async () => {
                     title: 'Error',
                     description: error.email || 'Failed to send verification code',
                     variant: 'destructive',
-                    class: 'text-deepblue bg-white shadow-lg',
+                    class: 'text-primaryDark bg-white shadow-lg',
                 });
 
             }
@@ -317,7 +317,7 @@ const handleOtpSubmit = async () => {
                 title: 'Validation Error',
                 description: inputError,
                 variant: 'destructive',
-                class: 'text-deepblue bg-white shadow-lg',
+                class: 'text-primaryDark bg-white shadow-lg',
             });
         }
 
@@ -332,7 +332,7 @@ const handleOtpSubmit = async () => {
                 toast({
                     title: 'Email Verified',
                     description: 'Please complete your registration',
-                    class: 'text-deepblue bg-white shadow-lg',
+                    class: 'text-primaryDark bg-white shadow-lg',
                 });
                 signupForm.email = emailForm.email;
                 currentStep.value = 3;
@@ -343,7 +343,7 @@ const handleOtpSubmit = async () => {
                     title: 'Verification Failed',
                     description: error.otp || 'Invalid verification code',
                     variant: 'destructive',
-                    class: 'text-deepblue bg-white shadow-lg',
+                    class: 'text-primaryDark bg-white shadow-lg',
                 });
                 console.log(error)
             }
@@ -365,7 +365,7 @@ const resendOtp = async () => {
                 toast({
                     title: 'Code Resent',
                     description: 'A new verification code has been sent to your email',
-                    class: 'text-deepblue bg-white shadow-lg',
+                    class: 'text-primaryDark bg-white shadow-lg',
                 });
             },
             onError: () => {
@@ -373,7 +373,7 @@ const resendOtp = async () => {
                     title: 'Error',
                     description: 'Failed to resend verification code',
                     variant: 'destructive',
-                    class: 'text-deepblue bg-white shadow-lg',
+                    class: 'text-primaryDark bg-white shadow-lg',
                 });
             }
         });
@@ -397,7 +397,7 @@ const handleSignup = async () => {
                 title: 'Validation Error',
                 description: errors[field][0],
                 variant: 'destructive',
-                class: 'text-deepblue bg-white shadow-lg',
+                class: 'text-primaryDark bg-white shadow-lg',
             });
             break;
         }
@@ -416,7 +416,7 @@ const handleSignup = async () => {
                         title: 'Registration Failed',
                         description: error[err],
                         variant: 'destructive',
-                        class: 'text-deepblue bg-white shadow-lg',
+                        class: 'text-primaryDark bg-white shadow-lg',
                     });
                     break;
                 }
@@ -425,7 +425,7 @@ const handleSignup = async () => {
                 toast({
                     title: 'Registration Successful',
                     description: 'Welcome! Redirecting to dashboard...',
-                    class: 'text-deepblue bg-white shadow-lg',
+                    class: 'text-primaryDark bg-white shadow-lg',
                 });
                 setTimeout(() => {
                     router.push(route('user.dashboard'));

@@ -15,7 +15,7 @@
                     <!-- Back Button -->
                     <div class="flex justify-start">
                         <Link href="/"
-                            class="inline-flex items-center gap-2 text-xl  px-4 py-2 text-deepgreen  rounded-lg transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5 hover:bg-deepgradient hover:text-white hover:shadow-deepgreen/30">
+                            class="inline-flex items-center gap-2 text-xl  px-4 py-2 text-primaryDark  rounded-lg transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5 hover:bg-primaryDark hover:text-white hover:shadow-primaryDark/30">
                         <ArrowLeft class="w-4 h-4" />
                         <span>Back to Home</span>
                         </Link>
@@ -24,7 +24,7 @@
                     <!-- Login Card -->
                     <div class="bg-white rounded-lg shadow-xl">
                         <!-- Header -->
-                        <div class="p-6 space-y-1 border-b rounded-t-lg border-deepgradient bg-deepgradient">
+                        <div class="p-6 space-y-1 border-b rounded-t-lg border-primaryDark bg-primaryDark">
                             <h2 class="text-2xl font-bold text-center text-white">Login</h2>
                             <p class="text-center text-lg text-white">
                                 Enter your email address and password
@@ -41,7 +41,7 @@
                                     </label>
                                     <input id="login-email" v-model="loginForm.email" type="email"
                                         placeholder="Enter your email"
-                                        class="w-full px-4 py-2.5 border border-gray-300 text-xl  rounded-lg focus:outline-none focus:ring-2 focus:ring-deepgreen focus:border-transparent transition-all"
+                                        class="w-full px-4 py-2.5 border border-gray-300 text-xl  rounded-lg focus:outline-none focus:ring-2 focus:ring-primaryDark focus:border-transparent transition-all"
                                         required />
                                 </div>
 
@@ -60,12 +60,12 @@
                                 </div>
 
                                 <!-- Submit Button -->
-                                <button type="submit" class="w-full px-4 py-2.5 bg-deepgreen text-white font-medium rounded-lg group hover:bg-white
+                                <button type="submit" class="w-full px-4 py-2.5 bg-primaryDark text-white font-medium rounded-lg group hover:bg-white
            disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200
-           hover:shadow-lg hover:-translate-y-1 hover:shadow-deepgreen/30" :disabled="isLoading">
+           hover:shadow-lg hover:-translate-y-1 hover:shadow-primaryDark/30" :disabled="isLoading">
 
                                     <p
-                                        class="group-hover:bg-clip-text text-xl  group-hover:text-transparent group-hover:bg-deepgradient">
+                                        class="group-hover:bg-clip-text text-xl  group-hover:text-transparent group-hover:bg-primaryDark">
                                         {{ isLoading ? 'Logging in...' : 'Log in' }}
                                     </p>
                                 </button>
@@ -76,7 +76,7 @@
                                 <p class="text-xl text-gray-600">
                                     New here?
                                     <Link href="/signup"
-                                        class="text-deepgreen font-medium hover:text-deepgreen/80 transition-colors">
+                                        class="text-primaryDark font-medium hover:text-primaryDark/80 transition-colors">
                                     Sign up
                                     </Link>
                                 </p>
@@ -129,7 +129,7 @@ const handleLogin = async () => {
                 description: inputError,
                 variant: 'destructive',
                 open: true,
-                class: 'text-deepblue bg-white shadow-lg bottom-96',
+                class: 'text-primaryDark bg-white shadow-lg bottom-96',
             });
         }
         isLoading.value = false;
@@ -152,7 +152,7 @@ const handleLogin = async () => {
                     description: inputError,
                     variant: 'destructive',
                     open: true,
-                    class: 'text-deepblue bg-white shadow-lg bottom-96',
+                    class: 'text-primaryDark bg-white shadow-lg bottom-96',
                 });
             }
 
@@ -164,7 +164,7 @@ const handleLogin = async () => {
                 title: 'Login Successful',
                 variant: 'destructive',
                 open: true,
-                class: 'text-deepblue bg-white shadow-lg bottom-96',
+                class: 'text-primaryDark bg-white shadow-lg bottom-96',
             });
 
         }

@@ -6,7 +6,7 @@
             </div>
 
             <!-- Content Section -->
-            <div class="w-full lg:w-1/2 flex justify-center items-center p-6 lg:p-8 overflow-y-auto">
+            <div class="w-full lg:w-1/2 flex justify-center items-center p-6 py-20 lg:p-8 overflow-y-auto">
                   <slot />
             </div>
       </div>
