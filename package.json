@@ -6,7 +6,8 @@
         "build": "concurrently -n \"Web,Server\" -c \"red,blue\"  \"vue-tsc && vite build && vite build --ssr\" \"php artisan optimize\"",
         "commit": "./commit.sh",
         "dev": "vite",
-        "lint": "eslint resources/js --ext .js,.ts,.vue --ignore-path .gitignore --fix"
+        "lint": "eslint resources/js --ext .js,.ts,.vue --ignore-path .gitignore --fix",
+        "deploy": "npm run build && npm run commit"
 
     },
     "devDependencies": {

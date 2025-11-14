@@ -51,7 +51,7 @@
                                         <label for="login-password" class="block text-xl font-medium text-gray-600">
                                             Password
                                         </label>
-                                        <Link href="/forgot-password"
+                                        <Link href="route('password.request')"
                                             class="text-xl text-black hover:text-primary/80 transition-colors">
                                         Forgot password?
                                         </Link>
@@ -75,7 +75,7 @@
                             <div class="mt-6 text-center">
                                 <p class="text-xl text-gray-600">
                                     New here?
-                                    <Link href="/signup"
+                                    <Link :href="route('signup')"
                                         class="text-primaryDark font-medium hover:text-primaryDark/80 transition-colors">
                                     Sign up
                                     </Link>

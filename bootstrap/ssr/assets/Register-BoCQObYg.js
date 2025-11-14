@@ -1,6 +1,6 @@
-import { ref, unref, withCtx, createVNode, createTextVNode, toDisplayString, createBlock, openBlock, Fragment, renderList, createCommentVNode, withModifiers, withDirectives, vModelText, vModelDynamic, useSSRContext } from "vue";
+import { ref, unref, withCtx, createVNode, createTextVNode, toDisplayString, createBlock, openBlock, Fragment, renderList, createCommentVNode, withModifiers, withDirectives, vModelText, useSSRContext } from "vue";
 import { ssrRenderComponent, ssrInterpolate, ssrRenderList, ssrRenderClass, ssrRenderAttr, ssrIncludeBooleanAttr, ssrRenderDynamicModel } from "vue/server-renderer";
-import { useForm, Head, Link, router } from "@inertiajs/vue3";
+import { useForm, Head, Link } from "@inertiajs/vue3";
 import { z, flattenError } from "zod";
 import { A as AuthLayout } from "./AuthLayout-x0U8Uf7l.js";
 import { u as useToast, _ as _sfc_main$1, a as _sfc_main$2 } from "./PasswordInput-BRdDyhnh.js";
@@ -17,7 +17,6 @@ const _sfc_main = {
   __name: "Register",
   __ssrInlineRender: true,
   setup(__props) {
-    const router$1 = router;
     const isLoading = ref(false);
     const currentStep = ref(1);
     const { toast } = useToast();
@@ -111,7 +110,7 @@ const _sfc_main = {
       otp: z.string().length(6, "OTP must be 6 digits"),
       email: z.email("Invalid email address")
     });
-    const signupSchema = z.object({
+    z.object({
       clinic_name: z.string().min(1, "Clinic name is required"),
       email: z.email("Invalid email address"),
       password: z.string().min(6, "Password must be at least 6 characters"),
@@ -237,59 +236,12 @@ const _sfc_main = {
       }
       isLoading.value = false;
     };
-    const handleSignup = async () => {
-      isLoading.value = true;
-      const validation = signupSchema.safeParse(signupForm);
-      if (!validation.success) {
-        const errors = validation.error.flatten().fieldErrors;
-        for (const field in errors) {
-          toast({
-            title: "Validation Error",
-            description: errors[field][0],
-            variant: "destructive",
-            class: "text-primaryDark bg-white shadow-lg"
-          });
-          break;
-        }
-        isLoading.value = false;
-        return;
-      }
-      try {
-        signupForm.post(route("signup"), {
-          onFinish: () => {
-            signupForm.reset();
-          },
-          onError: (error) => {
-            for (const err in error) {
-              toast({
-                title: "Registration Failed",
-                description: error[err],
-                variant: "destructive",
-                class: "text-primaryDark bg-white shadow-lg"
-              });
-              break;
-            }
-          },
-          onSuccess: () => {
-            toast({
-              title: "Registration Successful",
-              description: "Welcome! Redirecting to dashboard...",
-              class: "text-primaryDark bg-white shadow-lg"
-            });
-            setTimeout(() => {
-              router$1.push(route("user.dashboard"));
-            }, 500);
-          }
-        });
-      } catch (error) {
-        console.error(error);
-      }
-      isLoading.value = false;
-    };
     return (_ctx, _push, _parent, _attrs) => {
       _push(`<!--[-->`);
       _push(ssrRenderComponent(unref(Head), { title: "signup" }, null, _parent));
-      _push(ssrRenderComponent(AuthLayout, null, {
+      _push(ssrRenderComponent(AuthLayout, {
+        class: currentStep.value !== 3 ? "block" : "hidden"
+      }, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
             _push2(ssrRenderComponent(_sfc_main$1, null, null, _parent2, _scopeId));
@@ -328,10 +280,10 @@ const _sfc_main = {
               _push2(`</div></div>`);
             });
             _push2(`<!--]--></div></div><div class="p-6 space-y-4 bg-white"${_scopeId}>`);
-            if (currentStep.value === 3) {
+            if (currentStep.value === 1) {
               _push2(`<form class="space-y-4"${_scopeId}><div class="space-y-2"${_scopeId}><label for="email" class="text-xl font-medium"${_scopeId}>Email Address</label><input id="email" type="email" placeholder="Enter your email" autocomplete="email" autofocus${ssrRenderAttr("value", unref(emailForm).email)} class="w-full px-3 py-2 text-lg border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primaryDark"${_scopeId}></div><button type="submit" class="w-full px-4 py-2.5 text-xl bg-primaryDark hover:text-primaryDark text-white font-medium rounded-lg hover:bg-white hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:shadow-md hover:shadow-primaryring-primaryDark/30"${ssrIncludeBooleanAttr(isLoading.value) ? " disabled" : ""}${_scopeId}>${ssrInterpolate(isLoading.value ? "Sending OTP..." : "Send Verification Code")}</button><div class="mt-6 text-center"${_scopeId}><p class="text-xl text-gray-600"${_scopeId}> Already have an account? `);
               _push2(ssrRenderComponent(unref(Link), {
-                href: "/login",
+                href: _ctx.route("login"),
                 class: "text-primaryring-primaryDark font-medium hover:text-primaryring-primaryDark/80 transition-colors"
               }, {
                 default: withCtx((_2, _push3, _parent3, _scopeId2) => {
@@ -351,26 +303,6 @@ const _sfc_main = {
             }
             if (currentStep.value === 2) {
               _push2(`<form class="space-y-4"${_scopeId}><div class="space-y-2"${_scopeId}><label for="otp" class="text-xl font-medium"${_scopeId}>Verification Code</label><p class="text-lg text-gray-500 mb-2"${_scopeId}> Enter the 6-digit code sent to ${ssrInterpolate(unref(emailForm).email)}</p><input id="otp" type="text" placeholder="Enter 6-digit code" maxlength="6"${ssrRenderAttr("value", unref(otpForm).otp)} class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primaryDark text-center text-2xl tracking-widest"${_scopeId}></div><button type="submit" class="w-full px-4 text-xl py-2.5 bg-primaryDark hover:-translate-y-1 text-white hover:text-primaryDark font-medium rounded-lg hover:bg-white disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:shadow-md hover:shadow-primaryring-primaryDark/30"${ssrIncludeBooleanAttr(isLoading.value) ? " disabled" : ""}${_scopeId}>${ssrInterpolate(isLoading.value ? "Verifying..." : "Verify Code")}</button><div class="mt-4 text-center"${_scopeId}><button type="button" class="text-xl text-primary ring-primaryDark hover:text-primary ring-primaryDark/80 transition-colors"${ssrIncludeBooleanAttr(isLoading.value) ? " disabled" : ""}${_scopeId}> Resend Code </button></div></form>`);
-            } else {
-              _push2(`<!---->`);
-            }
-            if (currentStep.value === 1) {
-              _push2(`<form class="space-y-4"${_scopeId}><!--[-->`);
-              ssrRenderList(biodataFields.value, (field) => {
-                _push2(`<div class="space-y-2"${_scopeId}><label${ssrRenderAttr("for", field.id)} class="text-xl font-medium"${_scopeId}>${ssrInterpolate(field.name)}</label>`);
-                if (field.type !== "password") {
-                  _push2(`<input${ssrRenderAttr("id", field.id)}${ssrRenderAttr("type", field.type)}${ssrRenderAttr("placeholder", field.placeholder)}${ssrRenderAttr("autocomplete", field.autocomplete)}${ssrRenderDynamicModel(field.type, unref(signupForm)[field.model], null)} class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primaryDark"${_scopeId}>`);
-                } else {
-                  _push2(ssrRenderComponent(_sfc_main$2, {
-                    id: field.id,
-                    placeholder: field.placeholder,
-                    modelValue: unref(signupForm)[field.model],
-                    "onUpdate:modelValue": ($event) => unref(signupForm)[field.model] = $event
-                  }, null, _parent2, _scopeId));
-                }
-                _push2(`</div>`);
-              });
-              _push2(`<!--]--><button type="submit" class="w-full px-4 text-xl py-2.5 bg-primaryDark hover:-translate-y-1 text-white font-medium rounded-lg hover:bg-white hover:text-primaryDark disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:shadow-md hover:shadow-primaryring-primaryDark/30"${ssrIncludeBooleanAttr(isLoading.value) ? " disabled" : ""}${_scopeId}>${ssrInterpolate(isLoading.value ? "Signing up..." : "Complete Registration")}</button></form>`);
             } else {
               _push2(`<!---->`);
             }
@@ -424,7 +356,7 @@ const _sfc_main = {
                       ])
                     ]),
                     createVNode("div", { class: "p-6 space-y-4 bg-white" }, [
-                      currentStep.value === 3 ? (openBlock(), createBlock("form", {
+                      currentStep.value === 1 ? (openBlock(), createBlock("form", {
                         key: 0,
                         onSubmit: withModifiers(handleEmailSubmit, ["prevent"]),
                         class: "space-y-4"
@@ -455,14 +387,14 @@ const _sfc_main = {
                           createVNode("p", { class: "text-xl text-gray-600" }, [
                             createTextVNode(" Already have an account? "),
                             createVNode(unref(Link), {
-                              href: "/login",
+                              href: _ctx.route("login"),
                               class: "text-primaryring-primaryDark font-medium hover:text-primaryring-primaryDark/80 transition-colors"
                             }, {
                               default: withCtx(() => [
                                 createTextVNode(" Login ")
                               ]),
                               _: 1
-                            })
+                            }, 8, ["href"])
                           ])
                         ])
                       ], 32)) : createCommentVNode("", true),
@@ -501,45 +433,6 @@ const _sfc_main = {
                             disabled: isLoading.value
                           }, " Resend Code ", 8, ["disabled"])
                         ])
-                      ], 32)) : createCommentVNode("", true),
-                      currentStep.value === 1 ? (openBlock(), createBlock("form", {
-                        key: 2,
-                        onSubmit: withModifiers(handleSignup, ["prevent"]),
-                        class: "space-y-4"
-                      }, [
-                        (openBlock(true), createBlock(Fragment, null, renderList(biodataFields.value, (field) => {
-                          return openBlock(), createBlock("div", {
-                            class: "space-y-2",
-                            key: field.id
-                          }, [
-                            createVNode("label", {
-                              for: field.id,
-                              class: "text-xl font-medium"
-                            }, toDisplayString(field.name), 9, ["for"]),
-                            field.type !== "password" ? withDirectives((openBlock(), createBlock("input", {
-                              key: 0,
-                              id: field.id,
-                              type: field.type,
-                              placeholder: field.placeholder,
-                              autocomplete: field.autocomplete,
-                              "onUpdate:modelValue": ($event) => unref(signupForm)[field.model] = $event,
-                              class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primaryDark"
-                            }, null, 8, ["id", "type", "placeholder", "autocomplete", "onUpdate:modelValue"])), [
-                              [vModelDynamic, unref(signupForm)[field.model]]
-                            ]) : (openBlock(), createBlock(_sfc_main$2, {
-                              key: 1,
-                              id: field.id,
-                              placeholder: field.placeholder,
-                              modelValue: unref(signupForm)[field.model],
-                              "onUpdate:modelValue": ($event) => unref(signupForm)[field.model] = $event
-                            }, null, 8, ["id", "placeholder", "modelValue", "onUpdate:modelValue"]))
-                          ]);
-                        }), 128)),
-                        createVNode("button", {
-                          type: "submit",
-                          class: "w-full px-4 text-xl py-2.5 bg-primaryDark hover:-translate-y-1 text-white font-medium rounded-lg hover:bg-white hover:text-primaryDark disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:shadow-md hover:shadow-primaryring-primaryDark/30",
-                          disabled: isLoading.value
-                        }, toDisplayString(isLoading.value ? "Signing up..." : "Complete Registration"), 9, ["disabled"])
                       ], 32)) : createCommentVNode("", true)
                     ])
                   ])
@@ -550,6 +443,26 @@ const _sfc_main = {
         }),
         _: 1
       }, _parent));
+      if (currentStep.value === 3) {
+        _push(`<div class="w-full flex bg-primaryLight justify-center pt-6 sm:pt-10 pb-20 overflow-y-auto min-h-screen"><div class="w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-2xl xl:max-w-4xl 2xl:max-w-6xl mx-4 sm:mx-6 lg:mx-8 bg-white shadow-lg rounded-xl my-auto h-fit"><div class="grid space-y-1 bg-primaryDark py-4 sm:py-5 rounded-t-xl px-4"><h2 class="text-xl sm:text-2xl lg:text-3xl font-bold text-center text-white">Complete Registration</h2><p class="text-center text-sm sm:text-base lg:text-lg text-white"> Create an account - Step ${ssrInterpolate(currentStep.value)} of 3 </p></div><form class="space-y-3 sm:space-y-4 p-4 sm:p-6 lg:p-8"><!--[-->`);
+        ssrRenderList(biodataFields.value, (field) => {
+          _push(`<div class="space-y-1.5 sm:space-y-2"><label${ssrRenderAttr("for", field.id)} class="block text-sm sm:text-base lg:text-lg font-medium text-gray-700">${ssrInterpolate(field.name)}</label>`);
+          if (field.type !== "password") {
+            _push(`<input${ssrRenderAttr("id", field.id)}${ssrRenderAttr("type", field.type)}${ssrRenderAttr("placeholder", field.placeholder)}${ssrRenderAttr("autocomplete", field.autocomplete)}${ssrRenderDynamicModel(field.type, unref(signupForm)[field.model], null)} class="w-full px-3 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primaryDark focus:border-transparent transition-all">`);
+          } else {
+            _push(ssrRenderComponent(_sfc_main$2, {
+              id: field.id,
+              placeholder: field.placeholder,
+              modelValue: unref(signupForm)[field.model],
+              "onUpdate:modelValue": ($event) => unref(signupForm)[field.model] = $event
+            }, null, _parent));
+          }
+          _push(`</div>`);
+        });
+        _push(`<!--]--><button type="submit" class="w-full px-4 text-sm sm:text-base lg:text-lg py-2.5 sm:py-3 bg-primaryDark hover:-translate-y-1 text-white font-medium rounded-lg hover:bg-white hover:text-primaryDark disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:shadow-lg hover:shadow-primaryDark/30 mt-6"${ssrIncludeBooleanAttr(isLoading.value) ? " disabled" : ""}>${ssrInterpolate(isLoading.value ? "Signing up..." : "Complete Registration")}</button></form></div></div>`);
+      } else {
+        _push(`<!---->`);
+      }
       _push(`<!--]-->`);
     };
   }

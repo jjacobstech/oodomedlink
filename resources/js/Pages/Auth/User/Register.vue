@@ -1,7 +1,7 @@
 <template>
 
     <Head title="signup" />
-    <AuthLayout>
+    <AuthLayout :class="currentStep !== 3 ? 'block' : 'hidden'">
         <Toaster />
         <div
             class="relative z-10  container mx-auto lg:max-w-xl py-12 flex items-center justify-center min-h-[calc(100vh-80px)]">
@@ -50,7 +50,7 @@
 
                     <div class="p-6 space-y-4 bg-white">
                         <!-- Step 1: Email Verification -->
-                        <form v-if="currentStep === 3" @submit.prevent="handleEmailSubmit" class="space-y-4">
+                        <form v-if="currentStep === 1" @submit.prevent="handleEmailSubmit" class="space-y-4">
                             <div class="space-y-2">
                                 <label for="email" class="text-xl font-medium">Email Address</label>
                                 <input id="email" type="email" placeholder="Enter your email" autocomplete="email"
@@ -66,7 +66,7 @@
                             <div class="mt-6 text-center">
                                 <p class="text-xl text-gray-600">
                                     Already have an account?
-                                    <Link href="/login"
+                                    <Link :href="route('login')"
                                         class="text-primaryring-primaryDark font-medium hover:text-primaryring-primaryDark/80 transition-colors">
                                     Login
                                     </Link>
@@ -101,31 +101,44 @@
                             </div>
                         </form>
 
-                        <!-- Step 3: Biodata Form -->
-                        <form v-if="currentStep === 1" @submit.prevent="handleSignup" class="space-y-4">
-                            <div class="space-y-2 " v-for="field in biodataFields" :key="field.id">
-                                <label :for="field.id" class="text-xl font-medium">{{ field.name }}</label>
-                                <input v-if="field.type !== 'password'" :id="field.id" :type="field.type"
-                                    :placeholder="field.placeholder" :autocomplete="field.autocomplete"
-                                    v-model="signupForm[field.model]"
-                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primaryDark" />
-                                <PasswordInput v-else :id="field.id" :placeholder="field.placeholder"
-                                    v-model="signupForm[field.model]" />
-                            </div>
-
-                            <button type="submit"
-                                class="w-full px-4 text-xl py-2.5 bg-primaryDark hover:-translate-y-1 text-white font-medium rounded-lg hover:bg-white hover:text-primaryDark disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:shadow-md hover:shadow-primaryring-primaryDark/30"
-                                :disabled="isLoading">
-                                {{ isLoading ? 'Signing up...' : 'Complete Registration' }}
-                            </button>
-
-                        </form>
                     </div>
                 </div>
 
             </div>
         </div>
     </AuthLayout>
+    <!-- Step 3: Biodata Form -->
+    <div v-if="currentStep === 3"
+        class="w-full flex bg-primaryLight justify-center pt-6 sm:pt-10 pb-20 overflow-y-auto min-h-screen">
+        <div
+            class="w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-2xl xl:max-w-4xl 2xl:max-w-6xl mx-4 sm:mx-6 lg:mx-8 bg-white shadow-lg rounded-xl my-auto h-fit">
+            <div class="grid space-y-1 bg-primaryDark py-4 sm:py-5 rounded-t-xl px-4">
+                <h2 class="text-xl sm:text-2xl lg:text-3xl font-bold text-center text-white">Complete Registration</h2>
+                <p class="text-center text-sm sm:text-base lg:text-lg text-white">
+                    Create an account - Step {{ currentStep }} of 3
+                </p>
+            </div>
+
+            <form @submit.prevent="handleSignup" class="space-y-3 sm:space-y-4 p-4 sm:p-6 lg:p-8">
+                <div class="space-y-1.5 sm:space-y-2" v-for="field in biodataFields" :key="field.id">
+                    <label :for="field.id" class="block text-sm sm:text-base lg:text-lg font-medium text-gray-700">
+                        {{ field.name }}
+                    </label>
+                    <input v-if="field.type !== 'password'" :id="field.id" :type="field.type"
+                        :placeholder="field.placeholder" :autocomplete="field.autocomplete"
+                        v-model="signupForm[field.model]"
+                        class="w-full px-3 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primaryDark focus:border-transparent transition-all" />
+                    <PasswordInput v-else :id="field.id" :placeholder="field.placeholder"
+                        v-model="signupForm[field.model]" />
+                </div>
+                <button type="submit"
+                    class="w-full px-4 text-sm sm:text-base lg:text-lg py-2.5 sm:py-3 bg-primaryDark hover:-translate-y-1 text-white font-medium rounded-lg hover:bg-white hover:text-primaryDark disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:shadow-lg hover:shadow-primaryDark/30 mt-6"
+                    :disabled="isLoading">
+                    {{ isLoading ? 'Signing up...' : 'Complete Registration' }}
+                </button>
+            </form>
+        </div>
+    </div>
 </template>
 
 <script setup>
