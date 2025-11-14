@@ -4,7 +4,7 @@ import { useForm, Head, Link } from "@inertiajs/vue3";
 import { z, flattenError } from "zod";
 import { u as useToast, _ as _sfc_main$1, a as _sfc_main$2 } from "./PasswordInput-BRdDyhnh.js";
 import { ArrowLeft } from "lucide-vue-next";
-import { A as AuthLayout } from "./AuthLayout-BSjOSLJN.js";
+import { A as AuthLayout } from "./AuthLayout-Bh38-ra-.js";
 import "@vueuse/core";
 import "reka-ui";
 import "./utils-H80jjgLf.js";
@@ -37,7 +37,7 @@ const _sfc_main = {
             description: inputError,
             variant: "destructive",
             open: true,
-            class: "text-deepblue bg-white shadow-lg bottom-96"
+            class: "text-primaryDark bg-white shadow-lg bottom-96"
           });
         }
         isLoading.value = false;
@@ -57,7 +57,7 @@ const _sfc_main = {
               description: inputError,
               variant: "destructive",
               open: true,
-              class: "text-deepblue bg-white shadow-lg bottom-96"
+              class: "text-primaryDark bg-white shadow-lg bottom-96"
             });
           }
         },
@@ -68,7 +68,7 @@ const _sfc_main = {
             title: "Login Successful",
             variant: "destructive",
             open: true,
-            class: "text-deepblue bg-white shadow-lg bottom-96"
+            class: "text-primaryDark bg-white shadow-lg bottom-96"
           });
         }
       });
@@ -84,7 +84,7 @@ const _sfc_main = {
             _push2(`<div class="relative z-10 container mx-auto max-w-xl py-12 flex items-center justify-center min-h-[calc(100vh-80px)]"${_scopeId}><div class="w-full px-20 space-y-4"${_scopeId}><div class="flex justify-start"${_scopeId}>`);
             _push2(ssrRenderComponent(unref(Link), {
               href: "/",
-              class: "inline-flex items-center gap-2 text-xl px-4 py-2 text-deepgreen rounded-lg transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5 hover:bg-deepgradient hover:text-white hover:shadow-deepgreen/30"
+              class: "inline-flex items-center gap-2 text-xl px-4 py-2 text-primaryDark rounded-lg transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5 hover:bg-primaryDark hover:text-white hover:shadow-primaryDark/30"
             }, {
               default: withCtx((_2, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
@@ -99,7 +99,7 @@ const _sfc_main = {
               }),
               _: 1
             }, _parent2, _scopeId));
-            _push2(`</div><div class="bg-white rounded-lg shadow-xl"${_scopeId}><div class="p-6 space-y-1 border-b rounded-t-lg border-deepgradient bg-deepgradient"${_scopeId}><h2 class="text-2xl font-bold text-center text-white"${_scopeId}>Login</h2><p class="text-center text-lg text-white"${_scopeId}> Enter your email address and password </p></div><div class="p-6"${_scopeId}><form class="space-y-5"${_scopeId}><div class="space-y-2"${_scopeId}><label for="login-email" class="block text-xl font-medium text-gray-600"${_scopeId}> Email </label><input id="login-email"${ssrRenderAttr("value", unref(loginForm).email)} type="email" placeholder="Enter your email" class="w-full px-4 py-2.5 border border-gray-300 text-xl rounded-lg focus:outline-none focus:ring-2 focus:ring-deepgreen focus:border-transparent transition-all" required${_scopeId}></div><div class="space-y-2"${_scopeId}><div class="flex items-center justify-between"${_scopeId}><label for="login-password" class="block text-xl font-medium text-gray-600"${_scopeId}> Password </label>`);
+            _push2(`</div><div class="bg-white rounded-lg shadow-xl"${_scopeId}><div class="p-6 space-y-1 border-b rounded-t-lg border-primaryDark bg-primaryDark"${_scopeId}><h2 class="text-2xl font-bold text-center text-white"${_scopeId}>Login</h2><p class="text-center text-lg text-white"${_scopeId}> Enter your email address and password </p></div><div class="p-6"${_scopeId}><form class="space-y-5"${_scopeId}><div class="space-y-2"${_scopeId}><label for="login-email" class="block text-xl font-medium text-gray-600"${_scopeId}> Email </label><input id="login-email"${ssrRenderAttr("value", unref(loginForm).email)} type="email" placeholder="Enter your email" class="w-full px-4 py-2.5 border border-gray-300 text-xl rounded-lg focus:outline-none focus:ring-2 focus:ring-primaryDark focus:border-transparent transition-all" required${_scopeId}></div><div class="space-y-2"${_scopeId}><div class="flex items-center justify-between"${_scopeId}><label for="login-password" class="block text-xl font-medium text-gray-600"${_scopeId}> Password </label>`);
             _push2(ssrRenderComponent(unref(Link), {
               href: "/forgot-password",
               class: "text-xl text-black hover:text-primary/80 transition-colors"
@@ -121,10 +121,10 @@ const _sfc_main = {
               modelValue: unref(loginForm).password,
               "onUpdate:modelValue": ($event) => unref(loginForm).password = $event
             }, null, _parent2, _scopeId));
-            _push2(`</div><button type="submit" class="w-full px-4 py-2.5 bg-deepgreen text-white font-medium rounded-lg group hover:bg-white disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:shadow-lg hover:-translate-y-1 hover:shadow-deepgreen/30"${ssrIncludeBooleanAttr(isLoading.value) ? " disabled" : ""}${_scopeId}><p class="group-hover:bg-clip-text text-xl group-hover:text-transparent group-hover:bg-deepgradient"${_scopeId}>${ssrInterpolate(isLoading.value ? "Logging in..." : "Log in")}</p></button></form><div class="mt-6 text-center"${_scopeId}><p class="text-xl text-gray-600"${_scopeId}> New here? `);
+            _push2(`</div><button type="submit" class="w-full px-4 py-2.5 bg-primaryDark text-white font-medium rounded-lg group hover:bg-white disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:shadow-lg hover:-translate-y-1 hover:shadow-primaryDark/30"${ssrIncludeBooleanAttr(isLoading.value) ? " disabled" : ""}${_scopeId}><p class="group-hover:bg-clip-text text-xl group-hover:text-transparent group-hover:bg-primaryDark"${_scopeId}>${ssrInterpolate(isLoading.value ? "Logging in..." : "Log in")}</p></button></form><div class="mt-6 text-center"${_scopeId}><p class="text-xl text-gray-600"${_scopeId}> New here? `);
             _push2(ssrRenderComponent(unref(Link), {
               href: "/signup",
-              class: "text-deepgreen font-medium hover:text-deepgreen/80 transition-colors"
+              class: "text-primaryDark font-medium hover:text-primaryDark/80 transition-colors"
             }, {
               default: withCtx((_2, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
@@ -147,7 +147,7 @@ const _sfc_main = {
                     createVNode("div", { class: "flex justify-start" }, [
                       createVNode(unref(Link), {
                         href: "/",
-                        class: "inline-flex items-center gap-2 text-xl px-4 py-2 text-deepgreen rounded-lg transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5 hover:bg-deepgradient hover:text-white hover:shadow-deepgreen/30"
+                        class: "inline-flex items-center gap-2 text-xl px-4 py-2 text-primaryDark rounded-lg transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5 hover:bg-primaryDark hover:text-white hover:shadow-primaryDark/30"
                       }, {
                         default: withCtx(() => [
                           createVNode(unref(ArrowLeft), { class: "w-4 h-4" }),
@@ -157,7 +157,7 @@ const _sfc_main = {
                       })
                     ]),
                     createVNode("div", { class: "bg-white rounded-lg shadow-xl" }, [
-                      createVNode("div", { class: "p-6 space-y-1 border-b rounded-t-lg border-deepgradient bg-deepgradient" }, [
+                      createVNode("div", { class: "p-6 space-y-1 border-b rounded-t-lg border-primaryDark bg-primaryDark" }, [
                         createVNode("h2", { class: "text-2xl font-bold text-center text-white" }, "Login"),
                         createVNode("p", { class: "text-center text-lg text-white" }, " Enter your email address and password ")
                       ]),
@@ -176,7 +176,7 @@ const _sfc_main = {
                               "onUpdate:modelValue": ($event) => unref(loginForm).email = $event,
                               type: "email",
                               placeholder: "Enter your email",
-                              class: "w-full px-4 py-2.5 border border-gray-300 text-xl rounded-lg focus:outline-none focus:ring-2 focus:ring-deepgreen focus:border-transparent transition-all",
+                              class: "w-full px-4 py-2.5 border border-gray-300 text-xl rounded-lg focus:outline-none focus:ring-2 focus:ring-primaryDark focus:border-transparent transition-all",
                               required: ""
                             }, null, 8, ["onUpdate:modelValue"]), [
                               [vModelText, unref(loginForm).email]
@@ -206,10 +206,10 @@ const _sfc_main = {
                           ]),
                           createVNode("button", {
                             type: "submit",
-                            class: "w-full px-4 py-2.5 bg-deepgreen text-white font-medium rounded-lg group hover:bg-white disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:shadow-lg hover:-translate-y-1 hover:shadow-deepgreen/30",
+                            class: "w-full px-4 py-2.5 bg-primaryDark text-white font-medium rounded-lg group hover:bg-white disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:shadow-lg hover:-translate-y-1 hover:shadow-primaryDark/30",
                             disabled: isLoading.value
                           }, [
-                            createVNode("p", { class: "group-hover:bg-clip-text text-xl group-hover:text-transparent group-hover:bg-deepgradient" }, toDisplayString(isLoading.value ? "Logging in..." : "Log in"), 1)
+                            createVNode("p", { class: "group-hover:bg-clip-text text-xl group-hover:text-transparent group-hover:bg-primaryDark" }, toDisplayString(isLoading.value ? "Logging in..." : "Log in"), 1)
                           ], 8, ["disabled"])
                         ], 32),
                         createVNode("div", { class: "mt-6 text-center" }, [
@@ -217,7 +217,7 @@ const _sfc_main = {
                             createTextVNode(" New here? "),
                             createVNode(unref(Link), {
                               href: "/signup",
-                              class: "text-deepgreen font-medium hover:text-deepgreen/80 transition-colors"
+                              class: "text-primaryDark font-medium hover:text-primaryDark/80 transition-colors"
                             }, {
                               default: withCtx(() => [
                                 createTextVNode(" Sign up ")
