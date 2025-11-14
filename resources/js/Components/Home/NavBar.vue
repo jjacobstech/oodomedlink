@@ -87,7 +87,7 @@
 
                   <!-- Desktop Authentication -->
                   <div class="hidden lg:flex font-extrabold  justify-center items-center gap-4 text-xl xl:gap-10">
-                        <Link href="/login"
+                        <Link :href="route('login')"
                               class="flex text-primaryDark btn btn-lg text-xl  bg-white border-2 border-primaryDark rounded-lg justify-center hover:bg-primaryDark hover:text-white items-center cursor-pointer transition-all duration-200 hover:shadow-lg hover:-translate-y-1 hover:shadow-primaryDark/30">
                         Login
                         </Link>
@@ -175,7 +175,7 @@
 
                               <!-- Mobile Auth Buttons -->
                               <div class="flex flex-col space-y-3 pt-2 border-t">
-                                    <Link href="/login"
+                                    <Link :href="route('login')"
                                           class="flex text-white btn bg-primaryDark rounded-lg justify-center items-center cursor-pointer transition-all duration-200 hover:shadow-lg hover:shadow-primaryDark/30">
                                     Login
                                     </Link>
