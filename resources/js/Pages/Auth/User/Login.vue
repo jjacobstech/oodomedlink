@@ -2,14 +2,14 @@
 
     <Head title="Login" />
     <AuthLayout>
-        <div class="w-full overflow-hidden">
+        <div class="w-full flex justify-center overflow-hidden">
             <!-- Toast -->
             <Toaster />
 
             <!-- Main content -->
             <div
-                class="relative z-10 container mx-auto max-w-xl py-12 flex items-center justify-center min-h-[calc(100vh-80px)]">
-                <div class="w-full px-20 space-y-4">
+                class="relative z-10  container mx-auto lg:max-w-xl py-12 flex items-center justify-center min-h-[calc(100vh-80px)]">
+                <div class="w-full px-5 lg:px-20 space-y-4">
 
 
                     <!-- Back Button -->

@@ -11,7 +11,7 @@ use App\Http\Controllers\Auth\ConfirmablePasswordController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
 
-Route::middleware(['guest', 'isAuth'])->group(function () {
+Route::prefix('clinics')->middleware(['guest', 'isAuth'])->group(function () {
 
     Route::post('signup', [RegisteredUserController::class, 'store']);
     Route::post('login', [AuthenticatedSessionController::class, 'store']);
@@ -35,7 +35,7 @@ Route::middleware(['guest', 'isAuth'])->group(function () {
 });
 
 
-Route::middleware('guest')->group(function () {
+Route::prefix('clinics')->middleware('guest')->group(function () {
     Route::post('send-otp', [EmailVerificationController::class, 'send'])
         ->name('send.otp');
 
@@ -44,7 +44,7 @@ Route::middleware('guest')->group(function () {
         ->name('verify.otp');
 });
 
-Route::middleware('auth:clinic')->group(function () {
+Route::prefix('clinics')->middleware('auth:clinic')->group(function () {
 
     Route::post('email/verification-notification', [EmailVerificationNotificationController::class, 'store'])
         ->middleware('throttle:6,1')

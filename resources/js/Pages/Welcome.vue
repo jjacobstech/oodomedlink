@@ -5,50 +5,51 @@
     <GuestLayout>
         <!-- Hero Section -->
         <div
-            class="w-full flex flex-col lg:flex-row justify-center items-center gap-8 lg:gap-16 my-40 px-6 sm:px-6 lg:px-12 2xl:px-10 2xl:gap-32 2xl:my-44">
+            class="w-full flex flex-col lg:flex-row justify-center items-center gap-8 lg:gap-16 my-20 sm:my-32 lg:my-40 px-4 sm:px-6 lg:px-12 2xl:px-10 2xl:gap-32 2xl:my-44">
             <!-- Text Content -->
-            <div class="w-full lg:w-[45%] flex flex-col space-y-6 max-w-2xl">
-                <h1 class="text-4xl sm:text-4xl lg:text-6xl 2xl:text-8xl font-bold leading-tight text-black">
+            <div class="w-full lg:w-1/2 flex flex-col space-y-4 sm:space-y-6 max-w-2xl">
+                <h1
+                    class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl 2xl:text-8xl font-bold leading-tight text-black">
                     Fast,<br />
                     Secure and<br />
                     Convenient<br />
                     Test Results
                 </h1>
-                <p class="text-base font-bold sm:text-lg lg:text-xl 2xl:text-2xl text-gray-700 leading-relaxed">
+                <p
+                    class="text-sm sm:text-base md:text-lg lg:text-xl 2xl:text-2xl font-bold text-gray-700 leading-relaxed">
                     Your health and peace of mind should not be a gamble. Oodo Medlink gives you fast, secure and
                     convenient access to your lab test results anytime, anywhere.
                 </p>
-                <div class="w-full">
-                    <div class="flex flex-col sm:flex-row gap-3 sm:gap-4">
+                <div class="w-full pt-2">
+                    <form @submit.prevent="startNow" class="flex flex-col sm:flex-row gap-3 sm:gap-4">
                         <label for="email-input" class="sr-only">Email address</label>
-                        <input type="email" id="email-input" v-model="email"
-                            class="flex-1 px-4 py-3 font-extrabold  rounded-md border text-xl border-gray-300 focus:outline-none focus:ring-2 focus:ring-primaaryDark focus:border-transparent"
-                            placeholder="Enter your email" aria-label="Enter your email address">
-                        <button @click="startNow"
-                            class="px-6 py-3 font-extrabold  bg-primaryDark text-xl rounded-md text-white  hover:opacity-90 transition-opacity duration-300 focus:ring-2 focus:ring-primaaryDark focus:outline-none whitespace-nowrap"
+                        <input type="email" id="email-input" v-model="email" required
+                            class="flex-1 px-3 py-2.5 sm:px-4 sm:py-3 font-extrabold rounded-md border text-base sm:text-lg lg:text-xl border-gray-300 focus:outline-none focus:ring-2 focus:ring-primaryDark focus:border-transparent"
+                            placeholder="Enter your email" aria-label="Enter your email address" />
+                        <button type="submit"
+                            class="px-5 py-2.5 sm:px-6 sm:py-3 font-extrabold bg-primaryDark text-base sm:text-lg lg:text-xl rounded-md text-white hover:opacity-90 transition-opacity duration-300 focus:ring-2 focus:ring-primaryDark focus:outline-none whitespace-nowrap"
                             aria-label="Start now">
                             Start Now
                         </button>
-                    </div>
+                    </form>
                 </div>
             </div>
 
             <!-- Carousel Section -->
-            <div class="w-full lg:w-[51%] ">
-                <div class="w-full max-w-xl 2xl:max-w-none space-y-4">
+            <div class="w-full lg:w-1/2 flex justify-center">
+                <div class="w-full max-w-2xl space-y-4">
                     <!-- Main Carousel -->
-                    <Carousel :plugins="[Autoplay({ delay: 5000 })]"
-                        class="relative w-full rounded-lg overflow-hidden shadow-lg 2xl:h-[600px] 2xl:w-[950px]"
+                    <Carousel :plugins="[Autoplay({ delay: 5000 })]" class="w-full rounded-lg overflow-hidden shadow-lg"
                         @init-api="(val) => emblaMainApi = val" aria-label="Featured images carousel">
                         <CarouselContent>
                             <CarouselItem v-for="image in images" :key="image.id" class="rounded-lg">
-                                <img :src="image.src" :alt="image.alt" class="w-full h-full object-cover rounded-lg">
+                                <img :src="image.src" :alt="image.alt" class="w-full h-full object-cover rounded-lg" />
                             </CarouselItem>
                         </CarouselContent>
                     </Carousel>
 
                     <!-- Thumbnail Indicators -->
-                    <Carousel class="relative w-full 2xl:w-[950px]" @init-api="(val) => emblaThumbnailApi = val"
+                    <Carousel class="relative w-full" @init-api="(val) => emblaThumbnailApi = val"
                         aria-label="Carousel navigation">
                         <CarouselContent class="flex justify-center gap-2 ml-0">
                             <CarouselItem v-for="(_, index) in images.length" :key="index"
@@ -58,8 +59,7 @@
                                 <div class="transition-opacity duration-300"
                                     :class="index === selectedIndex ? 'opacity-100' : 'opacity-50'">
                                     <div class="h-2 rounded-full transition-all duration-300"
-                                        :class="index === selectedIndex ? 'w-20 bg-primaryDark' : 'w-8 bg-gray-400'">
-                                    </div>
+                                        :class="index === selectedIndex ? 'w-16 sm:w-20 bg-primaryDark' : 'w-6 sm:w-8 bg-gray-400'" />
                                 </div>
                             </CarouselItem>
                         </CarouselContent>
@@ -88,8 +88,9 @@
                             class="h-14 w-14 group-hover:bg-white rounded-2xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors">
                             <component :is="feature.icon" class="h-6 w-6 text-primary" />
                         </div>
-                        <h3 class="text-2xl font-extrabold mb-3">{{ feature.title }}</h3>
-                        <p class="text-muted-foreground group-hover:text-white text-xl font-extrabold leading-relaxed">
+                        <h3 class="lg:text-2xl font-extrabold mb-3">{{ feature.title }}</h3>
+                        <p
+                            class="text-muted-foreground group-hover:text-white lg:text-xl font-extrabold leading-relaxed">
                             {{ feature.description }}
                         </p>
                     </Card>
@@ -119,8 +120,8 @@
                                         class="h-6 w-6 text-primary group-hover:scale-110 transition-transform" />
                                 </div>
                                 <div>
-                                    <h3 class="text-3xl font-extrabold mb-2">{{ benefit.title }}</h3>
-                                    <p class="text-muted-foreground text-2xl leading-relaxed">
+                                    <h3 class="lg:text-3xl font-extrabold mb-2">{{ benefit.title }}</h3>
+                                    <p class="text-muted-foreground lg:text-2xl leading-relaxed">
                                         {{ benefit.description }}
                                     </p>
                                 </div>
@@ -133,8 +134,8 @@
                 <div class="space-y-6">
                     <div v-for="stat in stats" :key="stat.title"
                         class="bg-primaryDark  p-8 text-white rounded-2xl border border-none shadow-lg">
-                        <div class="text-5xl font-extrabold text-white mb-2 2xl:text-6xl">{{ stat.title }}</div>
-                        <div class="text-lg font-extrabold mb-2 2xl:text-2xl">{{ stat.subject }}</div>
+                        <div class="md:text-5xl font-extrabold text-white mb-2 2xl:text-6xl">{{ stat.title }}</div>
+                        <div class="md:text-lg font-extrabold mb-2 2xl:text-2xl">{{ stat.subject }}</div>
                         <p class="bg-primaryDark font-extrabold bg-clip-text 2xl:text-xl">
                             {{ stat.description }}
                         </p>

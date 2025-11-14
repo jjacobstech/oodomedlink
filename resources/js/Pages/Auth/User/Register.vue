@@ -3,113 +3,127 @@
     <Head title="signup" />
     <AuthLayout>
         <Toaster />
-        <div class=" my-32  py-20 overflow-y-scroll items-center  ">
-            <!-- Main content -->
+        <div
+            class="relative z-10  container mx-auto lg:max-w-xl py-12 flex items-center justify-center min-h-[calc(100vh-80px)]">
+            <div class="w-full px-5 lg:px-20 space-y-4">
 
-            <div class="w-full grid justify-center rounded-xl shadow-xl items-center ">
-                <div class="p-6 grid space-y-1 bg-primaryDark rounded-t-lg">
-                    <h2 class="text-2xl font-bold text-center text-white">Complete Registration</h2>
-                    <p class="text-center text-xl  text-white">
-                        Create an account - Step {{ currentStep }} of 3
-                    </p>
+
+                <!-- Back Button -->
+                <div class="flex justify-start">
+                    <Link href="/"
+                        class="inline-flex items-center gap-2 text-xl  px-4 py-2 text-primaryDark  rounded-lg transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5 hover:bg-primaryDark hover:text-white hover:shadow-primaryDark/30">
+                    <ArrowLeft class="w-5 h-5" />
+                    <span>Back to Home</span>
+                    </Link>
                 </div>
 
-                <!-- Progress Indicator -->
-                <div class=" py-6 flex  justify-center">
-                    <div class="flex justify-between items-center  px-auto">
-                        <div v-for="step in 3" :key="step" class="flex-1">
-                            <div class="flex items-center">
-                                <div :class="[
-                                    'w-10 h-10 rounded-full flex items-center justify-center text-2xl font-medium transition-all',
-    currentStep >= step ? 'bg-primaryDark text-white' : 'bg-gray-200 text-gray-500'
-]">
-                                    {{ step }}
-                                </div>
-                                <div v-if="step < 3" :class="[
-                                    'flex-1 h-1 mx-2 w-20 transition-all',
-    currentStep > step ? 'bg-primaryDark' : 'bg-gray-200'
-                                ]">
+                <!-- Main content -->
+
+                <div class="w-full grid justify-center rounded-xl bg-white shadow-xl items-center ">
+                    <div class="p-6 grid space-y-1 bg-primaryDark rounded-t-lg">
+                        <h2 class="text-2xl font-bold text-center text-white">Complete Registration</h2>
+                        <p class="text-center text-xl  text-white">
+                            Create an account - Step {{ currentStep }} of 3
+                        </p>
+                    </div>
+
+                    <!-- Progress Indicator -->
+                    <div class=" py-6 flex  justify-center">
+                        <div class="flex justify-between items-center  px-auto">
+                            <div v-for="step in 3" :key="step" class="flex-1">
+                                <div class="flex items-center">
+                                    <div :class="[
+                                        'w-10 h-10 rounded-full flex items-center justify-center text-2xl font-medium transition-all',
+                                        currentStep >= step ? 'bg-primaryDark text-white' : 'bg-gray-200 text-gray-500'
+                                    ]">
+                                        {{ step }}
+                                    </div>
+                                    <div v-if="step < 3" :class="[
+                                        'flex-1 h-1 mx-2 w-20 transition-all',
+                                        currentStep > step ? 'bg-primaryDark' : 'bg-gray-200'
+                                    ]">
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="p-6 space-y-4">
-                    <!-- Step 1: Email Verification -->
-                    <form v-if="currentStep === 1" @submit.prevent="handleEmailSubmit" class="space-y-4">
-                        <div class="space-y-2">
-                            <label for="email" class="text-xl font-medium">Email Address</label>
-                            <input id="email" type="email" placeholder="Enter your email" autocomplete="email" autofocus
-                                v-model="emailForm.email"
-                                class="w-full px-3 py-2 text-lg border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primaryDark" />
-                        </div>
-                        <button type="submit"
-                            class="w-full px-4 py-2.5 text-xl bg-primaryDark hover:text-primaryDark text-white font-medium rounded-lg hover:bg-white hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:shadow-md hover:shadow-primaryring-primaryDark/30"
-                            :disabled="isLoading">
-                            {{ isLoading ? 'Sending OTP...' : 'Send Verification Code' }}
-                        </button>
-
-                        <div class="mt-6 text-center">
-                            <p class="text-xl text-gray-600">
-                                Already have an account?
-                                <Link href="/login"
-                                    class="text-primaryring-primaryDark font-medium hover:text-primaryring-primaryDark/80 transition-colors">
-                                Login
-                                </Link>
-                            </p>
-                        </div>
-                    </form>
-
-                    <!-- Step 2: OTP Verification -->
-                    <form v-if="currentStep === 2" @submit.prevent="handleOtpSubmit" class="space-y-4">
-                        <div class="space-y-2">
-                            <label for="otp" class="text-xl font-medium">Verification Code</label>
-                            <p class="text-lg text-gray-500 mb-2">
-                                Enter the 6-digit code sent to {{ emailForm.email }}
-                            </p>
-                            <input id="otp" type="text" placeholder="Enter 6-digit code" maxlength="6"
-                                v-model="otpForm.otp"
-                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primaryDark text-center text-2xl tracking-widest" />
-                        </div>
-
-                        <button type="submit"
-                            class="w-full px-4 text-xl py-2.5 bg-primaryDark hover:-translate-y-1 text-white hover:text-primaryDark font-medium rounded-lg hover:bg-white disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:shadow-md hover:shadow-primaryring-primaryDark/30"
-                            :disabled="isLoading">
-                            {{ isLoading ? 'Verifying...' : 'Verify Code' }}
-                        </button>
-
-                        <div class="mt-4 text-center">
-                            <button type="button" @click="resendOtp"
-                                class="text-xl text-primary ring-primaryDark hover:text-primary ring-primaryDark/80 transition-colors"
+                    <div class="p-6 space-y-4 bg-white">
+                        <!-- Step 1: Email Verification -->
+                        <form v-if="currentStep === 3" @submit.prevent="handleEmailSubmit" class="space-y-4">
+                            <div class="space-y-2">
+                                <label for="email" class="text-xl font-medium">Email Address</label>
+                                <input id="email" type="email" placeholder="Enter your email" autocomplete="email"
+                                    autofocus v-model="emailForm.email"
+                                    class="w-full px-3 py-2 text-lg border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primaryDark" />
+                            </div>
+                            <button type="submit"
+                                class="w-full px-4 py-2.5 text-xl bg-primaryDark hover:text-primaryDark text-white font-medium rounded-lg hover:bg-white hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:shadow-md hover:shadow-primaryring-primaryDark/30"
                                 :disabled="isLoading">
-                                Resend Code
+                                {{ isLoading ? 'Sending OTP...' : 'Send Verification Code' }}
                             </button>
-                        </div>
-                    </form>
 
-                    <!-- Step 3: Biodata Form -->
-                    <form v-if="currentStep === 3" @submit.prevent="handleSignup" class="space-y-4">
-                        <div class="space-y-2 " v-for="field in biodataFields" :key="field.id">
-                            <label :for="field.id" class="text-xl font-medium">{{ field.name }}</label>
-                            <input v-if="field.type !== 'password'" :id="field.id" :type="field.type"
-                                :placeholder="field.placeholder" :autocomplete="field.autocomplete"
-                                v-model="signupForm[field.model]"
-                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primaryDark" />
-                            <PasswordInput v-else :id="field.id" :placeholder="field.placeholder"
-                                v-model="signupForm[field.model]" />
-                        </div>
+                            <div class="mt-6 text-center">
+                                <p class="text-xl text-gray-600">
+                                    Already have an account?
+                                    <Link href="/login"
+                                        class="text-primaryring-primaryDark font-medium hover:text-primaryring-primaryDark/80 transition-colors">
+                                    Login
+                                    </Link>
+                                </p>
+                            </div>
+                        </form>
 
-                        <button type="submit"
-                            class="w-full px-4 text-xl py-2.5 bg-primaryDark hover:-translate-y-1 text-white font-medium rounded-lg hover:bg-white hover:text-primaryDark disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:shadow-md hover:shadow-primaryring-primaryDark/30"
-                            :disabled="isLoading">
-                            {{ isLoading ? 'Signing up...' : 'Complete Registration' }}
-                        </button>
+                        <!-- Step 2: OTP Verification -->
+                        <form v-if="currentStep === 2" @submit.prevent="handleOtpSubmit" class="space-y-4">
+                            <div class="space-y-2">
+                                <label for="otp" class="text-xl font-medium">Verification Code</label>
+                                <p class="text-lg text-gray-500 mb-2">
+                                    Enter the 6-digit code sent to {{ emailForm.email }}
+                                </p>
+                                <input id="otp" type="text" placeholder="Enter 6-digit code" maxlength="6"
+                                    v-model="otpForm.otp"
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primaryDark text-center text-2xl tracking-widest" />
+                            </div>
 
-                    </form>
+                            <button type="submit"
+                                class="w-full px-4 text-xl py-2.5 bg-primaryDark hover:-translate-y-1 text-white hover:text-primaryDark font-medium rounded-lg hover:bg-white disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:shadow-md hover:shadow-primaryring-primaryDark/30"
+                                :disabled="isLoading">
+                                {{ isLoading ? 'Verifying...' : 'Verify Code' }}
+                            </button>
+
+                            <div class="mt-4 text-center">
+                                <button type="button" @click="resendOtp"
+                                    class="text-xl text-primary ring-primaryDark hover:text-primary ring-primaryDark/80 transition-colors"
+                                    :disabled="isLoading">
+                                    Resend Code
+                                </button>
+                            </div>
+                        </form>
+
+                        <!-- Step 3: Biodata Form -->
+                        <form v-if="currentStep === 1" @submit.prevent="handleSignup" class="space-y-4">
+                            <div class="space-y-2 " v-for="field in biodataFields" :key="field.id">
+                                <label :for="field.id" class="text-xl font-medium">{{ field.name }}</label>
+                                <input v-if="field.type !== 'password'" :id="field.id" :type="field.type"
+                                    :placeholder="field.placeholder" :autocomplete="field.autocomplete"
+                                    v-model="signupForm[field.model]"
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primaryDark" />
+                                <PasswordInput v-else :id="field.id" :placeholder="field.placeholder"
+                                    v-model="signupForm[field.model]" />
+                            </div>
+
+                            <button type="submit"
+                                class="w-full px-4 text-xl py-2.5 bg-primaryDark hover:-translate-y-1 text-white font-medium rounded-lg hover:bg-white hover:text-primaryDark disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:shadow-md hover:shadow-primaryring-primaryDark/30"
+                                :disabled="isLoading">
+                                {{ isLoading ? 'Signing up...' : 'Complete Registration' }}
+                            </button>
+
+                        </form>
+                    </div>
                 </div>
-            </div>
 
+            </div>
         </div>
     </AuthLayout>
 </template>
@@ -123,6 +137,7 @@ import AuthLayout from '@/Layouts/AuthLayout.vue';
 import Toaster from '@/components/ui/toast/Toaster.vue';
 import { useToast } from '@/components/ui/toast';
 import PasswordInput from '@/Components/PasswordInput.vue';
+import { ArrowLeft } from '@solar-icons/vue';
 
 
 

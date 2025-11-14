@@ -192,11 +192,11 @@
 
       <!-- Modal Overlay -->
       <div id="modal" autofocus v-if="selectionModal"
-            class="fixed inset-0 py-20 h-screen  z-50 flex  items-center justify-center bg-black bg-opacity-50 p-4">
+            class="fixed inset-0 py-20 h-screen z-50 flex  items-center justify-center bg-black bg-opacity-50 p-4">
 
             <!-- Modal Container -->
             <div
-                  class="bg-white h-screen overflow-y-auto scrollbar-none rounded-2xl shadow-2xl pb-20  pt-14 max-w-4xl w-full p-6 md:p-10 relative">
+                  class="bg-white h-full lg:h-max overflow-y-auto scrollbar-none rounded-2xl shadow-2xl pb-20  pt-14 max-w-4xl w-full p-6 md:p-10 relative">
 
                   <!-- Close Button -->
                   <button @click="closeModal"
@@ -241,10 +241,13 @@
                                     patients efficiently through clinic-based workflows and batch operations</p>
 
                               <!-- Action Button -->
+                              <Link :href="route('signup')">
                               <button
                                     class="mt-6 w-full bg-primaryDark hover:bg-primaryDark text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-300 group-hover:shadow-lg">
                                     Select Clinics
                               </button>
+                              </Link>
+
                         </div>
 
                         <!-- Individual Option -->
