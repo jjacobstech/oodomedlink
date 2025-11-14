@@ -417,7 +417,22 @@ const _sfc_main$3 = /* @__PURE__ */ defineComponent({
       }
       _push(`</nav>`);
       if (selectionModal.value) {
-        _push(`<div id="modal" autofocus class="fixed inset-0 py-20 h-screen z-50 flex items-center justify-center bg-black bg-opacity-50 p-4"><div class="bg-white h-screen overflow-y-auto scrollbar-none rounded-2xl shadow-2xl pb-20 pt-14 max-w-4xl w-full p-6 md:p-10 relative"><button class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button><div class="text-center mb-8"><h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-2">Select Patient Management Type</h2><p class="text-gray-600 text-sm md:text-base">Choose how you&#39;d like to add patients to the system</p></div><div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6"><div class="group cursor-pointer bg-white border-2 border-gray-200 hover:border-primaryDark rounded-xl p-6 md:p-8 transition-all duration-300 hover:shadow-xl hover:-translate-y-1"><div class="w-16 h-16 bg-primaryLight rounded-full flex items-center justify-center mb-4 group-hover:bg-primaryDark transition-colors duration-300"><svg class="w-8 h-8 text-primaryDark group-hover:text-white transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg></div><h3 class="text-xl md:text-2xl font-bold text-gray-800 mb-3 group-hover:text-primaryDark transition-colors"> Clinics</h3><p class="text-gray-600 text-sm md:text-base leading-relaxed">Manage multiple patients efficiently through clinic-based workflows and batch operations</p><button class="mt-6 w-full bg-primaryDark hover:bg-primaryDark text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-300 group-hover:shadow-lg"> Select Clinics </button></div><div class="group cursor-pointer bg-white border-2 border-gray-200 hover:border-primaryDark rounded-xl p-6 md:p-8 transition-all duration-300 hover:shadow-xl hover:-translate-y-1"><div class="w-16 h-16 bg-primaryLight rounded-full flex items-center justify-center mb-4 group-hover:bg-blue-500 transition-colors duration-300"><svg class="w-8 h-8 text-primaryDark group-hover:text-white transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg></div><h3 class="text-xl md:text-2xl font-bold text-gray-800 mb-3 group-hover:text-primaryDark transition-colors"> Individual</h3><p class="text-gray-600 text-sm md:text-base leading-relaxed">Add patients one at a time with complete control over each entry and detailed information</p><button class="mt-6 w-full btn-disabled bg-primaryDark hover:bg-primaryDark text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-300 group-hover:shadow-lg"> Coming Soon... </button></div></div></div></div>`);
+        _push(`<div id="modal" autofocus class="fixed inset-0 py-20 h-screen z-50 flex items-center justify-center bg-black bg-opacity-50 p-4"><div class="bg-white h-full lg:h-max overflow-y-auto scrollbar-none rounded-2xl shadow-2xl pb-20 pt-14 max-w-4xl w-full p-6 md:p-10 relative"><button class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button><div class="text-center mb-8"><h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-2">Select Patient Management Type</h2><p class="text-gray-600 text-sm md:text-base">Choose how you&#39;d like to add patients to the system</p></div><div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6"><div class="group cursor-pointer bg-white border-2 border-gray-200 hover:border-primaryDark rounded-xl p-6 md:p-8 transition-all duration-300 hover:shadow-xl hover:-translate-y-1"><div class="w-16 h-16 bg-primaryLight rounded-full flex items-center justify-center mb-4 group-hover:bg-primaryDark transition-colors duration-300"><svg class="w-8 h-8 text-primaryDark group-hover:text-white transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg></div><h3 class="text-xl md:text-2xl font-bold text-gray-800 mb-3 group-hover:text-primaryDark transition-colors"> Clinics</h3><p class="text-gray-600 text-sm md:text-base leading-relaxed">Manage multiple patients efficiently through clinic-based workflows and batch operations</p>`);
+        _push(ssrRenderComponent(unref(Link), {
+          href: _ctx.route("signup")
+        }, {
+          default: withCtx((_, _push2, _parent2, _scopeId) => {
+            if (_push2) {
+              _push2(`<button class="mt-6 w-full bg-primaryDark hover:bg-primaryDark text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-300 group-hover:shadow-lg"${_scopeId}> Select Clinics </button>`);
+            } else {
+              return [
+                createVNode("button", { class: "mt-6 w-full bg-primaryDark hover:bg-primaryDark text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-300 group-hover:shadow-lg" }, " Select Clinics ")
+              ];
+            }
+          }),
+          _: 1
+        }, _parent));
+        _push(`</div><div class="group cursor-pointer bg-white border-2 border-gray-200 hover:border-primaryDark rounded-xl p-6 md:p-8 transition-all duration-300 hover:shadow-xl hover:-translate-y-1"><div class="w-16 h-16 bg-primaryLight rounded-full flex items-center justify-center mb-4 group-hover:bg-blue-500 transition-colors duration-300"><svg class="w-8 h-8 text-primaryDark group-hover:text-white transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg></div><h3 class="text-xl md:text-2xl font-bold text-gray-800 mb-3 group-hover:text-primaryDark transition-colors"> Individual</h3><p class="text-gray-600 text-sm md:text-base leading-relaxed">Add patients one at a time with complete control over each entry and detailed information</p><button class="mt-6 w-full btn-disabled bg-primaryDark hover:bg-primaryDark text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-300 group-hover:shadow-lg"> Coming Soon... </button></div></div></div></div>`);
       } else {
         _push(`<!---->`);
       }
@@ -455,12 +470,12 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
   __ssrInlineRender: true,
   setup(__props) {
     return (_ctx, _push, _parent, _attrs) => {
-      _push(`<footer${ssrRenderAttrs(mergeProps({ class: "bg-card border-t text-xl border-border py-12" }, _attrs))}><div class="container mx-auto px-4 sm:px-6 lg:px-8"><div class="grid md:grid-cols-4 text-xl gap-8 mb-8"><div class="space-y-4">`);
+      _push(`<footer${ssrRenderAttrs(mergeProps({ class: "bg-card bg-primaryDark border-t text-xl border-border py-12" }, _attrs))}><div class="container mx-auto px-4 sm:px-6 lg:px-8"><div class="grid md:grid-cols-4 text-xl gap-8 mb-8"><div class="space-y-4"><button class="bg-white rounded-lg p-1">`);
       _push(ssrRenderComponent(_sfc_main$b, null, null, _parent));
-      _push(`<p class="text-xl font-extrabold text-muted-foreground"> Streamlining test results delivery for modern healthcare providers </p></div><div><h4 class="font-extrabold mb-4">Product</h4><ul class="space-y-2 text-xl font-extrabold text-muted-foreground"><li><a href="#" class="hover:text-primary transition-colors">Features</a></li><li><a href="#" class="hover:text-primary transition-colors">Pricing</a></li><li><a href="#" class="hover:text-primary transition-colors">Security</a></li><li><a href="#" class="hover:text-primary transition-colors">Integration</a></li></ul></div><div><h4 class="font-extrabold mb-4">Company</h4><ul class="space-y-2 text-xl font-extrabold text-muted-foreground"><li><a href="#" class="hover:text-primary transition-colors">About Us</a></li><li><a href="#" class="hover:text-primary transition-colors">Careers</a></li><li><a href="#" class="hover:text-primary transition-colors">Blog</a></li><li><a href="#" class="hover:text-primary transition-colors">Contact</a></li></ul></div><div><h4 class="font-extrabold mb-4">Support</h4><ul class="space-y-2 text-xl font-extrabold text-muted-foreground"><li><a href="#" class="hover:text-primary transition-colors">Help Center</a></li><li><a href="#" class="hover:text-primary transition-colors">Documentation</a></li><li><a href="#" class="hover:text-primary transition-colors">Privacy Policy</a></li><li><a href="#" class="hover:text-primary transition-colors">Terms of Service</a></li></ul></div></div><div class="pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4"><p class="text-xl font-extrabold text-muted-foreground"> © 2025 OodoMedlink. All rights reserved. </p><div class="flex font-extrabold items-center gap-2 text-xl text-muted-foreground"><span>Made with</span>`);
+      _push(`</button><p class="text-xl font-extrabold text-primaryLight"> Streamlining test results delivery for modern healthcare providers </p></div><div><h4 class="font-extrabold mb-4 text-primaryLight">Product</h4><ul class="space-y-2 text-xl font-extrabold text-primaryLight"><li><a href="#" class="hover:text-primary transition-colors">Features</a></li><li><a href="#" class="hover:text-primary transition-colors">Pricing</a></li><li><a href="#" class="hover:text-primary transition-colors">Security</a></li><li><a href="#" class="hover:text-primary transition-colors">Integration</a></li></ul></div><div><h4 class="font-extrabold mb-4 text-primaryLight">Company</h4><ul class="space-y-2 text-xl font-extrabold text-primaryLight"><li><a href="#" class="hover:text-primary transition-colors">About Us</a></li><li><a href="#" class="hover:text-primary transition-colors">Careers</a></li><li><a href="#" class="hover:text-primary transition-colors">Blog</a></li><li><a href="#" class="hover:text-primary transition-colors">Contact</a></li></ul></div><div><h4 class="font-extrabold mb-4 text-primaryLight">Support</h4><ul class="space-y-2 text-xl font-extrabold text-primaryLight"><li><a href="#" class="hover:text-primary transition-colors">Help Center</a></li><li><a href="#" class="hover:text-primary transition-colors">Documentation</a></li><li><a href="#" class="hover:text-primary transition-colors">Privacy Policy</a></li><li><a href="#" class="hover:text-primary transition-colors">Terms of Service</a></li></ul></div></div><div class="pt-8 border-t bg-primaryDark border-border flex flex-col md:flex-row justify-between items-center gap-4"><p class="text-xl font-extrabold text-primaryLight"> © 2025 OodoMedlink. All rights reserved. </p><div class="flex font-extrabold items-center gap-2 text-xl text-primaryLight"><span>Made with</span>`);
       _push(ssrRenderComponent(unref(HeartShine), {
         weight: "Bold",
-        class: "fill-primaryDark text-primaryDark w-auto h-8"
+        class: "fill-primaryDark text-primaryLight w-auto h-8"
       }, null, _parent));
       _push(`<span>for healthcare professionals</span></div></div></div></footer>`);
     };
@@ -592,10 +607,10 @@ const _sfc_main = {
       _push(ssrRenderComponent(_sfc_main$2, null, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(`<div class="w-full flex flex-col lg:flex-row justify-center items-center gap-8 lg:gap-16 my-40 px-6 sm:px-6 lg:px-12 2xl:px-10 2xl:gap-32 2xl:my-44"${_scopeId}><div class="w-full lg:w-[45%] flex flex-col space-y-6 max-w-2xl"${_scopeId}><h1 class="text-4xl sm:text-4xl lg:text-6xl 2xl:text-8xl font-bold leading-tight text-black"${_scopeId}> Fast,<br${_scopeId}> Secure and<br${_scopeId}> Convenient<br${_scopeId}> Test Results </h1><p class="text-base font-bold sm:text-lg lg:text-xl 2xl:text-2xl text-gray-700 leading-relaxed"${_scopeId}> Your health and peace of mind should not be a gamble. Oodo Medlink gives you fast, secure and convenient access to your lab test results anytime, anywhere. </p><div class="w-full"${_scopeId}><div class="flex flex-col sm:flex-row gap-3 sm:gap-4"${_scopeId}><label for="email-input" class="sr-only"${_scopeId}>Email address</label><input type="email" id="email-input"${ssrRenderAttr("value", email.value)} class="flex-1 px-4 py-3 font-extrabold rounded-md border text-xl border-gray-300 focus:outline-none focus:ring-2 focus:ring-primaaryDark focus:border-transparent" placeholder="Enter your email" aria-label="Enter your email address"${_scopeId}><button class="px-6 py-3 font-extrabold bg-primaryDark text-xl rounded-md text-white hover:opacity-90 transition-opacity duration-300 focus:ring-2 focus:ring-primaaryDark focus:outline-none whitespace-nowrap" aria-label="Start now"${_scopeId}> Start Now </button></div></div></div><div class="w-full lg:w-[51%]"${_scopeId}><div class="w-full max-w-xl 2xl:max-w-none space-y-4"${_scopeId}>`);
+            _push2(`<div class="w-full flex flex-col lg:flex-row justify-center items-center gap-8 lg:gap-16 my-20 sm:my-32 lg:my-40 px-4 sm:px-6 lg:px-12 2xl:px-10 2xl:gap-32 2xl:my-44"${_scopeId}><div class="w-full lg:w-1/2 flex flex-col space-y-4 sm:space-y-6 max-w-2xl"${_scopeId}><h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl 2xl:text-8xl font-bold leading-tight text-black"${_scopeId}> Fast,<br${_scopeId}> Secure and<br${_scopeId}> Convenient<br${_scopeId}> Test Results </h1><p class="text-sm sm:text-base md:text-lg lg:text-xl 2xl:text-2xl font-bold text-gray-700 leading-relaxed"${_scopeId}> Your health and peace of mind should not be a gamble. Oodo Medlink gives you fast, secure and convenient access to your lab test results anytime, anywhere. </p><div class="w-full pt-2"${_scopeId}><form class="flex flex-col sm:flex-row gap-3 sm:gap-4"${_scopeId}><label for="email-input" class="sr-only"${_scopeId}>Email address</label><input type="email" id="email-input"${ssrRenderAttr("value", email.value)} required class="flex-1 px-3 py-2.5 sm:px-4 sm:py-3 font-extrabold rounded-md border text-base sm:text-lg lg:text-xl border-gray-300 focus:outline-none focus:ring-2 focus:ring-primaryDark focus:border-transparent" placeholder="Enter your email" aria-label="Enter your email address"${_scopeId}><button type="submit" class="px-5 py-2.5 sm:px-6 sm:py-3 font-extrabold bg-primaryDark text-base sm:text-lg lg:text-xl rounded-md text-white hover:opacity-90 transition-opacity duration-300 focus:ring-2 focus:ring-primaryDark focus:outline-none whitespace-nowrap" aria-label="Start now"${_scopeId}> Start Now </button></form></div></div><div class="w-full lg:w-1/2 flex justify-center"${_scopeId}><div class="w-full max-w-2xl space-y-4"${_scopeId}>`);
             _push2(ssrRenderComponent(unref(_sfc_main$9), {
               plugins: [unref(Autoplay)({ delay: 5e3 })],
-              class: "relative w-full rounded-lg overflow-hidden shadow-lg 2xl:h-[600px] 2xl:w-[950px]",
+              class: "w-full rounded-lg overflow-hidden shadow-lg",
               onInitApi: (val) => emblaMainApi.value = val,
               "aria-label": "Featured images carousel"
             }, {
@@ -677,7 +692,7 @@ const _sfc_main = {
               _: 1
             }, _parent2, _scopeId));
             _push2(ssrRenderComponent(unref(_sfc_main$9), {
-              class: "relative w-full 2xl:w-[950px]",
+              class: "relative w-full",
               onInitApi: (val) => emblaThumbnailApi.value = val,
               "aria-label": "Carousel navigation"
             }, {
@@ -699,14 +714,14 @@ const _sfc_main = {
                           }, {
                             default: withCtx((_5, _push5, _parent5, _scopeId4) => {
                               if (_push5) {
-                                _push5(`<div class="${ssrRenderClass([index === selectedIndex.value ? "opacity-100" : "opacity-50", "transition-opacity duration-300"])}"${_scopeId4}><div class="${ssrRenderClass([index === selectedIndex.value ? "w-20 bg-primaryDark" : "w-8 bg-gray-400", "h-2 rounded-full transition-all duration-300"])}"${_scopeId4}></div></div>`);
+                                _push5(`<div class="${ssrRenderClass([index === selectedIndex.value ? "opacity-100" : "opacity-50", "transition-opacity duration-300"])}"${_scopeId4}><div class="${ssrRenderClass([index === selectedIndex.value ? "w-16 sm:w-20 bg-primaryDark" : "w-6 sm:w-8 bg-gray-400", "h-2 rounded-full transition-all duration-300"])}"${_scopeId4}></div></div>`);
                               } else {
                                 return [
                                   createVNode("div", {
                                     class: ["transition-opacity duration-300", index === selectedIndex.value ? "opacity-100" : "opacity-50"]
                                   }, [
                                     createVNode("div", {
-                                      class: ["h-2 rounded-full transition-all duration-300", index === selectedIndex.value ? "w-20 bg-primaryDark" : "w-8 bg-gray-400"]
+                                      class: ["h-2 rounded-full transition-all duration-300", index === selectedIndex.value ? "w-16 sm:w-20 bg-primaryDark" : "w-6 sm:w-8 bg-gray-400"]
                                     }, null, 2)
                                   ], 2)
                                 ];
@@ -736,7 +751,7 @@ const _sfc_main = {
                                   class: ["transition-opacity duration-300", index === selectedIndex.value ? "opacity-100" : "opacity-50"]
                                 }, [
                                   createVNode("div", {
-                                    class: ["h-2 rounded-full transition-all duration-300", index === selectedIndex.value ? "w-20 bg-primaryDark" : "w-8 bg-gray-400"]
+                                    class: ["h-2 rounded-full transition-all duration-300", index === selectedIndex.value ? "w-16 sm:w-20 bg-primaryDark" : "w-6 sm:w-8 bg-gray-400"]
                                   }, null, 2)
                                 ], 2)
                               ]),
@@ -770,7 +785,7 @@ const _sfc_main = {
                                 class: ["transition-opacity duration-300", index === selectedIndex.value ? "opacity-100" : "opacity-50"]
                               }, [
                                 createVNode("div", {
-                                  class: ["h-2 rounded-full transition-all duration-300", index === selectedIndex.value ? "w-20 bg-primaryDark" : "w-8 bg-gray-400"]
+                                  class: ["h-2 rounded-full transition-all duration-300", index === selectedIndex.value ? "w-16 sm:w-20 bg-primaryDark" : "w-6 sm:w-8 bg-gray-400"]
                                 }, null, 2)
                               ], 2)
                             ]),
@@ -795,14 +810,14 @@ const _sfc_main = {
                   if (_push3) {
                     _push3(`<div class="h-14 w-14 group-hover:bg-white rounded-2xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors"${_scopeId2}>`);
                     ssrRenderVNode(_push3, createVNode(resolveDynamicComponent(feature.icon), { class: "h-6 w-6 text-primary" }, null), _parent3, _scopeId2);
-                    _push3(`</div><h3 class="text-2xl font-extrabold mb-3"${_scopeId2}>${ssrInterpolate(feature.title)}</h3><p class="text-muted-foreground group-hover:text-white text-xl font-extrabold leading-relaxed"${_scopeId2}>${ssrInterpolate(feature.description)}</p>`);
+                    _push3(`</div><h3 class="lg:text-2xl font-extrabold mb-3"${_scopeId2}>${ssrInterpolate(feature.title)}</h3><p class="text-muted-foreground group-hover:text-white lg:text-xl font-extrabold leading-relaxed"${_scopeId2}>${ssrInterpolate(feature.description)}</p>`);
                   } else {
                     return [
                       createVNode("div", { class: "h-14 w-14 group-hover:bg-white rounded-2xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors" }, [
                         (openBlock(), createBlock(resolveDynamicComponent(feature.icon), { class: "h-6 w-6 text-primary" }))
                       ]),
-                      createVNode("h3", { class: "text-2xl font-extrabold mb-3" }, toDisplayString(feature.title), 1),
-                      createVNode("p", { class: "text-muted-foreground group-hover:text-white text-xl font-extrabold leading-relaxed" }, toDisplayString(feature.description), 1)
+                      createVNode("h3", { class: "lg:text-2xl font-extrabold mb-3" }, toDisplayString(feature.title), 1),
+                      createVNode("p", { class: "text-muted-foreground group-hover:text-white lg:text-xl font-extrabold leading-relaxed" }, toDisplayString(feature.description), 1)
                     ];
                   }
                 }),
@@ -813,19 +828,19 @@ const _sfc_main = {
             ssrRenderList(benefits.value, (benefit) => {
               _push2(`<div${_scopeId}><div class="flex-shrink-0 mt-1"${_scopeId}>`);
               _push2(ssrRenderComponent(unref(CheckCircle), { class: "h-6 w-6 text-primary group-hover:scale-110 transition-transform" }, null, _parent2, _scopeId));
-              _push2(`</div><div${_scopeId}><h3 class="text-3xl font-extrabold mb-2"${_scopeId}>${ssrInterpolate(benefit.title)}</h3><p class="text-muted-foreground text-2xl leading-relaxed"${_scopeId}>${ssrInterpolate(benefit.description)}</p></div></div>`);
+              _push2(`</div><div${_scopeId}><h3 class="lg:text-3xl font-extrabold mb-2"${_scopeId}>${ssrInterpolate(benefit.title)}</h3><p class="text-muted-foreground lg:text-2xl leading-relaxed"${_scopeId}>${ssrInterpolate(benefit.description)}</p></div></div>`);
             });
             _push2(`<!--]--></div></div></div><div class="space-y-6"${_scopeId}><!--[-->`);
             ssrRenderList(stats.value, (stat) => {
-              _push2(`<div class="bg-primaryDark p-8 text-white rounded-2xl border border-none shadow-lg"${_scopeId}><div class="text-5xl font-extrabold text-white mb-2 2xl:text-6xl"${_scopeId}>${ssrInterpolate(stat.title)}</div><div class="text-lg font-extrabold mb-2 2xl:text-2xl"${_scopeId}>${ssrInterpolate(stat.subject)}</div><p class="bg-primaryDark font-extrabold bg-clip-text 2xl:text-xl"${_scopeId}>${ssrInterpolate(stat.description)}</p></div>`);
+              _push2(`<div class="bg-primaryDark p-8 text-white rounded-2xl border border-none shadow-lg"${_scopeId}><div class="md:text-5xl font-extrabold text-white mb-2 2xl:text-6xl"${_scopeId}>${ssrInterpolate(stat.title)}</div><div class="md:text-lg font-extrabold mb-2 2xl:text-2xl"${_scopeId}>${ssrInterpolate(stat.subject)}</div><p class="bg-primaryDark font-extrabold bg-clip-text 2xl:text-xl"${_scopeId}>${ssrInterpolate(stat.description)}</p></div>`);
             });
             _push2(`<!--]--></div></div></section>`);
             _push2(ssrRenderComponent(_sfc_main$1, null, null, _parent2, _scopeId));
           } else {
             return [
-              createVNode("div", { class: "w-full flex flex-col lg:flex-row justify-center items-center gap-8 lg:gap-16 my-40 px-6 sm:px-6 lg:px-12 2xl:px-10 2xl:gap-32 2xl:my-44" }, [
-                createVNode("div", { class: "w-full lg:w-[45%] flex flex-col space-y-6 max-w-2xl" }, [
-                  createVNode("h1", { class: "text-4xl sm:text-4xl lg:text-6xl 2xl:text-8xl font-bold leading-tight text-black" }, [
+              createVNode("div", { class: "w-full flex flex-col lg:flex-row justify-center items-center gap-8 lg:gap-16 my-20 sm:my-32 lg:my-40 px-4 sm:px-6 lg:px-12 2xl:px-10 2xl:gap-32 2xl:my-44" }, [
+                createVNode("div", { class: "w-full lg:w-1/2 flex flex-col space-y-4 sm:space-y-6 max-w-2xl" }, [
+                  createVNode("h1", { class: "text-3xl sm:text-4xl md:text-5xl lg:text-6xl 2xl:text-8xl font-bold leading-tight text-black" }, [
                     createTextVNode(" Fast,"),
                     createVNode("br"),
                     createTextVNode(" Secure and"),
@@ -834,9 +849,12 @@ const _sfc_main = {
                     createVNode("br"),
                     createTextVNode(" Test Results ")
                   ]),
-                  createVNode("p", { class: "text-base font-bold sm:text-lg lg:text-xl 2xl:text-2xl text-gray-700 leading-relaxed" }, " Your health and peace of mind should not be a gamble. Oodo Medlink gives you fast, secure and convenient access to your lab test results anytime, anywhere. "),
-                  createVNode("div", { class: "w-full" }, [
-                    createVNode("div", { class: "flex flex-col sm:flex-row gap-3 sm:gap-4" }, [
+                  createVNode("p", { class: "text-sm sm:text-base md:text-lg lg:text-xl 2xl:text-2xl font-bold text-gray-700 leading-relaxed" }, " Your health and peace of mind should not be a gamble. Oodo Medlink gives you fast, secure and convenient access to your lab test results anytime, anywhere. "),
+                  createVNode("div", { class: "w-full pt-2" }, [
+                    createVNode("form", {
+                      onSubmit: withModifiers(startNow, ["prevent"]),
+                      class: "flex flex-col sm:flex-row gap-3 sm:gap-4"
+                    }, [
                       createVNode("label", {
                         for: "email-input",
                         class: "sr-only"
@@ -845,25 +863,26 @@ const _sfc_main = {
                         type: "email",
                         id: "email-input",
                         "onUpdate:modelValue": ($event) => email.value = $event,
-                        class: "flex-1 px-4 py-3 font-extrabold rounded-md border text-xl border-gray-300 focus:outline-none focus:ring-2 focus:ring-primaaryDark focus:border-transparent",
+                        required: "",
+                        class: "flex-1 px-3 py-2.5 sm:px-4 sm:py-3 font-extrabold rounded-md border text-base sm:text-lg lg:text-xl border-gray-300 focus:outline-none focus:ring-2 focus:ring-primaryDark focus:border-transparent",
                         placeholder: "Enter your email",
                         "aria-label": "Enter your email address"
                       }, null, 8, ["onUpdate:modelValue"]), [
                         [vModelText, email.value]
                       ]),
                       createVNode("button", {
-                        onClick: startNow,
-                        class: "px-6 py-3 font-extrabold bg-primaryDark text-xl rounded-md text-white hover:opacity-90 transition-opacity duration-300 focus:ring-2 focus:ring-primaaryDark focus:outline-none whitespace-nowrap",
+                        type: "submit",
+                        class: "px-5 py-2.5 sm:px-6 sm:py-3 font-extrabold bg-primaryDark text-base sm:text-lg lg:text-xl rounded-md text-white hover:opacity-90 transition-opacity duration-300 focus:ring-2 focus:ring-primaryDark focus:outline-none whitespace-nowrap",
                         "aria-label": "Start now"
                       }, " Start Now ")
-                    ])
+                    ], 32)
                   ])
                 ]),
-                createVNode("div", { class: "w-full lg:w-[51%]" }, [
-                  createVNode("div", { class: "w-full max-w-xl 2xl:max-w-none space-y-4" }, [
+                createVNode("div", { class: "w-full lg:w-1/2 flex justify-center" }, [
+                  createVNode("div", { class: "w-full max-w-2xl space-y-4" }, [
                     createVNode(unref(_sfc_main$9), {
                       plugins: [unref(Autoplay)({ delay: 5e3 })],
-                      class: "relative w-full rounded-lg overflow-hidden shadow-lg 2xl:h-[600px] 2xl:w-[950px]",
+                      class: "w-full rounded-lg overflow-hidden shadow-lg",
                       onInitApi: (val) => emblaMainApi.value = val,
                       "aria-label": "Featured images carousel"
                     }, {
@@ -892,7 +911,7 @@ const _sfc_main = {
                       _: 1
                     }, 8, ["plugins", "onInitApi"]),
                     createVNode(unref(_sfc_main$9), {
-                      class: "relative w-full 2xl:w-[950px]",
+                      class: "relative w-full",
                       onInitApi: (val) => emblaThumbnailApi.value = val,
                       "aria-label": "Carousel navigation"
                     }, {
@@ -917,7 +936,7 @@ const _sfc_main = {
                                     class: ["transition-opacity duration-300", index === selectedIndex.value ? "opacity-100" : "opacity-50"]
                                   }, [
                                     createVNode("div", {
-                                      class: ["h-2 rounded-full transition-all duration-300", index === selectedIndex.value ? "w-20 bg-primaryDark" : "w-8 bg-gray-400"]
+                                      class: ["h-2 rounded-full transition-all duration-300", index === selectedIndex.value ? "w-16 sm:w-20 bg-primaryDark" : "w-6 sm:w-8 bg-gray-400"]
                                     }, null, 2)
                                   ], 2)
                                 ]),
@@ -949,8 +968,8 @@ const _sfc_main = {
                           createVNode("div", { class: "h-14 w-14 group-hover:bg-white rounded-2xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors" }, [
                             (openBlock(), createBlock(resolveDynamicComponent(feature.icon), { class: "h-6 w-6 text-primary" }))
                           ]),
-                          createVNode("h3", { class: "text-2xl font-extrabold mb-3" }, toDisplayString(feature.title), 1),
-                          createVNode("p", { class: "text-muted-foreground group-hover:text-white text-xl font-extrabold leading-relaxed" }, toDisplayString(feature.description), 1)
+                          createVNode("h3", { class: "lg:text-2xl font-extrabold mb-3" }, toDisplayString(feature.title), 1),
+                          createVNode("p", { class: "text-muted-foreground group-hover:text-white lg:text-xl font-extrabold leading-relaxed" }, toDisplayString(feature.description), 1)
                         ]),
                         _: 2
                       }, 1024);
@@ -975,8 +994,8 @@ const _sfc_main = {
                               createVNode(unref(CheckCircle), { class: "h-6 w-6 text-primary group-hover:scale-110 transition-transform" })
                             ]),
                             createVNode("div", null, [
-                              createVNode("h3", { class: "text-3xl font-extrabold mb-2" }, toDisplayString(benefit.title), 1),
-                              createVNode("p", { class: "text-muted-foreground text-2xl leading-relaxed" }, toDisplayString(benefit.description), 1)
+                              createVNode("h3", { class: "lg:text-3xl font-extrabold mb-2" }, toDisplayString(benefit.title), 1),
+                              createVNode("p", { class: "text-muted-foreground lg:text-2xl leading-relaxed" }, toDisplayString(benefit.description), 1)
                             ])
                           ]);
                         }), 128))
@@ -989,8 +1008,8 @@ const _sfc_main = {
                         key: stat.title,
                         class: "bg-primaryDark p-8 text-white rounded-2xl border border-none shadow-lg"
                       }, [
-                        createVNode("div", { class: "text-5xl font-extrabold text-white mb-2 2xl:text-6xl" }, toDisplayString(stat.title), 1),
-                        createVNode("div", { class: "text-lg font-extrabold mb-2 2xl:text-2xl" }, toDisplayString(stat.subject), 1),
+                        createVNode("div", { class: "md:text-5xl font-extrabold text-white mb-2 2xl:text-6xl" }, toDisplayString(stat.title), 1),
+                        createVNode("div", { class: "md:text-lg font-extrabold mb-2 2xl:text-2xl" }, toDisplayString(stat.subject), 1),
                         createVNode("p", { class: "bg-primaryDark font-extrabold bg-clip-text 2xl:text-xl" }, toDisplayString(stat.description), 1)
                       ]);
                     }), 128))

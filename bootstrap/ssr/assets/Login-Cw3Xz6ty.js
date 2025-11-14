@@ -4,7 +4,7 @@ import { useForm, Head, Link } from "@inertiajs/vue3";
 import { z, flattenError } from "zod";
 import { u as useToast, _ as _sfc_main$1, a as _sfc_main$2 } from "./PasswordInput-BRdDyhnh.js";
 import { ArrowLeft } from "lucide-vue-next";
-import { A as AuthLayout } from "./AuthLayout-Bh38-ra-.js";
+import { A as AuthLayout } from "./AuthLayout-x0U8Uf7l.js";
 import "@vueuse/core";
 import "reka-ui";
 import "./utils-H80jjgLf.js";
@@ -79,9 +79,9 @@ const _sfc_main = {
       _push(ssrRenderComponent(AuthLayout, null, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(`<div class="w-full overflow-hidden"${_scopeId}>`);
+            _push2(`<div class="w-full flex justify-center overflow-hidden"${_scopeId}>`);
             _push2(ssrRenderComponent(_sfc_main$1, null, null, _parent2, _scopeId));
-            _push2(`<div class="relative z-10 container mx-auto max-w-xl py-12 flex items-center justify-center min-h-[calc(100vh-80px)]"${_scopeId}><div class="w-full px-20 space-y-4"${_scopeId}><div class="flex justify-start"${_scopeId}>`);
+            _push2(`<div class="relative z-10 container mx-auto lg:max-w-xl py-12 flex items-center justify-center min-h-[calc(100vh-80px)]"${_scopeId}><div class="w-full px-5 lg:px-20 space-y-4"${_scopeId}><div class="flex justify-start"${_scopeId}>`);
             _push2(ssrRenderComponent(unref(Link), {
               href: "/",
               class: "inline-flex items-center gap-2 text-xl px-4 py-2 text-primaryDark rounded-lg transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5 hover:bg-primaryDark hover:text-white hover:shadow-primaryDark/30"
@@ -140,10 +140,10 @@ const _sfc_main = {
             _push2(`</p></div></div></div></div></div></div>`);
           } else {
             return [
-              createVNode("div", { class: "w-full overflow-hidden" }, [
+              createVNode("div", { class: "w-full flex justify-center overflow-hidden" }, [
                 createVNode(_sfc_main$1),
-                createVNode("div", { class: "relative z-10 container mx-auto max-w-xl py-12 flex items-center justify-center min-h-[calc(100vh-80px)]" }, [
-                  createVNode("div", { class: "w-full px-20 space-y-4" }, [
+                createVNode("div", { class: "relative z-10 container mx-auto lg:max-w-xl py-12 flex items-center justify-center min-h-[calc(100vh-80px)]" }, [
+                  createVNode("div", { class: "w-full px-5 lg:px-20 space-y-4" }, [
                     createVNode("div", { class: "flex justify-start" }, [
                       createVNode(unref(Link), {
                         href: "/",

@@ -2,7 +2,7 @@ import { ref, unref, withCtx, createTextVNode, createVNode, createBlock, createC
 import { ssrRenderComponent, ssrRenderAttr, ssrInterpolate, ssrIncludeBooleanAttr, ssrRenderList, ssrRenderDynamicModel } from "vue/server-renderer";
 import { useForm, Head, Link } from "@inertiajs/vue3";
 import { z, flattenError } from "zod";
-import { A as AuthLayout } from "./AuthLayout-Bh38-ra-.js";
+import { A as AuthLayout } from "./AuthLayout-x0U8Uf7l.js";
 import { u as useToast, _ as _sfc_main$1, a as _sfc_main$2 } from "./PasswordInput-BRdDyhnh.js";
 import "./_plugin-vue_export-helper-1tPrXgE0.js";
 import "@vueuse/core";
