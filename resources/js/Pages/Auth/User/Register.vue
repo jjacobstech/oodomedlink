@@ -360,7 +360,7 @@ const resendOtp = async () => {
     isLoading.value = true;
     console.log(otpForm.email)
     try {
-        emailForm.post(route('send-otp'), {
+        emailForm.post(route('send.otp'), {
             onSuccess: () => {
                 toast({
                     title: 'Code Resent',

@@ -191,11 +191,12 @@
 
 
       <!-- Modal Overlay -->
-      <div id="modal" v-if="selectionModal"
-            class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4">
+      <div id="modal" autofocus v-if="selectionModal"
+            class="fixed inset-0 py-20 h-screen  z-50 flex  items-center justify-center bg-black bg-opacity-50 p-4">
 
             <!-- Modal Container -->
-            <div class="bg-white rounded-2xl shadow-2xl max-w-4xl w-full p-6 md:p-10 relative">
+            <div
+                  class="bg-white h-screen overflow-y-auto scrollbar-none rounded-2xl shadow-2xl pb-20  pt-14 max-w-4xl w-full p-6 md:p-10 relative">
 
                   <!-- Close Button -->
                   <button @click="closeModal"
@@ -217,43 +218,14 @@
                   <!-- Options Container -->
                   <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
 
-                        <!-- Individual Option -->
-                        <div @click=""
-                              class="group cursor-pointer bg-white border-2 border-gray-200 hover:border-blue-500 rounded-xl p-6 md:p-8 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
-
-                              <!-- Icon -->
-                              <div
-                                    class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4 group-hover:bg-blue-500 transition-colors duration-300">
-                                    <svg class="w-8 h-8 text-blue-600 group-hover:text-white transition-colors duration-300"
-                                          fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z">
-                                          </path>
-                                    </svg>
-                              </div>
-
-                              <!-- Content -->
-                              <h3
-                                    class="text-xl md:text-2xl font-bold text-gray-800 mb-3 group-hover:text-blue-600 transition-colors">
-                                    Individual</h3>
-                              <p class="text-gray-600 text-sm md:text-base leading-relaxed">Add patients one at a
-                                    time with complete control over each entry and detailed information</p>
-
-                              <!-- Action Button -->
-                              <button
-                                    class="mt-6 w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-300 group-hover:shadow-lg">
-                                    Select Individual
-                              </button>
-                        </div>
-
                         <!-- Clinics Option -->
                         <div @click=""
-                              class="group cursor-pointer bg-white border-2 border-gray-200 hover:border-green-500 rounded-xl p-6 md:p-8 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                              class="group cursor-pointer bg-white border-2 border-gray-200 hover:border-primaryDark rounded-xl p-6 md:p-8 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
 
                               <!-- Icon -->
                               <div
-                                    class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4 group-hover:bg-green-500 transition-colors duration-300">
-                                    <svg class="w-8 h-8 text-green-600 group-hover:text-white transition-colors duration-300"
+                                    class="w-16 h-16 bg-primaryLight rounded-full flex items-center justify-center mb-4 group-hover:bg-primaryDark transition-colors duration-300">
+                                    <svg class="w-8 h-8 text-primaryDark group-hover:text-white transition-colors duration-300"
                                           fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4">
@@ -263,15 +235,44 @@
 
                               <!-- Content -->
                               <h3
-                                    class="text-xl md:text-2xl font-bold text-gray-800 mb-3 group-hover:text-green-600 transition-colors">
+                                    class="text-xl md:text-2xl font-bold text-gray-800 mb-3 group-hover:text-primaryDark transition-colors">
                                     Clinics</h3>
                               <p class="text-gray-600 text-sm md:text-base leading-relaxed">Manage multiple
                                     patients efficiently through clinic-based workflows and batch operations</p>
 
                               <!-- Action Button -->
                               <button
-                                    class="mt-6 w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-300 group-hover:shadow-lg">
+                                    class="mt-6 w-full bg-primaryDark hover:bg-primaryDark text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-300 group-hover:shadow-lg">
                                     Select Clinics
+                              </button>
+                        </div>
+
+                        <!-- Individual Option -->
+                        <div @click=""
+                              class="group cursor-pointer bg-white border-2 border-gray-200 hover:border-primaryDark rounded-xl p-6 md:p-8 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+
+                              <!-- Icon -->
+                              <div
+                                    class="w-16 h-16 bg-primaryLight rounded-full flex items-center justify-center mb-4 group-hover:bg-blue-500 transition-colors duration-300">
+                                    <svg class="w-8 h-8 text-primaryDark group-hover:text-white transition-colors duration-300"
+                                          fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z">
+                                          </path>
+                                    </svg>
+                              </div>
+
+                              <!-- Content -->
+                              <h3
+                                    class="text-xl md:text-2xl font-bold text-gray-800 mb-3 group-hover:text-primaryDark transition-colors">
+                                    Individual</h3>
+                              <p class="text-gray-600 text-sm md:text-base leading-relaxed">Add patients one at a
+                                    time with complete control over each entry and detailed information</p>
+
+                              <!-- Action Button -->
+                              <button
+                                    class="mt-6 w-full btn-disabled bg-primaryDark hover:bg-primaryDark text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-300 group-hover:shadow-lg">
+                                    Coming Soon...
                               </button>
                         </div>
 
