@@ -14,9 +14,9 @@ const auth = usePage().props.auth;
 
         <AppSidebar />
         <main class="bg-white h-screen w-full">
-            <div class="p-5 bg-deepblue/40 flex  justify-between items-center px-10">
+            <div class="p-5 bg-primaryDark/50 flex  justify-between items-center px-10">
                 <SidebarTrigger
-                    class=" hover:-translate-y-1  transition-all duration-150 text-white hover:bg-white hover:text-deepgreen" />
+                    class=" hover:-translate-y-1  transition-all duration-150 text-white hover:bg-white hover:text-primaryDark" />
 
                 <Avatar>
                     <AvatarImage src="/assets/doctor.jpeg" alt="@unovue" />
@@ -24,7 +24,7 @@ const auth = usePage().props.auth;
                         class="bg-white text-transparent w-16 font-extrabold text-xl  justify-center flex items-center rounded-full h-16">
                         <p class="bg-deepgradient bg-clip-text">
                             {{
-                                auth.user.name.charAt(0).toUpperCase() }}
+                            auth.user.name.charAt(0).toUpperCase() }}
                         </p>
 
                     </AvatarFallback>

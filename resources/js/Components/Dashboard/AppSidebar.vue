@@ -19,17 +19,24 @@ const userForm = useForm({
       ...page.props.auth.user
 });
 
+console.log(route('user.dashboard'), page.props.ziggy.location)
 
-const activeRoute = ref(window.location.pathname);
+
+const activeRoute = ref(page.props.ziggy.location);
 
 const menuItems = [
-      { href: route('user.dashboard'), icon: Home, label: 'Dashboard', gradient: 'from-deepblue to-cyan-500' },
-      { href: route('user.emails'), icon: Letter, label: 'Emails', gradient: 'from-purple-500 to-pink-500' },
-      { href: route('user.patients'), icon: UserBlock, label: 'Patients', gradient: 'from-deepgreen to-teal-500' },
-      { href: route('user.settings'), icon: Cog, label: 'Settings', gradient: 'from-deeppurple to-purple-500' },
+      { href: route('user.dashboard'), icon: Home, label: 'Dashboard' },
+      { href: route('user.emails'), icon: Letter, label: 'Emails' },
+      { href: route('user.patients'), icon: UserBlock, label: 'Patients' },
+      { href: route('user.settings'), icon: Cog, label: 'Settings' },
 ];
 
-const isActive = (href: string) => activeRoute.value === href;
+const isActive = (href: string) => {
+      if (activeRoute.value === href) {
+            return true;
+      }
+      return false;
+};
 
 const logout = () => {
       userForm.post('/logout');
@@ -38,14 +45,14 @@ const logout = () => {
 </script>
 
 <template>
-      <Sidebar class="bg-deepblue">
-            <SidebarHeader class="flex py-7  bg-deepblue items-center justify-between backdrop-blur-sm ">
+      <Sidebar class="bg-primaryDark">
+            <SidebarHeader class="flex py-7  bg-primaryDark items-center justify-between backdrop-blur-sm ">
                   <div class="transform rounded-xl p-2 transition-transform duration-300 hover:scale-105 bg-white">
                         <ApplicationLogo />
                   </div>
             </SidebarHeader>
 
-            <SidebarContent class="py-4 bg-deepblue text-white">
+            <SidebarContent class="py-4 bg-primaryDark ">
                   <SidebarGroup class="space-y-5">
                         <div v-for="item in menuItems" :key="item.href">
                               <SidebarMenuButton
@@ -54,14 +61,14 @@ const logout = () => {
                                           class="flex items-center gap-3 w-full relative z-10 transition-all duration-300">
                                     <!-- Animated gradient background on hover -->
                                     <div
-                                          class="absolute inset-0 bg-gradient-to-r opacity-0 group-hover:opacity-10 transition-opacity duration-300 -z-10">
+                                          class="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-300 -z-10">
                                     </div>
 
                                     <!-- Active indicator -->
-                                    <div v-if="isActive(item.href)"
-                                          class="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-black rounded-r-full animate-pulse">
-
-                                    </div>
+                                    <!-- <div v-if="isActive(item.href)" -->
+                                    <!-- class="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-primaryLight rounded-r-full animate-pulse"> -->
+                                    <!--  -->
+                                    <!-- </div> -->
 
                                     <!-- Icon with gradient on active -->
                                     <div
@@ -84,7 +91,7 @@ const logout = () => {
                   </SidebarGroup>
             </SidebarContent>
 
-            <SidebarFooter class="p-3 bg-deepblue backdrop-blur-sm ">
+            <SidebarFooter class="p-3 bg-primaryDark backdrop-blur-sm ">
                   <SidebarMenuButton
                         class="group hover:bg-red-50 dark:hover:bg-red-950/20 transition-all text-2xl font-extrabold duration-300">
                         <a @click="logout"
@@ -110,29 +117,6 @@ const logout = () => {
       100% {
             transform: translateX(100%);
       }
-}
-
-/* Custom scrollbar for sidebar content */
-:deep(.sidebar-content) {
-      scrollbar-width: thin;
-      scrollbar-color: rgba(148, 163, 184, 0.3) transparent;
-}
-
-:deep(.sidebar-content)::-webkit-scrollbar {
-      width: 6px;
-}
-
-:deep(.sidebar-content)::-webkit-scrollbar-track {
-      background: transparent;
-}
-
-:deep(.sidebar-content)::-webkit-scrollbar-thumb {
-      background-color: rgba(148, 163, 184, 0.3);
-      border-radius: 3px;
-}
-
-:deep(.sidebar-content)::-webkit-scrollbar-thumb:hover {
-      background-color: rgba(148, 163, 184, 0.5);
 }
 
 /* Glassmorphism effect */

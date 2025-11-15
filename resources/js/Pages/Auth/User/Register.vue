@@ -142,7 +142,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref } from 'vue';
 import { router as useRouter, useForm, Link, usePage } from '@inertiajs/vue3';
 import { flattenError, z } from 'zod';
 import { Head } from '@inertiajs/vue3';

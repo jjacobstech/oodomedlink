@@ -57,61 +57,32 @@ const mockStats = [
             name: "total uploads",
             count: 156,
             icon: "📤",
-            color: "deepblue",
+            color: "primaryLight",
       },
       {
             name: "pending reviews",
             count: 12,
             icon: "⏳",
-            color: "deepgreen",
+            color: "primaryDark",
       },
       {
             name: "completed results",
             count: 132,
             icon: "✅",
-            color: "deepgreen",
+            color: "primaryDark",
       },
       {
             name: "total patients",
             count: 89,
             icon: "👥",
-            color: "deeppurple",
+            color: "primaryDark",
       }
 ];
 
 
 // Mock data for demonstration (remove when backend is connected)
 let results: PatientResult[] = [
-      {
-            id: 1,
-            patient_name: 'John Doe',
-            result_type: 'Blood Test',
-            file_name: 'blood_test_results.pdf',
-            file_path: '/storage/results/blood_test_results.pdf',
-            file_type: 'pdf',
-            upload_date: '2025-11-05T10:30:00',
-            status: 'completed'
-      },
-      {
-            id: 2,
-            patient_name: 'Jane Smith',
-            result_type: 'X-Ray',
-            file_name: 'xray_scan.jpg',
-            file_path: '/storage/results/xray_scan.jpg',
-            file_type: 'image',
-            upload_date: '2025-11-04T14:15:00',
-            status: 'reviewed'
-      },
-      {
-            id: 3,
-            patient_name: 'Mike Johnson',
-            result_type: 'Lab Analysis',
-            file_name: 'lab_data.csv',
-            file_path: '/storage/results/lab_data.csv',
-            file_type: 'csv',
-            upload_date: '2025-11-03T09:00:00',
-            status: 'pending'
-      }
+
 ];
 
 let filtered: PatientResult[] = results
@@ -187,7 +158,9 @@ const getFileIcon = (fileType: string) => {
       }
 };
 
-
+const loadFile = (event: Event) => {
+      console.log(event)
+}
 
 
 
@@ -210,6 +183,16 @@ const getFileIcon = (fileType: string) => {
                               <p class="text-gray-600 text-xl font-bold">Manage patient test results and uploads</p>
                         </div>
 
+                        <!-- Upload Section -->
+                        <div class="p-6  rounded-xl">
+                              <div class="flex items-center justify-center mb-4">
+                                    <button @click="showUploadModal = true"
+                                          class="px-6 py-3 text-xl font-bold text-white bg-primaryDark rounded-lg hover:shadow-lg hover:-translate-y-1 transition-all duration-150">
+                                          + Upload New Result
+                                    </button>
+                              </div>
+
+                        </div>
 
                         <!-- Stats Cards -->
                         <div class="grid grid-cols-1 gap-4 mb-6 md:grid-cols-2 lg:grid-cols-4 ">
@@ -226,20 +209,6 @@ const getFileIcon = (fileType: string) => {
                                           </div>
                                     </div>
                               </div>
-                        </div>
-
-                        <!-- Upload Section -->
-                        <div class="p-6 mb-6 bg-white shadow-md rounded-xl">
-                              <div class="flex items-center justify-between mb-4">
-                                    <h2 class="text-2xl font-bold text-gray-800 ">Upload Patient Results</h2>
-                                    <button @click="showUploadModal = true"
-                                          class="px-6 py-3 text-xl font-bold text-white bg-deepgradient rounded-lg hover:shadow-lg hover:-translate-y-1 transition-all duration-150">
-                                          + Upload New Result
-                                    </button>
-                              </div>
-                              <p class="text-md font-bold text-gray-600">Supported formats: PDF, Images (JPG, PNG), CSV,
-                                    XLSX, XLS, DOC, DOCX
-                                    files</p>
                         </div>
 
                         <!-- Results List Section -->
@@ -313,7 +282,7 @@ const getFileIcon = (fileType: string) => {
                                                       class="transition-colors hover:bg-gray-50">
                                                       <td class="px-4 py-4 text-sm font-medium text-gray-900">{{
                                                             result.patient_name
-}}
+                                                      }}
                                                       </td>
                                                       <td class="px-4 py-4 text-sm text-gray-700">{{ result.result_type
                                                       }}</td>
@@ -399,10 +368,9 @@ const getFileIcon = (fileType: string) => {
                                           </div>
 
 
-                                          <div @dragenter="handleFileChange" @drop="console.log('drop')"
-                                                class="flex items-center justify-center w-full">
+                                          <div class="flex items-center justify-center w-full">
                                                 <label for="dropzone-file"
-                                                      class="flex flex-col items-center justify-center w-full group h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50  hover:bg-deepblue/30 ">
+                                                      class="flex flex-col items-center justify-center w-full group h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50  hover:bg-primaryLight/30 ">
                                                       <div class="flex flex-col items-center justify-center pt-5 pb-6">
                                                             <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
                                                                   aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -418,7 +386,9 @@ const getFileIcon = (fileType: string) => {
                                                             <p class="text-md text-gray-500 dark:text-gray-400">SVG,
                                                                   PNG, JPG or GIF (MAX. 800x400px)</p>
                                                       </div>
-                                                      <input id="dropzone-file" type="file" class="hidden" />
+                                                      <input id="dropzone-file" type="file"
+                                                            @dragenter="handleFileChange" @drop="console.log('drop')"
+                                                            @change="loadFile" class="hidden" />
                                                 </label>
                                           </div>
 

@@ -12,12 +12,12 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
 
 Route::prefix('clinics')->middleware(['guest', 'isAuth'])->group(function () {
-
+    Route::get('signup', [RegisteredUserController::class, 'create'])
+        ->name('signup');
     Route::post('signup', [RegisteredUserController::class, 'store']);
     Route::post('login', [AuthenticatedSessionController::class, 'store']);
 
-    Route::get('signup', [RegisteredUserController::class, 'create'])
-        ->name('signup');
+
     Route::get('login', [AuthenticatedSessionController::class, 'create'])
         ->name('login');
 
