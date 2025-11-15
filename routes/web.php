@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Clinics\DashboardController;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -19,11 +20,7 @@ Route::middleware('isClinic')->group(function () {
     Route::prefix('clinic')->middleware(['auth:clinic', 'verified'])->group(
         function () {
 
-            Route::get("/dashboard", function () {
-                return Inertia::render('User/Dashboard', [
-                    'user' => Auth::user(),
-                ]);
-            })->name('user.dashboard');
+            Route::get("/dashboard",  [DashboardController::class, 'index'])->name('user.dashboard');
 
             Route::get('/emails', function () {
 
