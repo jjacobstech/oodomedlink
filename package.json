@@ -7,7 +7,7 @@
         "commit": "./commit.sh",
         "dev": "vite",
         "lint": "eslint resources/js --ext .js,.ts,.vue --ignore-path .gitignore --fix",
-        "deploy": "npm run commit"
+        "deploy": "npm run build && npm run commit"
 
     },
     "devDependencies": {

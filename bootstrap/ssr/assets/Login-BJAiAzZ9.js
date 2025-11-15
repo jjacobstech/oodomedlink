@@ -101,7 +101,7 @@ const _sfc_main = {
             }, _parent2, _scopeId));
             _push2(`</div><div class="bg-white rounded-lg shadow-xl"${_scopeId}><div class="p-6 space-y-1 border-b rounded-t-lg border-primaryDark bg-primaryDark"${_scopeId}><h2 class="text-2xl font-bold text-center text-white"${_scopeId}>Login</h2><p class="text-center text-lg text-white"${_scopeId}> Enter your email address and password </p></div><div class="p-6"${_scopeId}><form class="space-y-5"${_scopeId}><div class="space-y-2"${_scopeId}><label for="login-email" class="block text-xl font-medium text-gray-600"${_scopeId}> Email </label><input id="login-email"${ssrRenderAttr("value", unref(loginForm).email)} type="email" placeholder="Enter your email" class="w-full px-4 py-2.5 border border-gray-300 text-xl rounded-lg focus:outline-none focus:ring-2 focus:ring-primaryDark focus:border-transparent transition-all" required${_scopeId}></div><div class="space-y-2"${_scopeId}><div class="flex items-center justify-between"${_scopeId}><label for="login-password" class="block text-xl font-medium text-gray-600"${_scopeId}> Password </label>`);
             _push2(ssrRenderComponent(unref(Link), {
-              href: "route('password.request')",
+              href: _ctx.route("password.request"),
               class: "text-xl text-black hover:text-primary/80 transition-colors"
             }, {
               default: withCtx((_2, _push3, _parent3, _scopeId2) => {
@@ -189,14 +189,14 @@ const _sfc_main = {
                                 class: "block text-xl font-medium text-gray-600"
                               }, " Password "),
                               createVNode(unref(Link), {
-                                href: "route('password.request')",
+                                href: _ctx.route("password.request"),
                                 class: "text-xl text-black hover:text-primary/80 transition-colors"
                               }, {
                                 default: withCtx(() => [
                                   createTextVNode(" Forgot password? ")
                                 ]),
                                 _: 1
-                              })
+                              }, 8, ["href"])
                             ]),
                             createVNode(_sfc_main$2, {
                               placeholder: "Password",
