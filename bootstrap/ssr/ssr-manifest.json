@@ -69,7 +69,7 @@
     "/build/assets/Dashboard-BPffLjBP.css"
   ],
   "resources/js/Layouts/AuthLayout.vue": [
-    "/build/assets/AuthLayout-x0U8Uf7l.js"
+    "/build/assets/AuthLayout-Dz9EVw08.js"
   ],
   "resources/js/Layouts/AuthenticatedLayout.vue": [
     "/build/assets/AuthenticatedLayout-BJU7AtiY.js",
@@ -121,19 +121,19 @@
     "/build/assets/Register-CmygHiZk.js"
   ],
   "resources/js/Pages/Auth/User/ForgotPassword.vue": [
-    "/build/assets/ForgotPassword-C64Pdy3s.js"
+    "/build/assets/ForgotPassword-5-sX4mOS.js"
   ],
   "resources/js/Pages/Auth/User/Login.vue": [
-    "/build/assets/Login-BJAiAzZ9.js"
+    "/build/assets/Login-z-PEiaIy.js"
   ],
   "resources/js/Pages/Auth/User/Register.vue": [
-    "/build/assets/Register-BoCQObYg.js"
+    "/build/assets/Register-crICx6y7.js"
   ],
   "resources/js/Pages/User/Dashboard.vue": [
-    "/build/assets/Dashboard-CsU6KzVH.js"
+    "/build/assets/Dashboard-BVv94Mnx.js"
   ],
   "resources/js/Pages/User/Dashboard.vue?vue&type=script&setup=true&lang.ts": [
-    "/build/assets/Dashboard-CsU6KzVH.js"
+    "/build/assets/Dashboard-BVv94Mnx.js"
   ],
   "resources/js/Pages/User/Emails.vue": [
     "/build/assets/Emails-C95AeDr3.js"

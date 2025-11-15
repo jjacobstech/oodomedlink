@@ -187,7 +187,7 @@ const loadFile = (event: Event) => {
                         <div class="p-6  rounded-xl">
                               <div class="flex items-center justify-center mb-4">
                                     <button @click="showUploadModal = true"
-                                          class="px-6 py-3 text-xl font-bold text-white bg-primaryDark rounded-lg hover:shadow-lg hover:-translate-y-1 transition-all duration-150">
+                                          class="px-6 py-5 text-xl font-bold text-white bg-primaryDark rounded-lg hover:shadow-lg hover:-translate-y-1 transition-all duration-150">
                                           + Upload New Result
                                     </button>
                               </div>
@@ -282,10 +282,10 @@ const loadFile = (event: Event) => {
                                                       class="transition-colors hover:bg-gray-50">
                                                       <td class="px-4 py-4 text-sm font-medium text-gray-900">{{
                                                             result.patient_name
-                                                      }}
+                                                            }}
                                                       </td>
                                                       <td class="px-4 py-4 text-sm text-gray-700">{{ result.result_type
-                                                      }}</td>
+                                                            }}</td>
                                                       <td class="px-4 py-4 text-sm text-gray-700">
                                                             <span class="flex items-center gap-2">
                                                                   <span>{{ getFileIcon(result.file_type) }}</span>
@@ -303,7 +303,7 @@ const loadFile = (event: Event) => {
                                                                   'bg-purple-100 text-purple-800': result.status === 'reviewed'
                                                             }" class="px-3 py-1 text-xs font-semibold rounded-full">
                                                                   {{ result.status.charAt(0).toUpperCase() +
-                                                                        result.status.slice(1) }}
+                                                                  result.status.slice(1) }}
                                                             </span>
                                                       </td>
                                                       <td class="px-4 py-4 text-sm">
@@ -403,7 +403,7 @@ const loadFile = (event: Event) => {
                                                       <button type="submit" :disabled="uploadForm.processing"
                                                             class="flex-1 hover:-translate-y-1  duration-150 px-4 py-2 font-semibold text-white transition-all bg-blue-600 rounded-lg hover:bg-blue-700 disabled:bg-gray-400">
                                                             {{ uploadForm.processing ? 'Uploading...' :
-                                                                  'Upload' }}
+                                                            'Upload' }}
                                                       </button>
                                                       <button type="button" @click="showUploadModal = false"
                                                             class="flex-1 px-4 py-2 font-semibold text-gray-700 transition-all hover:-translate-y-1  duration-150 bg-gray-200 rounded-lg hover:bg-gray-300">
@@ -422,7 +422,7 @@ const loadFile = (event: Event) => {
                                     <div class="flex items-center justify-between mb-4">
                                           <h3 class="text-2xl font-bold text-gray-800">{{ previewFile.patient_name }} -
                                                 {{
-                                                      previewFile.result_type }}</h3>
+                                                previewFile.result_type }}</h3>
                                           <button @click="previewFile = null"
                                                 class="px-4 py-2 text-gray-700 transition-colors bg-gray-200 rounded-lg hover:bg-gray-300">
                                                 Close

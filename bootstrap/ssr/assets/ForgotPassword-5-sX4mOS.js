@@ -1,8 +1,8 @@
-import { ref, unref, withCtx, createTextVNode, createVNode, createBlock, createCommentVNode, openBlock, withModifiers, withDirectives, vModelText, toDisplayString, Fragment, renderList, vModelDynamic, useSSRContext } from "vue";
-import { ssrRenderComponent, ssrRenderAttr, ssrInterpolate, ssrIncludeBooleanAttr, ssrRenderList, ssrRenderDynamicModel } from "vue/server-renderer";
+import { ref, unref, withCtx, createTextVNode, createVNode, createBlock, createCommentVNode, openBlock, withModifiers, withDirectives, vModelText, toDisplayString, Fragment, renderList, useSSRContext } from "vue";
+import { ssrRenderComponent, ssrRenderAttr, ssrInterpolate, ssrIncludeBooleanAttr, ssrRenderList } from "vue/server-renderer";
 import { useForm, Head, Link } from "@inertiajs/vue3";
 import { z, flattenError } from "zod";
-import { A as AuthLayout } from "./AuthLayout-x0U8Uf7l.js";
+import { A as AuthLayout } from "./AuthLayout-Dz9EVw08.js";
 import { u as useToast, _ as _sfc_main$1, a as _sfc_main$2 } from "./PasswordInput-BRdDyhnh.js";
 import "./_plugin-vue_export-helper-1tPrXgE0.js";
 import "@vueuse/core";
@@ -82,7 +82,7 @@ const _sfc_main = {
           title: "Validation Error",
           description: error.email[0],
           variant: "destructive",
-          class: "text-deepblue bg-white shadow-lg"
+          class: "text-primaryDark bg-white shadow-lg"
         });
         isLoading.value = false;
         return;
@@ -93,7 +93,7 @@ const _sfc_main = {
             toast({
               title: "Verification Code Sent",
               description: "Please check your email for the verification code",
-              class: "text-deepblue bg-white shadow-lg"
+              class: "text-primaryDark bg-white shadow-lg"
             });
             currentStep.value = 2;
             otpForm.email = emailForm.email;
@@ -103,7 +103,7 @@ const _sfc_main = {
               title: "Error",
               description: error.email || "Failed to send verification code",
               variant: "destructive",
-              class: "text-deepblue bg-white shadow-lg"
+              class: "text-primaryDark bg-white shadow-lg"
             });
             isLoading.value = false;
           }
@@ -124,7 +124,7 @@ const _sfc_main = {
             title: "Validation Error",
             description: inputError,
             variant: "destructive",
-            class: "text-deepblue bg-white shadow-lg"
+            class: "text-primaryDark bg-white shadow-lg"
           });
         }
         isLoading.value = false;
@@ -136,7 +136,7 @@ const _sfc_main = {
             toast({
               title: "Email Verified",
               description: "Please complete your registration",
-              class: "text-deepblue bg-white shadow-lg"
+              class: "text-primaryDark bg-white shadow-lg"
             });
             resetForm.email = otpForm.email;
             resetForm.otp = otpForm.otp;
@@ -147,7 +147,7 @@ const _sfc_main = {
               title: "Verification Failed",
               description: error.otp || "Invalid verification code",
               variant: "destructive",
-              class: "text-deepblue bg-white shadow-lg"
+              class: "text-primaryDark bg-white shadow-lg"
             });
             console.log(error);
           }
@@ -166,7 +166,7 @@ const _sfc_main = {
             toast({
               title: "Code Resent",
               description: "A new verification code has been sent to your email",
-              class: "text-deepblue bg-white shadow-lg"
+              class: "text-primaryDark bg-white shadow-lg"
             });
           },
           onError: () => {
@@ -174,7 +174,7 @@ const _sfc_main = {
               title: "Error",
               description: "Failed to resend verification code",
               variant: "destructive",
-              class: "text-deepblue bg-white shadow-lg"
+              class: "text-primaryDark bg-white shadow-lg"
             });
           }
         });
@@ -194,7 +194,7 @@ const _sfc_main = {
             title: "Validation Error",
             description: errors[field][0],
             variant: "destructive",
-            class: "text-deepblue bg-white shadow-lg"
+            class: "text-primaryDark bg-white shadow-lg"
           });
           break;
         }
@@ -209,7 +209,7 @@ const _sfc_main = {
                 title: "Password Reset Failed",
                 description: error[err],
                 variant: "destructive",
-                class: "text-deepblue bg-white shadow-lg"
+                class: "text-primaryDark bg-white shadow-lg"
               });
               break;
             }
@@ -219,7 +219,7 @@ const _sfc_main = {
             toast({
               title: "Password Reset Successful",
               description: " Redirecting to login...",
-              class: "text-deepblue bg-white shadow-lg"
+              class: "text-primaryDark bg-white shadow-lg"
             });
           }
         });
@@ -235,12 +235,12 @@ const _sfc_main = {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
             _push2(ssrRenderComponent(_sfc_main$1, null, null, _parent2, _scopeId));
-            _push2(`<div class="h-screen overflow-y-hidden flex justify-center items-center"${_scopeId}><div class="max-w-lg justify-center rounded-xl shadow-xl bg-white items-center"${_scopeId}><div class="p-6 grid space-y-1 bg-deepgradient rounded-t-lg"${_scopeId}><h2 class="text-2xl font-bold text-center text-white"${_scopeId}>Reset Password</h2></div><div class="p-6 space-y-4"${_scopeId}>`);
+            _push2(`<div class="relative z-10 container mx-auto w-3-1/2 py-12 flex items-center justify-center min-h-[calc(100vh-80px)]"${_scopeId}><div class="max-w-xl px-5"${_scopeId}><div class="p-6 grid space-y-1 bg-primaryDark rounded-t-lg"${_scopeId}><h2 class="text-2xl font-bold text-center text-white"${_scopeId}>Reset Password</h2></div><div class="p-6 space-y-4 bg-white"${_scopeId}>`);
             if (currentStep.value === 1) {
-              _push2(`<form class="space-y-4"${_scopeId}><div class="space-y-2"${_scopeId}><label for="email" class="text-sm font-medium"${_scopeId}>Email Address</label><input id="email" type="email" placeholder="Enter your email" autocomplete="email" autofocus${ssrRenderAttr("value", unref(emailForm).email)} class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-deepgreen"${_scopeId}></div><button type="submit" class="w-full px-4 py-2.5 bg-deepgradient text-white font-medium rounded-lg hover:bg-white hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:shadow-md hover:shadow-deepgreen/30"${ssrIncludeBooleanAttr(isLoading.value) ? " disabled" : ""}${_scopeId}>${ssrInterpolate(isLoading.value ? "Sending OTP..." : "Send Verification Code")}</button><div class="mt-6 text-center"${_scopeId}><p class="text-sm text-gray-600"${_scopeId}> Already have an account? `);
+              _push2(`<form class="space-y-6"${_scopeId}><div class="space-y-2"${_scopeId}><label for="email" class="text-lg lg:text-2xl font-medium"${_scopeId}>Email Address</label><input id="email" type="email" placeholder="Enter your email" autocomplete="email" autofocus${ssrRenderAttr("value", unref(emailForm).email)} class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 text-xl focus:ring-primaryDark"${_scopeId}></div><button type="submit" class="w-full px-4 py-2.5 bg-primaryDark text-white font-medium rounded-lg lg:text-xl hover:bg-white hover:text-primaryDark hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:shadow-md hover:shadow-primaryDark/30"${ssrIncludeBooleanAttr(isLoading.value) ? " disabled" : ""}${_scopeId}>${ssrInterpolate(isLoading.value ? "Sending OTP..." : "Send Verification Code")}</button><div class="mt-6 text-center"${_scopeId}><p class="lg:text-2xl text-gray-600"${_scopeId}> Already have an account? `);
               _push2(ssrRenderComponent(unref(Link), {
                 href: _ctx.route("login"),
-                class: "text-deepgreen font-medium hover:text-deepgreen/80 transition-colors"
+                class: "text-primaryDark font-medium hover:text-primaryDark/80 transition-colors"
               }, {
                 default: withCtx((_2, _push3, _parent3, _scopeId2) => {
                   if (_push3) {
@@ -258,27 +258,23 @@ const _sfc_main = {
               _push2(`<!---->`);
             }
             if (currentStep.value === 2) {
-              _push2(`<form class="space-y-4"${_scopeId}><div class="space-y-2"${_scopeId}><label for="otp" class="text-sm font-medium"${_scopeId}>Verification Code</label><p class="text-xs text-gray-500 mb-2"${_scopeId}> Enter the 6-digit code sent to ${ssrInterpolate(unref(emailForm).email)}</p><input id="otp" type="text" placeholder="Enter 6-digit code" maxlength="6"${ssrRenderAttr("value", unref(otpForm).otp)} class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-deepgreen text-center text-2xl tracking-widest"${_scopeId}></div><button type="submit" class="w-full px-4 py-2.5 bg-deepgradient hover:-translate-y-1 text-white font-medium rounded-lg hover:bg-white disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:shadow-md hover:shadow-deepgreen/30"${ssrIncludeBooleanAttr(isLoading.value) ? " disabled" : ""}${_scopeId}>${ssrInterpolate(isLoading.value ? "Verifying..." : "Verify Code")}</button><div class="mt-4 text-center"${_scopeId}><button type="button" class="text-sm text-deepgreen hover:text-deepgreen/80 transition-colors"${ssrIncludeBooleanAttr(isLoading.value) ? " disabled" : ""}${_scopeId}> Resend Code </button></div></form>`);
+              _push2(`<form class="space-y-4"${_scopeId}><div class="space-y-2"${_scopeId}><label for="otp" class="text-lg lg:text-2xl font-medium"${_scopeId}>Verification Code</label><p class="text-sm text-gray-500 mb-2"${_scopeId}> Enter the 6-digit code sent to ${ssrInterpolate(unref(emailForm).email)}</p><input id="otp" type="text" placeholder="Enter 6-digit code" maxlength="6"${ssrRenderAttr("value", unref(otpForm).otp)} class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primaryDark text-center text-2xl tracking-widest"${_scopeId}></div><button type="submit" class="w-full px-4 py-2.5 bg-primaryDark hover:-translate-y-1 text-white text-xl font-medium rounded-lg hover:bg-white disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:shadow-md hover:shadow-primaryDark/30"${ssrIncludeBooleanAttr(isLoading.value) ? " disabled" : ""}${_scopeId}>${ssrInterpolate(isLoading.value ? "Verifying..." : "Verify Code")}</button><div class="mt-4 text-center"${_scopeId}><button type="button" class="text-2xl text-primaryDark hover:text-primaryDark/80 hover:text-primaryDark transition-colors"${ssrIncludeBooleanAttr(isLoading.value) ? " disabled" : ""}${_scopeId}> Resend Code </button></div></form>`);
             } else {
               _push2(`<!---->`);
             }
             if (currentStep.value === 3) {
-              _push2(`<form class="space-y-4 h-full"${_scopeId}><!--[-->`);
+              _push2(`<form class="space-y-4"${_scopeId}><!--[-->`);
               ssrRenderList(biodataFields.value, (field) => {
-                _push2(`<div class="space-y-2"${_scopeId}><label${ssrRenderAttr("for", field.id)} class="text-sm font-medium"${_scopeId}>${ssrInterpolate(field.name)}</label>`);
-                if (field.type !== "password") {
-                  _push2(`<input${ssrRenderAttr("id", field.id)}${ssrRenderAttr("type", field.type)}${ssrRenderAttr("placeholder", field.placeholder)}${ssrRenderAttr("autocomplete", field.autocomplete)}${ssrRenderDynamicModel(field.type, unref(resetForm)[field.model], null)} class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-deepgreen"${_scopeId}>`);
-                } else {
-                  _push2(ssrRenderComponent(_sfc_main$2, {
-                    id: field.id,
-                    placeholder: field.placeholder,
-                    modelValue: unref(resetForm)[field.model],
-                    "onUpdate:modelValue": ($event) => unref(resetForm)[field.model] = $event
-                  }, null, _parent2, _scopeId));
-                }
+                _push2(`<div class="space-y-2"${_scopeId}><label${ssrRenderAttr("for", field.id)} class="text-lg lg:text-2xl font-medium"${_scopeId}>${ssrInterpolate(field.name)}</label>`);
+                _push2(ssrRenderComponent(_sfc_main$2, {
+                  id: field.id,
+                  placeholder: field.placeholder,
+                  modelValue: unref(resetForm)[field.model],
+                  "onUpdate:modelValue": ($event) => unref(resetForm)[field.model] = $event
+                }, null, _parent2, _scopeId));
                 _push2(`</div>`);
               });
-              _push2(`<!--]--><button type="submit" class="w-full px-4 py-2.5 bg-deepgradient hover:-translate-y-1 text-white font-medium rounded-lg hover:bg-white disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:shadow-md hover:shadow-deepgreen/30"${ssrIncludeBooleanAttr(isLoading.value) ? " disabled" : ""}${_scopeId}>${ssrInterpolate(isLoading.value ? "Resetting Password..." : "Reset Password")}</button></form>`);
+              _push2(`<!--]--><button type="submit" class="w-full px-4 py-2.5 bg-primaryDark hover:text-primaryDark hover:-translate-y-1 text-xl text-white font-medium rounded-lg hover:bg-white disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:shadow-md hover:shadow-primaryDark/30"${ssrIncludeBooleanAttr(isLoading.value) ? " disabled" : ""}${_scopeId}>${ssrInterpolate(isLoading.value ? "Resetting Password..." : "Reset Password")}</button></form>`);
             } else {
               _push2(`<!---->`);
             }
@@ -286,21 +282,21 @@ const _sfc_main = {
           } else {
             return [
               createVNode(_sfc_main$1),
-              createVNode("div", { class: "h-screen overflow-y-hidden flex justify-center items-center" }, [
-                createVNode("div", { class: "max-w-lg justify-center rounded-xl shadow-xl bg-white items-center" }, [
-                  createVNode("div", { class: "p-6 grid space-y-1 bg-deepgradient rounded-t-lg" }, [
+              createVNode("div", { class: "relative z-10 container mx-auto w-3-1/2 py-12 flex items-center justify-center min-h-[calc(100vh-80px)]" }, [
+                createVNode("div", { class: "max-w-xl px-5" }, [
+                  createVNode("div", { class: "p-6 grid space-y-1 bg-primaryDark rounded-t-lg" }, [
                     createVNode("h2", { class: "text-2xl font-bold text-center text-white" }, "Reset Password")
                   ]),
-                  createVNode("div", { class: "p-6 space-y-4" }, [
+                  createVNode("div", { class: "p-6 space-y-4 bg-white" }, [
                     currentStep.value === 1 ? (openBlock(), createBlock("form", {
                       key: 0,
                       onSubmit: withModifiers(handleEmailSubmit, ["prevent"]),
-                      class: "space-y-4"
+                      class: "space-y-6"
                     }, [
                       createVNode("div", { class: "space-y-2" }, [
                         createVNode("label", {
                           for: "email",
-                          class: "text-sm font-medium"
+                          class: "text-lg lg:text-2xl font-medium"
                         }, "Email Address"),
                         withDirectives(createVNode("input", {
                           id: "email",
@@ -309,22 +305,22 @@ const _sfc_main = {
                           autocomplete: "email",
                           autofocus: "",
                           "onUpdate:modelValue": ($event) => unref(emailForm).email = $event,
-                          class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-deepgreen"
+                          class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 text-xl focus:ring-primaryDark"
                         }, null, 8, ["onUpdate:modelValue"]), [
                           [vModelText, unref(emailForm).email]
                         ])
                       ]),
                       createVNode("button", {
                         type: "submit",
-                        class: "w-full px-4 py-2.5 bg-deepgradient text-white font-medium rounded-lg hover:bg-white hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:shadow-md hover:shadow-deepgreen/30",
+                        class: "w-full px-4 py-2.5 bg-primaryDark text-white font-medium rounded-lg lg:text-xl hover:bg-white hover:text-primaryDark hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:shadow-md hover:shadow-primaryDark/30",
                         disabled: isLoading.value
                       }, toDisplayString(isLoading.value ? "Sending OTP..." : "Send Verification Code"), 9, ["disabled"]),
                       createVNode("div", { class: "mt-6 text-center" }, [
-                        createVNode("p", { class: "text-sm text-gray-600" }, [
+                        createVNode("p", { class: "lg:text-2xl text-gray-600" }, [
                           createTextVNode(" Already have an account? "),
                           createVNode(unref(Link), {
                             href: _ctx.route("login"),
-                            class: "text-deepgreen font-medium hover:text-deepgreen/80 transition-colors"
+                            class: "text-primaryDark font-medium hover:text-primaryDark/80 transition-colors"
                           }, {
                             default: withCtx(() => [
                               createTextVNode(" Login ")
@@ -342,30 +338,30 @@ const _sfc_main = {
                       createVNode("div", { class: "space-y-2" }, [
                         createVNode("label", {
                           for: "otp",
-                          class: "text-sm font-medium"
+                          class: "text-lg lg:text-2xl font-medium"
                         }, "Verification Code"),
-                        createVNode("p", { class: "text-xs text-gray-500 mb-2" }, " Enter the 6-digit code sent to " + toDisplayString(unref(emailForm).email), 1),
+                        createVNode("p", { class: "text-sm text-gray-500 mb-2" }, " Enter the 6-digit code sent to " + toDisplayString(unref(emailForm).email), 1),
                         withDirectives(createVNode("input", {
                           id: "otp",
                           type: "text",
                           placeholder: "Enter 6-digit code",
                           maxlength: "6",
                           "onUpdate:modelValue": ($event) => unref(otpForm).otp = $event,
-                          class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-deepgreen text-center text-2xl tracking-widest"
+                          class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primaryDark text-center text-2xl tracking-widest"
                         }, null, 8, ["onUpdate:modelValue"]), [
                           [vModelText, unref(otpForm).otp]
                         ])
                       ]),
                       createVNode("button", {
                         type: "submit",
-                        class: "w-full px-4 py-2.5 bg-deepgradient hover:-translate-y-1 text-white font-medium rounded-lg hover:bg-white disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:shadow-md hover:shadow-deepgreen/30",
+                        class: "w-full px-4 py-2.5 bg-primaryDark hover:-translate-y-1 text-white text-xl font-medium rounded-lg hover:bg-white disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:shadow-md hover:shadow-primaryDark/30",
                         disabled: isLoading.value
                       }, toDisplayString(isLoading.value ? "Verifying..." : "Verify Code"), 9, ["disabled"]),
                       createVNode("div", { class: "mt-4 text-center" }, [
                         createVNode("button", {
                           type: "button",
                           onClick: resendOtp,
-                          class: "text-sm text-deepgreen hover:text-deepgreen/80 transition-colors",
+                          class: "text-2xl text-primaryDark hover:text-primaryDark/80 hover:text-primaryDark transition-colors",
                           disabled: isLoading.value
                         }, " Resend Code ", 8, ["disabled"])
                       ])
@@ -373,7 +369,7 @@ const _sfc_main = {
                     currentStep.value === 3 ? (openBlock(), createBlock("form", {
                       key: 2,
                       onSubmit: withModifiers(handleReset, ["prevent"]),
-                      class: "space-y-4 h-full"
+                      class: "space-y-4"
                     }, [
                       (openBlock(true), createBlock(Fragment, null, renderList(biodataFields.value, (field) => {
                         return openBlock(), createBlock("div", {
@@ -382,30 +378,19 @@ const _sfc_main = {
                         }, [
                           createVNode("label", {
                             for: field.id,
-                            class: "text-sm font-medium"
+                            class: "text-lg lg:text-2xl font-medium"
                           }, toDisplayString(field.name), 9, ["for"]),
-                          field.type !== "password" ? withDirectives((openBlock(), createBlock("input", {
-                            key: 0,
-                            id: field.id,
-                            type: field.type,
-                            placeholder: field.placeholder,
-                            autocomplete: field.autocomplete,
-                            "onUpdate:modelValue": ($event) => unref(resetForm)[field.model] = $event,
-                            class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-deepgreen"
-                          }, null, 8, ["id", "type", "placeholder", "autocomplete", "onUpdate:modelValue"])), [
-                            [vModelDynamic, unref(resetForm)[field.model]]
-                          ]) : (openBlock(), createBlock(_sfc_main$2, {
-                            key: 1,
+                          createVNode(_sfc_main$2, {
                             id: field.id,
                             placeholder: field.placeholder,
                             modelValue: unref(resetForm)[field.model],
                             "onUpdate:modelValue": ($event) => unref(resetForm)[field.model] = $event
-                          }, null, 8, ["id", "placeholder", "modelValue", "onUpdate:modelValue"]))
+                          }, null, 8, ["id", "placeholder", "modelValue", "onUpdate:modelValue"])
                         ]);
                       }), 128)),
                       createVNode("button", {
                         type: "submit",
-                        class: "w-full px-4 py-2.5 bg-deepgradient hover:-translate-y-1 text-white font-medium rounded-lg hover:bg-white disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:shadow-md hover:shadow-deepgreen/30",
+                        class: "w-full px-4 py-2.5 bg-primaryDark hover:text-primaryDark hover:-translate-y-1 text-xl text-white font-medium rounded-lg hover:bg-white disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:shadow-md hover:shadow-primaryDark/30",
                         disabled: isLoading.value
                       }, toDisplayString(isLoading.value ? "Resetting Password..." : "Reset Password"), 9, ["disabled"])
                     ], 32)) : createCommentVNode("", true)

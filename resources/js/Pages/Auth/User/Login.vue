@@ -36,23 +36,23 @@
                             <form @submit.prevent="handleLogin" class="space-y-5">
                                 <!-- Email Field -->
                                 <div class="space-y-2">
-                                    <label for="login-email" class="block text-xl font-medium text-gray-600">
+                                    <label for="login-email" class="block lg:text-xl font-medium text-gray-600">
                                         Email
                                     </label>
                                     <input id="login-email" v-model="loginForm.email" type="email"
                                         placeholder="Enter your email"
-                                        class="w-full px-4 py-2.5 border border-gray-300 text-xl  rounded-lg focus:outline-none focus:ring-2 focus:ring-primaryDark focus:border-transparent transition-all"
+                                        class="w-full px-4 py-2.5 border border-gray-300 lg:text-xl  rounded-lg focus:outline-none focus:ring-2 focus:ring-primaryDark focus:border-transparent transition-all"
                                         required />
                                 </div>
 
                                 <!-- Password Field -->
                                 <div class="space-y-2">
                                     <div class="flex items-center justify-between">
-                                        <label for="login-password" class="block text-xl font-medium text-gray-600">
+                                        <label for="login-password" class="block lg:text-xl font-medium text-gray-600">
                                             Password
                                         </label>
                                         <Link :href="route('password.request')"
-                                            class="text-xl text-black hover:text-primary/80 transition-colors">
+                                            class="lg:text-xl text-black hover:text-primary/80 transition-colors">
                                         Forgot password?
                                         </Link>
                                     </div>
@@ -65,7 +65,7 @@
            hover:shadow-lg hover:-translate-y-1 hover:shadow-primaryDark/30" :disabled="isLoading">
 
                                     <p
-                                        class="group-hover:bg-clip-text text-xl  group-hover:text-transparent group-hover:bg-primaryDark">
+                                        class="group-hover:bg-clip-text lg:text-xl  group-hover:text-transparent group-hover:bg-primaryDark">
                                         {{ isLoading ? 'Logging in...' : 'Log in' }}
                                     </p>
                                 </button>
@@ -73,7 +73,7 @@
 
                             <!-- Sign Up Link -->
                             <div class="mt-6 text-center">
-                                <p class="text-xl text-gray-600">
+                                <p class="lg:text-xl text-gray-600">
                                     New here?
                                     <Link :href="route('signup')"
                                         class="text-primaryDark font-medium hover:text-primaryDark/80 transition-colors">

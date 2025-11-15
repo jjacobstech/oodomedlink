@@ -126,7 +126,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       _push(ssrRenderComponent(_sfc_main$1, null, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(`<div class="flex w-full h-full gap-1 overflow-hidden bg-white"${_scopeId}><div class="w-full p-6 mb-16 overflow-y-scroll bg-white scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-gray-100"${_scopeId}><div class="mb-6"${_scopeId}><h1 class="text-4xl font-bold text-gray-800"${_scopeId}>Dashboard</h1><p class="text-gray-600 text-xl font-bold"${_scopeId}>Manage patient test results and uploads</p></div><div class="p-6 rounded-xl"${_scopeId}><div class="flex items-center justify-center mb-4"${_scopeId}><button class="px-6 py-3 text-xl font-bold text-white bg-primaryDark rounded-lg hover:shadow-lg hover:-translate-y-1 transition-all duration-150"${_scopeId}> + Upload New Result </button></div></div><div class="grid grid-cols-1 gap-4 mb-6 md:grid-cols-2 lg:grid-cols-4"${_scopeId}><!--[-->`);
+            _push2(`<div class="flex w-full h-full gap-1 overflow-hidden bg-white"${_scopeId}><div class="w-full p-6 mb-16 overflow-y-scroll bg-white scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-gray-100"${_scopeId}><div class="mb-6"${_scopeId}><h1 class="text-4xl font-bold text-gray-800"${_scopeId}>Dashboard</h1><p class="text-gray-600 text-xl font-bold"${_scopeId}>Manage patient test results and uploads</p></div><div class="p-6 rounded-xl"${_scopeId}><div class="flex items-center justify-center mb-4"${_scopeId}><button class="px-6 py-5 text-xl font-bold text-white bg-primaryDark rounded-lg hover:shadow-lg hover:-translate-y-1 transition-all duration-150"${_scopeId}> + Upload New Result </button></div></div><div class="grid grid-cols-1 gap-4 mb-6 md:grid-cols-2 lg:grid-cols-4"${_scopeId}><!--[-->`);
             ssrRenderList(mockStats, (stat) => {
               _push2(`<div class="p-6 bg-white shadow-md rounded-xl group hover:shadow-lg transition-all duration-150"${_scopeId}><div class="flex items-center justify-between"${_scopeId}><div${_scopeId}><p class="text-lg capitalize font-bold text-gray-600"${_scopeId}>${ssrInterpolate(stat.name)}</p><p class="mt-2 text-3xl font-bold text-blue-600"${_scopeId}>${ssrInterpolate(stat.count)}</p></div><div class="p-3 bg-blue-100 rounded-full"${_scopeId}><span class="text-2xl"${_scopeId}>${ssrInterpolate(stat.icon)}</span></div></div></div>`);
             });
@@ -176,7 +176,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                     createVNode("div", { class: "flex items-center justify-center mb-4" }, [
                       createVNode("button", {
                         onClick: ($event) => showUploadModal.value = true,
-                        class: "px-6 py-3 text-xl font-bold text-white bg-primaryDark rounded-lg hover:shadow-lg hover:-translate-y-1 transition-all duration-150"
+                        class: "px-6 py-5 text-xl font-bold text-white bg-primaryDark rounded-lg hover:shadow-lg hover:-translate-y-1 transition-all duration-150"
                       }, " + Upload New Result ", 8, ["onClick"])
                     ])
                   ]),

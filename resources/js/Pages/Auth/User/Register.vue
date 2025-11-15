@@ -5,30 +5,28 @@
         <Toaster />
         <div
             class="relative z-10  container mx-auto lg:max-w-xl py-12 flex items-center justify-center min-h-[calc(100vh-80px)]">
-            <div class="w-full px-5 lg:px-20 space-y-4">
-
+            <div class="w-full px-7 lg:px-20 space-y-4">
 
                 <!-- Back Button -->
-                <div class="flex justify-start">
-                    <Link href="/"
-                        class="inline-flex items-center gap-2 text-xl  px-4 py-2 text-primaryDark  rounded-lg transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5 hover:bg-primaryDark hover:text-white hover:shadow-primaryDark/30">
-                    <ArrowLeft class="w-5 h-5" />
-                    <span>Back to Home</span>
-                    </Link>
-                </div>
+                <Link href="/"
+                    class="inline-flex items-center gap-2 text-xl  px-4 py-2 text-primaryDark  rounded-lg transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5 hover:bg-primaryDark hover:text-white hover:shadow-primaryDark/30">
+                <ArrowLeft class="w-5 h-5" />
+                <span>Back to Home</span>
+                </Link>
+
 
                 <!-- Main content -->
 
                 <div class="w-full grid justify-center rounded-xl bg-white shadow-xl items-center ">
                     <div class="p-6 grid space-y-1 bg-primaryDark rounded-t-lg">
-                        <h2 class="text-2xl font-bold text-center text-white">Complete Registration</h2>
+                        <h2 class="lg:text-2xl font-bold text-center text-white">Complete Registration</h2>
                         <p class="text-center text-xl  text-white">
                             Create an account - Step {{ currentStep }} of 3
                         </p>
                     </div>
 
                     <!-- Progress Indicator -->
-                    <div class=" py-6 flex  justify-center">
+                    <div class=" py-6 flex bg-white px-4 lg:px-0 justify-center">
                         <div class="flex justify-between items-center  px-auto">
                             <div v-for="step in 3" :key="step" class="flex-1">
                                 <div class="flex items-center">
@@ -55,7 +53,7 @@
                                 <label for="email" class="text-xl font-medium">Email Address</label>
                                 <input id="email" type="email" placeholder="Enter your email" autocomplete="email"
                                     autofocus v-model="emailForm.email"
-                                    class="w-full px-3 py-2 text-lg border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primaryDark" />
+                                    class="w-full px-3 py-2 lg:text-lg border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primaryDark" />
                             </div>
                             <button type="submit"
                                 class="w-full px-4 py-2.5 text-xl bg-primaryDark hover:text-primaryDark text-white font-medium rounded-lg hover:bg-white hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:shadow-md hover:shadow-primaryring-primaryDark/30"
@@ -77,8 +75,8 @@
                         <!-- Step 2: OTP Verification -->
                         <form v-if="currentStep === 2" @submit.prevent="handleOtpSubmit" class="space-y-4">
                             <div class="space-y-2">
-                                <label for="otp" class="text-xl font-medium">Verification Code</label>
-                                <p class="text-lg text-gray-500 mb-2">
+                                <label for="otp" class="lg:text-xl font-medium">Verification Code</label>
+                                <p class="lg:text-lg text-gray-500 mb-2">
                                     Enter the 6-digit code sent to {{ emailForm.email }}
                                 </p>
                                 <input id="otp" type="text" placeholder="Enter 6-digit code" maxlength="6"
@@ -87,14 +85,14 @@
                             </div>
 
                             <button type="submit"
-                                class="w-full px-4 text-xl py-2.5 bg-primaryDark hover:-translate-y-1 text-white hover:text-primaryDark font-medium rounded-lg hover:bg-white disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:shadow-md hover:shadow-primaryring-primaryDark/30"
+                                class="w-full px-4 lg:text-xl py-2.5 bg-primaryDark hover:-translate-y-1 text-white hover:text-primaryDark font-medium rounded-lg hover:bg-white disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:shadow-md hover:shadow-primaryring-primaryDark/30"
                                 :disabled="isLoading">
                                 {{ isLoading ? 'Verifying...' : 'Verify Code' }}
                             </button>
 
                             <div class="mt-4 text-center">
                                 <button type="button" @click="resendOtp"
-                                    class="text-xl text-primary ring-primaryDark hover:text-primary ring-primaryDark/80 transition-colors"
+                                    class="lg:text-xl text-primary ring-primaryDark hover:text-primary ring-primaryDark/80 transition-colors"
                                     :disabled="isLoading">
                                     Resend Code
                                 </button>

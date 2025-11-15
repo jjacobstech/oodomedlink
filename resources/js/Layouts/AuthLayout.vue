@@ -1,14 +1,16 @@
 <template>
-      <div class="flex flex-col lg:flex-row bg-primaryLight h-screen overflow-hidden fixed">
+      <div class="flex flex-col lg:flex-row bg-primaryLight h-screen w-screen">
             <!-- Image Section -->
-            <div class="w-full lg:w-1/2 hidden md:block lg:h-screen " lazy="true">
-                  <img src="/assets/med1.jpg" alt="med1" class="w-full h-full object-cover">
+            <div class="w-full lg:w-1/2 h-48 hidden lg:block sm:h-64 md:h-80 lg:h-screen flex-shrink-0">
+                  <img src="/assets/med1.jpg" alt="Medical consultation" class="w-full h-full object-cover"
+                        loading="lazy">
             </div>
 
             <!-- Content Section -->
-            <div
-                  class="w-full bg-primaryLight lg:w-1/2 flex justify-center items-center lg:py-20 lg:p-8 overflow-y-hidden lg:overflow-y-auto">
-                  <slot />
+            <div class="w-full lg:w-1/2 flex justify-center items-center p-6 sm:p-8 md:p-12 lg:p-20 overflow-y-hidden">
+                  <div class="w-full max-w-md lg:max-w-lg">
+                        <slot />
+                  </div>
             </div>
       </div>
 </template>

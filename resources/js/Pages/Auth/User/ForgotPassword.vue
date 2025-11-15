@@ -3,37 +3,35 @@
       <Head title="Password Reset" />
       <AuthLayout>
             <Toaster />
-            <div class=" h-screen overflow-y-hidden   flex justify-center items-center  ">
-                  <!-- Main content -->
-
-                  <div class="max-w-lg  justify-center   rounded-xl shadow-xl bg-white items-center">
-                        <div class="p-6 grid space-y-1 bg-deepgradient rounded-t-lg">
+            <div
+                  class="relative z-10   container mx-auto w-3-1/2 py-12 flex items-center justify-center min-h-[calc(100vh-80px)]">
+                  <div class="max-w-xl px-5 ">
+                        <div class="p-6 grid space-y-1 bg-primaryDark rounded-t-lg">
                               <h2 class="text-2xl font-bold text-center text-white">Reset Password</h2>
 
                         </div>
 
-
-
-                        <div class="p-6 space-y-4">
+                        <div class="p-6 space-y-4 bg-white">
                               <!-- Step 1: Email Verification -->
-                              <form v-if="currentStep === 1" @submit.prevent="handleEmailSubmit" class="space-y-4">
+                              <form v-if="currentStep === 1" @submit.prevent="handleEmailSubmit" class="space-y-6">
                                     <div class="space-y-2">
-                                          <label for="email" class="text-sm font-medium">Email Address</label>
+                                          <label for="email" class="text-lg lg:text-2xl font-medium">Email
+                                                Address</label>
                                           <input id="email" type="email" placeholder="Enter your email"
                                                 autocomplete="email" autofocus v-model="emailForm.email"
-                                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-deepgreen" />
+                                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 text-xl focus:ring-primaryDark" />
                                     </div>
                                     <button type="submit"
-                                          class="w-full px-4 py-2.5 bg-deepgradient text-white font-medium rounded-lg hover:bg-white hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:shadow-md hover:shadow-deepgreen/30"
+                                          class="w-full px-4 py-2.5 bg-primaryDark text-white font-medium rounded-lg lg:text-xl hover:bg-white hover:text-primaryDark hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:shadow-md hover:shadow-primaryDark/30"
                                           :disabled="isLoading">
                                           {{ isLoading ? 'Sending OTP...' : 'Send Verification Code' }}
                                     </button>
 
                                     <div class="mt-6 text-center">
-                                          <p class="text-sm text-gray-600">
+                                          <p class="lg:text-2xl text-gray-600">
                                                 Already have an account?
                                                 <Link :href="route('login')"
-                                                      class="text-deepgreen font-medium hover:text-deepgreen/80 transition-colors">
+                                                      class="text-primaryDark font-medium hover:text-primaryDark/80 transition-colors">
                                                 Login
                                                 </Link>
                                           </p>
@@ -43,24 +41,25 @@
                               <!-- Step 2: OTP Verification -->
                               <form v-if="currentStep === 2" @submit.prevent="handleOtpSubmit" class="space-y-4">
                                     <div class="space-y-2">
-                                          <label for="otp" class="text-sm font-medium">Verification Code</label>
-                                          <p class="text-xs text-gray-500 mb-2">
+                                          <label for="otp" class="text-lg lg:text-2xl font-medium">Verification
+                                                Code</label>
+                                          <p class="text-sm text-gray-500 mb-2">
                                                 Enter the 6-digit code sent to {{ emailForm.email }}
                                           </p>
                                           <input id="otp" type="text" placeholder="Enter 6-digit code" maxlength="6"
                                                 v-model="otpForm.otp"
-                                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-deepgreen text-center text-2xl tracking-widest" />
+                                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primaryDark text-center text-2xl tracking-widest" />
                                     </div>
 
                                     <button type="submit"
-                                          class="w-full px-4 py-2.5 bg-deepgradient hover:-translate-y-1 text-white font-medium rounded-lg hover:bg-white disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:shadow-md hover:shadow-deepgreen/30"
+                                          class="w-full px-4 py-2.5 bg-primaryDark hover:-translate-y-1 text-white text-xl font-medium rounded-lg hover:bg-white disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:shadow-md hover:shadow-primaryDark/30"
                                           :disabled="isLoading">
                                           {{ isLoading ? 'Verifying...' : 'Verify Code' }}
                                     </button>
 
                                     <div class="mt-4 text-center">
                                           <button type="button" @click="resendOtp"
-                                                class="text-sm text-deepgreen hover:text-deepgreen/80 transition-colors"
+                                                class="text-2xl text-primaryDark hover:text-primaryDark/80 hover:text-primaryDark transition-colors"
                                                 :disabled="isLoading">
                                                 Resend Code
                                           </button>
@@ -68,19 +67,17 @@
                               </form>
 
                               <!-- Step 3: Biodata Form -->
-                              <form v-if="currentStep === 3" @submit.prevent="handleReset" class="space-y-4 h-full">
+                              <form v-if="currentStep === 3" @submit.prevent="handleReset" class="space-y-4 ">
                                     <div class="space-y-2" v-for="field in biodataFields" :key="field.id">
-                                          <label :for="field.id" class="text-sm font-medium">{{ field.name }}</label>
-                                          <input v-if="field.type !== 'password'" :id="field.id" :type="field.type"
-                                                :placeholder="field.placeholder" :autocomplete="field.autocomplete"
-                                                v-model="resetForm[field.model]"
-                                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-deepgreen" />
-                                          <PasswordInput v-else :id="field.id" :placeholder="field.placeholder"
+                                          <label :for="field.id" class="text-lg lg:text-2xl font-medium">{{ field.name
+                                          }}</label>
+
+                                          <PasswordInput :id="field.id" :placeholder="field.placeholder"
                                                 v-model="resetForm[field.model]" />
                                     </div>
 
                                     <button type="submit"
-                                          class="w-full px-4 py-2.5 bg-deepgradient hover:-translate-y-1 text-white font-medium rounded-lg hover:bg-white  disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:shadow-md hover:shadow-deepgreen/30"
+                                          class="w-full px-4 py-2.5 bg-primaryDark hover:text-primaryDark hover:-translate-y-1 text-xl text-white font-medium rounded-lg hover:bg-white  disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:shadow-md hover:shadow-primaryDark/30"
                                           :disabled="isLoading">
                                           {{ isLoading ? 'Resetting Password...' : 'Reset Password' }}
                                     </button>
@@ -102,6 +99,7 @@ import AuthLayout from '@/Layouts/AuthLayout.vue';
 import Toaster from '@/components/ui/toast/Toaster.vue';
 import { useToast } from '@/components/ui/toast';
 import PasswordInput from '@/Components/PasswordInput.vue';
+import { ArrowLeft } from '@solar-icons/vue';
 
 
 
@@ -192,7 +190,7 @@ const handleEmailSubmit = async () => {
                   title: 'Validation Error',
                   description: error.email[0],
                   variant: 'destructive',
-                  class: 'text-deepblue bg-white shadow-lg',
+                  class: 'text-primaryDark bg-white shadow-lg',
             });
             isLoading.value = false;
             return;
@@ -205,7 +203,7 @@ const handleEmailSubmit = async () => {
                         toast({
                               title: 'Verification Code Sent',
                               description: 'Please check your email for the verification code',
-                              class: 'text-deepblue bg-white shadow-lg',
+                              class: 'text-primaryDark bg-white shadow-lg',
                         });
                         currentStep.value = 2;
 
@@ -217,7 +215,7 @@ const handleEmailSubmit = async () => {
                               title: 'Error',
                               description: error.email || 'Failed to send verification code',
                               variant: 'destructive',
-                              class: 'text-deepblue bg-white shadow-lg',
+                              class: 'text-primaryDark bg-white shadow-lg',
                         });
                         isLoading.value = false;
                   }
@@ -243,7 +241,7 @@ const handleOtpSubmit = async () => {
                         title: 'Validation Error',
                         description: inputError,
                         variant: 'destructive',
-                        class: 'text-deepblue bg-white shadow-lg',
+                        class: 'text-primaryDark bg-white shadow-lg',
                   });
             }
 
@@ -258,7 +256,7 @@ const handleOtpSubmit = async () => {
                         toast({
                               title: 'Email Verified',
                               description: 'Please complete your registration',
-                              class: 'text-deepblue bg-white shadow-lg',
+                              class: 'text-primaryDark bg-white shadow-lg',
                         });
 
                         resetForm.email = otpForm.email;
@@ -272,7 +270,7 @@ const handleOtpSubmit = async () => {
                               title: 'Verification Failed',
                               description: error.otp || 'Invalid verification code',
                               variant: 'destructive',
-                              class: 'text-deepblue bg-white shadow-lg',
+                              class: 'text-primaryDark bg-white shadow-lg',
                         });
                         console.log(error)
                   }
@@ -294,7 +292,7 @@ const resendOtp = async () => {
                         toast({
                               title: 'Code Resent',
                               description: 'A new verification code has been sent to your email',
-                              class: 'text-deepblue bg-white shadow-lg',
+                              class: 'text-primaryDark bg-white shadow-lg',
                         });
                   },
                   onError: () => {
@@ -302,7 +300,7 @@ const resendOtp = async () => {
                               title: 'Error',
                               description: 'Failed to resend verification code',
                               variant: 'destructive',
-                              class: 'text-deepblue bg-white shadow-lg',
+                              class: 'text-primaryDark bg-white shadow-lg',
                         });
                   }
             });
@@ -327,7 +325,7 @@ const handleReset = async () => {
                         title: 'Validation Error',
                         description: errors[field][0],
                         variant: 'destructive',
-                        class: 'text-deepblue bg-white shadow-lg',
+                        class: 'text-primaryDark bg-white shadow-lg',
                   });
                   break;
             }
@@ -343,7 +341,7 @@ const handleReset = async () => {
                                     title: 'Password Reset Failed',
                                     description: error[err],
                                     variant: 'destructive',
-                                    class: 'text-deepblue bg-white shadow-lg',
+                                    class: 'text-primaryDark bg-white shadow-lg',
                               });
                               break;
                         }
@@ -353,7 +351,7 @@ const handleReset = async () => {
                         toast({
                               title: 'Password Reset Successful',
                               description: ' Redirecting to login...',
-                              class: 'text-deepblue bg-white shadow-lg',
+                              class: 'text-primaryDark bg-white shadow-lg',
                         });
                   }
             });
