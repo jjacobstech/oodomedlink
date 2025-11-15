@@ -39,7 +39,7 @@ const isActive = (href: string) => {
 };
 
 const logout = () => {
-      userForm.post('/logout');
+      userForm.post(route('logout'));
 
 }
 </script>

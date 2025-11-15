@@ -28,16 +28,16 @@
     "/build/assets/ApplicationLogo-BnvHfr9H.js"
   ],
   "resources/js/Components/Dashboard/AppSidebar.vue": [
-    "/build/assets/AuthenticatedLayout-BGtG9d5z.js",
-    "/build/assets/AuthenticatedLayout-BLSf5RCD.css"
+    "/build/assets/AuthenticatedLayout-BJU7AtiY.js",
+    "/build/assets/AuthenticatedLayout-Uy1rkWmk.css"
   ],
   "resources/js/Components/Dashboard/AppSidebar.vue?vue&type=script&setup=true&lang.ts": [
-    "/build/assets/AuthenticatedLayout-BGtG9d5z.js",
-    "/build/assets/AuthenticatedLayout-BLSf5RCD.css"
+    "/build/assets/AuthenticatedLayout-BJU7AtiY.js",
+    "/build/assets/AuthenticatedLayout-Uy1rkWmk.css"
   ],
-  "resources/js/Components/Dashboard/AppSidebar.vue?vue&type=style&index=0&scoped=b04c545f&lang.css": [
-    "/build/assets/AuthenticatedLayout-BGtG9d5z.js",
-    "/build/assets/AuthenticatedLayout-BLSf5RCD.css"
+  "resources/js/Components/Dashboard/AppSidebar.vue?vue&type=style&index=0&scoped=6f853249&lang.css": [
+    "/build/assets/AuthenticatedLayout-BJU7AtiY.js",
+    "/build/assets/AuthenticatedLayout-Uy1rkWmk.css"
   ],
   "resources/js/Components/Home/GuestFooter.vue": [
     "/build/assets/Welcome-KtA3cuVC.js"
@@ -72,12 +72,12 @@
     "/build/assets/AuthLayout-x0U8Uf7l.js"
   ],
   "resources/js/Layouts/AuthenticatedLayout.vue": [
-    "/build/assets/AuthenticatedLayout-BGtG9d5z.js",
-    "/build/assets/AuthenticatedLayout-BLSf5RCD.css"
+    "/build/assets/AuthenticatedLayout-BJU7AtiY.js",
+    "/build/assets/AuthenticatedLayout-Uy1rkWmk.css"
   ],
   "resources/js/Layouts/AuthenticatedLayout.vue?vue&type=script&setup=true&lang.ts": [
-    "/build/assets/AuthenticatedLayout-BGtG9d5z.js",
-    "/build/assets/AuthenticatedLayout-BLSf5RCD.css"
+    "/build/assets/AuthenticatedLayout-BJU7AtiY.js",
+    "/build/assets/AuthenticatedLayout-Uy1rkWmk.css"
   ],
   "resources/js/Layouts/GuestLayout.vue": [
     "/build/assets/Welcome-KtA3cuVC.js"
@@ -94,22 +94,22 @@
     "/build/assets/Dashboard-BPffLjBP.css"
   ],
   "resources/js/Pages/Admin/Emails.vue": [
-    "/build/assets/Emails-D-5x_sqr.js"
+    "/build/assets/Emails-BUkS8aDF.js"
   ],
   "resources/js/Pages/Admin/Emails.vue?vue&type=script&setup=true&lang.ts": [
-    "/build/assets/Emails-D-5x_sqr.js"
+    "/build/assets/Emails-BUkS8aDF.js"
   ],
   "resources/js/Pages/Admin/Patients.vue": [
-    "/build/assets/Patients-CTI6EjY-.js"
+    "/build/assets/Patients-CDiOFMB0.js"
   ],
   "resources/js/Pages/Admin/Patients.vue?vue&type=script&setup=true&lang.ts": [
-    "/build/assets/Patients-CTI6EjY-.js"
+    "/build/assets/Patients-CDiOFMB0.js"
   ],
   "resources/js/Pages/Admin/Settings.vue": [
-    "/build/assets/Settings-BEHcJhS9.js"
+    "/build/assets/Settings-DJWPfpJr.js"
   ],
   "resources/js/Pages/Admin/Settings.vue?vue&type=script&setup=true&lang.ts": [
-    "/build/assets/Settings-BEHcJhS9.js"
+    "/build/assets/Settings-DJWPfpJr.js"
   ],
   "resources/js/Pages/Auth/Admin/ForgotPassword.vue": [
     "/build/assets/ForgotPassword-6FNJIQxm.js"
@@ -130,28 +130,28 @@
     "/build/assets/Register-BoCQObYg.js"
   ],
   "resources/js/Pages/User/Dashboard.vue": [
-    "/build/assets/Dashboard-B0lVnVkB.js"
+    "/build/assets/Dashboard-CsU6KzVH.js"
   ],
   "resources/js/Pages/User/Dashboard.vue?vue&type=script&setup=true&lang.ts": [
-    "/build/assets/Dashboard-B0lVnVkB.js"
+    "/build/assets/Dashboard-CsU6KzVH.js"
   ],
   "resources/js/Pages/User/Emails.vue": [
-    "/build/assets/Emails-BeGAqtKM.js"
+    "/build/assets/Emails-C95AeDr3.js"
   ],
   "resources/js/Pages/User/Emails.vue?vue&type=script&setup=true&lang.ts": [
-    "/build/assets/Emails-BeGAqtKM.js"
+    "/build/assets/Emails-C95AeDr3.js"
   ],
   "resources/js/Pages/User/Patients.vue": [
-    "/build/assets/Patients-qNPf4l6c.js"
+    "/build/assets/Patients-DHRJ1buo.js"
   ],
   "resources/js/Pages/User/Patients.vue?vue&type=script&setup=true&lang.ts": [
-    "/build/assets/Patients-qNPf4l6c.js"
+    "/build/assets/Patients-DHRJ1buo.js"
   ],
   "resources/js/Pages/User/Settings.vue": [
-    "/build/assets/Settings-2qTEeu2O.js"
+    "/build/assets/Settings-CkKNJK3r.js"
   ],
   "resources/js/Pages/User/Settings.vue?vue&type=script&setup=true&lang.ts": [
-    "/build/assets/Settings-2qTEeu2O.js"
+    "/build/assets/Settings-CkKNJK3r.js"
   ],
   "resources/js/Pages/Welcome.vue": [
     "/build/assets/Welcome-KtA3cuVC.js"
