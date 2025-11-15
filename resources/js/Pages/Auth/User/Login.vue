@@ -51,7 +51,7 @@
                                         <label for="login-password" class="block text-xl font-medium text-gray-600">
                                             Password
                                         </label>
-                                        <Link href="route('password.request')"
+                                        <Link :href="route('password.request')"
                                             class="text-xl text-black hover:text-primary/80 transition-colors">
                                         Forgot password?
                                         </Link>
