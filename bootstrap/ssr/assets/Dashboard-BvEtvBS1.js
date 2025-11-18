@@ -1,7 +1,7 @@
 import { defineComponent, ref, unref, withCtx, createVNode, createBlock, createCommentVNode, openBlock, Fragment, renderList, toDisplayString, withDirectives, vModelText, withModifiers, vModelSelect, createTextVNode, vModelCheckbox, useSSRContext } from "vue";
 import { ssrRenderComponent, ssrRenderList, ssrInterpolate, ssrRenderClass, ssrRenderAttr, ssrIncludeBooleanAttr, ssrLooseContain, ssrLooseEqual } from "vue/server-renderer";
 import { _ as _sfc_main$1 } from "./AuthenticatedLayout-hu7FW2Vw.js";
-import { useForm, Head, router } from "@inertiajs/vue3";
+import { usePage, useForm, Head, router } from "@inertiajs/vue3";
 import "./index-Ch8fN83j.js";
 import "class-variance-authority";
 import "reka-ui";
@@ -25,6 +25,8 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     nextPage: {}
   },
   setup(__props) {
+    const page = usePage();
+    const base_url = page.props.ziggy.base_url;
     const props = __props;
     const showUploadModal = ref(false);
     const selectedFilter = ref("all");
@@ -70,7 +72,6 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       sendViaEmail: false
     });
     const uploadedFiles = ref([]);
-    console.log(props.results);
     const handleFileChange = (event) => {
       const target = event.target;
       if (target.files && target.files[0]) {
@@ -78,11 +79,9 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
           uploadedFiles.value.push(file);
           uploadForm?.file?.push(file);
         }
-        console.log(uploadedFiles.value, uploadForm.file);
       }
     };
     const submitUpload = () => {
-      console.log(uploadForm.data());
       uploadForm.post(route("clinic.result.upload"), {
         onSuccess: (response) => {
           console.log(response);
@@ -97,15 +96,15 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     const filteredResults = (filter) => {
       router.get(route("user.dashboard"), { filter });
     };
-    const getPage = (page) => {
-      if (page === null) {
+    const getPage = (page2) => {
+      if (page2 === null) {
         return;
       }
-      page = 1;
-      return router.get(route("user.dashboard"), { page });
+      page2 = 1;
+      return router.get(route("user.dashboard"), { page: page2 });
     };
-    const downloadResult = (result) => {
-      window.open(result.file_path, "_blank");
+    const downloadResult = (file) => {
+      window.open(`${base_url}/storage/${file.file_path}`, "_blank");
     };
     const viewPreview = (result) => {
       previewFile.value = result;
@@ -147,7 +146,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
             });
             _push2(`<!--]--></div><div class="relative w-full sm:w-auto sm:max-w-md lg:max-w-lg"${_scopeId}><input${ssrRenderAttr("value", searchQuery.value)} type="text" placeholder="Search patient or result type..." class="w-full px-3 sm:px-4 py-2 sm:py-2.5 pl-9 sm:pl-10 text-sm sm:text-base border border-gray-300 rounded-lg placeholder:text-gray-400 placeholder:text-sm sm:placeholder:text-base focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"${_scopeId}><span class="absolute text-base sm:text-lg text-gray-400 transform -translate-y-1/2 left-3 top-1/2"${_scopeId}> 🔍 </span></div></div></div><div class="overflow-x-auto -mx-4 sm:mx-0 rounded-lg"${_scopeId}><div class="inline-block min-w-full align-middle"${_scopeId}><div class="overflow-hidden border-b border-gray-200 sm:rounded-lg"${_scopeId}><table class="min-w-full divide-y divide-gray-200"${_scopeId}><thead class="bg-gray-50"${_scopeId}><tr${_scopeId}><th class="px-3 sm:px-4 lg:px-6 py-2 sm:py-3 text-xs sm:text-sm font-semibold tracking-wider text-left text-gray-700 uppercase"${_scopeId}> Patient </th><th class="hidden md:table-cell px-3 sm:px-4 lg:px-6 py-2 sm:py-3 text-xs sm:text-sm font-semibold tracking-wider text-left text-gray-700 uppercase"${_scopeId}> Result Type </th><th class="hidden lg:table-cell px-3 sm:px-4 lg:px-6 py-2 sm:py-3 text-xs sm:text-sm font-semibold tracking-wider text-left text-gray-700 uppercase"${_scopeId}> File </th><th class="hidden xl:table-cell px-3 sm:px-4 lg:px-6 py-2 sm:py-3 text-xs sm:text-sm font-semibold tracking-wider text-left text-gray-700 uppercase"${_scopeId}> Upload Date </th><th class="px-3 sm:px-4 lg:px-6 py-2 sm:py-3 text-xs sm:text-sm font-semibold tracking-wider text-left text-gray-700 uppercase"${_scopeId}> Status </th><th class="px-3 sm:px-4 lg:px-6 py-2 sm:py-3 text-xs sm:text-sm font-semibold tracking-wider text-left text-gray-700 uppercase"${_scopeId}> Actions </th></tr></thead><tbody class="bg-white divide-y divide-gray-200"${_scopeId}><!--[-->`);
             ssrRenderList(unref(filtered), (result) => {
-              _push2(`<tr class="transition-colors hover:bg-gray-50"${_scopeId}><td class="px-3 sm:px-4 lg:px-6 py-3 sm:py-4"${_scopeId}><div class="text-xs sm:text-sm lg:text-base font-medium text-gray-900"${_scopeId}>${ssrInterpolate(result.patient_name)}</div><div class="md:hidden text-xs text-gray-500 mt-1"${_scopeId}>${ssrInterpolate(result.result_type)}</div></td><td class="hidden md:table-cell px-3 sm:px-4 lg:px-6 py-3 sm:py-4 text-xs sm:text-sm lg:text-base text-gray-700"${_scopeId}>${ssrInterpolate(result.result_type)}</td><td class="hidden lg:table-cell px-3 sm:px-4 lg:px-6 py-3 sm:py-4"${_scopeId}><!--[-->`);
+              _push2(`<tr class="transition-colors hover:bg-gray-50"${_scopeId}><td class="px-3 sm:px-4 lg:px-6 py-3 sm:py-4"${_scopeId}><div class="text-xs sm:text-sm lg:text-base font-medium text-gray-900"${_scopeId}>${ssrInterpolate(result.patient.full_name)}</div><div class="md:hidden text-xs text-gray-500 mt-1"${_scopeId}>${ssrInterpolate(result.result_type)}</div></td><td class="hidden md:table-cell px-3 sm:px-4 lg:px-6 py-3 sm:py-4 text-xs sm:text-sm lg:text-base text-gray-700"${_scopeId}>${ssrInterpolate(result.result_type)}</td><td class="hidden lg:table-cell px-3 sm:px-4 lg:px-6 py-3 sm:py-4"${_scopeId}><!--[-->`);
               ssrRenderList(result.files, (file) => {
                 _push2(`<span class="flex items-center gap-2 text-xs sm:text-sm text-gray-700"${_scopeId}><span${_scopeId}>${ssrInterpolate(getFileIcon(result.file_type))}</span><span class="truncate max-w-[150px] xl:max-w-[200px]"${_scopeId}>${ssrInterpolate(file.original_file_name)}</span></span>`);
               });
@@ -155,7 +154,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                 "bg-orange-100 text-orange-800": result.status === "pending",
                 "bg-green-100 text-green-800": result.status === "completed",
                 "bg-purple-100 text-purple-800": result.status === "reviewed"
-              }, "inline-flex px-2 sm:px-3 py-0.5 sm:py-1 text-xs font-semibold rounded-full whitespace-nowrap"])}"${_scopeId}>${ssrInterpolate(result.status.charAt(0).toUpperCase() + result.status.slice(1))}</span></td><td class="px-3 sm:px-4 lg:px-6 py-3 sm:py-4"${_scopeId}><div class="flex flex-col sm:flex-row gap-1 sm:gap-2"${_scopeId}><button class="px-2 sm:px-3 py-1 sm:py-1.5 text-xs font-medium text-blue-700 transition-all bg-blue-100 rounded hover:bg-blue-200 hover:shadow-sm whitespace-nowrap"${_scopeId}> View </button><button class="px-2 sm:px-3 py-1 sm:py-1.5 text-xs font-medium text-green-700 transition-all bg-green-100 rounded hover:bg-green-200 hover:shadow-sm whitespace-nowrap"${_scopeId}> Download </button></div></td></tr>`);
+              }, "inline-flex px-2 sm:px-3 py-0.5 sm:py-1 text-xs font-semibold rounded-full whitespace-nowrap"])}"${_scopeId}>${ssrInterpolate(result.status.charAt(0).toUpperCase() + result.status.slice(1))}</span></td><td class="px-3 sm:px-4 lg:px-6 py-3 sm:py-4"${_scopeId}><div class="flex flex-col sm:flex-row gap-1 sm:gap-2"${_scopeId}><button class="px-2 sm:px-3 py-1 sm:py-1.5 text-xs font-medium text-blue-700 transition-all bg-blue-100 rounded hover:bg-blue-200 hover:shadow-sm whitespace-nowrap"${_scopeId}> View </button></div></td></tr>`);
             });
             _push2(`<!--]-->`);
             if (unref(filtered).length === 0) {
@@ -174,19 +173,17 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
               _push2(`<!---->`);
             }
             if (previewFile.value) {
-              _push2(`<div class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"${_scopeId}><div class="w-full max-w-4xl p-6 bg-white rounded-xl max-h-[90vh] overflow-y-auto"${_scopeId}><div class="flex items-center justify-between mb-4"${_scopeId}><h3 class="text-2xl font-bold text-gray-800"${_scopeId}>${ssrInterpolate(previewFile.value.patient_name ?? "Patient")} - ${ssrInterpolate(previewFile.value.result_type)}</h3><button class="px-4 py-2 text-gray-700 transition-colors bg-gray-200 rounded-lg hover:bg-gray-300"${_scopeId}> Close </button></div><div class="p-4 mb-4 bg-gray-50 rounded-lg"${_scopeId}><!--[-->`);
+              _push2(`<div class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"${_scopeId}><div class="w-full max-w-4xl p-6 bg-white rounded-xl max-h-[90vh] overflow-y-auto"${_scopeId}><div class="flex items-center justify-between mb-4"${_scopeId}><h3 class="text-2xl font-bold text-gray-800"${_scopeId}>${ssrInterpolate(previewFile.value.patient.full_name ?? "Patient")} - ${ssrInterpolate(previewFile.value.result_type)}</h3><button class="px-4 py-2 text-gray-700 transition-colors bg-gray-200 rounded-lg hover:bg-gray-300"${_scopeId}> Close </button></div><div class="p-4 mb-4 bg-gray-50 rounded-lg"${_scopeId}><!--[-->`);
               ssrRenderList(previewFile.value.files, (file) => {
                 _push2(`<p class="text-sm text-gray-600"${_scopeId}>File: ${ssrInterpolate(file.original_file_name)}</p>`);
               });
               _push2(`<!--]--><p class="text-sm text-gray-600"${_scopeId}>Uploaded: ${ssrInterpolate(formatDate(previewFile.value.uploaded_at))}</p></div><!--[-->`);
               ssrRenderList(previewFile.value.files, (file) => {
                 _push2(`<div class="flex items-center justify-center p-8 my-2 bg-gray-100 rounded-lg"${_scopeId}>`);
-                if (file.file_type === "application/pdf") {
-                  _push2(`<div class="text-center"${_scopeId}><span class="text-6xl"${_scopeId}>📄</span><p class="mt-4 text-gray-600"${_scopeId}>PDF Preview</p><button class="px-4 py-2 mt-4 font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700"${_scopeId}> Open PDF </button></div>`);
-                } else if (file.file_type === "image/png") {
-                  _push2(`<div class="text-center"${_scopeId}><img${ssrRenderAttr("src", `storage/${file.file_path}`)} alt="Result preview" class="max-w-full max-h-96"${_scopeId}></div>`);
+                if (file.file_type === "image/png") {
+                  _push2(`<div class="text-center"${_scopeId}><img${ssrRenderAttr("src", unref(base_url) + file.file_url)} alt="Result preview" class="max-w-full max-h-96"${_scopeId}><button class="px-4 py-2 mt-4 font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700"${_scopeId}> Download Image </button></div>`);
                 } else {
-                  _push2(`<div class="text-center"${_scopeId}><span class="text-6xl"${_scopeId}>📊</span><p class="mt-4 text-gray-600"${_scopeId}>CSV Data File</p><button class="px-4 py-2 mt-4 font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700"${_scopeId}> Download CSV </button></div>`);
+                  _push2(`<div class="text-center"${_scopeId}><span class="text-6xl"${_scopeId}>📊</span><p class="mt-4 text-gray-600"${_scopeId}> File</p><button class="px-4 py-2 mt-4 font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700"${_scopeId}> Download </button></div>`);
                 }
                 _push2(`</div>`);
               });
@@ -276,7 +273,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                                   class: "transition-colors hover:bg-gray-50"
                                 }, [
                                   createVNode("td", { class: "px-3 sm:px-4 lg:px-6 py-3 sm:py-4" }, [
-                                    createVNode("div", { class: "text-xs sm:text-sm lg:text-base font-medium text-gray-900" }, toDisplayString(result.patient_name), 1),
+                                    createVNode("div", { class: "text-xs sm:text-sm lg:text-base font-medium text-gray-900" }, toDisplayString(result.patient.full_name), 1),
                                     createVNode("div", { class: "md:hidden text-xs text-gray-500 mt-1" }, toDisplayString(result.result_type), 1)
                                   ]),
                                   createVNode("td", { class: "hidden md:table-cell px-3 sm:px-4 lg:px-6 py-3 sm:py-4 text-xs sm:text-sm lg:text-base text-gray-700" }, toDisplayString(result.result_type), 1),
@@ -306,11 +303,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                                       createVNode("button", {
                                         onClick: ($event) => viewPreview(result),
                                         class: "px-2 sm:px-3 py-1 sm:py-1.5 text-xs font-medium text-blue-700 transition-all bg-blue-100 rounded hover:bg-blue-200 hover:shadow-sm whitespace-nowrap"
-                                      }, " View ", 8, ["onClick"]),
-                                      createVNode("button", {
-                                        onClick: ($event) => downloadResult(result),
-                                        class: "px-2 sm:px-3 py-1 sm:py-1.5 text-xs font-medium text-green-700 transition-all bg-green-100 rounded hover:bg-green-200 hover:shadow-sm whitespace-nowrap"
-                                      }, " Download ", 8, ["onClick"])
+                                      }, " View ", 8, ["onClick"])
                                     ])
                                   ])
                                 ]);
@@ -516,7 +509,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                   }, [
                     createVNode("div", { class: "w-full max-w-4xl p-6 bg-white rounded-xl max-h-[90vh] overflow-y-auto" }, [
                       createVNode("div", { class: "flex items-center justify-between mb-4" }, [
-                        createVNode("h3", { class: "text-2xl font-bold text-gray-800" }, toDisplayString(previewFile.value.patient_name ?? "Patient") + " - " + toDisplayString(previewFile.value.result_type), 1),
+                        createVNode("h3", { class: "text-2xl font-bold text-gray-800" }, toDisplayString(previewFile.value.patient.full_name ?? "Patient") + " - " + toDisplayString(previewFile.value.result_type), 1),
                         createVNode("button", {
                           onClick: ($event) => previewFile.value = null,
                           class: "px-4 py-2 text-gray-700 transition-colors bg-gray-200 rounded-lg hover:bg-gray-300"
@@ -536,35 +529,29 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                           key: file.id,
                           class: "flex items-center justify-center p-8 my-2 bg-gray-100 rounded-lg"
                         }, [
-                          file.file_type === "application/pdf" ? (openBlock(), createBlock("div", {
+                          file.file_type === "image/png" ? (openBlock(), createBlock("div", {
                             key: 0,
                             class: "text-center"
                           }, [
-                            createVNode("span", { class: "text-6xl" }, "📄"),
-                            createVNode("p", { class: "mt-4 text-gray-600" }, "PDF Preview"),
+                            createVNode("img", {
+                              src: unref(base_url) + file.file_url,
+                              alt: "Result preview",
+                              class: "max-w-full max-h-96"
+                            }, null, 8, ["src"]),
                             createVNode("button", {
-                              onClick: ($event) => downloadResult(previewFile.value),
+                              onClick: ($event) => downloadResult(file),
                               class: "px-4 py-2 mt-4 font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700"
-                            }, " Open PDF ", 8, ["onClick"])
-                          ])) : file.file_type === "image/png" ? (openBlock(), createBlock("div", {
+                            }, " Download Image ", 8, ["onClick"])
+                          ])) : (openBlock(), createBlock("div", {
                             key: 1,
                             class: "text-center"
                           }, [
-                            createVNode("img", {
-                              src: `storage/${file.file_path}`,
-                              alt: "Result preview",
-                              class: "max-w-full max-h-96"
-                            }, null, 8, ["src"])
-                          ])) : (openBlock(), createBlock("div", {
-                            key: 2,
-                            class: "text-center"
-                          }, [
                             createVNode("span", { class: "text-6xl" }, "📊"),
-                            createVNode("p", { class: "mt-4 text-gray-600" }, "CSV Data File"),
+                            createVNode("p", { class: "mt-4 text-gray-600" }, " File"),
                             createVNode("button", {
-                              onClick: ($event) => downloadResult(previewFile.value),
+                              onClick: ($event) => downloadResult(file),
                               class: "px-4 py-2 mt-4 font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700"
-                            }, " Download CSV ", 8, ["onClick"])
+                            }, " Download ", 8, ["onClick"])
                           ]))
                         ]);
                       }), 128))
