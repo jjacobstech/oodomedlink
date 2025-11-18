@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class Job
  * 
- * @property uuid $id
+ * @property string $id
  * @property string $queue
  * @property string $payload
  * @property int $attempts
@@ -28,7 +28,6 @@ class Job extends Model
 	public $timestamps = false;
 
 	protected $casts = [
-		'id' => 'uuid',
 		'attempts' => 'int',
 		'reserved_at' => 'int',
 		'available_at' => 'int'

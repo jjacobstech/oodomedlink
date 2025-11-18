@@ -54,6 +54,7 @@ class Clinic extends Authenticatable
 		'name',
 		'email',
 		'avatar',
+		'staff_no',
 		'email_verified_at',
 		'password',
 		'phone_no',

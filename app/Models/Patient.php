@@ -8,38 +8,40 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Patient
- * 
- * @property uuid $id
- * @property string $patient_id
+ *
+ * @property string $id
+ * @property string $clinic_id
  * @property string $full_name
  * @property string $email
- * @property string $phone_no
- * @property Carbon $date_of_birth
- * @property string $gender
- * @property string $address
+ * @property string|null $phone_no
+ * @property Carbon|null $date_of_birth
+ * @property string|null $gender
+ * @property string|null $address
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * 
+ *
  * @property Collection|PatientResult[] $patient_results
  *
  * @package App\Models
  */
 class Patient extends Model
 {
+	use HasUuids;
+
 	protected $table = 'patients';
 	public $incrementing = false;
 
 	protected $casts = [
-		'id' => 'uuid',
 		'date_of_birth' => 'datetime'
 	];
 
 	protected $fillable = [
-		'patient_id',
+		'clinic_id',
 		'full_name',
 		'email',
 		'phone_no',

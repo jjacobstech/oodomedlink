@@ -18,13 +18,13 @@ return new class extends Migration
                 $table->string('clinic_id', 100);
                 $table->string('full_name', 225);
                 $table->string('email', 225);
-                $table->string('phone_no', 225);
-                $table->date('date_of_birth');
-                $table->enum('gender', ['male', 'female', 'other']);
-                $table->longText('address');
+                $table->string('phone_no', 225)->nullable();
+                $table->date('date_of_birth')->nullable();
+                $table->enum('gender', ['male', 'female', 'other'])->nullable();
+                $table->longText('address')->nullable();
                 $table->timestamps();
                 $table->index(['clinic_id', 'email'], 'idx_clinic_id_email');
-                $table->index(['full_name', 'patient_id'], 'idx_full_name_patient_id');
+                $table->index(['full_name', 'id'], 'idx_full_name_patient_id');
             }
 
         );

@@ -13,12 +13,24 @@ class ResultMail extends Mailable
 {
     use Queueable, SerializesModels;
 
+    protected string $receipient;
+
+    protected string $subject;
+
+    protected array $attachments;
+
+    protected object $data;
+
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct(string $receipient, string $subject, object $data, array $attachments)
     {
-        //
+        $this->receipient = $receipient;
+        $this->subject($subject);
+        $this->attachments = $attachments;
+        $this->data = $data;
+
     }
 
     /**
@@ -27,8 +39,10 @@ class ResultMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Result Mail',
+            from: config('mail.from.address'),
+            metadata: ['oodomedlink', 'digital medical lab system']
         );
+
     }
 
     /**
@@ -37,7 +51,8 @@ class ResultMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            view: 'view.result-mail',
+            with: ['receipient' => $this->receipient]
         );
     }
 
@@ -48,6 +63,6 @@ class ResultMail extends Mailable
      */
     public function attachments(): array
     {
-        return [];
+        return [...$this->attachments];
     }
 }

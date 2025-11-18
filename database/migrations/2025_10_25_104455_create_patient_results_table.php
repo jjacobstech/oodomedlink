@@ -11,23 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('patient_result', function (Blueprint $table) {
+        Schema::create('patient_results', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->uuid('clinic_id');
-            $table->uuid('patient_id');
+            $table->uuid('patient_id')->nullable();
             $table->string('result_type', 225);
             $table->string('test_name', 225);
             $table->dateTime('test_date');
-            $table->string('file_path', 225)->nullable();
-            $table->string('file_type', 225)->nullable();
-            $table->bigInteger('file_size')->nullable();
-            $table->string('original_file_name', 225)->nullable();
             $table->json('data')->nullable();
             $table->boolean('encrypted')->default(true);
             $table->longText('notes')->nullable();
             $table->enum('status', ['pending', 'processed', 'sent', 'archived'])->default('pending');
             $table->timestamp('uploaded_at')->useCurrent();
-            $table->timestamp('updated_at')->useCurrentOnUpdate();
+            $table->timestamp('updated_at')->useCurrentOnUpdate()->default(now());
 
             $table->foreign('clinic_id')->on('clinics')->references('id')->cascadeOnDelete();
             $table->foreign('patient_id')->on('patients')->references('id')->cascadeOnDelete();

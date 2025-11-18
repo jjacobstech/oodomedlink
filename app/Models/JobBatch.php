@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class JobBatch
  * 
- * @property uuid $id
+ * @property string $id
  * @property string $name
  * @property int $total_jobs
  * @property int $pending_jobs
@@ -31,7 +31,6 @@ class JobBatch extends Model
 	public $timestamps = false;
 
 	protected $casts = [
-		'id' => 'uuid',
 		'total_jobs' => 'int',
 		'pending_jobs' => 'int',
 		'failed_jobs' => 'int',

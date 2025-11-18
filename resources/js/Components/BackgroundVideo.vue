@@ -1,4 +1,9 @@
 <template>
-      <video src="/assets/background.mp4" class="fixed top-0 left-0 object-cover  w-screen h-screen " autoplay muted
-            loop></video>
+    <video
+        src="/assets/background.mp4"
+        class="fixed left-0 top-0 h-screen w-screen object-cover"
+        autoplay
+        muted
+        loop
+    ></video>
 </template>

@@ -73,7 +73,7 @@
                     <!-- Header -->
                     <tr>
                         <td
-                            style="padding:24px 28px 0;background:linear-gradient(90deg,#0466fc 0%,#4CAF50 100%);color:white;">
+                            style="padding:24px 28px ;background:linear-gradient(90deg,#0466fc 0%,#4CAF50 100%);color:white;">
                             <h1 style="margin:0;font-size:20px;letter-spacing:0.2px;">Verify your email</h1>
                             <p style="margin:6px 0 0;font-size:13px;opacity:0.95">Enter the code below to confirm your
                                 email address.</p>

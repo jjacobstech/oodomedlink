@@ -1,31 +1,37 @@
 <template>
-
     <Head title="Login" />
     <AuthLayout>
-        <div class="w-full flex justify-center overflow-hidden">
+        <div class="flex w-full justify-center overflow-hidden">
             <!-- Toast -->
             <Toaster />
 
             <!-- Main content -->
             <div
-                class="relative z-10  container mx-auto lg:max-w-xl py-12 flex items-center justify-center min-h-[calc(100vh-80px)]">
-                <div class="w-full px-5 lg:px-20 space-y-4">
-
-
+                class="container relative z-10 mx-auto flex min-h-[calc(100vh-80px)] items-center justify-center py-12 lg:max-w-xl"
+            >
+                <div class="w-full space-y-4 px-5 lg:px-20">
                     <!-- Back Button -->
                     <div class="flex justify-start">
-                        <Link href="/"
-                            class="inline-flex items-center gap-2 text-xl  px-4 py-2 text-primaryDark  rounded-lg transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5 hover:bg-primaryDark hover:text-white hover:shadow-primaryDark/30">
-                        <ArrowLeft class="w-4 h-4" />
-                        <span>Back to Home</span>
+                        <Link
+                            href="/"
+                            class="inline-flex items-center gap-2 rounded-lg px-4 py-2 text-xl text-primaryDark transition-all duration-200 hover:-translate-y-0.5 hover:bg-primaryDark hover:text-white hover:shadow-lg hover:shadow-primaryDark/30"
+                        >
+                            <ArrowLeft class="h-4 w-4" />
+                            <span>Back to Home</span>
                         </Link>
                     </div>
 
                     <!-- Login Card -->
-                    <div class="bg-white rounded-lg shadow-xl">
+                    <div class="rounded-lg bg-white shadow-xl">
                         <!-- Header -->
-                        <div class="p-6 space-y-1 border-b rounded-t-lg border-primaryDark bg-primaryDark">
-                            <h2 class="text-2xl font-bold text-center text-white">Login</h2>
+                        <div
+                            class="space-y-1 rounded-t-lg border-b border-primaryDark bg-primaryDark p-6"
+                        >
+                            <h2
+                                class="text-center text-2xl font-bold text-white"
+                            >
+                                Login
+                            </h2>
                             <p class="text-center text-lg text-white">
                                 Enter your email address and password
                             </p>
@@ -33,51 +39,79 @@
 
                         <!-- Form -->
                         <div class="p-6">
-                            <form @submit.prevent="handleLogin" class="space-y-5">
+                            <form
+                                @submit.prevent="handleLogin"
+                                class="space-y-5"
+                            >
                                 <!-- Email Field -->
                                 <div class="space-y-2">
-                                    <label for="login-email" class="block lg:text-xl font-medium text-gray-600">
+                                    <label
+                                        for="login-email"
+                                        class="block font-medium text-gray-600 lg:text-xl"
+                                    >
                                         Email
                                     </label>
-                                    <input id="login-email" v-model="loginForm.email" type="email"
+                                    <input
+                                        id="login-email"
+                                        v-model="loginForm.email"
+                                        type="email"
                                         placeholder="Enter your email"
-                                        class="w-full px-4 py-2.5 border border-gray-300 lg:text-xl  rounded-lg focus:outline-none focus:ring-2 focus:ring-primaryDark focus:border-transparent transition-all"
-                                        required />
+                                        class="w-full rounded-lg border border-gray-300 px-4 py-2.5 transition-all focus:border-transparent focus:outline-none focus:ring-2 focus:ring-primaryDark lg:text-xl"
+                                        required
+                                    />
                                 </div>
 
                                 <!-- Password Field -->
                                 <div class="space-y-2">
-                                    <div class="flex items-center justify-between">
-                                        <label for="login-password" class="block lg:text-xl font-medium text-gray-600">
+                                    <div
+                                        class="flex items-center justify-between"
+                                    >
+                                        <label
+                                            for="login-password"
+                                            class="block font-medium text-gray-600 lg:text-xl"
+                                        >
                                             Password
                                         </label>
-                                        <Link :href="route('password.request')"
-                                            class="lg:text-xl text-black hover:text-primary/80 transition-colors">
-                                        Forgot password?
+                                        <Link
+                                            :href="route('password.request')"
+                                            class="text-black transition-colors hover:text-primary/80 lg:text-xl"
+                                        >
+                                            Forgot password?
                                         </Link>
                                     </div>
-                                    <PasswordInput :placeholder="'Password'" v-model="loginForm.password" />
+                                    <PasswordInput
+                                        :placeholder="'Password'"
+                                        v-model="loginForm.password"
+                                    />
                                 </div>
 
                                 <!-- Submit Button -->
-                                <button type="submit" class="w-full px-4 py-2.5 bg-primaryDark text-white font-medium rounded-lg group hover:bg-white
-           disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200
-           hover:shadow-lg hover:-translate-y-1 hover:shadow-primaryDark/30" :disabled="isLoading">
-
+                                <button
+                                    type="submit"
+                                    class="group w-full rounded-lg bg-primaryDark px-4 py-2.5 font-medium text-white transition-all duration-200 hover:-translate-y-1 hover:bg-white hover:shadow-lg hover:shadow-primaryDark/30 disabled:cursor-not-allowed disabled:opacity-50"
+                                    :disabled="isLoading"
+                                >
                                     <p
-                                        class="group-hover:bg-clip-text lg:text-xl  group-hover:text-transparent group-hover:bg-primaryDark">
-                                        {{ isLoading ? 'Logging in...' : 'Log in' }}
+                                        class="group-hover:bg-primaryDark group-hover:bg-clip-text group-hover:text-transparent lg:text-xl"
+                                    >
+                                        {{
+                                            isLoading
+                                                ? 'Logging in...'
+                                                : 'Log in'
+                                        }}
                                     </p>
                                 </button>
                             </form>
 
                             <!-- Sign Up Link -->
                             <div class="mt-6 text-center">
-                                <p class="lg:text-xl text-gray-600">
+                                <p class="text-gray-600 lg:text-xl">
                                     New here?
-                                    <Link :href="route('signup')"
-                                        class="text-primaryDark font-medium hover:text-primaryDark/80 transition-colors">
-                                    Sign up
+                                    <Link
+                                        :href="route('signup')"
+                                        class="font-medium text-primaryDark transition-colors hover:text-primaryDark/80"
+                                    >
+                                        Sign up
                                     </Link>
                                 </p>
                             </div>
@@ -89,29 +123,26 @@
     </AuthLayout>
 </template>
 <script setup>
-import { ref } from 'vue';
-import { useForm, Link } from '@inertiajs/vue3';
-import { z, flattenError } from 'zod';
-import { Head } from '@inertiajs/vue3';
-import Toaster from '@/components/ui/toast/Toaster.vue';
-import { useToast } from '@/components/ui/toast';
-import { ArrowLeft, EyeClosedIcon } from 'lucide-vue-next';
-import AuthLayout from '@/Layouts/AuthLayout.vue';
 import PasswordInput from '@/Components/PasswordInput.vue';
+import { useToast } from '@/components/ui/toast';
+import Toaster from '@/components/ui/toast/Toaster.vue';
+import AuthLayout from '@/Layouts/AuthLayout.vue';
+import { Head, Link, useForm } from '@inertiajs/vue3';
+import { ArrowLeft } from 'lucide-vue-next';
+import { ref } from 'vue';
+import { flattenError, z } from 'zod';
 
 const isLoading = ref(false);
 const { toast } = useToast();
 
-
 const loginForm = useForm({
     email: '',
-    password: ''
+    password: '',
 });
-
 
 const loginSchema = z.object({
     email: z.email('Invalid email address').max(255),
-    password: z.string().min(6, 'Password must be at least 6 characters')
+    password: z.string().min(6, 'Password must be at least 6 characters'),
 });
 
 const handleLogin = async () => {
@@ -120,7 +151,6 @@ const handleLogin = async () => {
     const form = loginSchema.safeParse(loginForm);
 
     if (form.error) {
-
         for (const error in flattenError(form.error)?.fieldErrors) {
             // console.log(flattenError(form.error)?.fieldErrors[error][0])
             const inputError = flattenError(form.error)?.fieldErrors[error][0];
@@ -136,16 +166,14 @@ const handleLogin = async () => {
         return;
     }
 
-
     loginForm.post(route('login'), {
         onFinish: () => {
             isLoading.value = false;
-
         },
         onError: (error) => {
-            console.log(error[0])
+            console.log(error[0]);
             for (const err in error) {
-                console.log(error[err])
+                console.log(error[err]);
                 const inputError = error[err];
                 toast({
                     title: 'Login failed',
@@ -155,7 +183,6 @@ const handleLogin = async () => {
                     class: 'text-primaryDark bg-white shadow-lg bottom-96',
                 });
             }
-
         },
         onSuccess: (page) => {
             console.log('Login Success - Page:', page); // See what page is returned
@@ -166,10 +193,7 @@ const handleLogin = async () => {
                 open: true,
                 class: 'text-primaryDark bg-white shadow-lg bottom-96',
             });
-
-        }
+        },
     });
-
 };
-
 </script>

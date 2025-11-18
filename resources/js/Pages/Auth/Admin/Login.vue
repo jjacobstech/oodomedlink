@@ -1,35 +1,41 @@
 <template>
-
     <Head title="Login" />
     <Toaster />
     <AdminAuthLayout>
-
         <div class="w-full overflow-hidden">
             <!-- Toast -->
 
             <!-- Main content -->
             <div
-                class="relative z-10 max-w-3xl container mx-auto px-4 py-12 flex items-center justify-center min-h-[calc(100vh-80px)]">
-                <div class="w-full px-40 space-y-10">
-                    <div class="w-full flex justify-center my-5">
+                class="container relative z-10 mx-auto flex min-h-[calc(100vh-80px)] max-w-3xl items-center justify-center px-4 py-12"
+            >
+                <div class="w-full space-y-10 px-40">
+                    <div class="my-5 flex w-full justify-center">
                         <!-- <ApplicationLogo /> -->
-
                     </div>
 
                     Back Button
                     <div class="flex justify-start">
-                        <Link href="/"
-                            class="inline-flex items-center gap-2 px-4 py-2 text-sm text-deepgreen  rounded-lg transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5 hover:bg-deepgradient hover:text-white hover:shadow-deepgreen/30">
-                        <ArrowLeft class="w-4 h-4" />
-                        <span>Back to Home</span>
+                        <Link
+                            href="/"
+                            class="text-deepgreen hover:bg-deepgradient hover:shadow-deepgreen/30 inline-flex items-center gap-2 rounded-lg px-4 py-2 text-sm transition-all duration-200 hover:-translate-y-0.5 hover:text-white hover:shadow-lg"
+                        >
+                            <ArrowLeft class="h-4 w-4" />
+                            <span>Back to Home</span>
                         </Link>
                     </div>
 
                     <!-- Login Card -->
-                    <div class="bg-white rounded-lg shadow-xl">
+                    <div class="rounded-lg bg-white shadow-xl">
                         <!-- Header -->
-                        <div class="p-6 space-y-1 border-b rounded-t-lg border-deepgradient bg-deepgradient">
-                            <h2 class="text-2xl font-bold text-center text-white">Admin</h2>
+                        <div
+                            class="border-deepgradient bg-deepgradient space-y-1 rounded-t-lg border-b p-6"
+                        >
+                            <h2
+                                class="text-center text-2xl font-bold text-white"
+                            >
+                                Admin
+                            </h2>
                             <p class="text-center text-sm text-white">
                                 Enter your email address and password
                             </p>
@@ -37,40 +43,67 @@
 
                         <!-- Form -->
                         <div class="p-6">
-                            <form @submit.prevent="handleLogin" class="space-y-5">
+                            <form
+                                @submit.prevent="handleLogin"
+                                class="space-y-5"
+                            >
                                 <!-- Email Field -->
                                 <div class="space-y-2">
-                                    <label for="login-email" class="block text-sm font-medium text-gray-600">
+                                    <label
+                                        for="login-email"
+                                        class="block text-sm font-medium text-gray-600"
+                                    >
                                         Email
                                     </label>
-                                    <input id="login-email" v-model="loginForm.email" type="email"
+                                    <input
+                                        id="login-email"
+                                        v-model="loginForm.email"
+                                        type="email"
                                         placeholder="Enter your email"
-                                        class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-deepgreen focus:border-transparent transition-all"
-                                        required />
+                                        class="focus:ring-deepgreen w-full rounded-lg border border-gray-300 px-4 py-2.5 transition-all focus:border-transparent focus:outline-none focus:ring-2"
+                                        required
+                                    />
                                 </div>
 
                                 <!-- Password Field -->
                                 <div class="space-y-2">
-                                    <div class="flex items-center justify-between">
-                                        <label for="login-password" class="block text-sm font-medium text-gray-600">
+                                    <div
+                                        class="flex items-center justify-between"
+                                    >
+                                        <label
+                                            for="login-password"
+                                            class="block text-sm font-medium text-gray-600"
+                                        >
                                             Password
                                         </label>
-                                        <Link :href="route('admin.password.request')"
-                                            class="text-sm text-black hover:text-primary/80 transition-colors">
-                                        Forgot password?
+                                        <Link
+                                            :href="
+                                                route('admin.password.request')
+                                            "
+                                            class="text-sm text-black transition-colors hover:text-primary/80"
+                                        >
+                                            Forgot password?
                                         </Link>
                                     </div>
-                                    <PasswordInput v-model="loginForm.password" />
+                                    <PasswordInput
+                                        v-model="loginForm.password"
+                                    />
                                 </div>
 
                                 <!-- Submit Button -->
-                                <button type="submit" class="w-full px-4 py-2.5 bg-deepgreen text-white font-medium rounded-lg group hover:bg-white
-           disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200
-           hover:shadow-lg hover:-translate-y-1 hover:shadow-deepgreen/30" :disabled="isLoading">
-
+                                <button
+                                    type="submit"
+                                    class="bg-deepgreen hover:shadow-deepgreen/30 group w-full rounded-lg px-4 py-2.5 font-medium text-white transition-all duration-200 hover:-translate-y-1 hover:bg-white hover:shadow-lg disabled:cursor-not-allowed disabled:opacity-50"
+                                    :disabled="isLoading"
+                                >
                                     <p
-                                        class="group-hover:bg-clip-text group-hover:text-transparent group-hover:bg-deepgradient">
-                                        {{ isLoading ? 'Logging in...' : 'Log in' }}
+                                        class="group-hover:bg-deepgradient group-hover:bg-clip-text group-hover:text-transparent"
+                                    >
+                                        {{
+                                            isLoading
+                                                ? 'Logging in...'
+                                                : 'Log in'
+                                        }}
                                     </p>
                                 </button>
                             </form>
@@ -79,9 +112,11 @@
                             <div class="mt-6 text-center">
                                 <p class="text-sm text-gray-600">
                                     New here?
-                                    <Link :href="route('admin.signup')"
-                                        class="text-deepgreen font-medium hover:text-deepgreen/80 transition-colors">
-                                    Sign up
+                                    <Link
+                                        :href="route('admin.signup')"
+                                        class="text-deepgreen hover:text-deepgreen/80 font-medium transition-colors"
+                                    >
+                                        Sign up
                                     </Link>
                                 </p>
                             </div>
@@ -91,33 +126,28 @@
             </div>
         </div>
     </AdminAuthLayout>
-
 </template>
 <script setup>
-import { ref } from 'vue';
-import { useForm, Link } from '@inertiajs/vue3';
-import { z, flattenError } from 'zod';
-import { Head } from '@inertiajs/vue3';
-import Toaster from '@/components/ui/toast/Toaster.vue';
 import { useToast } from '@/components/ui/toast';
+import Toaster from '@/components/ui/toast/Toaster.vue';
 import AdminAuthLayout from '@/Layouts/AdminAuthLayout.vue';
+import { Head, Link, useForm } from '@inertiajs/vue3';
+import { ref } from 'vue';
+import { flattenError, z } from 'zod';
 
 import PasswordInput from '@/Components/PasswordInput.vue';
-import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 
 const isLoading = ref(false);
 const { toast } = useToast();
 
-
 const loginForm = useForm({
     email: '',
-    password: ''
+    password: '',
 });
-
 
 const loginSchema = z.object({
     email: z.email('Invalid email address').max(255),
-    password: z.string().min(6, 'Password must be at least 6 characters')
+    password: z.string().min(6, 'Password must be at least 6 characters'),
 });
 
 const handleLogin = async () => {
@@ -126,7 +156,6 @@ const handleLogin = async () => {
     const form = loginSchema.safeParse(loginForm);
 
     if (form.error) {
-
         for (const error in flattenError(form.error)?.fieldErrors) {
             // console.log(flattenError(form.error)?.fieldErrors[error][0])
             const inputError = flattenError(form.error)?.fieldErrors[error][0];
@@ -142,16 +171,14 @@ const handleLogin = async () => {
         return;
     }
 
-
     loginForm.post(route('admin.login'), {
         onFinish: () => {
             isLoading.value = false;
-
         },
         onError: (error) => {
-            console.log(error[0])
+            console.log(error[0]);
             for (const err in error) {
-                console.log(error[err])
+                console.log(error[err]);
                 const inputError = error[err];
                 toast({
                     title: 'Login failed',
@@ -161,7 +188,6 @@ const handleLogin = async () => {
                     class: 'text-deepblue bg-white shadow-lg bottom-96',
                 });
             }
-
         },
         onSuccess: (page) => {
             console.log('Login Success - Page:', page); // See what page is returned
@@ -172,10 +198,7 @@ const handleLogin = async () => {
                 open: true,
                 class: 'text-deepblue bg-white shadow-lg bottom-96',
             });
-
-        }
+        },
     });
-
 };
-
 </script>

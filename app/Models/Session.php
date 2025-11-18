@@ -11,8 +11,8 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class Session
  * 
- * @property uuid $id
- * @property int|null $clinic_id
+ * @property string $id
+ * @property string|null $user_id
  * @property string|null $ip_address
  * @property string|null $user_agent
  * @property string $payload
@@ -27,13 +27,11 @@ class Session extends Model
 	public $timestamps = false;
 
 	protected $casts = [
-		'id' => 'uuid',
-		'clinic_id' => 'int',
 		'last_activity' => 'int'
 	];
 
 	protected $fillable = [
-		'clinic_id',
+		'user_id',
 		'ip_address',
 		'user_agent',
 		'payload',

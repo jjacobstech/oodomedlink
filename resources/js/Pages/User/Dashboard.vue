@@ -1,140 +1,168 @@
 <script setup lang="ts">
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head, useForm, usePage } from '@inertiajs/vue3';
-import { ref, computed } from 'vue';
-
+import { Head, useForm, router, usePage } from '@inertiajs/vue3';
+import { ref } from 'vue';
+import { Upload, UsersGroupTwoRounded, ClockCircle, } from '@solar-icons/vue';
 
 const page = usePage();
-
-const onDrop = (file: File[] | null) => {
-      console.log(file)
-      return;
-}
-
-
-
-console.log(page.props)
+const base_url = page.props.ziggy.base_url;
 
 // Define props for patient results data from backend
+interface file {
+      id: string;
+      original_file_name: string;
+      file_path: string;
+      file_url: string;
+      file_name: string;
+      file_type: string;
+      file_size: number;
+      result: string;
+}
 interface PatientResult {
       id: number;
-      patient_name: string;
+      patient: {
+            id: string;
+            full_name: string;
+            email: string;
+      };
       result_type: string;
       file_name: string;
       file_path: string;
       file_type: 'pdf' | 'image' | 'csv';
-      upload_date: string;
+      uploaded_at: string;
       status: 'pending' | 'completed' | 'reviewed';
+      files: file[];
 }
 
 interface Props {
+      user?: any,
       results?: PatientResult[];
       stats?: {
-            name: string,
-            count: number,
-            icon: string,
-            color: string,
+            total_uploads: number,
+            total_patients: number,
+            pending_results: number,
+            completed_result: number
       };
+      prevPage?: number | string;
+      nextPage?: number | string;
+
 }
 
-const props = defineProps<Props>(
 
-);
-
-console.log(props)
-
-
-// Upload form
-const uploadForm = useForm({
-      patient_name: '',
-      patient_email: '',
-      result_type: '',
-      file: null as File | null,
-});
-
+const props = defineProps<Props>();
 const showUploadModal = ref(false);
 const selectedFilter = ref('all');
 const searchQuery = ref('');
 const previewFile = ref<PatientResult | null>(null);
-
-const mockStats = [
+const stats = [
       {
             name: "total uploads",
-            count: 156,
+            count: props.stats?.total_uploads,
             icon: "📤",
-            color: "primaryLight",
+            color: "primaryDark",
       },
       {
-            name: "pending reviews",
-            count: 12,
+            name: "pending results",
+            count: props.stats?.pending_results,
             icon: "⏳",
             color: "primaryDark",
       },
       {
             name: "completed results",
-            count: 132,
+            count: props.stats?.completed_result,
             icon: "✅",
             color: "primaryDark",
       },
       {
             name: "total patients",
-            count: 89,
+            count: props.stats?.total_patients,
             icon: "👥",
             color: "primaryDark",
       }
 ];
 
-
-// Mock data for demonstration (remove when backend is connected)
-let results: PatientResult[] = [
-
-];
+let results: PatientResult[] = props.results || [];
 
 let filtered: PatientResult[] = results
+
+const selectionFilter = ['all', 'pending', 'sent', 'failed']
+// Upload form
+const uploadForm = useForm({
+      patient_name: '',
+      patient_email: '',
+      test_date: '',
+      test_name: '',
+      result_type: '',
+      file: [] as File[],
+      notes: '',
+      sendViaEmail: false as boolean
+});
+
+const uploadedFiles = ref<File[]>([])
+
+// console.log(props.results);
 
 // File input handling
 const handleFileChange = (event: Event) => {
       const target = event.target as HTMLInputElement;
       if (target.files && target.files[0]) {
-            uploadForm.file = target.files[0];
+            // console.log(uploadForm.file, target.files);
+            for (let file of target.files) {
+
+                  uploadedFiles.value.push(file)
+                  uploadForm?.file?.push(file)
+            }
+
+
+            // console.log(uploadedFiles.value, uploadForm.file)
       }
+};
+
+const handleFileRemove = (file: File) => {
+      // console.log(uploadForm.file, target.files);
+
+
+
+
+
+
+      console.log(uploadedFiles.value, uploadForm.file)
 };
 
 // Submit upload
 const submitUpload = () => {
-      uploadForm.post('/clinic/results/upload', {
-            onSuccess: () => {
+      // console.log(uploadForm.data())
+      uploadForm.post(route('clinic.result.upload'), {
+            onSuccess: (response) => {
+                  console.log(response)
                   uploadForm.reset();
                   showUploadModal.value = false;
             },
+            onError: (response) => {
+                  console.log(response)
+            }
       });
 };
 
 // Filter and search results
 const filteredResults = (filter: string) => {
-      selectedFilter.value = filter;
 
-      if (selectedFilter.value !== 'all') {
-            filtered = results.filter(p => p.status === selectedFilter.value);
-      }
-
-      if (selectedFilter.value === 'all') {
-            filtered = results
-      }
-
-      if (searchQuery.value) {
-            const query = searchQuery.value.toLowerCase();
-            filtered = results.filter(p =>
-                  p.patient_name.toLowerCase().includes(query) ||
-                  p.result_type.toLowerCase().includes(query) ||
-                  p.file_name.toLowerCase().includes(query)
-            );
-      };
+      router.get(route('user.dashboard'), { filter: filter });
 }
 
+
+const getPage = (page: number | string | undefined) => {
+
+      if (page === null) {
+            return;
+      }
+
+      page = 1;
+      return router.get(route('user.dashboard'), { page: page });
+}
 // Download result
-const downloadResult = (result: PatientResult) => {
-      window.open(result.file_path, '_blank');
+const downloadResult = (file: file) => {
+      window.open(`${base_url}/storage/${file.file_path}`, '_blank');
 };
 
 // View result preview
@@ -164,7 +192,15 @@ const getFileIcon = (fileType: string) => {
 };
 
 const loadFile = (event: Event) => {
-      console.log(event)
+      let files: File[] = [];
+      const target = event.target as HTMLInputElement;
+
+      if (target.files && target.files[0]) {
+            files.push(target.files[0]);
+
+            console.log(files)
+      }
+
 }
 
 
@@ -177,10 +213,10 @@ const loadFile = (event: Event) => {
 
       <AuthenticatedLayout>
 
-            <div class=" flex w-full h-full gap-1 overflow-hidden bg-white">
+            <div class=" flex w-full  gap-1 overflow-y-hidden bg-primaryLight">
                   <!-- Main Content -->
                   <div
-                        class="w-full p-6 mb-16 overflow-y-scroll bg-white scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-gray-100">
+                        class="w-full p-6 mb-16 overflow-y-auto  bg-transparent scrollbar-thin scrollbar-thumb-primaryDark scrollbar-track-primaryLight">
 
                         <!-- Header -->
                         <div class="mb-6">
@@ -201,7 +237,7 @@ const loadFile = (event: Event) => {
 
                         <!-- Stats Cards -->
                         <div class="grid grid-cols-1 gap-4 mb-6 md:grid-cols-2 lg:grid-cols-4 ">
-                              <div v-for="stat in mockStats" :key="stat.name"
+                              <div v-for="stat in stats" :key="stat.name"
                                     class="p-6 bg-white shadow-md rounded-xl group hover:shadow-lg transition-all duration-150">
                                     <div class="flex items-center justify-between">
                                           <div>
@@ -227,25 +263,12 @@ const loadFile = (event: Event) => {
                                     <div class="flex flex-col gap-3 sm:gap-4 mb-4">
                                           <!-- Filter Buttons -->
                                           <div class="flex flex-wrap gap-2 sm:gap-3">
-                                                <button @click="filteredResults('all')"
-                                                      :class="selectedFilter === 'all' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700'"
+                                                <button v-for="selection in selectionFilter" :key="selection"
+                                                      @click="filteredResults(selection)"
+                                                      :class="selectedFilter === selection ? 'bg-primaryDark text-white' : 'bg-gray-200 text-gray-700'"
                                                       class="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm lg:text-base font-medium rounded-lg transition-all hover:shadow-md">
-                                                      All
-                                                </button>
-                                                <button @click="filteredResults('pending')"
-                                                      :class="selectedFilter === 'pending' ? 'bg-orange-600 text-white' : 'bg-gray-200 text-gray-700'"
-                                                      class="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm lg:text-base font-medium rounded-lg transition-all hover:shadow-md">
-                                                      Pending
-                                                </button>
-                                                <button @click="filteredResults('completed')"
-                                                      :class="selectedFilter === 'completed' ? 'bg-green-600 text-white' : 'bg-gray-200 text-gray-700'"
-                                                      class="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm lg:text-base font-medium rounded-lg transition-all hover:shadow-md">
-                                                      Completed
-                                                </button>
-                                                <button @click="filteredResults('reviewed')"
-                                                      :class="selectedFilter === 'reviewed' ? 'bg-purple-600 text-white' : 'bg-gray-200 text-gray-700'"
-                                                      class="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm lg:text-base font-medium rounded-lg transition-all hover:shadow-md">
-                                                      Reviewed
+                                                      {{ selection.charAt(0).toUpperCase() +
+                                                            selection.slice(1) }}
                                                 </button>
                                           </div>
 
@@ -302,7 +325,7 @@ const loadFile = (event: Event) => {
                                                                   <td class="px-3 sm:px-4 lg:px-6 py-3 sm:py-4">
                                                                         <div
                                                                               class="text-xs sm:text-sm lg:text-base font-medium text-gray-900">
-                                                                              {{ result.patient_name }}
+                                                                              {{ result.patient.full_name }}
                                                                         </div>
                                                                         <!-- Show result type on mobile -->
                                                                         <div
@@ -320,13 +343,15 @@ const loadFile = (event: Event) => {
                                                                   <!-- File (hidden on mobile & tablet) -->
                                                                   <td
                                                                         class="hidden lg:table-cell px-3 sm:px-4 lg:px-6 py-3 sm:py-4">
-                                                                        <span
-                                                                              class="flex items-center gap-2 text-xs sm:text-sm text-gray-700">
+                                                                        <span v-for="file of result.files"
+                                                                              :key="file.id" class="flex items-center gap-2 text-xs
+                                                                              sm:text-sm text-gray-700">
                                                                               <span>{{ getFileIcon(result.file_type)
                                                                                     }}</span>
                                                                               <span
                                                                                     class="truncate max-w-[150px] xl:max-w-[200px]">
-                                                                                    {{ result.file_name }}
+                                                                                    {{ file.original_file_name
+                                                                                    }}
                                                                               </span>
                                                                         </span>
                                                                   </td>
@@ -334,7 +359,7 @@ const loadFile = (event: Event) => {
                                                                   <!-- Upload Date (hidden on mobile, tablet, and desktop) -->
                                                                   <td
                                                                         class="hidden xl:table-cell px-3 sm:px-4 lg:px-6 py-3 sm:py-4 text-xs sm:text-sm text-gray-700">
-                                                                        {{ formatDate(result.upload_date) }}
+                                                                        {{ formatDate(result.uploaded_at) }}
                                                                   </td>
 
                                                                   <!-- Status -->
@@ -358,10 +383,10 @@ const loadFile = (event: Event) => {
                                                                                     class="px-2 sm:px-3 py-1 sm:py-1.5 text-xs font-medium text-blue-700 transition-all bg-blue-100 rounded hover:bg-blue-200 hover:shadow-sm whitespace-nowrap">
                                                                                     View
                                                                               </button>
-                                                                              <button @click="downloadResult(result)"
-                                                                                    class="px-2 sm:px-3 py-1 sm:py-1.5 text-xs font-medium text-green-700 transition-all bg-green-100 rounded hover:bg-green-200 hover:shadow-sm whitespace-nowrap">
-                                                                                    Download
-                                                                              </button>
+                                                                              <!-- <button @click="downloadResult(result)" -->
+                                                                              <!-- class="px-2 sm:px-3 py-1 sm:py-1.5 text-xs font-medium text-green-700 transition-all bg-green-100 rounded hover:bg-green-200 hover:shadow-sm whitespace-nowrap"> -->
+                                                                              <!-- Download -->
+                                                                              <!-- </button> -->
                                                                         </div>
                                                                   </td>
                                                             </tr>
@@ -369,12 +394,20 @@ const loadFile = (event: Event) => {
                                                             <!-- No Results -->
                                                             <tr v-if="filtered.length === 0">
                                                                   <td colspan="6"
-                                                                        class="px-4 py-8 sm:py-12 text-center text-sm sm:text-base text-gray-500">
+                                                                        class="px-4 py-8 sm:py-12 text-center sm:text-base lg:text-lg text-gray-600">
                                                                         No results found
                                                                   </td>
                                                             </tr>
                                                       </tbody>
                                                 </table>
+
+                                          </div>
+                                          <div
+                                                class="w-full py-3 bg-transparent flex items-center  h-full gap-10  justify-end px-5">
+                                                <button @click="getPage(props.nextPage)"
+                                                      class="btn bg-primaryDark  rounded-xl hover:text-primaryDark hover:bg-white hover:shadow-primaryDark/30 px-3 text-lg font-bold py-2 shadow-md text-white">Prev</button>
+                                                <button @click="getPage(props.prevPage)"
+                                                      class="btn bg-primaryDark rounded-xl hover:text-primaryDark hover:bg-white hover:shadow-primaryDark/30 px-3 text-lg font-bold py-2 shadow-md text-white">Next</button>
                                           </div>
                                     </div>
                               </div>
@@ -398,7 +431,7 @@ const loadFile = (event: Event) => {
                                                 </label>
                                                 <input v-model="uploadForm.patient_name" type="text" required
                                                       class="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                                                      placeholder="Enter patient name">
+                                                      placeholder="Enter patient name" autofocus autocomplete="name">
                                           </div>
 
                                           <!-- Patient Email -->
@@ -409,7 +442,18 @@ const loadFile = (event: Event) => {
                                                 </label>
                                                 <input v-model="uploadForm.patient_email" type="email" required
                                                       class="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                                                      placeholder="Enter patient email">
+                                                      placeholder="Enter patient email" autofocus autocomplete="email">
+                                          </div>
+
+                                          <!-- Test Name -->
+                                          <div>
+                                                <label
+                                                      class="block mb-2 text-sm sm:text-base font-medium text-gray-700">
+                                                      Test Name
+                                                </label>
+                                                <input v-model="uploadForm.test_name" type="text" required
+                                                      class="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                                                      placeholder="Enter patient email" autofocus autocomplete="date">
                                           </div>
 
                                           <!-- Result Type -->
@@ -429,6 +473,31 @@ const loadFile = (event: Event) => {
                                                       <option value="Other">Other</option>
                                                 </select>
                                           </div>
+
+                                          <!-- Test Date -->
+                                          <div>
+                                                <label
+                                                      class="block mb-2 text-sm sm:text-base font-medium text-gray-700">
+                                                      Test Date
+                                                </label>
+                                                <input v-model="uploadForm.test_date" type="date" required
+                                                      class="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                                                      placeholder="Enter patient email" autofocus autocomplete="date">
+                                          </div>
+
+                                          <!-- Notes -->
+                                          <div>
+                                                <label
+                                                      class="block mb-2 text-sm sm:text-base font-medium text-gray-700">
+                                                      Notes
+                                                </label>
+                                                <textarea v-model="uploadForm.notes"
+                                                      class="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                                                      placeholder="e.g referrals, prescriptions etc ">
+                                                </textarea>
+                                          </div>
+
+
 
                                           <!-- File Upload Dropzone -->
                                           <div class="flex items-center justify-center w-full">
@@ -451,17 +520,31 @@ const loadFile = (event: Event) => {
                                                                   SVG, PNG, JPG or GIF (MAX. 800x400px)
                                                             </p>
                                                       </div>
-                                                      <input id="dropzone-file" type="file"
-                                                            @dragenter="handleFileChange" @drop="console.log('drop')"
-                                                            @change="loadFile" class="hidden" />
+                                                      <input id="dropzone-file" type="file" multiple
+                                                            @change="handleFileChange"
+                                                            @dragenter="console.log('dragenter')"
+                                                            @dragleave="console.log('dragleave')"
+                                                            @dragover="console.log('dragover')"
+                                                            @drop="console.log('drop')" class="hidden" />
                                                 </label>
+                                          </div>
+
+                                          <div class="space-y-2">
+
+                                                <p v-for="files of uploadedFiles" :key="files.name"
+                                                      class="w-full flex justify-between items-center px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                                                      placeholder="e.g referrals, prescriptions etc ">
+                                                      <span> {{ files.name }}</span>
+
+                                                      <span class="font-extrabold text-lg text-primaryDark">X</span>
+                                                </p>
                                           </div>
 
                                           <!-- Actions Section -->
                                           <div class="flex flex-col sm:flex-row sm:justify-between gap-4 pt-2 sm:pt-4">
                                                 <!-- Checkbox -->
                                                 <div class="flex items-center gap-2 sm:gap-3">
-                                                      <input type="checkbox"
+                                                      <input type="checkbox" v-model="uploadForm.sendViaEmail"
                                                             class="w-4 h-4 sm:w-5 sm:h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2 transition-all flex-shrink-0" />
                                                       <span class="text-xs sm:text-sm lg:text-base text-gray-700">
                                                             Upload and send result immediately
@@ -489,9 +572,10 @@ const loadFile = (event: Event) => {
                               class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
                               <div class="w-full max-w-4xl p-6 bg-white rounded-xl max-h-[90vh] overflow-y-auto">
                                     <div class="flex items-center justify-between mb-4">
-                                          <h3 class="text-2xl font-bold text-gray-800">{{ previewFile.patient_name }} -
+                                          <h3 class="text-2xl font-bold text-gray-800">{{ previewFile.patient.full_name
+                                                ?? "Patient" }} -
                                                 {{
-                                                previewFile.result_type }}</h3>
+                                                      previewFile.result_type }}</h3>
                                           <button @click="previewFile = null"
                                                 class="px-4 py-2 text-gray-700 transition-colors bg-gray-200 rounded-lg hover:bg-gray-300">
                                                 Close
@@ -499,30 +583,30 @@ const loadFile = (event: Event) => {
                                     </div>
 
                                     <div class="p-4 mb-4 bg-gray-50 rounded-lg">
-                                          <p class="text-sm text-gray-600">File: {{ previewFile.file_name }}</p>
+                                          <p v-for="file in previewFile.files" :key="file.id"
+                                                class="text-sm text-gray-600">File: {{ file.original_file_name
+                                                }}</p>
                                           <p class="text-sm text-gray-600">Uploaded: {{
-                                                formatDate(previewFile.upload_date) }}</p>
+                                                formatDate(previewFile.uploaded_at) }}</p>
                                     </div>
 
-                                    <div class="flex items-center justify-center p-8 bg-gray-100 rounded-lg">
-                                          <div v-if="previewFile.file_type === 'pdf'" class="text-center">
-                                                <span class="text-6xl">📄</span>
-                                                <p class="mt-4 text-gray-600">PDF Preview</p>
-                                                <button @click="downloadResult(previewFile)"
-                                                      class="px-4 py-2 mt-4 font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700">
-                                                      Open PDF
-                                                </button>
-                                          </div>
-                                          <div v-else-if="previewFile.file_type === 'image'" class="text-center">
-                                                <img :src="previewFile.file_path" alt="Result preview"
+                                    <div v-for="file in previewFile.files" :key="file.id"
+                                          class="flex items-center justify-center p-8 my-2 bg-gray-100 rounded-lg">
+
+                                          <div v-if="file.file_type === 'image/png'" class="text-center">
+                                                <img :src="base_url + file.file_url" alt="Result preview"
                                                       class="max-w-full max-h-96">
+                                                <button @click="downloadResult(file)"
+                                                      class="px-4 py-2 mt-4 font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700">
+                                                      Download Image
+                                                </button>
                                           </div>
                                           <div v-else class="text-center">
                                                 <span class="text-6xl">📊</span>
-                                                <p class="mt-4 text-gray-600">CSV Data File</p>
-                                                <button @click="downloadResult(previewFile)"
+                                                <p class="mt-4 text-gray-600"> File</p>
+                                                <button @click="downloadResult(file)"
                                                       class="px-4 py-2 mt-4 font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700">
-                                                      Download CSV
+                                                      Download
                                                 </button>
                                           </div>
                                     </div>

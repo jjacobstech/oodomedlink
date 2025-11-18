@@ -7,13 +7,14 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class EmailDelivery
- * 
- * @property uuid $id
- * @property uuid $result_id
+ *
+ * @property string $id
+ * @property string $patient_result_id
  * @property string $patient_email
  * @property string $sent_by
  * @property string $subject
@@ -29,18 +30,17 @@ use Illuminate\Database\Eloquent\Model;
  */
 class EmailDelivery extends Model
 {
+	use HasUuids;
 	protected $table = 'email_deliveries';
 	public $incrementing = false;
 
 	protected $casts = [
-		'id' => 'uuid',
-		'result_id' => 'uuid',
 		'sent_at' => 'datetime',
 		'delivery_attempts' => 'int'
 	];
 
 	protected $fillable = [
-		'result_id',
+		'patient_result_id',
 		'patient_email',
 		'sent_by',
 		'subject',
