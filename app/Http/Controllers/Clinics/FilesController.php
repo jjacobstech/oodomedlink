@@ -97,10 +97,10 @@ class FilesController extends Controller
             if ($validated->sendViaEmail) {
                 $attempt = 0;
                 $this->subject = "$patient->full_name Test Result";
-                $sent = $this->sendEmail($patient, $attachment, $validated->notes);
+                $sent = $this->sendEmail($patient, $attachment, $validated->notes ?? '');
 
                 while (!$sent) {
-                    $sent = $this->sendEmail($patient, $attachment, $validated->notes);
+                    $sent = $this->sendEmail($patient, $attachment, $validated->notes ?? '');
 
                     $attempt++;
 
