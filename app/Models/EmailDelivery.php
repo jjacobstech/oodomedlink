@@ -50,4 +50,14 @@ class EmailDelivery extends Model
 		'delivery_attempts',
 		'error_message'
 	];
+
+	public function patient()
+	{
+		return $this->hasOne(Patient::class, 'email', 'patient_email');
+	}
+
+	public function result()
+	{
+		return $this->hasOne(PatientResult::class, 'id', 'patient_result_id');
+	}
 }

@@ -2,19 +2,27 @@
 
 namespace App\Http\Controllers\Clinics;
 
+use Exception;
 use App\Models\File;
+use Inertia\Inertia;
+use App\Models\Patient;
+use App\Mail\ResultMail;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Models\EmailDelivery;
 use App\Models\PatientResult;
+use PHPUnit\Event\Code\Throwable;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\Models\Patient;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
-use Inertia\Inertia;
 
 class FilesController extends Controller
 {
+
+    protected string $subject;
 
     public function index() {}
     public function upload(Request $request)
@@ -70,6 +78,10 @@ class FilesController extends Controller
                 $storedFile = Storage::disk('public')->putFileAs('uploads', $file, $fileName);
                 $url = Storage::url($storedFile);
 
+                $attachment = [];
+
+                array_push($attachment,  public_path($url));
+
                 File::create([
                     'result' => $result->id,
                     'file_name' => $fileName,
@@ -78,6 +90,34 @@ class FilesController extends Controller
                     'file_type' => $fileInfo->mime,
                     'file_size' => $fileInfo->size,
                     'original_file_name' => $fileInfo->name
+                ]);
+            }
+
+
+            if ($validated->sendViaEmail) {
+                $attempt = 0;
+                $this->subject = "$patient->full_name Test Result";
+                $sent = $this->sendEmail($patient, $attachment, $validated->notes);
+
+                while (!$sent) {
+                    $sent = $this->sendEmail($patient, $attachment, $validated->notes);
+
+                    $attempt++;
+
+                    if ($attempt === 5) {
+                        throw new Exception;
+                    }
+                }
+
+                EmailDelivery::create([
+                    'patient_result_id' => $result->id,
+                    'patient_email' => $patient->email,
+                    'sent_by' => Auth::user()->name,
+                    'subject' => $this->subject,
+                    'body' => '',
+                    'status' => 'sent',
+                    'sent_at' => now(),
+                    'delivery_attempts' => $attempt
                 ]);
             }
 
@@ -100,5 +140,22 @@ class FilesController extends Controller
         );
 
         dd($validated);
+    }
+
+    public function sendEmail(object $receipient,  array $attachment, string  $notes)
+    {
+
+        // try {
+        //     Mail::to($receipient->email)->send(new ResultMail($receipient, $this->subject, $attachment));
+        //     return true;
+        // } catch (\Throwable $th) {
+        //     return  $th;
+        // }
+        $mail = Mail::to($receipient->email)->send(new ResultMail($receipient, $this->subject, $attachment, $notes));
+
+        if ($mail) {
+            return true;
+        }
+        return false;
     }
 }

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('email_deliveries', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->uuid('patient_result_id')->references('id')->on('patient_results')->cascadeOnDelete();
-            $table->string('patient_email', 225)->references('id')->on('patient_results')->cascadeOnDelete();
+            $table->string('patient_email', 225)->references('email')->on('patients')->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('sent_by', 225);
             $table->string('subject', 225);
             $table->longText('body');

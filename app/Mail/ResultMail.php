@@ -3,33 +3,36 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Mail\Mailables\Content;
-use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Mail\Mailables\Envelope;
+use Illuminate\Mail\Mailables\Attachment;
+use Illuminate\Contracts\Queue\ShouldQueue;
 
 class ResultMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    protected string $receipient;
+    public object $receipient;
+    public array $mailAttachments;
 
-    protected string $subject;
+    public string $notes;
 
-    protected array $attachments;
 
-    protected object $data;
+
 
     /**
      * Create a new message instance.
      */
-    public function __construct(string $receipient, string $subject, object $data, array $attachments)
+    public function __construct(object $receipient, string $subject, array $attachments,  string $notes)
     {
         $this->receipient = $receipient;
         $this->subject($subject);
-        $this->attachments = $attachments;
-        $this->data = $data;
+        $this->mailAttachments = $attachments;
+        $this->notes = $notes;
 
     }
 
@@ -40,7 +43,9 @@ class ResultMail extends Mailable
     {
         return new Envelope(
             from: config('mail.from.address'),
-            metadata: ['oodomedlink', 'digital medical lab system']
+            metadata: ['oodomedlink', 'digital medical lab system'],
+            subject: $this->subject,
+            to: $this->receipient->email
         );
 
     }
@@ -51,8 +56,15 @@ class ResultMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.result-mail',
-            with: ['receipient' => $this->receipient]
+            view: 'mail.result-mail',
+            with: [
+                'receipient' => $this->receipient,
+                'clinic' => Auth::user(),
+                'year' => Carbon::now()->year,
+                'notes' => $this->notes
+            ],
+
+
         );
     }
 
@@ -63,6 +75,15 @@ class ResultMail extends Mailable
      */
     public function attachments(): array
     {
-        return [...$this->attachments];
+
+        $attachments = [];
+
+        if (!empty($this->mailAttachments)) {
+            foreach ($this->mailAttachments as $key => $file) {
+                $attachments[] = Attachment::fromPath($file);
+            }
+        }
+
+        return $attachments;
     }
 }

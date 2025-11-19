@@ -114,7 +114,7 @@ const handleFileChange = (event: Event) => {
             }
 
 
-            // console.log(uploadedFiles.value, uploadForm.file)
+            console.log(uploadedFiles.value, uploadForm.file)
       }
 };
 
@@ -136,6 +136,7 @@ const submitUpload = () => {
             onSuccess: (response) => {
                   console.log(response)
                   uploadForm.reset();
+                  uploadedFiles.value = [];
                   showUploadModal.value = false;
             },
             onError: (response) => {
@@ -268,7 +269,7 @@ const loadFile = (event: Event) => {
                                                       :class="selectedFilter === selection ? 'bg-primaryDark text-white' : 'bg-gray-200 text-gray-700'"
                                                       class="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm lg:text-base font-medium rounded-lg transition-all hover:shadow-md">
                                                       {{ selection.charAt(0).toUpperCase() +
-                                                            selection.slice(1) }}
+                                                      selection.slice(1) }}
                                                 </button>
                                           </div>
 
@@ -371,7 +372,7 @@ const loadFile = (event: Event) => {
                                                                         }"
                                                                               class="inline-flex px-2 sm:px-3 py-0.5 sm:py-1 text-xs font-semibold rounded-full whitespace-nowrap">
                                                                               {{ result.status.charAt(0).toUpperCase() +
-                                                                                    result.status.slice(1) }}
+                                                                              result.status.slice(1) }}
                                                                         </span>
                                                                   </td>
 
@@ -575,7 +576,7 @@ const loadFile = (event: Event) => {
                                           <h3 class="text-2xl font-bold text-gray-800">{{ previewFile.patient.full_name
                                                 ?? "Patient" }} -
                                                 {{
-                                                      previewFile.result_type }}</h3>
+                                                previewFile.result_type }}</h3>
                                           <button @click="previewFile = null"
                                                 class="px-4 py-2 text-gray-700 transition-colors bg-gray-200 rounded-lg hover:bg-gray-300">
                                                 Close
@@ -593,7 +594,8 @@ const loadFile = (event: Event) => {
                                     <div v-for="file in previewFile.files" :key="file.id"
                                           class="flex items-center justify-center p-8 my-2 bg-gray-100 rounded-lg">
 
-                                          <div v-if="file.file_type === 'image/png'" class="text-center">
+                                          <div v-if="file.file_type === 'image/png' || file.file_type === 'image/jpg' || file.file_type === 'image/jpeg'"
+                                                class="text-center">
                                                 <img :src="base_url + file.file_url" alt="Result preview"
                                                       class="max-w-full max-h-96">
                                                 <button @click="downloadResult(file)"

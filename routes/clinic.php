@@ -4,8 +4,10 @@ use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Clinics\EmailController;
 use App\Http\Controllers\Clinics\FilesController;
 use App\Http\Controllers\Clinics\DashboardController;
+use App\Http\Controllers\Clinics\PatientController;
 
 Route::prefix('clinic')->middleware(['auth:clinic'])->group(function () {
       Route::middleware(['verified'])->group(
@@ -13,19 +15,9 @@ Route::prefix('clinic')->middleware(['auth:clinic'])->group(function () {
 
                   Route::get("/dashboard",  [DashboardController::class, 'index'])->name('user.dashboard');
 
-                  Route::get('/emails', function () {
+                  Route::get('/emails', [EmailController::class, 'index'])->name('user.emails');
 
-                        return Inertia::render('User/Emails', [
-                              'user' => Auth::user(),
-                        ]);
-                  })->name('user.emails');
-
-                  Route::get('/patients', function () {
-
-                        return Inertia::render('User/Patients', [
-                              'user' => Auth::user(),
-                        ]);
-                  })->name('user.patients');
+                  Route::get('/patients', [PatientController::class, 'index'])->name('user.patients');
 
                   Route::get('/settings', function () {
 

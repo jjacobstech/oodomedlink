@@ -1,7 +1,7 @@
 import { defineComponent, ref, computed, unref, withCtx, createVNode, createBlock, createCommentVNode, withDirectives, vModelText, openBlock, Fragment, renderList, toDisplayString, createTextVNode, useSSRContext } from "vue";
 import { ssrRenderComponent, ssrRenderClass, ssrRenderAttr, ssrRenderList, ssrInterpolate } from "vue/server-renderer";
 import { _ as _sfc_main$1 } from "./AuthenticatedLayout-hu7FW2Vw.js";
-import { Head } from "@inertiajs/vue3";
+import { usePage, Head } from "@inertiajs/vue3";
 import "./index-Ch8fN83j.js";
 import "class-variance-authority";
 import "reka-ui";
@@ -21,48 +21,25 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     emails: {}
   },
   setup(__props) {
+    const page = usePage();
+    const base_url = page.props.ziggy.base_url;
     const props = __props;
+    console.log(props);
     const selectedFilter = ref("all");
     const searchQuery = ref("");
     const previewEmail = ref(null);
-    const mockEmails = props.emails || [
-      {
-        id: 1,
-        patient_name: "John Doe",
-        email: "john.doe@example.com",
-        subject: "Blood Test Results",
-        sent_at: "2025-11-05T09:30:00",
-        status: "sent",
-        message_preview: "Your blood test results are now available..."
-      },
-      {
-        id: 2,
-        patient_name: "Jane Smith",
-        email: "jane.smith@example.com",
-        subject: "X-Ray Review Pending",
-        sent_at: "2025-11-05T10:15:00",
-        status: "in_progress",
-        message_preview: "Your X-Ray report is currently under review..."
-      },
-      {
-        id: 3,
-        patient_name: "Mike Johnson",
-        email: "mike.j@example.com",
-        subject: "Lab Analysis Error",
-        sent_at: "2025-11-04T13:45:00",
-        status: "failed",
-        message_preview: "We encountered an issue sending your lab results..."
-      }
-    ];
+    const downloadResult = (file) => {
+      window.open(`${base_url}/storage/${file.file_path}`, "_blank");
+    };
     const filteredEmails = computed(() => {
-      let filtered = mockEmails;
+      let filtered = props.emails;
       if (selectedFilter.value !== "all") {
-        filtered = filtered.filter((e) => e.status === selectedFilter.value);
+        filtered = filtered?.filter((e) => e.status === selectedFilter.value);
       }
       if (searchQuery.value) {
         const query = searchQuery.value.toLowerCase();
-        filtered = filtered.filter(
-          (e) => e.patient_name.toLowerCase().includes(query) || e.email.toLowerCase().includes(query) || e.subject.toLowerCase().includes(query)
+        filtered = filtered?.filter(
+          (e) => e.patient.full_name.toLowerCase().includes(query) || e.patient_email.toLowerCase().includes(query) || e.subject.toLowerCase().includes(query)
         );
       }
       return filtered;
@@ -76,8 +53,8 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         minute: "2-digit"
       });
     };
-    const retryEmail = (email) => {
-      alert(`Retrying email to ${email.patient_name}...`);
+    const retryEmail = (patient) => {
+      alert(`Retrying email to ${patient.patient_email}...`);
     };
     return (_ctx, _push, _parent, _attrs) => {
       _push(`<!--[-->`);
@@ -99,7 +76,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
               "rounded-lg px-4 py-2 font-medium transition-colors"
             ])}"${_scopeId}> Failed </button></div><div class="relative"${_scopeId}><input${ssrRenderAttr("value", searchQuery.value)} type="text" placeholder="Search by patient, email, or subject..." class="w-full rounded-lg border border-gray-300 px-4 py-2 pl-10 focus:border-transparent focus:ring-2 focus:ring-blue-500 md:w-80"${_scopeId}><span class="absolute left-3 top-1/2 -translate-y-1/2 transform text-gray-400"${_scopeId}>🔍</span></div></div><div class="overflow-x-auto rounded-xl bg-white shadow-md"${_scopeId}><table class="w-full text-sm"${_scopeId}><thead class="bg-gray-50"${_scopeId}><tr${_scopeId}><th class="px-4 py-3 text-left text-xs font-semibold uppercase text-gray-700"${_scopeId}> Patient </th><th class="px-4 py-3 text-left text-xs font-semibold uppercase text-gray-700"${_scopeId}> Email </th><th class="px-4 py-3 text-left text-xs font-semibold uppercase text-gray-700"${_scopeId}> Subject </th><th class="px-4 py-3 text-left text-xs font-semibold uppercase text-gray-700"${_scopeId}> Sent At </th><th class="px-4 py-3 text-left text-xs font-semibold uppercase text-gray-700"${_scopeId}> Status </th><th class="px-4 py-3 text-left text-xs font-semibold uppercase text-gray-700"${_scopeId}> Actions </th></tr></thead><tbody class="divide-y divide-gray-200"${_scopeId}><!--[-->`);
             ssrRenderList(filteredEmails.value, (email) => {
-              _push2(`<tr class="hover:bg-gray-50"${_scopeId}><td class="px-4 py-3 font-medium text-gray-800"${_scopeId}>${ssrInterpolate(email.patient_name)}</td><td class="px-4 py-3 text-gray-700"${_scopeId}>${ssrInterpolate(email.email)}</td><td class="max-w-[200px] truncate px-4 py-3 text-gray-700"${_scopeId}>${ssrInterpolate(email.subject)}</td><td class="px-4 py-3 text-gray-600"${_scopeId}>${ssrInterpolate(formatDate(email.sent_at))}</td><td class="px-4 py-3"${_scopeId}><span class="${ssrRenderClass([{
+              _push2(`<tr class="hover:bg-gray-50"${_scopeId}><td class="px-4 py-3 font-medium text-gray-800"${_scopeId}>${ssrInterpolate(email.patient.full_name)}</td><td class="px-4 py-3 text-gray-700"${_scopeId}>${ssrInterpolate(email.patient.email)}</td><td class="max-w-[200px] truncate px-4 py-3 text-gray-700"${_scopeId}>${ssrInterpolate(email.subject)}</td><td class="px-4 py-3 text-gray-600"${_scopeId}>${ssrInterpolate(formatDate(email.sent_at))}</td><td class="px-4 py-3"${_scopeId}><span class="${ssrRenderClass([{
                 "bg-green-100 text-green-800": email.status === "sent",
                 "bg-red-100 text-red-800": email.status === "failed",
                 "bg-orange-100 text-orange-800": email.status === "in_progress"
@@ -112,14 +89,24 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
               _push2(`</div></td></tr>`);
             });
             _push2(`<!--]-->`);
-            if (filteredEmails.value.length === 0) {
+            if (filteredEmails.value?.length === 0) {
               _push2(`<tr${_scopeId}><td colspan="6" class="px-4 py-8 text-center text-gray-500"${_scopeId}> No emails found. </td></tr>`);
             } else {
               _push2(`<!---->`);
             }
             _push2(`</tbody></table></div>`);
             if (previewEmail.value) {
-              _push2(`<div class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"${_scopeId}><div class="w-full max-w-2xl rounded-xl bg-white p-6"${_scopeId}><div class="mb-4 flex items-center justify-between"${_scopeId}><h3 class="text-2xl font-bold text-gray-800"${_scopeId}>${ssrInterpolate(previewEmail.value.subject)}</h3><button class="rounded-lg bg-gray-200 px-4 py-2 text-gray-700 hover:bg-gray-300"${_scopeId}> Close </button></div><div class="mb-4 text-sm text-gray-600"${_scopeId}><p${_scopeId}><strong${_scopeId}>To:</strong> ${ssrInterpolate(previewEmail.value.patient_name)} (${ssrInterpolate(previewEmail.value.email)}) </p><p${_scopeId}><strong${_scopeId}>Sent:</strong> ${ssrInterpolate(formatDate(previewEmail.value.sent_at))}</p><p${_scopeId}><strong${_scopeId}>Status:</strong> ${ssrInterpolate(previewEmail.value.status)}</p></div><div class="rounded-lg bg-gray-50 p-4 text-gray-700"${_scopeId}><p${_scopeId}>${ssrInterpolate(previewEmail.value.message_preview)}</p></div></div></div>`);
+              _push2(`<div class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"${_scopeId}><div class="w-full max-w-4xl p-6 bg-white rounded-xl max-h-[90vh] overflow-y-auto"${_scopeId}><div class="mb-4 flex items-center justify-between"${_scopeId}><h3 class="text-2xl font-bold text-gray-800"${_scopeId}>${ssrInterpolate(previewEmail.value.subject)}</h3><button class="rounded-lg bg-gray-200 px-4 py-2 text-gray-700 hover:bg-gray-300"${_scopeId}> Close </button></div><div class="mb-4 text-sm text-gray-600"${_scopeId}><p${_scopeId}><strong${_scopeId}>To:</strong> ${ssrInterpolate(previewEmail.value.patient.full_name)} (${ssrInterpolate(previewEmail.value.patient_email)}) </p><p${_scopeId}><strong${_scopeId}>Sent:</strong> ${ssrInterpolate(formatDate(previewEmail.value.sent_at))}</p><p${_scopeId}><strong${_scopeId}>Status:</strong> ${ssrInterpolate(previewEmail.value.status)}</p></div><div class="rounded-lg bg-gray-50 p-4 text-gray-700"${_scopeId}><p${_scopeId}>${ssrInterpolate(previewEmail.value.message_preview)}</p></div><!--[-->`);
+              ssrRenderList(previewEmail.value.result.files, (file) => {
+                _push2(`<div class="flex items-center justify-center p-8 my-2 bg-gray-100 rounded-lg"${_scopeId}>`);
+                if (file.file_type === "image/png" || file.file_type === "image/jpg" || file.file_type === "image/jpeg") {
+                  _push2(`<div class="text-center"${_scopeId}><img${ssrRenderAttr("src", file.file_url)} alt="Result preview" class="max-w-full max-h-96"${_scopeId}><button class="px-4 py-2 mt-4 font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700"${_scopeId}> Download Image </button></div>`);
+                } else {
+                  _push2(`<div class="text-center"${_scopeId}><span class="text-6xl"${_scopeId}>📊</span><p class="mt-4 text-gray-600"${_scopeId}> File</p><button class="px-4 py-2 mt-4 font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700"${_scopeId}> Download </button></div>`);
+                }
+                _push2(`</div>`);
+              });
+              _push2(`<!--]--></div></div>`);
             } else {
               _push2(`<!---->`);
             }
@@ -193,8 +180,8 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                             key: email.id,
                             class: "hover:bg-gray-50"
                           }, [
-                            createVNode("td", { class: "px-4 py-3 font-medium text-gray-800" }, toDisplayString(email.patient_name), 1),
-                            createVNode("td", { class: "px-4 py-3 text-gray-700" }, toDisplayString(email.email), 1),
+                            createVNode("td", { class: "px-4 py-3 font-medium text-gray-800" }, toDisplayString(email.patient.full_name), 1),
+                            createVNode("td", { class: "px-4 py-3 text-gray-700" }, toDisplayString(email.patient.email), 1),
                             createVNode("td", { class: "max-w-[200px] truncate px-4 py-3 text-gray-700" }, toDisplayString(email.subject), 1),
                             createVNode("td", { class: "px-4 py-3 text-gray-600" }, toDisplayString(formatDate(email.sent_at)), 1),
                             createVNode("td", { class: "px-4 py-3" }, [
@@ -221,7 +208,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                             ])
                           ]);
                         }), 128)),
-                        filteredEmails.value.length === 0 ? (openBlock(), createBlock("tr", { key: 0 }, [
+                        filteredEmails.value?.length === 0 ? (openBlock(), createBlock("tr", { key: 0 }, [
                           createVNode("td", {
                             colspan: "6",
                             class: "px-4 py-8 text-center text-gray-500"
@@ -234,7 +221,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                     key: 0,
                     class: "fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
                   }, [
-                    createVNode("div", { class: "w-full max-w-2xl rounded-xl bg-white p-6" }, [
+                    createVNode("div", { class: "w-full max-w-4xl p-6 bg-white rounded-xl max-h-[90vh] overflow-y-auto" }, [
                       createVNode("div", { class: "mb-4 flex items-center justify-between" }, [
                         createVNode("h3", { class: "text-2xl font-bold text-gray-800" }, toDisplayString(previewEmail.value.subject), 1),
                         createVNode("button", {
@@ -245,7 +232,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                       createVNode("div", { class: "mb-4 text-sm text-gray-600" }, [
                         createVNode("p", null, [
                           createVNode("strong", null, "To:"),
-                          createTextVNode(" " + toDisplayString(previewEmail.value.patient_name) + " (" + toDisplayString(previewEmail.value.email) + ") ", 1)
+                          createTextVNode(" " + toDisplayString(previewEmail.value.patient.full_name) + " (" + toDisplayString(previewEmail.value.patient_email) + ") ", 1)
                         ]),
                         createVNode("p", null, [
                           createVNode("strong", null, "Sent:"),
@@ -258,7 +245,38 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                       ]),
                       createVNode("div", { class: "rounded-lg bg-gray-50 p-4 text-gray-700" }, [
                         createVNode("p", null, toDisplayString(previewEmail.value.message_preview), 1)
-                      ])
+                      ]),
+                      (openBlock(true), createBlock(Fragment, null, renderList(previewEmail.value.result.files, (file) => {
+                        return openBlock(), createBlock("div", {
+                          key: file.id,
+                          class: "flex items-center justify-center p-8 my-2 bg-gray-100 rounded-lg"
+                        }, [
+                          file.file_type === "image/png" || file.file_type === "image/jpg" || file.file_type === "image/jpeg" ? (openBlock(), createBlock("div", {
+                            key: 0,
+                            class: "text-center"
+                          }, [
+                            createVNode("img", {
+                              src: file.file_url,
+                              alt: "Result preview",
+                              class: "max-w-full max-h-96"
+                            }, null, 8, ["src"]),
+                            createVNode("button", {
+                              onClick: ($event) => downloadResult(file),
+                              class: "px-4 py-2 mt-4 font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700"
+                            }, " Download Image ", 8, ["onClick"])
+                          ])) : (openBlock(), createBlock("div", {
+                            key: 1,
+                            class: "text-center"
+                          }, [
+                            createVNode("span", { class: "text-6xl" }, "📊"),
+                            createVNode("p", { class: "mt-4 text-gray-600" }, " File"),
+                            createVNode("button", {
+                              onClick: ($event) => downloadResult(file),
+                              class: "px-4 py-2 mt-4 font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700"
+                            }, " Download ", 8, ["onClick"])
+                          ]))
+                        ]);
+                      }), 128))
                     ])
                   ])) : createCommentVNode("", true)
                 ])
