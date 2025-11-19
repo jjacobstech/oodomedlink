@@ -58,6 +58,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         color: "primaryDark"
       }
     ];
+    console.log(props);
     let results = props.results || [];
     let filtered = results;
     const selectionFilter = ["all", "pending", "sent", "failed"];
@@ -89,6 +90,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
           uploadForm.reset();
           uploadedFiles.value = [];
           showUploadModal.value = false;
+          router.get(route("user.dashboard"));
         },
         onError: (response) => {
           console.log(response);
@@ -154,8 +156,8 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
               });
               _push2(`<!--]--></td><td class="hidden xl:table-cell px-3 sm:px-4 lg:px-6 py-3 sm:py-4 text-xs sm:text-sm text-gray-700"${_scopeId}>${ssrInterpolate(formatDate(result.uploaded_at))}</td><td class="px-3 sm:px-4 lg:px-6 py-3 sm:py-4"${_scopeId}><span class="${ssrRenderClass([{
                 "bg-orange-100 text-orange-800": result.status === "pending",
-                "bg-green-100 text-green-800": result.status === "completed",
-                "bg-purple-100 text-purple-800": result.status === "reviewed"
+                "bg-green-100 text-green-800": result.status === "sent",
+                "bg-purple-100 text-purple-800": result.status === "failed"
               }, "inline-flex px-2 sm:px-3 py-0.5 sm:py-1 text-xs font-semibold rounded-full whitespace-nowrap"])}"${_scopeId}>${ssrInterpolate(result.status.charAt(0).toUpperCase() + result.status.slice(1))}</span></td><td class="px-3 sm:px-4 lg:px-6 py-3 sm:py-4"${_scopeId}><div class="flex flex-col sm:flex-row gap-1 sm:gap-2"${_scopeId}><button class="px-2 sm:px-3 py-1 sm:py-1.5 text-xs font-medium text-blue-700 transition-all bg-blue-100 rounded hover:bg-blue-200 hover:shadow-sm whitespace-nowrap"${_scopeId}> View </button></div></td></tr>`);
             });
             _push2(`<!--]-->`);
@@ -168,7 +170,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
             if (showUploadModal.value) {
               _push2(`<div class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4 sm:p-6 lg:p-10"${_scopeId}><div class="w-full max-w-md sm:max-w-lg lg:max-w-2xl xl:max-w-3xl p-6 sm:p-8 lg:p-10 xl:p-16 bg-white rounded-xl shadow-2xl max-h-[90vh] overflow-y-auto"${_scopeId}><h3 class="mb-4 sm:mb-6 text-xl sm:text-2xl lg:text-3xl font-bold text-gray-800"${_scopeId}> Upload Patient Result </h3><form class="space-y-4 sm:space-y-5 lg:space-y-6"${_scopeId}><div${_scopeId}><label class="block mb-2 text-sm sm:text-base font-extrabold text-gray-700"${_scopeId}> Patient Name </label><input${ssrRenderAttr("value", unref(uploadForm).patient_name)} type="text" required class="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all" placeholder="Enter patient name" autofocus autocomplete="name"${_scopeId}></div><div${_scopeId}><label class="block mb-2 text-sm sm:text-base font-extrabold text-gray-700"${_scopeId}> Patient Email </label><input${ssrRenderAttr("value", unref(uploadForm).patient_email)} type="email" required class="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all" placeholder="Enter patient email" autofocus autocomplete="email"${_scopeId}></div><div${_scopeId}><label class="block mb-2 text-sm sm:text-base font-extrabold text-gray-700"${_scopeId}> Test Name </label><input${ssrRenderAttr("value", unref(uploadForm).test_name)} type="text" required class="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all" placeholder="Enter patient email" autofocus autocomplete="date"${_scopeId}></div><div${_scopeId}><label class="block mb-2 text-sm sm:text-base font-extrabold text-gray-700"${_scopeId}> Result Type </label><select required class="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"${_scopeId}><option value=""${ssrIncludeBooleanAttr(Array.isArray(unref(uploadForm).result_type) ? ssrLooseContain(unref(uploadForm).result_type, "") : ssrLooseEqual(unref(uploadForm).result_type, "")) ? " selected" : ""}${_scopeId}>Select result type</option><option value="Blood Test"${ssrIncludeBooleanAttr(Array.isArray(unref(uploadForm).result_type) ? ssrLooseContain(unref(uploadForm).result_type, "Blood Test") : ssrLooseEqual(unref(uploadForm).result_type, "Blood Test")) ? " selected" : ""}${_scopeId}>Blood Test</option><option value="X-Ray"${ssrIncludeBooleanAttr(Array.isArray(unref(uploadForm).result_type) ? ssrLooseContain(unref(uploadForm).result_type, "X-Ray") : ssrLooseEqual(unref(uploadForm).result_type, "X-Ray")) ? " selected" : ""}${_scopeId}>X-Ray</option><option value="MRI"${ssrIncludeBooleanAttr(Array.isArray(unref(uploadForm).result_type) ? ssrLooseContain(unref(uploadForm).result_type, "MRI") : ssrLooseEqual(unref(uploadForm).result_type, "MRI")) ? " selected" : ""}${_scopeId}>MRI</option><option value="CT Scan"${ssrIncludeBooleanAttr(Array.isArray(unref(uploadForm).result_type) ? ssrLooseContain(unref(uploadForm).result_type, "CT Scan") : ssrLooseEqual(unref(uploadForm).result_type, "CT Scan")) ? " selected" : ""}${_scopeId}>CT Scan</option><option value="Lab Analysis"${ssrIncludeBooleanAttr(Array.isArray(unref(uploadForm).result_type) ? ssrLooseContain(unref(uploadForm).result_type, "Lab Analysis") : ssrLooseEqual(unref(uploadForm).result_type, "Lab Analysis")) ? " selected" : ""}${_scopeId}>Lab Analysis</option><option value="Other"${ssrIncludeBooleanAttr(Array.isArray(unref(uploadForm).result_type) ? ssrLooseContain(unref(uploadForm).result_type, "Other") : ssrLooseEqual(unref(uploadForm).result_type, "Other")) ? " selected" : ""}${_scopeId}>Other</option></select></div><div${_scopeId}><label class="block mb-2 text-sm sm:text-base font-extrabold text-gray-700"${_scopeId}> Test Date </label><input${ssrRenderAttr("value", unref(uploadForm).test_date)} type="date" required class="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all" placeholder="Enter patient email" autofocus autocomplete="date"${_scopeId}></div><div${_scopeId}><label class="block mb-2 text-sm font-extrabold sm:text-basetext-gray-700"${_scopeId}> Notes </label><textarea class="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all" placeholder="e.g referrals, prescriptions etc "${_scopeId}>${ssrInterpolate(unref(uploadForm).notes)}</textarea></div><div class="flex items-center justify-center w-full"${_scopeId}><label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-48 sm:h-56 lg:h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-primaryLight/30 transition-colors group"${_scopeId}><div class="flex flex-col items-center justify-center px-4"${_scopeId}><svg class="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 mb-3 sm:mb-4 text-gray-500 group-hover:text-gray-600 transition-colors" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16"${_scopeId}><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"${_scopeId}></path></svg><p class="mb-2 text-sm sm:text-base lg:text-lg text-gray-500 text-center"${_scopeId}><span class="font-semibold"${_scopeId}>Click to upload</span> or drag and drop </p><p class="text-xs sm:text-sm text-gray-500 text-center"${_scopeId}> SVG, PNG, JPG or GIF (MAX. 800x400px) </p></div><input id="dropzone-file" type="file" multiple class="hidden"${_scopeId}></label></div><div class="space-y-2"${_scopeId}><!--[-->`);
               ssrRenderList(uploadedFiles.value, (files) => {
-                _push2(`<p class="w-full flex justify-between items-center px-3 sm:px-4 py-1 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all" placeholder="e.g referrals, prescriptions etc "${_scopeId}><span${_scopeId}>${ssrInterpolate(files.name)}</span><span class="font-extrabold text-lg btn text-primaryDark"${_scopeId}>`);
+                _push2(`<p class="w-full flex justify-between items-center px-3 sm:px-4 py-1 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all" placeholder="e.g referrals, prescriptions etc "${_scopeId}><span class="truncate max-w-[100px] md:max-w-[300px] xl:max-w-[300px]"${_scopeId}>${ssrInterpolate(files.name)}</span><span class="font-extrabold text-lg btn text-primaryDark"${_scopeId}>`);
                 _push2(ssrRenderComponent(unref(CloseCircle), {
                   weight: "Bold",
                   size: "24"
@@ -302,8 +304,8 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                                     createVNode("span", {
                                       class: [{
                                         "bg-orange-100 text-orange-800": result.status === "pending",
-                                        "bg-green-100 text-green-800": result.status === "completed",
-                                        "bg-purple-100 text-purple-800": result.status === "reviewed"
+                                        "bg-green-100 text-green-800": result.status === "sent",
+                                        "bg-purple-100 text-purple-800": result.status === "failed"
                                       }, "inline-flex px-2 sm:px-3 py-0.5 sm:py-1 text-xs font-semibold rounded-full whitespace-nowrap"]
                                     }, toDisplayString(result.status.charAt(0).toUpperCase() + result.status.slice(1)), 3)
                                   ]),
@@ -480,7 +482,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                               class: "w-full flex justify-between items-center px-3 sm:px-4 py-1 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all",
                               placeholder: "e.g referrals, prescriptions etc "
                             }, [
-                              createVNode("span", null, toDisplayString(files.name), 1),
+                              createVNode("span", { class: "truncate max-w-[100px] md:max-w-[300px] xl:max-w-[300px]" }, toDisplayString(files.name), 1),
                               createVNode("span", { class: "font-extrabold text-lg btn text-primaryDark" }, [
                                 createVNode(unref(CloseCircle), {
                                   weight: "Bold",

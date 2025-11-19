@@ -45,9 +45,11 @@ class PatientController extends Controller
             'patient_id' => 'required|string|exists:patients,id'
         ]);
         $user = Auth::user();
+
+
         $patient = Patient::where('clinic_id', $user->id)
-            ->where('email', $request->patient_id)
-            ->get();
+            ->where('id', $request->patient_id)
+            ->first();
 
         dd($patient);
 
@@ -59,12 +61,20 @@ class PatientController extends Controller
     public function update(Request $request)
     {
         $request->validate([
-            'patient_id' => 'required|string|exists:patients,id'
+            'patient_id' => 'required|string|exists:patients,id',
+            'full_name' => 'required|string',
+            'email' => 'required|string',
+            'phone_no' => 'required|string',
+            'gender' => 'required|string',
+            'date_of_birth' => 'required|string',
+            'address' => 'required|string',
         ]);
         $user = Auth::user();
         $patient = Patient::where('clinic_id', $user->id)
             ->where('email', $request->patient_id)
-            ->get();
+            ->first();
+
+
 
         dd($patient);
 

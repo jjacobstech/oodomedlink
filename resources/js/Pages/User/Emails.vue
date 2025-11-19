@@ -276,8 +276,7 @@ const retryEmail = (patient: PatientEmail) => {
                             </div>
                             <div v-else-if="file.file_type === 'application/pdf'" class="text-center w-full">
                                 <iframe :src="file.file_url" frameborder="10" class="w-full h-96">
-                                    <p>Your browser does not support iframes. You can <a :href="file.file_url">download
-                                            the PDF</a> instead.</p>
+
                                 </iframe>
                                 <button @click="downloadResult(file)"
                                     class="px-4 py-2 mt-4 font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700">

@@ -71,6 +71,7 @@ class FilesController extends Controller
                 'result_type' => $validated->result_type,
                 'test_name' => $validated->test_name,
                 'test_date' => $validated->test_date,
+                'status' => 'sent'
             ]);
 
             $files = $validated->file;
@@ -140,11 +141,11 @@ class FilesController extends Controller
 
             $message = $validated->sendViaEmail ? 'result uploaded and mailed successfully' : 'result uploaded successfully';
             DB::commit();
-            return redirect(route('user.dashboard'))->with($message);
+            return redirect()->route('user.dashboard')->with($message);
         } catch (\Throwable $th) {
             DB::rollBack();
 
-            return  config('app.env') !== 'production' ? $th :  redirect(route('user.dashboard'))->with(['message' => 'server error']);
+            return  config('app.env') !== 'production' ? $th :  redirect()->route('user.dashboard')->with(['message' => 'server error']);
         }
     }
 

@@ -30,7 +30,7 @@ interface PatientResult {
       file_path: string;
       file_type: 'pdf' | 'image' | 'csv';
       uploaded_at: string;
-      status: 'pending' | 'completed' | 'reviewed';
+      status: 'pending' | 'sent' | 'failed';
       files: file[];
 }
 
@@ -47,6 +47,7 @@ interface Props {
       nextPage?: number | string;
 
 }
+
 
 
 const props = defineProps<Props>();
@@ -80,6 +81,9 @@ const stats = [
             color: "primaryDark",
       }
 ];
+
+console.log(props);
+
 
 let results: PatientResult[] = props.results || [];
 
@@ -138,6 +142,7 @@ const submitUpload = () => {
                   uploadForm.reset();
                   uploadedFiles.value = [];
                   showUploadModal.value = false;
+                  router.get(route('user.dashboard'));
             },
             onError: (response) => {
                   console.log(response)
@@ -367,8 +372,8 @@ const loadFile = (event: Event) => {
                                                                   <td class="px-3 sm:px-4 lg:px-6 py-3 sm:py-4">
                                                                         <span :class="{
                                                                               'bg-orange-100 text-orange-800': result.status === 'pending',
-                                                                              'bg-green-100 text-green-800': result.status === 'completed',
-                                                                              'bg-purple-100 text-purple-800': result.status === 'reviewed'
+      'bg-green-100 text-green-800': result.status === 'sent',
+      'bg-purple-100 text-purple-800': result.status === 'failed'
                                                                         }"
                                                                               class="inline-flex px-2 sm:px-3 py-0.5 sm:py-1 text-xs font-semibold rounded-full whitespace-nowrap">
                                                                               {{ result.status.charAt(0).toUpperCase() +
@@ -535,7 +540,9 @@ const loadFile = (event: Event) => {
                                                 <p v-for="files of uploadedFiles" :key="files.name"
                                                       class="w-full flex justify-between items-center px-3 sm:px-4 py-1 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                                                       placeholder="e.g referrals, prescriptions etc ">
-                                                      <span> {{ files.name }}</span>
+                                                      <span
+                                                            class="truncate max-w-[100px] md:max-w-[300px] xl:max-w-[300px]">
+                                                            {{ files.name }}</span>
 
                                                       <span class="font-extrabold text-lg btn text-primaryDark">
                                                             <CloseCircle weight="Bold" size="24" />

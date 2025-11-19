@@ -102,7 +102,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                 if (file.file_type === "image/png" || file.file_type === "image/jpg" || file.file_type === "image/jpeg") {
                   _push2(`<div class="text-center"${_scopeId}><img${ssrRenderAttr("src", file.file_url)} alt="Result preview" class="max-w-full max-h-96"${_scopeId}><button class="px-4 py-2 mt-4 font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700"${_scopeId}> Download Image </button></div>`);
                 } else if (file.file_type === "application/pdf") {
-                  _push2(`<div class="text-center w-full"${_scopeId}><iframe${ssrRenderAttr("src", file.file_url)} frameborder="10" class="w-full h-96"${_scopeId}><p${_scopeId}>Your browser does not support iframes. You can <a${ssrRenderAttr("href", file.file_url)}${_scopeId}>download the PDF</a> instead.</p></iframe><button class="px-4 py-2 mt-4 font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700"${_scopeId}> Download </button></div>`);
+                  _push2(`<div class="text-center w-full"${_scopeId}><iframe${ssrRenderAttr("src", file.file_url)} frameborder="10" class="w-full h-96"${_scopeId}></iframe><button class="px-4 py-2 mt-4 font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700"${_scopeId}> Download </button></div>`);
                 } else {
                   _push2(`<div class="text-center"${_scopeId}><span class="text-6xl"${_scopeId}>📊</span><p class="mt-4 text-gray-600"${_scopeId}> File</p><button class="px-4 py-2 mt-4 font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700"${_scopeId}> Download </button></div>`);
                 }
@@ -274,15 +274,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                               src: file.file_url,
                               frameborder: "10",
                               class: "w-full h-96"
-                            }, [
-                              createVNode("p", null, [
-                                createTextVNode("Your browser does not support iframes. You can "),
-                                createVNode("a", {
-                                  href: file.file_url
-                                }, "download the PDF", 8, ["href"]),
-                                createTextVNode(" instead.")
-                              ])
-                            ], 8, ["src"]),
+                            }, null, 8, ["src"]),
                             createVNode("button", {
                               onClick: ($event) => downloadResult(file),
                               class: "px-4 py-2 mt-4 font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700"
