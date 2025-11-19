@@ -50,9 +50,15 @@ class Patient extends Model
 		'address'
 	];
 
-	public function patient_results()
+	public function results()
 	{
 		return $this->hasMany(PatientResult::class);
 	}
+
+	public function latestResult()
+	{
+		return $this->hasMany(PatientResult::class)->latest('uploaded_at')->limit(1);
+	}
+
 
 }

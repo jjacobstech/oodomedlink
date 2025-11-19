@@ -130,22 +130,28 @@
     "/build/assets/Register-CJdhdMnX.js"
   ],
   "resources/js/Pages/User/Dashboard.vue": [
-    "/build/assets/Dashboard-DSZJklo_.js"
+    "/build/assets/Dashboard-D4ruOVO8.js"
   ],
   "resources/js/Pages/User/Dashboard.vue?vue&type=script&setup=true&lang.ts": [
-    "/build/assets/Dashboard-DSZJklo_.js"
+    "/build/assets/Dashboard-D4ruOVO8.js"
   ],
   "resources/js/Pages/User/Emails.vue": [
-    "/build/assets/Emails-cMDJEPAJ.js"
+    "/build/assets/Emails-BPIKXYdI.js"
   ],
   "resources/js/Pages/User/Emails.vue?vue&type=script&setup=true&lang.ts": [
-    "/build/assets/Emails-cMDJEPAJ.js"
+    "/build/assets/Emails-BPIKXYdI.js"
+  ],
+  "resources/js/Pages/User/Patient.vue": [
+    "/build/assets/Patient-ARNwM9lK.js"
+  ],
+  "resources/js/Pages/User/Patient.vue?vue&type=script&setup=true&lang.ts": [
+    "/build/assets/Patient-ARNwM9lK.js"
   ],
   "resources/js/Pages/User/Patients.vue": [
-    "/build/assets/Patients-Cg8z25q0.js"
+    "/build/assets/Patients-C3ytp-Ll.js"
   ],
   "resources/js/Pages/User/Patients.vue?vue&type=script&setup=true&lang.ts": [
-    "/build/assets/Patients-Cg8z25q0.js"
+    "/build/assets/Patients-C3ytp-Ll.js"
   ],
   "resources/js/Pages/User/Settings.vue": [
     "/build/assets/Settings-Cuk7omj1.js"

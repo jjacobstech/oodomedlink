@@ -63,7 +63,7 @@ const searchQuery = ref('');
 const previewEmail = ref<PatientEmail | null>(null);
 
 const downloadResult = (file: file) => {
-    window.open(`${base_url}/storage/${file.file_path}`, '_blank');
+    window.open(file.file_url, '_blank');
 };
 
 // Search & Filter
@@ -247,7 +247,7 @@ const retryEmail = (patient: PatientEmail) => {
                             <p>
                                 <strong>To:</strong>
                                 {{ previewEmail.patient.full_name }} ({{
-                                    previewEmail.patient_email
+                                previewEmail.patient_email
                                 }})
                             </p>
                             <p>
@@ -266,11 +266,22 @@ const retryEmail = (patient: PatientEmail) => {
                         <div v-for="file in previewEmail.result.files" :key="file.id"
                             class="flex items-center justify-center p-8 my-2 bg-gray-100 rounded-lg">
 
-                            <div v-if="file.file_type === 'image/png' || file.file_type === 'image/jpg' || file.file_type === 'image/jpeg' " class="text-center">
+                            <div v-if="file.file_type === 'image/png' || file.file_type === 'image/jpg' || file.file_type === 'image/jpeg'"
+                                class="text-center">
                                 <img :src="file.file_url" alt="Result preview" class="max-w-full max-h-96">
                                 <button @click="downloadResult(file)"
                                     class="px-4 py-2 mt-4 font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700">
                                     Download Image
+                                </button>
+                            </div>
+                            <div v-else-if="file.file_type === 'application/pdf'" class="text-center w-full">
+                                <iframe :src="file.file_url" frameborder="10" class="w-full h-96">
+                                    <p>Your browser does not support iframes. You can <a :href="file.file_url">download
+                                            the PDF</a> instead.</p>
+                                </iframe>
+                                <button @click="downloadResult(file)"
+                                    class="px-4 py-2 mt-4 font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700">
+                                    Download
                                 </button>
                             </div>
                             <div v-else class="text-center">
@@ -281,6 +292,7 @@ const retryEmail = (patient: PatientEmail) => {
                                     Download
                                 </button>
                             </div>
+
                         </div>
 
                     </div>

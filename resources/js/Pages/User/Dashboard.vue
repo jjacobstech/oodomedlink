@@ -2,7 +2,7 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, useForm, router, usePage } from '@inertiajs/vue3';
 import { ref } from 'vue';
-import { Upload, UsersGroupTwoRounded, ClockCircle, } from '@solar-icons/vue';
+import { Upload, UsersGroupTwoRounded, ClockCircle, CloseCircle } from '@solar-icons/vue';
 
 const page = usePage();
 const base_url = page.props.ziggy.base_url;
@@ -95,7 +95,7 @@ const uploadForm = useForm({
       result_type: '',
       file: [] as File[],
       notes: '',
-      sendViaEmail: false as boolean
+      sendViaEmail: true as boolean
 });
 
 const uploadedFiles = ref<File[]>([])
@@ -163,7 +163,7 @@ const getPage = (page: number | string | undefined) => {
 }
 // Download result
 const downloadResult = (file: file) => {
-      window.open(`${base_url}/storage/${file.file_path}`, '_blank');
+      window.open(file.file_url, '_blank');
 };
 
 // View result preview
@@ -427,7 +427,7 @@ const loadFile = (event: Event) => {
                                           <!-- Patient Name -->
                                           <div>
                                                 <label
-                                                      class="block mb-2 text-sm sm:text-base font-medium text-gray-700">
+                                                      class="block mb-2 text-sm sm:text-base font-extrabold text-gray-700">
                                                       Patient Name
                                                 </label>
                                                 <input v-model="uploadForm.patient_name" type="text" required
@@ -438,7 +438,7 @@ const loadFile = (event: Event) => {
                                           <!-- Patient Email -->
                                           <div>
                                                 <label
-                                                      class="block mb-2 text-sm sm:text-base font-medium text-gray-700">
+                                                      class="block mb-2 text-sm sm:text-base font-extrabold text-gray-700">
                                                       Patient Email
                                                 </label>
                                                 <input v-model="uploadForm.patient_email" type="email" required
@@ -449,7 +449,7 @@ const loadFile = (event: Event) => {
                                           <!-- Test Name -->
                                           <div>
                                                 <label
-                                                      class="block mb-2 text-sm sm:text-base font-medium text-gray-700">
+                                                      class="block mb-2 text-sm sm:text-base font-extrabold text-gray-700">
                                                       Test Name
                                                 </label>
                                                 <input v-model="uploadForm.test_name" type="text" required
@@ -460,7 +460,7 @@ const loadFile = (event: Event) => {
                                           <!-- Result Type -->
                                           <div>
                                                 <label
-                                                      class="block mb-2 text-sm sm:text-base font-medium text-gray-700">
+                                                      class="block mb-2 text-sm sm:text-base font-extrabold text-gray-700">
                                                       Result Type
                                                 </label>
                                                 <select v-model="uploadForm.result_type" required
@@ -478,7 +478,7 @@ const loadFile = (event: Event) => {
                                           <!-- Test Date -->
                                           <div>
                                                 <label
-                                                      class="block mb-2 text-sm sm:text-base font-medium text-gray-700">
+                                                      class="block mb-2 text-sm sm:text-base font-extrabold text-gray-700">
                                                       Test Date
                                                 </label>
                                                 <input v-model="uploadForm.test_date" type="date" required
@@ -489,7 +489,7 @@ const loadFile = (event: Event) => {
                                           <!-- Notes -->
                                           <div>
                                                 <label
-                                                      class="block mb-2 text-sm sm:text-base font-medium text-gray-700">
+                                                      class="block mb-2 text-sm font-extrabold sm:text-basetext-gray-700">
                                                       Notes
                                                 </label>
                                                 <textarea v-model="uploadForm.notes"
@@ -533,11 +533,13 @@ const loadFile = (event: Event) => {
                                           <div class="space-y-2">
 
                                                 <p v-for="files of uploadedFiles" :key="files.name"
-                                                      class="w-full flex justify-between items-center px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                                                      class="w-full flex justify-between items-center px-3 sm:px-4 py-1 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                                                       placeholder="e.g referrals, prescriptions etc ">
                                                       <span> {{ files.name }}</span>
 
-                                                      <span class="font-extrabold text-lg text-primaryDark">X</span>
+                                                      <span class="font-extrabold text-lg btn text-primaryDark">
+                                                            <CloseCircle weight="Bold" size="24" />
+                                                      </span>
                                                 </p>
                                           </div>
 
@@ -546,8 +548,9 @@ const loadFile = (event: Event) => {
                                                 <!-- Checkbox -->
                                                 <div class="flex items-center gap-2 sm:gap-3">
                                                       <input type="checkbox" v-model="uploadForm.sendViaEmail"
-                                                            class="w-4 h-4 sm:w-5 sm:h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2 transition-all flex-shrink-0" />
-                                                      <span class="text-xs sm:text-sm lg:text-base text-gray-700">
+                                                            class="w-4 h-4 sm:w-5 sm:h-5 text-primaryDark bg-gray-100 border-gray-300 rounded focus:ring-primaryDark focus:ring-2 transition-all flex-shrink-0" />
+                                                      <span
+                                                            class="text-xs font-extrabold  sm:text-sm lg:text-base text-gray-700">
                                                             Upload and send result immediately
                                                       </span>
                                                 </div>
@@ -596,11 +599,20 @@ const loadFile = (event: Event) => {
 
                                           <div v-if="file.file_type === 'image/png' || file.file_type === 'image/jpg' || file.file_type === 'image/jpeg'"
                                                 class="text-center">
-                                                <img :src="base_url + '/storage/' + file.file_path" alt="Result preview"
+                                                <img :src="file.file_url" alt="Result preview"
                                                       class="max-w-full max-h-96">
                                                 <button @click="downloadResult(file)"
                                                       class="px-4 py-2 mt-4 font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700">
                                                       Download Image
+                                                </button>
+                                          </div>
+                                          <div v-else-if="file.file_type === 'application/pdf'"
+                                                class="text-center w-full">
+                                                <iframe :src="file.file_url" frameborder="10"
+                                                      class="w-full h-96"></iframe>
+                                                <button @click="downloadResult(file)"
+                                                      class="px-4 py-2 mt-4 font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700">
+                                                      Download
                                                 </button>
                                           </div>
                                           <div v-else class="text-center">

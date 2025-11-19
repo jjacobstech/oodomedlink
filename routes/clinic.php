@@ -19,6 +19,13 @@ Route::prefix('clinic')->middleware(['auth:clinic'])->group(function () {
 
                   Route::get('/patients', [PatientController::class, 'index'])->name('user.patients');
 
+                  // Patient Routes
+                  Route::post('/patient', [PatientController::class, 'create'])->name('create.patient');
+                  Route::post('/patient', [PatientController::class, 'show'])->name('show.patient');
+                  Route::post('/patient', [PatientController::class, 'update'])->name('update.patient');
+                  Route::post('/patient', [PatientController::class, 'delete'])->name('delete.patient');
+
+
                   Route::get('/settings', function () {
 
                         return Inertia::render('User/Settings', [

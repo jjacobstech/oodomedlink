@@ -3,17 +3,39 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, router } from '@inertiajs/vue3';
 import { computed, ref } from 'vue';
 
-// Patient type
-interface Patient {
+interface file {
+    id: string;
+    original_file_name: string;
+    file_path: string;
+    file_url: string;
+    file_name: string;
+    file_type: string;
+    file_size: number;
+    result: string;
+}
+
+interface PatientResult {
     id: number;
+    result_type: string;
+    file_name: string;
+    file_path: string;
+    file_type: 'pdf' | 'image' | 'csv';
+    uploaded_at: string;
+    status: 'pending' | 'completed' | 'reviewed';
+    files: file[];
+}
+
+interface Patient {
+    id: string;
     full_name: string;
     email: string;
-    address: string;
-    phone: string;
+    phone_no: string;
     gender: string;
-    date_of_birth: string;
-    total_results: number;
-    last_result_date?: string;
+    date_of_birth: string | null;
+    address: string | null;
+    latest_result: PatientResult[];
+    results_count: number;
+
 }
 
 interface Props {
@@ -21,6 +43,7 @@ interface Props {
 }
 
 const props = defineProps<Props>();
+console.log(props.patients);
 
 const selectedFilter = ref('all');
 const searchQuery = ref('');
@@ -43,7 +66,7 @@ const filteredPatients = computed(() => {
             (p) =>
                 p.full_name.toLowerCase().includes(query) ||
                 p.email.toLowerCase().includes(query) ||
-                p.phone.toLowerCase().includes(query),
+                p.phone_no.toLowerCase().includes(query),
         );
     }
 
@@ -61,7 +84,7 @@ const formatDate = (dateString: string | undefined) => {
 };
 
 // Redirect to patient results page
-const viewPatientResults = (patient: Patient) => {
+const viewPatient = (patient: Patient) => {
     router.visit(`/clinic/patients/${patient.id}/results`);
 };
 </script>
@@ -71,8 +94,8 @@ const viewPatientResults = (patient: Patient) => {
     <Head title="Manage Patients" />
 
     <AuthenticatedLayout>
-        <div class="w-full bg-gray-100 px-10 pt-5">
-            <div class="overflow-y-scroll p-6">
+        <div class=" flex w-full  gap-1 h-full overflow-y-hidden bg-primaryLight">
+            <div class="overflow-y-scroll w-full p-6">
                 <!-- Header -->
                 <div class="flex justify-between">
                     <div class="mb-6">
@@ -86,7 +109,7 @@ const viewPatientResults = (patient: Patient) => {
                     </div>
                     <div>
                         <button
-                            class="btn rounded-md bg-primary px-10 py-7 text-2xl text-white transition-all duration-150 hover:-translate-y-1">
+                            class="btn rounded-md bg-primaryDark px-10 py-7 text-2xl text-white transition-all duration-150 hover:-translate-y-1">
                             Add Patient
                         </button>
                     </div>
@@ -96,19 +119,19 @@ const viewPatientResults = (patient: Patient) => {
                 <div class="mb-6 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                     <div class="flex gap-2">
                         <button @click="selectedFilter = 'all'" :class="selectedFilter === 'all'
-                            ? 'bg-blue-600 text-white'
+    ? 'bg-primaryDark text-white'
                             : 'bg-gray-200 text-gray-700'
     " class="rounded-lg px-4 py-2 font-medium transition-colors">
                             All
                         </button>
                         <button @click="selectedFilter = 'Male'" :class="selectedFilter === 'Male'
-                            ? 'bg-green-600 text-white'
-                            : 'bg-gray-200 text-gray-700'
+    ? 'bg-primaryDark text-white'
+    : 'bg-gray-200 text-gray-700'
     " class="rounded-lg px-4 py-2 font-medium transition-colors">
                             Male
                         </button>
                         <button @click="selectedFilter = 'Female'" :class="selectedFilter === 'Female'
-                            ? 'bg-purple-600 text-white'
+    ? 'bg-primaryDark text-white'
                             : 'bg-gray-200 text-gray-700'
     " class="rounded-lg px-4 py-2 font-medium transition-colors">
                             Female
@@ -117,7 +140,7 @@ const viewPatientResults = (patient: Patient) => {
 
                     <div class="relative">
                         <input v-model="searchQuery" type="text" placeholder="Search by name, email or phone..."
-                            class="w-full rounded-lg border border-gray-300 px-4 py-2 pl-10 focus:border-transparent focus:ring-2 focus:ring-blue-500 md:w-80" />
+                            class="w-full rounded-lg border border-gray-300 px-4 py-2 pl-10 focus:border-transparent focus:ring-2 focus:ring-primaryDark md:w-80" />
                         <span class="absolute left-3 top-1/2 -translate-y-1/2 transform text-gray-400">🔍</span>
                     </div>
                 </div>
@@ -165,7 +188,7 @@ const viewPatientResults = (patient: Patient) => {
                                     {{ patient.email }}
                                 </td>
                                 <td class="px-4 py-3 text-gray-700">
-                                    {{ patient.phone ?? "N/A" }}
+                                    {{ patient.phone_no ?? "N/A" }}
                                 </td>
                                 <td class="px-4 py-3 text-gray-700">
                                     {{ patient.gender ?? "N/A" }}
@@ -177,15 +200,15 @@ const viewPatientResults = (patient: Patient) => {
                                     {{ patient.address ?? "N/A" }}
                                 </td>
                                 <td class="px-4 py-3 text-center text-gray-700">
-                                    {{ patient.total_results ?? "N/A" }}
+                                    {{ patient.results_count ?? "N/A" }}
                                 </td>
                                 <td class="px-4 py-3 text-gray-600">
-                                    {{ formatDate(patient.last_result_date) ?? "N/A" }}
+                                    {{ formatDate(patient.latest_result[0].uploaded_at) ?? "N/A" }}
                                 </td>
                                 <td class="px-4 py-3">
-                                    <button @click="viewPatientResults(patient)"
+                                    <button @click="viewPatient(patient)"
                                         class="rounded bg-blue-100 px-3 py-1 text-xs font-medium text-blue-700 transition hover:bg-blue-200">
-                                        View Results
+                                        Edit
                                     </button>
                                 </td>
                             </tr>

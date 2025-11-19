@@ -47,11 +47,23 @@ class FilesController extends Controller
         try {
             DB::beginTransaction();
 
-            $patient = Patient::create([
-                'clinic_id' => Auth::user()->id,
-                'full_name' => $validated->patient_name,
-                'email' => $validated->patient_email,
-            ]);
+            $exists = Patient::where('clinic_id', Auth::user()->id)->where('email', $validated->patient_email)->exists();
+
+            // dd($exists);
+
+            if ($exists) {
+                $patient = Patient::where('clinic_id', Auth::user()->id)->where('email', $validated->patient_email)->first();
+                $created = false;
+            } else {
+                $patient = Patient::create([
+                    'clinic_id' => Auth::user()->id,
+                    'full_name' => $validated->patient_name,
+                    'email' => $validated->patient_email,
+                ]);
+                $created = true;
+            }
+
+            // dd($patient, $created);
 
             $result =  PatientResult::create([
                 'clinic_id' => Auth::user()->id,
@@ -80,18 +92,18 @@ class FilesController extends Controller
                     $file,
                     $fileName
                 );
-                $url = Storage::path($storedFile);
-                // dd($storedFile, $url);
+                $path = Storage::path($storedFile);
+                $url = Storage::url($storedFile);
 
                 $attachment = [];
 
-                array_push($attachment,  $url);
+                array_push($attachment,  $path);
 
                 File::create([
                     'result' => $result->id,
                     'file_name' => $fileName,
                     'file_url' => $url,
-                    'file_path' => $storedFile,
+                    'file_path' => $path,
                     'file_type' => $fileInfo->mime,
                     'file_size' => $fileInfo->size,
                     'original_file_name' => $fileInfo->name
