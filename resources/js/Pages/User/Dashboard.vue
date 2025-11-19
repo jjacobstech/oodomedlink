@@ -596,7 +596,7 @@ const loadFile = (event: Event) => {
 
                                           <div v-if="file.file_type === 'image/png' || file.file_type === 'image/jpg' || file.file_type === 'image/jpeg'"
                                                 class="text-center">
-                                                <img :src="base_url + file.file_url" alt="Result preview"
+                                                <img :src="base_url + '/storage/' + file.file_path" alt="Result preview"
                                                       class="max-w-full max-h-96">
                                                 <button @click="downloadResult(file)"
                                                       class="px-4 py-2 mt-4 font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700">

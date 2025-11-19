@@ -183,7 +183,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
               ssrRenderList(previewFile.value.files, (file) => {
                 _push2(`<div class="flex items-center justify-center p-8 my-2 bg-gray-100 rounded-lg"${_scopeId}>`);
                 if (file.file_type === "image/png" || file.file_type === "image/jpg" || file.file_type === "image/jpeg") {
-                  _push2(`<div class="text-center"${_scopeId}><img${ssrRenderAttr("src", unref(base_url) + file.file_url)} alt="Result preview" class="max-w-full max-h-96"${_scopeId}><button class="px-4 py-2 mt-4 font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700"${_scopeId}> Download Image </button></div>`);
+                  _push2(`<div class="text-center"${_scopeId}><img${ssrRenderAttr("src", unref(base_url) + "/storage/" + file.file_path)} alt="Result preview" class="max-w-full max-h-96"${_scopeId}><button class="px-4 py-2 mt-4 font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700"${_scopeId}> Download Image </button></div>`);
                 } else {
                   _push2(`<div class="text-center"${_scopeId}><span class="text-6xl"${_scopeId}>📊</span><p class="mt-4 text-gray-600"${_scopeId}> File</p><button class="px-4 py-2 mt-4 font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700"${_scopeId}> Download </button></div>`);
                 }
@@ -536,7 +536,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                             class: "text-center"
                           }, [
                             createVNode("img", {
-                              src: unref(base_url) + file.file_url,
+                              src: unref(base_url) + "/storage/" + file.file_path,
                               alt: "Result preview",
                               class: "max-w-full max-h-96"
                             }, null, 8, ["src"]),
