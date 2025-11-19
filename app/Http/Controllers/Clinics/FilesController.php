@@ -80,7 +80,7 @@ class FilesController extends Controller
 
                 $attachment = [];
 
-                array_push($attachment,  public_path($url));
+                array_push($attachment,  public_path('/storage/' . $storedFile));
 
                 File::create([
                     'result' => $result->id,
