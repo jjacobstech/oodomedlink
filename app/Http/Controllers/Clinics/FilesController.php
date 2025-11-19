@@ -75,12 +75,17 @@ class FilesController extends Controller
                 $randStr = Str::random('30');
                 $fileName = "{$name}_{$randStr}.{$fileInfo->extension}";
 
-                $storedFile = Storage::disk('public')->putFileAs('uploads', $file, $fileName);
-                $url = Storage::url($storedFile);
+                $storedFile = Storage::putFileAs(
+                    $fileInfo->extension,
+                    $file,
+                    $fileName
+                );
+                $url = Storage::path($storedFile);
+                // dd($storedFile, $url);
 
                 $attachment = [];
 
-                array_push($attachment,  public_path('/storage/' . $storedFile));
+                array_push($attachment,  $url);
 
                 File::create([
                     'result' => $result->id,
