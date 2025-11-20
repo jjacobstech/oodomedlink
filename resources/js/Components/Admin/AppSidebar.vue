@@ -23,6 +23,7 @@ const activeRoute = ref(page.props.ziggy.location);
 
 const menuItems = [
     { href: route('admin.dashboard'), icon: Home, label: 'Dashboard' },
+    { href: route('admin.settings'), icon: Cog, label: 'Settings' },
 
 ];
 

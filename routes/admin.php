@@ -2,6 +2,7 @@
 
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Auth\Admin\PasswordController;
 use App\Http\Controllers\Auth\Admin\NewPasswordController;
 use App\Http\Controllers\Auth\Admin\RegisteredAdminController;
@@ -69,9 +70,10 @@ Route::prefix('admin')->group(function () {
                         ->name('admin.logout');
             });
 
-            Route::get('/dashboard', function () {
-                  // Debug: Check if admin is authenticated\
-                  return Inertia::render('Admin/Dashboard');
-            })->middleware(['auth:admin', 'verified'])->name('admin.dashboard');
+            Route::get('/dashboard', [DashboardController::class, 'dashboard'])->middleware(['auth:admin', 'verified'])->name('admin.dashboard');
+
+            Route::get('/settings', function () {
+                  return Inertia::render('Admin/Settings');
+            })->middleware(['auth:admin', 'verified'])->name('admin.settings');
       });
 });

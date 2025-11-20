@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import AdminAuthenticatedLayout from '@/Layouts/AdminAuthenticatedLayout.vue';
 import { Head, useForm } from '@inertiajs/vue3';
 import { ref } from 'vue';
 
@@ -46,9 +46,10 @@ const submitForm = () => {
 </script>
 
 <template>
+
     <Head title="Settings" />
 
-    <AuthenticatedLayout>
+    <AdminAuthenticatedLayout>
         <div class="min-h-screen w-full bg-gray-100">
             <div class="mx-auto max-w-5xl p-6">
                 <!-- Header -->
@@ -66,11 +67,8 @@ const submitForm = () => {
                     <div class="rounded-2xl bg-white p-6 shadow-md">
                         <div class="flex flex-col items-center text-center">
                             <div class="shadow-4xl shadow-black">
-                                <img
-                                    :src="avatarPreview"
-                                    alt="Profile Avatar"
-                                    class="mb-4 h-28 w-28 rounded-full object-cover"
-                                />
+                                <img :src="avatarPreview" alt="Profile Avatar"
+                                    class="mb-4 h-28 w-28 rounded-full object-cover" />
                             </div>
                             <h2 class="text-xl font-semibold text-gray-800">
                                 {{ form.name }}
@@ -81,118 +79,65 @@ const submitForm = () => {
 
                             <div class="mt-4">
                                 <label
-                                    class="bg-deepgradient btn cursor-pointer rounded-lg text-xl font-extrabold text-white transition-all duration-150 hover:-translate-y-1"
-                                >
+                                    class="bg-deepgradient btn cursor-pointer rounded-lg text-xl font-extrabold text-white transition-all duration-150 hover:-translate-y-1">
                                     Change Avatar
-                                    <input
-                                        type="file"
-                                        class="hidden"
-                                        accept="image/*"
-                                        @change="handleAvatarChange"
-                                    />
+                                    <input type="file" class="hidden" accept="image/*" @change="handleAvatarChange" />
                                 </label>
                             </div>
                         </div>
                     </div>
 
                     <!-- Settings Form -->
-                    <div
-                        class="rounded-2xl bg-white p-6 shadow-md md:col-span-2"
-                    >
+                    <div class="rounded-2xl bg-white p-6 shadow-md md:col-span-2">
                         <form @submit.prevent="submitForm" class="space-y-5">
                             <div class="grid gap-5 md:grid-cols-2">
                                 <div>
-                                    <label
-                                        class="mb-1 block text-sm font-medium text-gray-700"
-                                        >Full Name</label
-                                    >
-                                    <input
-                                        v-model="form.name"
-                                        type="text"
-                                        class="focus:ring-deepgreen w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-transparent focus:ring-2"
-                                    />
+                                    <label class="mb-1 block text-sm font-medium text-gray-700">Full Name</label>
+                                    <input v-model="form.name" type="text"
+                                        class="focus:ring-deepgreen w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-transparent focus:ring-2" />
                                 </div>
                                 <div>
-                                    <label
-                                        class="mb-1 block text-sm font-medium text-gray-700"
-                                        >Email Address</label
-                                    >
-                                    <input
-                                        v-model="form.email"
-                                        type="email"
-                                        class="focus:ring-deepgreen w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-transparent focus:ring-2"
-                                    />
+                                    <label class="mb-1 block text-sm font-medium text-gray-700">Email Address</label>
+                                    <input v-model="form.email" type="email"
+                                        class="focus:ring-deepgreen w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-transparent focus:ring-2" />
                                 </div>
                             </div>
 
                             <div class="grid gap-5 md:grid-cols-2">
                                 <div>
-                                    <label
-                                        class="mb-1 block text-sm font-medium text-gray-700"
-                                        >Phone Number</label
-                                    >
-                                    <input
-                                        v-model="form.phone_no"
-                                        type="tel"
-                                        class="focus:ring-deepgreen w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-transparent focus:ring-2"
-                                    />
+                                    <label class="mb-1 block text-sm font-medium text-gray-700">Phone Number</label>
+                                    <input v-model="form.phone_no" type="tel"
+                                        class="focus:ring-deepgreen w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-transparent focus:ring-2" />
                                 </div>
                                 <div>
-                                    <label
-                                        class="mb-1 block text-sm font-medium text-gray-700"
-                                        >Password</label
-                                    >
-                                    <input
-                                        v-model="form.password"
-                                        type="password"
-                                        placeholder="••••••••"
-                                        class="focus:ring-deepgreen w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-transparent focus:ring-2"
-                                    />
+                                    <label class="mb-1 block text-sm font-medium text-gray-700">Password</label>
+                                    <input v-model="form.password" type="password" placeholder="••••••••"
+                                        class="focus:ring-deepgreen w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-transparent focus:ring-2" />
                                 </div>
                             </div>
 
                             <div>
-                                <label
-                                    class="mb-1 block text-sm font-medium text-gray-700"
-                                    >Address</label
-                                >
-                                <input
-                                    v-model="form.address"
-                                    type="text"
-                                    class="focusffset-deepgreen w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-transparent focus:ring-2"
-                                />
+                                <label class="mb-1 block text-sm font-medium text-gray-700">Address</label>
+                                <input v-model="form.address" type="text"
+                                    class="focusffset-deepgreen w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-transparent focus:ring-2" />
                             </div>
 
                             <div class="grid gap-5 md:grid-cols-2">
                                 <div>
-                                    <label
-                                        class="mb-1 block text-sm font-medium text-gray-700"
-                                        >State</label
-                                    >
-                                    <input
-                                        v-model="form.state"
-                                        type="text"
-                                        class="focus:ring-deepgreen w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-transparent focus:ring-2"
-                                    />
+                                    <label class="mb-1 block text-sm font-medium text-gray-700">State</label>
+                                    <input v-model="form.state" type="text"
+                                        class="focus:ring-deepgreen w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-transparent focus:ring-2" />
                                 </div>
                                 <div>
-                                    <label
-                                        class="mb-1 block text-sm font-medium text-gray-700"
-                                        >Country</label
-                                    >
-                                    <input
-                                        v-model="form.country"
-                                        type="text"
-                                        class="focus:ring-deepgreen w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-transparent focus:ring-2"
-                                    />
+                                    <label class="mb-1 block text-sm font-medium text-gray-700">Country</label>
+                                    <input v-model="form.country" type="text"
+                                        class="focus:ring-deepgreen w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-transparent focus:ring-2" />
                                 </div>
                             </div>
 
                             <div class="mt-8 flex justify-end">
-                                <button
-                                    type="submit"
-                                    class="bg-deepgradient rounded-lg px-6 py-2.5 font-semibold text-white shadow transition-all duration-150 hover:-translate-y-1 focus:ring-0 focus:ring-blue-300"
-                                >
+                                <button type="submit"
+                                    class="bg-deepgradient rounded-lg px-6 py-2.5 font-semibold text-white shadow transition-all duration-150 hover:-translate-y-1 focus:ring-0 focus:ring-blue-300">
                                     Save Changes
                                 </button>
                             </div>
@@ -201,5 +146,5 @@ const submitForm = () => {
                 </div>
             </div>
         </div>
-    </AuthenticatedLayout>
+    </AdminAuthenticatedLayout>
 </template>

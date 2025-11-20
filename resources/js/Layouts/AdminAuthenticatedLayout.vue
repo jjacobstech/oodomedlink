@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import AppSidebar from '@/Components/Dashboard/AppSidebar.vue';
+import AppSidebar from '@/Components/Admin/AppSidebar.vue';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import Badge from '@/components/ui/badge/Badge.vue';
 import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
