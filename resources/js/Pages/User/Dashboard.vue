@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head, useForm, router, usePage } from '@inertiajs/vue3';
-import { ref } from 'vue';
+import { Head, useForm, router, usePage, Link } from '@inertiajs/vue3';
+import { ref, onMounted } from 'vue';
 import { Upload, UsersGroupTwoRounded, ClockCircle, CloseCircle } from '@solar-icons/vue';
 
 const page = usePage();
@@ -43,8 +43,11 @@ interface Props {
             pending_results: number,
             completed_result: number
       };
-      prevPage?: number | string;
-      nextPage?: number | string;
+      filter?: string;
+      search?: string;
+      page?: number;
+      prevPage?: string;
+      nextPage?: string;
 
 }
 
@@ -52,8 +55,8 @@ interface Props {
 
 const props = defineProps<Props>();
 const showUploadModal = ref(false);
-const selectedFilter = ref('all');
-const searchQuery = ref('');
+const selectedFilter = ref(props.filter);
+const searchQuery = ref(props.search);
 const previewFile = ref<PatientResult | null>(null);
 const stats = [
       {
@@ -82,7 +85,6 @@ const stats = [
       }
 ];
 
-console.log(props);
 
 
 let results: PatientResult[] = props.results || [];
@@ -102,15 +104,16 @@ const uploadForm = useForm({
       sendViaEmail: true as boolean
 });
 
+
+
+
 const uploadedFiles = ref<File[]>([])
 
-// console.log(props.results);
 
 // File input handling
 const handleFileChange = (event: Event) => {
       const target = event.target as HTMLInputElement;
       if (target.files && target.files[0]) {
-            // console.log(uploadForm.file, target.files);
             for (let file of target.files) {
 
                   uploadedFiles.value.push(file)
@@ -118,15 +121,10 @@ const handleFileChange = (event: Event) => {
             }
 
 
-            console.log(uploadedFiles.value, uploadForm.file)
       }
 };
 
 const handleFileRemove = (file: File) => {
-      // console.log(uploadForm.file, target.files);
-
-
-
 
 
 
@@ -135,37 +133,64 @@ const handleFileRemove = (file: File) => {
 
 // Submit upload
 const submitUpload = () => {
-      // console.log(uploadForm.data())
       uploadForm.post(route('clinic.result.upload'), {
             onSuccess: (response) => {
-                  console.log(response)
                   uploadForm.reset();
                   uploadedFiles.value = [];
                   showUploadModal.value = false;
                   router.get(route('user.dashboard'));
             },
             onError: (response) => {
-                  console.log(response)
             }
       });
 };
 
 // Filter and search results
-const filteredResults = (filter: string) => {
+const filteredResults = (filter?: string, search?: string) => {
 
-      router.get(route('user.dashboard'), { filter: filter });
-}
+      selectedFilter.value = filter ?? 'all';
 
-
-const getPage = (page: number | string | undefined) => {
-
-      if (page === null) {
-            return;
+      const payload: Record<string, any> = {
+            filter: selectedFilter.value,
+            search: searchQuery.value
       }
 
-      page = 1;
-      return router.get(route('user.dashboard'), { page: page });
+      if (searchQuery.value === '') delete payload.search;
+      if (selectedFilter.value === '') delete payload.filter;
+
+
+      router.get(route('user.dashboard'), payload,
+            {
+                  onError: (response) => {
+                        console.log(response);
+                  },
+                  preserveScroll: true,
+
+            }
+      );
+
 }
+
+// Filter and search results
+const clearFilteredResults = () => {
+
+      const payload: Record<string, any> = {
+
+      }
+
+
+      router.get(route('user.dashboard'), payload,
+            {
+                  onError: (response) => {
+                        console.log(response);
+                  },
+                  preserveScroll: true,
+
+            }
+      );
+
+}
+
 // Download result
 const downloadResult = (file: file) => {
       window.open(file.file_url, '_blank');
@@ -197,17 +222,6 @@ const getFileIcon = (fileType: string) => {
       }
 };
 
-const loadFile = (event: Event) => {
-      let files: File[] = [];
-      const target = event.target as HTMLInputElement;
-
-      if (target.files && target.files[0]) {
-            files.push(target.files[0]);
-
-            console.log(files)
-      }
-
-}
 
 
 
@@ -279,14 +293,28 @@ const loadFile = (event: Event) => {
                                           </div>
 
                                           <!-- Search Input -->
-                                          <div class="relative w-full sm:w-auto sm:max-w-md lg:max-w-lg">
-                                                <input v-model="searchQuery" type="text"
-                                                      placeholder="Search patient or result type..."
-                                                      class="w-full px-3 sm:px-4 py-2 sm:py-2.5 pl-9 sm:pl-10 text-sm sm:text-base border border-gray-300 rounded-lg placeholder:text-gray-400 placeholder:text-sm sm:placeholder:text-base focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
-                                                <span
-                                                      class="absolute text-base sm:text-lg text-gray-400 transform -translate-y-1/2 left-3 top-1/2">
-                                                      🔍
-                                                </span>
+                                          <div
+                                                class="flex gap-10 justify-between items-center  w-full sm:w-auto sm:max-w-md lg:max-w-xl">
+                                                <div class="relative lg:w-[80%] sm:w-auto sm:max-w-md ">
+                                                      <input v-model="searchQuery" type="text"
+                                                            placeholder="Search patient or result type..."
+                                                            class="w-full px-3 sm:px-4 py-2 sm:py-2.5 pl-9 sm:pl-10 text-sm sm:text-base border border-gray-300 rounded-lg placeholder:text-gray-400 placeholder:text-sm sm:placeholder:text-base focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
+                                                      <span
+                                                            class="absolute text-base sm:text-lg text-gray-400 transform -translate-y-1/2 left-3 top-1/2">
+                                                            🔍
+                                                      </span>
+                                                </div>
+
+                                                <div class="flex gap-2 items-center">
+                                                      <button @click="filteredResults()"
+                                                            class="w-[20%] sm:w-auto sm:max-w-md lg:max-w-lg px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base font-semibold text-white transition-all bg-primaryDark rounded-lg hover:bg-primaryDark/90 hover:shadow-lg disabled:bg-gray-400 disabled:cursor-not-allowed disabled:hover:transform-none">
+                                                            Search
+                                                      </button>
+                                                      <button @click="clearFilteredResults"
+                                                            class="w-[20%] sm:w-auto sm:max-w-md lg:max-w-lg px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base font-semibold text-white transition-all bg-primaryDark rounded-lg hover:bg-primaryDark/90 hover:shadow-lg disabled:bg-gray-400 disabled:cursor-not-allowed disabled:hover:transform-none">
+                                                            Clear
+                                                      </button>
+                                                </div>
                                           </div>
                                     </div>
                               </div>
@@ -353,7 +381,7 @@ const loadFile = (event: Event) => {
                                                                               :key="file.id" class="flex items-center gap-2 text-xs
                                                                               sm:text-sm text-gray-700">
                                                                               <span>{{ getFileIcon(result.file_type)
-                                                                                    }}</span>
+                                                                              }}</span>
                                                                               <span
                                                                                     class="truncate max-w-[150px] xl:max-w-[200px]">
                                                                                     {{ file.original_file_name
@@ -372,12 +400,12 @@ const loadFile = (event: Event) => {
                                                                   <td class="px-3 sm:px-4 lg:px-6 py-3 sm:py-4">
                                                                         <span :class="{
                                                                               'bg-orange-100 text-orange-800': result.status === 'pending',
-      'bg-green-100 text-green-800': result.status === 'sent',
-      'bg-purple-100 text-purple-800': result.status === 'failed'
+                                                                              'bg-green-100 text-green-800': result.status === 'sent',
+                                                                              'bg-purple-100 text-purple-800': result.status === 'failed'
                                                                         }"
                                                                               class="inline-flex px-2 sm:px-3 py-0.5 sm:py-1 text-xs font-semibold rounded-full whitespace-nowrap">
                                                                               {{ result.status.charAt(0).toUpperCase() +
-                                                                              result.status.slice(1) }}
+                                                                                    result.status.slice(1) }}
                                                                         </span>
                                                                   </td>
 
@@ -410,10 +438,13 @@ const loadFile = (event: Event) => {
                                           </div>
                                           <div
                                                 class="w-full py-3 bg-transparent flex items-center  h-full gap-10  justify-end px-5">
-                                                <button @click="getPage(props.nextPage)"
-                                                      class="btn bg-primaryDark  rounded-xl hover:text-primaryDark hover:bg-white hover:shadow-primaryDark/30 px-3 text-lg font-bold py-2 shadow-md text-white">Prev</button>
-                                                <button @click="getPage(props.prevPage)"
-                                                      class="btn bg-primaryDark rounded-xl hover:text-primaryDark hover:bg-white hover:shadow-primaryDark/30 px-3 text-lg font-bold py-2 shadow-md text-white">Next</button>
+                                                <Link v-if="prevPage !== null" :href="prevPage ?? '#'" v-html="'Prev'"
+                                                      preserve-scroll
+                                                      class="btn bg-primaryDark  rounded-xl hover:text-primaryDark hover:bg-white hover:shadow-primaryDark/30 px-3 text-lg font-bold py-2 shadow-md text-white" />
+
+                                                <Link v-if="nextPage !== null" :href="nextPage" v-html="'Next'"
+                                                      preserve-scroll
+                                                      class="btn bg-primaryDark rounded-xl hover:text-primaryDark hover:bg-white hover:shadow-primaryDark/30 px-3 text-lg font-bold py-2 shadow-md text-white" />
                                           </div>
                                     </div>
                               </div>
@@ -586,7 +617,7 @@ const loadFile = (event: Event) => {
                                           <h3 class="text-2xl font-bold text-gray-800">{{ previewFile.patient.full_name
                                                 ?? "Patient" }} -
                                                 {{
-                                                previewFile.result_type }}</h3>
+                                                      previewFile.result_type }}</h3>
                                           <button @click="previewFile = null"
                                                 class="px-4 py-2 text-gray-700 transition-colors bg-gray-200 rounded-lg hover:bg-gray-300">
                                                 Close
@@ -595,7 +626,8 @@ const loadFile = (event: Event) => {
 
                                     <div class="p-4 mb-4 bg-gray-50 rounded-lg">
                                           <p v-for="file in previewFile.files" :key="file.id"
-                                                class="text-sm text-gray-600">File: {{ file.original_file_name
+                                                class="text-sm text-gray-600">
+                                                File: {{ file.original_file_name
                                                 }}</p>
                                           <p class="text-sm text-gray-600">Uploaded: {{
                                                 formatDate(previewFile.uploaded_at) }}</p>

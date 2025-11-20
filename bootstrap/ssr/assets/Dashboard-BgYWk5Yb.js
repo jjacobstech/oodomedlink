@@ -1,7 +1,7 @@
 import { defineComponent, ref, unref, withCtx, createVNode, createBlock, createCommentVNode, openBlock, Fragment, renderList, toDisplayString, withDirectives, vModelText, withModifiers, vModelSelect, createTextVNode, vModelCheckbox, useSSRContext } from "vue";
 import { ssrRenderComponent, ssrRenderList, ssrInterpolate, ssrRenderClass, ssrRenderAttr, ssrIncludeBooleanAttr, ssrLooseContain, ssrLooseEqual } from "vue/server-renderer";
 import { _ as _sfc_main$1 } from "./AuthenticatedLayout-hu7FW2Vw.js";
-import { usePage, useForm, Head, router } from "@inertiajs/vue3";
+import { usePage, useForm, Head, Link, router } from "@inertiajs/vue3";
 import { CloseCircle } from "@solar-icons/vue";
 import "./index-Ch8fN83j.js";
 import "class-variance-authority";
@@ -21,6 +21,9 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     user: {},
     results: {},
     stats: {},
+    filter: {},
+    search: {},
+    page: {},
     prevPage: {},
     nextPage: {}
   },
@@ -29,8 +32,8 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     page.props.ziggy.base_url;
     const props = __props;
     const showUploadModal = ref(false);
-    const selectedFilter = ref("all");
-    const searchQuery = ref("");
+    const selectedFilter = ref(props.filter);
+    const searchQuery = ref(props.search);
     const previewFile = ref(null);
     const stats = [
       {
@@ -58,7 +61,6 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         color: "primaryDark"
       }
     ];
-    console.log(props);
     let results = props.results || [];
     let filtered = results;
     const selectionFilter = ["all", "pending", "sent", "failed"];
@@ -80,32 +82,51 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
           uploadedFiles.value.push(file);
           uploadForm?.file?.push(file);
         }
-        console.log(uploadedFiles.value, uploadForm.file);
       }
     };
     const submitUpload = () => {
       uploadForm.post(route("clinic.result.upload"), {
         onSuccess: (response) => {
-          console.log(response);
           uploadForm.reset();
           uploadedFiles.value = [];
           showUploadModal.value = false;
           router.get(route("user.dashboard"));
         },
         onError: (response) => {
-          console.log(response);
         }
       });
     };
-    const filteredResults = (filter) => {
-      router.get(route("user.dashboard"), { filter });
+    const filteredResults = (filter, search) => {
+      selectedFilter.value = filter ?? "all";
+      const payload = {
+        filter: selectedFilter.value,
+        search: searchQuery.value
+      };
+      if (searchQuery.value === "") delete payload.search;
+      if (selectedFilter.value === "") delete payload.filter;
+      router.get(
+        route("user.dashboard"),
+        payload,
+        {
+          onError: (response) => {
+            console.log(response);
+          },
+          preserveScroll: true
+        }
+      );
     };
-    const getPage = (page2) => {
-      if (page2 === null) {
-        return;
-      }
-      page2 = 1;
-      return router.get(route("user.dashboard"), { page: page2 });
+    const clearFilteredResults = () => {
+      const payload = {};
+      router.get(
+        route("user.dashboard"),
+        payload,
+        {
+          onError: (response) => {
+            console.log(response);
+          },
+          preserveScroll: true
+        }
+      );
     };
     const downloadResult = (file) => {
       window.open(file.file_url, "_blank");
@@ -148,7 +169,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
             ssrRenderList(selectionFilter, (selection) => {
               _push2(`<button class="${ssrRenderClass([selectedFilter.value === selection ? "bg-primaryDark text-white" : "bg-gray-200 text-gray-700", "px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm lg:text-base font-medium rounded-lg transition-all hover:shadow-md"])}"${_scopeId}>${ssrInterpolate(selection.charAt(0).toUpperCase() + selection.slice(1))}</button>`);
             });
-            _push2(`<!--]--></div><div class="relative w-full sm:w-auto sm:max-w-md lg:max-w-lg"${_scopeId}><input${ssrRenderAttr("value", searchQuery.value)} type="text" placeholder="Search patient or result type..." class="w-full px-3 sm:px-4 py-2 sm:py-2.5 pl-9 sm:pl-10 text-sm sm:text-base border border-gray-300 rounded-lg placeholder:text-gray-400 placeholder:text-sm sm:placeholder:text-base focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"${_scopeId}><span class="absolute text-base sm:text-lg text-gray-400 transform -translate-y-1/2 left-3 top-1/2"${_scopeId}> 🔍 </span></div></div></div><div class="overflow-x-auto -mx-4 sm:mx-0 rounded-lg"${_scopeId}><div class="inline-block min-w-full align-middle"${_scopeId}><div class="overflow-hidden border-b border-gray-200 sm:rounded-lg"${_scopeId}><table class="min-w-full divide-y divide-gray-200"${_scopeId}><thead class="bg-gray-50"${_scopeId}><tr${_scopeId}><th class="px-3 sm:px-4 lg:px-6 py-2 sm:py-3 text-xs sm:text-sm font-semibold tracking-wider text-left text-gray-700 uppercase"${_scopeId}> Patient </th><th class="hidden md:table-cell px-3 sm:px-4 lg:px-6 py-2 sm:py-3 text-xs sm:text-sm font-semibold tracking-wider text-left text-gray-700 uppercase"${_scopeId}> Result Type </th><th class="hidden lg:table-cell px-3 sm:px-4 lg:px-6 py-2 sm:py-3 text-xs sm:text-sm font-semibold tracking-wider text-left text-gray-700 uppercase"${_scopeId}> File </th><th class="hidden xl:table-cell px-3 sm:px-4 lg:px-6 py-2 sm:py-3 text-xs sm:text-sm font-semibold tracking-wider text-left text-gray-700 uppercase"${_scopeId}> Upload Date </th><th class="px-3 sm:px-4 lg:px-6 py-2 sm:py-3 text-xs sm:text-sm font-semibold tracking-wider text-left text-gray-700 uppercase"${_scopeId}> Status </th><th class="px-3 sm:px-4 lg:px-6 py-2 sm:py-3 text-xs sm:text-sm font-semibold tracking-wider text-left text-gray-700 uppercase"${_scopeId}> Actions </th></tr></thead><tbody class="bg-white divide-y divide-gray-200"${_scopeId}><!--[-->`);
+            _push2(`<!--]--></div><div class="flex gap-10 justify-between items-center w-full sm:w-auto sm:max-w-md lg:max-w-xl"${_scopeId}><div class="relative lg:w-[80%] sm:w-auto sm:max-w-md"${_scopeId}><input${ssrRenderAttr("value", searchQuery.value)} type="text" placeholder="Search patient or result type..." class="w-full px-3 sm:px-4 py-2 sm:py-2.5 pl-9 sm:pl-10 text-sm sm:text-base border border-gray-300 rounded-lg placeholder:text-gray-400 placeholder:text-sm sm:placeholder:text-base focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"${_scopeId}><span class="absolute text-base sm:text-lg text-gray-400 transform -translate-y-1/2 left-3 top-1/2"${_scopeId}> 🔍 </span></div><div class="flex gap-2 items-center"${_scopeId}><button class="w-[20%] sm:w-auto sm:max-w-md lg:max-w-lg px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base font-semibold text-white transition-all bg-primaryDark rounded-lg hover:bg-primaryDark/90 hover:shadow-lg disabled:bg-gray-400 disabled:cursor-not-allowed disabled:hover:transform-none"${_scopeId}> Search </button><button class="w-[20%] sm:w-auto sm:max-w-md lg:max-w-lg px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base font-semibold text-white transition-all bg-primaryDark rounded-lg hover:bg-primaryDark/90 hover:shadow-lg disabled:bg-gray-400 disabled:cursor-not-allowed disabled:hover:transform-none"${_scopeId}> Clear </button></div></div></div></div><div class="overflow-x-auto -mx-4 sm:mx-0 rounded-lg"${_scopeId}><div class="inline-block min-w-full align-middle"${_scopeId}><div class="overflow-hidden border-b border-gray-200 sm:rounded-lg"${_scopeId}><table class="min-w-full divide-y divide-gray-200"${_scopeId}><thead class="bg-gray-50"${_scopeId}><tr${_scopeId}><th class="px-3 sm:px-4 lg:px-6 py-2 sm:py-3 text-xs sm:text-sm font-semibold tracking-wider text-left text-gray-700 uppercase"${_scopeId}> Patient </th><th class="hidden md:table-cell px-3 sm:px-4 lg:px-6 py-2 sm:py-3 text-xs sm:text-sm font-semibold tracking-wider text-left text-gray-700 uppercase"${_scopeId}> Result Type </th><th class="hidden lg:table-cell px-3 sm:px-4 lg:px-6 py-2 sm:py-3 text-xs sm:text-sm font-semibold tracking-wider text-left text-gray-700 uppercase"${_scopeId}> File </th><th class="hidden xl:table-cell px-3 sm:px-4 lg:px-6 py-2 sm:py-3 text-xs sm:text-sm font-semibold tracking-wider text-left text-gray-700 uppercase"${_scopeId}> Upload Date </th><th class="px-3 sm:px-4 lg:px-6 py-2 sm:py-3 text-xs sm:text-sm font-semibold tracking-wider text-left text-gray-700 uppercase"${_scopeId}> Status </th><th class="px-3 sm:px-4 lg:px-6 py-2 sm:py-3 text-xs sm:text-sm font-semibold tracking-wider text-left text-gray-700 uppercase"${_scopeId}> Actions </th></tr></thead><tbody class="bg-white divide-y divide-gray-200"${_scopeId}><!--[-->`);
             ssrRenderList(unref(filtered), (result) => {
               _push2(`<tr class="transition-colors hover:bg-gray-50"${_scopeId}><td class="px-3 sm:px-4 lg:px-6 py-3 sm:py-4"${_scopeId}><div class="text-xs sm:text-sm lg:text-base font-medium text-gray-900"${_scopeId}>${ssrInterpolate(result.patient.full_name)}</div><div class="md:hidden text-xs text-gray-500 mt-1"${_scopeId}>${ssrInterpolate(result.result_type)}</div></td><td class="hidden md:table-cell px-3 sm:px-4 lg:px-6 py-3 sm:py-4 text-xs sm:text-sm lg:text-base text-gray-700"${_scopeId}>${ssrInterpolate(result.result_type)}</td><td class="hidden lg:table-cell px-3 sm:px-4 lg:px-6 py-3 sm:py-4"${_scopeId}><!--[-->`);
               ssrRenderList(result.files, (file) => {
@@ -166,7 +187,26 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
             } else {
               _push2(`<!---->`);
             }
-            _push2(`</tbody></table></div><div class="w-full py-3 bg-transparent flex items-center h-full gap-10 justify-end px-5"${_scopeId}><button class="btn bg-primaryDark rounded-xl hover:text-primaryDark hover:bg-white hover:shadow-primaryDark/30 px-3 text-lg font-bold py-2 shadow-md text-white"${_scopeId}>Prev</button><button class="btn bg-primaryDark rounded-xl hover:text-primaryDark hover:bg-white hover:shadow-primaryDark/30 px-3 text-lg font-bold py-2 shadow-md text-white"${_scopeId}>Next</button></div></div></div></div>`);
+            _push2(`</tbody></table></div><div class="w-full py-3 bg-transparent flex items-center h-full gap-10 justify-end px-5"${_scopeId}>`);
+            if (__props.prevPage !== null) {
+              _push2(ssrRenderComponent(unref(Link), {
+                href: __props.prevPage ?? "#",
+                "preserve-scroll": "",
+                class: "btn bg-primaryDark rounded-xl hover:text-primaryDark hover:bg-white hover:shadow-primaryDark/30 px-3 text-lg font-bold py-2 shadow-md text-white"
+              }, null, _parent2, _scopeId));
+            } else {
+              _push2(`<!---->`);
+            }
+            if (__props.nextPage !== null) {
+              _push2(ssrRenderComponent(unref(Link), {
+                href: __props.nextPage,
+                "preserve-scroll": "",
+                class: "btn bg-primaryDark rounded-xl hover:text-primaryDark hover:bg-white hover:shadow-primaryDark/30 px-3 text-lg font-bold py-2 shadow-md text-white"
+              }, null, _parent2, _scopeId));
+            } else {
+              _push2(`<!---->`);
+            }
+            _push2(`</div></div></div></div>`);
             if (showUploadModal.value) {
               _push2(`<div class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4 sm:p-6 lg:p-10"${_scopeId}><div class="w-full max-w-md sm:max-w-lg lg:max-w-2xl xl:max-w-3xl p-6 sm:p-8 lg:p-10 xl:p-16 bg-white rounded-xl shadow-2xl max-h-[90vh] overflow-y-auto"${_scopeId}><h3 class="mb-4 sm:mb-6 text-xl sm:text-2xl lg:text-3xl font-bold text-gray-800"${_scopeId}> Upload Patient Result </h3><form class="space-y-4 sm:space-y-5 lg:space-y-6"${_scopeId}><div${_scopeId}><label class="block mb-2 text-sm sm:text-base font-extrabold text-gray-700"${_scopeId}> Patient Name </label><input${ssrRenderAttr("value", unref(uploadForm).patient_name)} type="text" required class="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all" placeholder="Enter patient name" autofocus autocomplete="name"${_scopeId}></div><div${_scopeId}><label class="block mb-2 text-sm sm:text-base font-extrabold text-gray-700"${_scopeId}> Patient Email </label><input${ssrRenderAttr("value", unref(uploadForm).patient_email)} type="email" required class="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all" placeholder="Enter patient email" autofocus autocomplete="email"${_scopeId}></div><div${_scopeId}><label class="block mb-2 text-sm sm:text-base font-extrabold text-gray-700"${_scopeId}> Test Name </label><input${ssrRenderAttr("value", unref(uploadForm).test_name)} type="text" required class="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all" placeholder="Enter patient email" autofocus autocomplete="date"${_scopeId}></div><div${_scopeId}><label class="block mb-2 text-sm sm:text-base font-extrabold text-gray-700"${_scopeId}> Result Type </label><select required class="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"${_scopeId}><option value=""${ssrIncludeBooleanAttr(Array.isArray(unref(uploadForm).result_type) ? ssrLooseContain(unref(uploadForm).result_type, "") : ssrLooseEqual(unref(uploadForm).result_type, "")) ? " selected" : ""}${_scopeId}>Select result type</option><option value="Blood Test"${ssrIncludeBooleanAttr(Array.isArray(unref(uploadForm).result_type) ? ssrLooseContain(unref(uploadForm).result_type, "Blood Test") : ssrLooseEqual(unref(uploadForm).result_type, "Blood Test")) ? " selected" : ""}${_scopeId}>Blood Test</option><option value="X-Ray"${ssrIncludeBooleanAttr(Array.isArray(unref(uploadForm).result_type) ? ssrLooseContain(unref(uploadForm).result_type, "X-Ray") : ssrLooseEqual(unref(uploadForm).result_type, "X-Ray")) ? " selected" : ""}${_scopeId}>X-Ray</option><option value="MRI"${ssrIncludeBooleanAttr(Array.isArray(unref(uploadForm).result_type) ? ssrLooseContain(unref(uploadForm).result_type, "MRI") : ssrLooseEqual(unref(uploadForm).result_type, "MRI")) ? " selected" : ""}${_scopeId}>MRI</option><option value="CT Scan"${ssrIncludeBooleanAttr(Array.isArray(unref(uploadForm).result_type) ? ssrLooseContain(unref(uploadForm).result_type, "CT Scan") : ssrLooseEqual(unref(uploadForm).result_type, "CT Scan")) ? " selected" : ""}${_scopeId}>CT Scan</option><option value="Lab Analysis"${ssrIncludeBooleanAttr(Array.isArray(unref(uploadForm).result_type) ? ssrLooseContain(unref(uploadForm).result_type, "Lab Analysis") : ssrLooseEqual(unref(uploadForm).result_type, "Lab Analysis")) ? " selected" : ""}${_scopeId}>Lab Analysis</option><option value="Other"${ssrIncludeBooleanAttr(Array.isArray(unref(uploadForm).result_type) ? ssrLooseContain(unref(uploadForm).result_type, "Other") : ssrLooseEqual(unref(uploadForm).result_type, "Other")) ? " selected" : ""}${_scopeId}>Other</option></select></div><div${_scopeId}><label class="block mb-2 text-sm sm:text-base font-extrabold text-gray-700"${_scopeId}> Test Date </label><input${ssrRenderAttr("value", unref(uploadForm).test_date)} type="date" required class="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all" placeholder="Enter patient email" autofocus autocomplete="date"${_scopeId}></div><div${_scopeId}><label class="block mb-2 text-sm font-extrabold sm:text-basetext-gray-700"${_scopeId}> Notes </label><textarea class="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all" placeholder="e.g referrals, prescriptions etc "${_scopeId}>${ssrInterpolate(unref(uploadForm).notes)}</textarea></div><div class="flex items-center justify-center w-full"${_scopeId}><label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-48 sm:h-56 lg:h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-primaryLight/30 transition-colors group"${_scopeId}><div class="flex flex-col items-center justify-center px-4"${_scopeId}><svg class="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 mb-3 sm:mb-4 text-gray-500 group-hover:text-gray-600 transition-colors" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16"${_scopeId}><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"${_scopeId}></path></svg><p class="mb-2 text-sm sm:text-base lg:text-lg text-gray-500 text-center"${_scopeId}><span class="font-semibold"${_scopeId}>Click to upload</span> or drag and drop </p><p class="text-xs sm:text-sm text-gray-500 text-center"${_scopeId}> SVG, PNG, JPG or GIF (MAX. 800x400px) </p></div><input id="dropzone-file" type="file" multiple class="hidden"${_scopeId}></label></div><div class="space-y-2"${_scopeId}><!--[-->`);
               ssrRenderList(uploadedFiles.value, (files) => {
@@ -184,7 +224,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
             if (previewFile.value) {
               _push2(`<div class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"${_scopeId}><div class="w-full max-w-4xl p-6 bg-white rounded-xl max-h-[90vh] overflow-y-auto"${_scopeId}><div class="flex items-center justify-between mb-4"${_scopeId}><h3 class="text-2xl font-bold text-gray-800"${_scopeId}>${ssrInterpolate(previewFile.value.patient.full_name ?? "Patient")} - ${ssrInterpolate(previewFile.value.result_type)}</h3><button class="px-4 py-2 text-gray-700 transition-colors bg-gray-200 rounded-lg hover:bg-gray-300"${_scopeId}> Close </button></div><div class="p-4 mb-4 bg-gray-50 rounded-lg"${_scopeId}><!--[-->`);
               ssrRenderList(previewFile.value.files, (file) => {
-                _push2(`<p class="text-sm text-gray-600"${_scopeId}>File: ${ssrInterpolate(file.original_file_name)}</p>`);
+                _push2(`<p class="text-sm text-gray-600"${_scopeId}> File: ${ssrInterpolate(file.original_file_name)}</p>`);
               });
               _push2(`<!--]--><p class="text-sm text-gray-600"${_scopeId}>Uploaded: ${ssrInterpolate(formatDate(previewFile.value.uploaded_at))}</p></div><!--[-->`);
               ssrRenderList(previewFile.value.files, (file) => {
@@ -250,16 +290,28 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                             }, toDisplayString(selection.charAt(0).toUpperCase() + selection.slice(1)), 11, ["onClick"]);
                           }), 64))
                         ]),
-                        createVNode("div", { class: "relative w-full sm:w-auto sm:max-w-md lg:max-w-lg" }, [
-                          withDirectives(createVNode("input", {
-                            "onUpdate:modelValue": ($event) => searchQuery.value = $event,
-                            type: "text",
-                            placeholder: "Search patient or result type...",
-                            class: "w-full px-3 sm:px-4 py-2 sm:py-2.5 pl-9 sm:pl-10 text-sm sm:text-base border border-gray-300 rounded-lg placeholder:text-gray-400 placeholder:text-sm sm:placeholder:text-base focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                          }, null, 8, ["onUpdate:modelValue"]), [
-                            [vModelText, searchQuery.value]
+                        createVNode("div", { class: "flex gap-10 justify-between items-center w-full sm:w-auto sm:max-w-md lg:max-w-xl" }, [
+                          createVNode("div", { class: "relative lg:w-[80%] sm:w-auto sm:max-w-md" }, [
+                            withDirectives(createVNode("input", {
+                              "onUpdate:modelValue": ($event) => searchQuery.value = $event,
+                              type: "text",
+                              placeholder: "Search patient or result type...",
+                              class: "w-full px-3 sm:px-4 py-2 sm:py-2.5 pl-9 sm:pl-10 text-sm sm:text-base border border-gray-300 rounded-lg placeholder:text-gray-400 placeholder:text-sm sm:placeholder:text-base focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                            }, null, 8, ["onUpdate:modelValue"]), [
+                              [vModelText, searchQuery.value]
+                            ]),
+                            createVNode("span", { class: "absolute text-base sm:text-lg text-gray-400 transform -translate-y-1/2 left-3 top-1/2" }, " 🔍 ")
                           ]),
-                          createVNode("span", { class: "absolute text-base sm:text-lg text-gray-400 transform -translate-y-1/2 left-3 top-1/2" }, " 🔍 ")
+                          createVNode("div", { class: "flex gap-2 items-center" }, [
+                            createVNode("button", {
+                              onClick: ($event) => filteredResults(),
+                              class: "w-[20%] sm:w-auto sm:max-w-md lg:max-w-lg px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base font-semibold text-white transition-all bg-primaryDark rounded-lg hover:bg-primaryDark/90 hover:shadow-lg disabled:bg-gray-400 disabled:cursor-not-allowed disabled:hover:transform-none"
+                            }, " Search ", 8, ["onClick"]),
+                            createVNode("button", {
+                              onClick: clearFilteredResults,
+                              class: "w-[20%] sm:w-auto sm:max-w-md lg:max-w-lg px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base font-semibold text-white transition-all bg-primaryDark rounded-lg hover:bg-primaryDark/90 hover:shadow-lg disabled:bg-gray-400 disabled:cursor-not-allowed disabled:hover:transform-none"
+                            }, " Clear ")
+                          ])
                         ])
                       ])
                     ]),
@@ -329,14 +381,20 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                           ])
                         ]),
                         createVNode("div", { class: "w-full py-3 bg-transparent flex items-center h-full gap-10 justify-end px-5" }, [
-                          createVNode("button", {
-                            onClick: ($event) => getPage(props.nextPage),
+                          __props.prevPage !== null ? (openBlock(), createBlock(unref(Link), {
+                            key: 0,
+                            href: __props.prevPage ?? "#",
+                            innerHTML: "Prev",
+                            "preserve-scroll": "",
                             class: "btn bg-primaryDark rounded-xl hover:text-primaryDark hover:bg-white hover:shadow-primaryDark/30 px-3 text-lg font-bold py-2 shadow-md text-white"
-                          }, "Prev", 8, ["onClick"]),
-                          createVNode("button", {
-                            onClick: ($event) => getPage(props.prevPage),
+                          }, null, 8, ["href"])) : createCommentVNode("", true),
+                          __props.nextPage !== null ? (openBlock(), createBlock(unref(Link), {
+                            key: 1,
+                            href: __props.nextPage,
+                            innerHTML: "Next",
+                            "preserve-scroll": "",
                             class: "btn bg-primaryDark rounded-xl hover:text-primaryDark hover:bg-white hover:shadow-primaryDark/30 px-3 text-lg font-bold py-2 shadow-md text-white"
-                          }, "Next", 8, ["onClick"])
+                          }, null, 8, ["href"])) : createCommentVNode("", true)
                         ])
                       ])
                     ])
@@ -536,7 +594,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                           return openBlock(), createBlock("p", {
                             key: file.id,
                             class: "text-sm text-gray-600"
-                          }, "File: " + toDisplayString(file.original_file_name), 1);
+                          }, " File: " + toDisplayString(file.original_file_name), 1);
                         }), 128)),
                         createVNode("p", { class: "text-sm text-gray-600" }, "Uploaded: " + toDisplayString(formatDate(previewFile.value.uploaded_at)), 1)
                       ]),

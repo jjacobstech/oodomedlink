@@ -40,6 +40,7 @@ Route::prefix('clinic')->middleware(['auth:clinic'])->group(function () {
       Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
       Route::prefix('result')->group(function () {
+            Route::post("/fetch",  [DashboardController::class, 'fetchDashboard'])->name('user.fetch.dashboard');
             Route::post('/', [FilesController::class, 'index'])->name('clinic.result');
             Route::post('upload', [FilesController::class, 'upload'])->name('clinic.result.upload');
             Route::post('send', [FilesController::class, 'send'])->name('clinic.result.send');
