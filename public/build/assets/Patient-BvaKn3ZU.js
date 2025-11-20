@@ -1,1 +1,0 @@
-import{d as e}from"./app-Ji7o7nMj.js";const r=e({__name:"Patient",props:{patients:{}},setup(t){return console.log(t),(o,p)=>null}});export{r as default};

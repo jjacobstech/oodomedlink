@@ -1,55 +1,39 @@
 <template>
-    <nav
-        class="navbar fixed top-0 z-50 flex w-full items-center bg-base-100 bg-white px-4 py-3 shadow-md md:px-8 lg:px-12"
-    >
+    <nav class="navbar fixed top-0 z-50 flex w-full items-center  bg-primaryDark px-4 py-3 shadow-md md:px-8 lg:px-12">
         <div class="flex w-full items-center justify-between">
             <!-- Logo -->
             <ApplicationLogo />
         </div>
 
         <!-- Mobile Menu -->
-        <Transition
-            enter-active-class="transition-all duration-300 ease-out"
-            leave-active-class="transition-all duration-200 ease-in"
-            enter-from-class="opacity-0 -translate-y-4"
-            enter-to-class="opacity-100 translate-y-0"
-            leave-from-class="opacity-100 translate-y-0"
-            leave-to-class="opacity-0 -translate-y-4"
-        >
-            <div
-                v-if="mobileMenu"
-                class="absolute left-0 right-0 top-full z-50 border-t bg-white shadow-lg lg:hidden"
-            >
+        <Transition enter-active-class="transition-all duration-300 ease-out"
+            leave-active-class="transition-all duration-200 ease-in" enter-from-class="opacity-0 -translate-y-4"
+            enter-to-class="opacity-100 translate-y-0" leave-from-class="opacity-100 translate-y-0"
+            leave-to-class="opacity-0 -translate-y-4">
+            <div v-if="mobileMenu"
+                class="absolute left-0 right-0 top-full z-50 border-t bg-primaryDark shadow-lg lg:hidden">
                 <div class="flex flex-col space-y-4 p-4">
                     <!-- Mobile Searchbar -->
                     <div
-                        class="focus-within:border-deepblue group flex items-center rounded-md border-2 border-transparent shadow-lg transition-colors duration-200"
-                    >
+                        class="focus-within:border-primaryDark group flex items-center rounded-md border-2 border-transparent shadow-lg transition-colors duration-200">
                         <div class="px-3">
                             <Magnifer
-                                class="group-focus-within:text-deepblue h-5 w-auto text-gray-400 transition-colors duration-200"
-                            />
+                                class="group-focus-within:text-primaryDark h-5 w-auto text-gray-400 transition-colors duration-200" />
                         </div>
-                        <input
-                            type="text"
+                        <input type="text"
                             class="w-full border-none bg-transparent px-2 py-2 text-sm outline-none focus:ring-0"
-                            placeholder="Search..."
-                        />
+                            placeholder="Search..." />
                     </div>
 
                     <!-- Mobile Auth Buttons -->
                     <div class="flex flex-col space-y-3 border-t pt-2">
-                        <Link
-                            href="/login"
-                            class="bg-deepblue hover:shadow-deepblue/30 btn flex cursor-pointer items-center justify-center rounded-lg text-white transition-all duration-200 hover:shadow-lg"
-                        >
-                            Login
+                        <Link href="/login"
+                            class="bg-primaryDark hover:shadow-primaryDark/30 btn flex cursor-pointer items-center justify-center rounded-lg text-white transition-all duration-200 hover:shadow-lg">
+                        Login
                         </Link>
-                        <Link
-                            href="/signup"
-                            class="bg-deepgreen hover:shadow-deepgreen/30 btn flex cursor-pointer items-center justify-center rounded-lg text-white transition-all duration-200 hover:shadow-lg"
-                        >
-                            Admin Signup
+                        <Link href="/signup"
+                            class="bg-primaryDark hover:shadow-primaryDark/30 btn flex cursor-pointer items-center justify-center rounded-lg text-white transition-all duration-200 hover:shadow-lg">
+                        Admin Signup
                         </Link>
                     </div>
                 </div>

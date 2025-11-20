@@ -8,7 +8,8 @@ import {
     SidebarMenuButton,
 } from '@/components/ui/sidebar';
 import { Link, useForm, usePage } from '@inertiajs/vue3';
-import { Home, Logout } from '@solar-icons/vue';
+import { Home, Letter, Logout, UserBlock } from '@solar-icons/vue';
+import { Cog } from 'lucide-vue-next';
 import { ref } from 'vue';
 import ApplicationLogo from '../ApplicationLogo.vue';
 
@@ -18,18 +19,19 @@ const userForm = useForm({
     ...page.props.auth.user,
 });
 
-const activeRoute = ref(window.location.pathname);
+const activeRoute = ref(page.props.ziggy.location);
 
 const menuItems = [
-    {
-        href: route('admin.dashboard'),
-        icon: Home,
-        label: 'Dashboard',
-        gradient: 'from-deepblue to-cyan-500',
-    },
+    { href: route('admin.dashboard'), icon: Home, label: 'Dashboard' },
+
 ];
 
-const isActive = (href: string) => activeRoute.value === href;
+const isActive = (href: string) => {
+    if (activeRoute.value === href) {
+        return true;
+    }
+    return false;
+};
 
 const logout = () => {
     userForm.post(route('admin.logout'));
@@ -37,111 +39,103 @@ const logout = () => {
 </script>
 
 <template>
-    <Sidebar
-        class="border-r border-slate-200 bg-gradient-to-b from-slate-50 to-slate-100 dark:border-slate-800 dark:to-slate-950 xl:dark:from-slate-900"
-    >
-        <SidebarHeader
-            class="flex items-center justify-between border-b border-slate-200 bg-white/50 py-4 backdrop-blur-sm dark:border-slate-800 dark:bg-slate-900/50"
-        >
+    <Sidebar class="bg-primaryDark">
+        <!-- Header -->
+        <SidebarHeader class="flex items-center justify-between bg-primaryDark py-4 backdrop-blur-sm sm:py-5 lg:py-7">
             <div
-                class="transform transition-transform duration-300 hover:scale-105"
-            >
+                class="transform rounded-lg bg-white p-1.5 transition-transform duration-300 hover:scale-105 sm:rounded-xl sm:p-2">
                 <ApplicationLogo />
             </div>
         </SidebarHeader>
 
-        <SidebarContent class="py-4">
-            <SidebarGroup class="space-y-2">
+        <!-- Content -->
+        <SidebarContent class="bg-primaryDark py-3 sm:py-4">
+            <SidebarGroup class="space-y-2 sm:space-y-3 lg:space-y-4">
                 <div v-for="item in menuItems" :key="item.href">
-                    <SidebarMenuButton
-                        class="group relative overflow-hidden"
-                        :class="
-                            isActive(item.href)
-                                ? 'bg-white shadow-lg shadow-slate-200/50 dark:bg-slate-800 dark:shadow-slate-900/50'
-                                : 'hover:bg-white/60 dark:hover:bg-slate-800/60'
-                        "
-                    >
-                        <Link
-                            :href="item.href"
-                            class="relative z-10 flex w-full items-center gap-3 transition-all duration-300"
-                            :class="
-                                isActive(item.href)
-                                    ? 'text-slate-900 dark:text-white'
-                                    : 'text-slate-600 dark:text-slate-400'
-                            "
-                        >
-                            <!-- Animated gradient background on hover -->
-                            <div
-                                class="absolute inset-0 -z-10 bg-gradient-to-r opacity-0 transition-opacity duration-300 group-hover:opacity-10"
-                                :class="item.gradient"
-                            ></div>
+                    <SidebarMenuButton v-if="isActive(item.href)"
+                        class="group relative overflow-hidden bg-primaryLight text-primaryDark">
+                        <Link :href="item.href"
+                            class="relative z-10 flex w-full items-center gap-2 rounded-lg px-3 py-2 transition-all duration-300 sm:gap-3 sm:px-4 sm:py-2.5 lg:py-3">
+                        <!-- Animated gradient background on hover -->
+                        <div
+                            class="absolute inset-0 -z-10 opacity-0 transition-opacity duration-300 group-hover:opacity-10">
+                        </div>
 
-                            <!-- Active indicator -->
-                            <div
-                                v-if="isActive(item.href)"
-                                class="absolute left-0 top-1/2 h-8 w-1 -translate-y-1/2 animate-pulse rounded-r-full bg-gradient-to-b"
-                                :class="item.gradient"
-                            ></div>
+                        <!-- Active indicator (uncomment if needed) -->
+                        <!-- <div v-if="isActive(item.href)" class="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-6 sm:h-8 bg-primaryLight rounded-r-full animate-pulse"></div> -->
 
-                            <!-- Icon with gradient on active -->
-                            <div
-                                class="relative rounded-lg p-2 transition-all duration-300 group-hover:scale-110"
-                                :class="
-                                    isActive(item.href)
-                                        ? 'bg-gradient-to-br ' +
-                                          item.gradient +
-                                          ' text-white shadow-md'
-                                        : 'bg-slate-100 dark:bg-slate-800'
-                                "
-                            >
-                                <component
-                                    :is="item.icon"
-                                    class="h-5 w-5 transition-transform duration-300"
-                                    :class="
-                                        !isActive(item.href)
-                                            ? 'text-slate-600 dark:text-slate-400'
-                                            : ''
-                                    "
-                                />
-                            </div>
+                        <!-- Icon with gradient on active -->
+                        <div
+                            class="relative flex-shrink-0 rounded-lg p-1.5 transition-all duration-300 group-hover:scale-110 sm:p-2">
+                            <component :is="item.icon"
+                                class="h-5 w-5 transition-transform duration-300 sm:h-6 sm:w-6 lg:h-7 lg:w-7" />
+                        </div>
 
-                            <span
-                                class="font-medium transition-all duration-300 group-hover:translate-x-1"
-                            >
-                                {{ item.label }}
-                            </span>
+                        <!-- Label -->
+                        <span
+                            class="text-sm font-semibold transition-all duration-300 group-hover:translate-x-1 sm:text-base lg:text-lg">
+                            {{ item.label }}
+                        </span>
 
-                            <!-- Hover shimmer effect -->
-                            <div
-                                class="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover:translate-x-full"
-                            ></div>
+                        <!-- Hover shimmer effect -->
+                        <div
+                            class="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover:translate-x-full">
+                        </div>
+                        </Link>
+                    </SidebarMenuButton>
+                    <SidebarMenuButton v-else
+                        class="group relative overflow-hidden text-white hover:bg-primaryLight hover:text-primaryDark">
+                        <Link :href="item.href"
+                            class="relative z-10 flex w-full items-center gap-2 rounded-lg px-3 py-2 transition-all duration-300 sm:gap-3 sm:px-4 sm:py-2.5 lg:py-3">
+                        <!-- Animated gradient background on hover -->
+                        <div
+                            class="absolute inset-0 -z-10 opacity-0 transition-opacity duration-300 group-hover:opacity-10">
+                        </div>
+
+                        <!-- Active indicator (uncomment if needed) -->
+                        <!-- <div v-if="isActive(item.href)" class="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-6 sm:h-8 bg-primaryLight rounded-r-full animate-pulse"></div> -->
+
+                        <!-- Icon with gradient on active -->
+                        <div
+                            class="relative flex-shrink-0 rounded-lg p-1.5 transition-all duration-300 group-hover:scale-110 sm:p-2">
+                            <component :is="item.icon"
+                                class="h-5 w-5 transition-transform duration-300 sm:h-6 sm:w-6 lg:h-7 lg:w-7" />
+                        </div>
+
+                        <!-- Label -->
+                        <span
+                            class="text-sm font-semibold transition-all duration-300 group-hover:translate-x-1 sm:text-base lg:text-lg">
+                            {{ item.label }}
+                        </span>
+
+                        <!-- Hover shimmer effect -->
+                        <div
+                            class="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover:translate-x-full">
+                        </div>
                         </Link>
                     </SidebarMenuButton>
                 </div>
             </SidebarGroup>
         </SidebarContent>
 
-        <SidebarFooter
-            class="border-t border-slate-200 bg-white/30 p-3 backdrop-blur-sm dark:border-slate-800 dark:bg-slate-900/30"
-        >
+        <!-- Footer -->
+        <SidebarFooter class="bg-primaryDark p-2 backdrop-blur-sm sm:p-3">
             <SidebarMenuButton
-                class="group transition-all duration-300 hover:bg-red-50 dark:hover:bg-red-950/20"
-            >
-                <a
-                    @click="logout"
-                    class="flex w-full items-center gap-3 text-slate-600 transition-colors duration-300 hover:text-red-600 dark:text-slate-400 dark:hover:text-red-400"
-                >
+                class="group rounded-lg transition-all duration-300 hover:bg-red-50 dark:hover:bg-red-950/20">
+                <a @click="logout"
+                    class="flex w-full cursor-pointer items-center gap-2 px-3 py-2 transition-colors duration-300 sm:gap-3 sm:px-4 sm:py-2.5 lg:py-3">
+                    <!-- Logout Icon -->
                     <div
-                        class="rounded-lg bg-slate-100 p-2 transition-all duration-300 group-hover:scale-110 group-hover:bg-red-100 dark:bg-slate-800 dark:group-hover:bg-red-950/30"
-                    >
+                        class="flex-shrink-0 rounded-lg p-1.5 transition-all duration-300 group-hover:scale-110 sm:p-2">
                         <Logout
-                            class="h-5 w-5 transition-transform duration-300 group-hover:rotate-12"
-                        />
+                            class="h-5 w-5 text-white transition-all duration-300 group-hover:rotate-12 group-hover:text-red-600 sm:h-6 sm:w-6 lg:h-7 lg:w-7" />
                     </div>
+
+                    <!-- Logout Label -->
                     <span
-                        class="font-medium transition-all duration-300 group-hover:translate-x-1"
-                        >Logout</span
-                    >
+                        class="text-sm font-semibold text-white transition-all duration-300 group-hover:translate-x-1 group-hover:text-red-600 sm:text-base lg:text-lg">
+                        Logout
+                    </span>
                 </a>
             </SidebarMenuButton>
         </SidebarFooter>
@@ -158,29 +152,6 @@ const logout = () => {
     100% {
         transform: translateX(100%);
     }
-}
-
-/* Custom scrollbar for sidebar content */
-:deep(.sidebar-content) {
-    scrollbar-width: thin;
-    scrollbar-color: rgba(148, 163, 184, 0.3) transparent;
-}
-
-:deep(.sidebar-content)::-webkit-scrollbar {
-    width: 6px;
-}
-
-:deep(.sidebar-content)::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-:deep(.sidebar-content)::-webkit-scrollbar-thumb {
-    background-color: rgba(148, 163, 184, 0.3);
-    border-radius: 3px;
-}
-
-:deep(.sidebar-content)::-webkit-scrollbar-thumb:hover {
-    background-color: rgba(148, 163, 184, 0.5);
 }
 
 /* Glassmorphism effect */
