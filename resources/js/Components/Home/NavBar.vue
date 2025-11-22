@@ -1,62 +1,34 @@
 <template>
     <nav
-        class="navbar fixed top-0 z-50 flex w-full items-center bg-base-100 bg-white px-4 py-3 shadow-md md:px-8 lg:px-12"
-    >
-        <div class="flex w-full items-center justify-between">
+        class="navbar fixed top-0 z-50 flex w-full items-center bg-base-100 bg-white px-4 py-3 shadow-md md:px-8 lg:px-12">
+        <div class="flex w-full items-center gap-5 justify-between">
             <!-- Logo -->
             <ApplicationLogo />
 
             <!-- Desktop Navigation -->
-            <div
-                class="hidden items-center justify-center gap-6 text-xl lg:flex xl:gap-16"
-            >
+            <div class="hidden items-center justify-center gap-6 text-xl lg:flex xl:gap-10">
                 <!-- dropdown -->
                 <div class="flex-none">
                     <div class="relative">
-                        <div
-                            tabindex="0"
-                            role="button"
-                            @click="drop = !drop"
-                            class="btn m-1 rounded bg-white text-xl text-primaryDark"
-                        >
+                        <div tabindex="0" role="button" @click="drop = !drop"
+                            class="btn m-1 rounded bg-white text-xl text-primaryDark">
                             Clinics
-                            <span
-                                class="transition-all duration-150 ease-in-out"
-                                :class="{ 'rotate-180': drop }"
-                            >
-                                <SquareAltArrowUp
-                                    v-show="!drop"
-                                    class="animate-in-out duration-150"
-                                    weight="Broken"
-                                />
-                                <SquareAltArrowDown
-                                    v-show="drop"
-                                    class="animate-in-out rotate-180 duration-150"
-                                    weight="Broken"
-                                />
+                            <span class="transition-all duration-150 ease-in-out" :class="{ 'rotate-180': drop }">
+                                <SquareAltArrowUp v-show="!drop" class="animate-in-out duration-150" weight="Broken" />
+                                <SquareAltArrowDown v-show="drop" class="animate-in-out rotate-180 duration-150"
+                                    weight="Broken" />
                             </span>
                         </div>
-                        <Transition
-                            v-if="drop"
-                            ref="dropDown"
-                            enter-active-class="transition-all duration-200"
-                            leave-active-class="transition-all duration-150"
-                            enter-from-class="opacity-0 translate-y-1"
-                            enter-to-class="opacity-100 translate-y-0"
-                            leave-from-class="opacity-100 translate-y-0"
-                            leave-to-class="opacity-0 translate-y-1"
-                        >
+                        <Transition v-if="drop" ref="dropDown" enter-active-class="transition-all duration-200"
+                            leave-active-class="transition-all duration-150" enter-from-class="opacity-0 translate-y-1"
+                            enter-to-class="opacity-100 translate-y-0" leave-from-class="opacity-100 translate-y-0"
+                            leave-to-class="opacity-0 translate-y-1">
                             <ul
-                                class="z-1 menu-compact dropdown-content menu absolute w-52 rounded-md bg-base-100 bg-primaryDark p-1 text-xl text-white shadow-sm"
-                            >
-                                <li
-                                    class="rounded-md hover:bg-white hover:text-primaryDark"
-                                >
+                                class="z-1 menu-compact dropdown-content menu absolute w-52 rounded-md bg-base-100 bg-primaryDark p-1 text-xl text-white shadow-sm">
+                                <li class="rounded-md hover:bg-white hover:text-primaryDark">
                                     <a>Item 1</a>
                                 </li>
-                                <li
-                                    class="rounded-md hover:bg-white hover:text-primaryDark"
-                                >
+                                <li class="rounded-md hover:bg-white hover:text-primaryDark">
                                     <a>Item 2</a>
                                 </li>
                             </ul>
@@ -66,37 +38,25 @@
 
                 <!-- Searchbar -->
                 <div
-                    class="group relative flex w-48 items-center justify-center rounded-md border-2 border-transparent text-xl shadow-lg transition-colors duration-200 focus-within:border-primaryDark xl:w-80"
-                >
+                    class="group relative flex w-48 items-center justify-center rounded-md border-2 border-transparent text-xl shadow-lg transition-colors duration-200 focus-within:border-primaryDark xl:w-80">
                     <div class="px-2">
                         <Magnifer
-                            class="h-5 w-auto text-gray-400 transition-colors duration-200 group-focus-within:text-primaryDark"
-                        />
+                            class="h-5 w-auto text-gray-400 transition-colors duration-200 group-focus-within:text-primaryDark" />
                     </div>
-                    <input
-                        type="text"
-                        @click="loadResults"
+                    <input type="text" @click="loadResults"
                         class="w-full border-none bg-transparent px-2 py-2 text-xl outline-none focus:ring-0"
-                        placeholder="Search..."
-                    />
+                        placeholder="Search..." />
 
                     <div v-if="searchDropDown" ref="resultDropDown">
-                        <div
-                            v-if="searchResults.length <= 0"
-                            class="absolute right-0 top-14 flex h-auto w-full items-center justify-center rounded-md bg-white text-white shadow-lg"
-                        >
+                        <div v-if="searchResults.length <= 0"
+                            class="absolute right-0 top-14 flex h-auto w-full items-center justify-center rounded-md bg-white text-white shadow-lg">
                             <p class="text-black">No results found</p>
                         </div>
 
-                        <div
-                            v-if="searchResults.length > 0"
-                            class="absolute right-0 top-11 z-50 grid h-auto w-full items-center gap-2 rounded-md bg-blue-200 px-3 py-3 text-white shadow-lg"
-                        >
-                            <div
-                                class="w-full rounded-md bg-black px-3 py-1 text-white shadow-md"
-                                v-for="result in searchResults"
-                                :key="result.id"
-                            >
+                        <div v-if="searchResults.length > 0"
+                            class="absolute right-0 top-11 z-50 grid h-auto w-full items-center gap-2 rounded-md bg-blue-200 px-3 py-3 text-white shadow-lg">
+                            <div class="w-full rounded-md bg-black px-3 py-1 text-white shadow-md"
+                                v-for="result in searchResults" :key="result.id">
                                 <p>{{ result.title }}</p>
                                 <p>{{ result.description }}</p>
                             </div>
@@ -105,148 +65,82 @@
                 </div>
 
                 <!-- Links -->
-                <div
-                    class="flex items-center justify-center gap-6 text-xl font-extrabold xl:gap-10"
-                >
+                <div class="flex items-center justify-center gap-6 text-xl font-extrabold xl:gap-10">
                     <p
-                        class="relative cursor-pointer text-primaryDark duration-200 after:absolute after:bottom-0 after:left-1/2 after:h-0.5 after:w-0 after:-translate-x-1/2 after:bg-primaryDark after:transition-all after:duration-300 after:content-[''] hover:-translate-y-1 hover:after:w-full"
-                    >
+                        class="relative cursor-pointer text-primaryDark duration-200 after:absolute after:bottom-0 after:left-1/2 after:h-0.5 after:w-0 after:-translate-x-1/2 after:bg-primaryDark after:transition-all after:duration-300 after:content-[''] hover:-translate-y-1 hover:after:w-full">
                         Blog
                     </p>
                     <p
-                        class="relative cursor-pointer text-primaryDark duration-200 after:absolute after:bottom-0 after:left-1/2 after:h-0.5 after:w-0 after:-translate-x-1/2 after:bg-primaryDark after:transition-all after:duration-300 after:content-[''] hover:-translate-y-1 hover:after:w-full"
-                    >
+                        class="relative cursor-pointer text-primaryDark duration-200 after:absolute after:bottom-0 after:left-1/2 after:h-0.5 after:w-0 after:-translate-x-1/2 after:bg-primaryDark after:transition-all after:duration-300 after:content-[''] hover:-translate-y-1 hover:after:w-full">
                         About Us
                     </p>
                 </div>
             </div>
 
             <!-- Desktop Authentication -->
-            <div
-                class="hidden items-center justify-center gap-4 text-xl font-extrabold lg:flex xl:gap-10"
-            >
-                <Link
-                    :href="route('login')"
-                    class="btn btn-lg flex cursor-pointer items-center justify-center rounded-lg border-2 border-primaryDark bg-white text-xl text-primaryDark transition-all duration-200 hover:-translate-y-1 hover:bg-primaryDark hover:text-white hover:shadow-lg hover:shadow-primaryDark/30"
-                >
-                    Login
+            <div class="hidden items-center justify-center gap-4 text-xl font-extrabold lg:flex xl:gap-10">
+                <Link :href="route('login')"
+                    class="btn btn-lg flex cursor-pointer items-center justify-center rounded-lg border-2 border-primaryDark bg-white text-xl text-primaryDark transition-all duration-200 hover:-translate-y-1 hover:bg-primaryDark hover:text-white hover:shadow-lg hover:shadow-primaryDark/30">
+                Login
                 </Link>
-                <div
-                    @click="signup"
-                    class="btn btn-lg flex cursor-pointer items-center justify-center whitespace-nowrap rounded-lg bg-primaryDark text-xl text-white transition-all duration-200 hover:-translate-y-1 hover:shadow-lg hover:shadow-primaryDark/30"
-                >
+                <div @click="signup"
+                    class="btn btn-lg flex cursor-pointer items-center justify-center whitespace-nowrap rounded-lg bg-primaryDark text-xl text-white transition-all duration-200 hover:-translate-y-1 hover:shadow-lg hover:shadow-primaryDark/30">
                     Signup for free
                 </div>
             </div>
 
             <!-- Mobile Menu Button -->
-            <button
-                @click="mobileMenu = !mobileMenu"
-                class="p-2 text-primaryDark lg:hidden"
-            >
-                <svg
-                    v-if="!mobileMenu"
-                    class="h-6 w-6"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                >
-                    <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M4 6h16M4 12h16M4 18h16"
-                    />
+            <button @click="mobileMenu = !mobileMenu" class="p-2 text-primaryDark lg:hidden">
+                <svg v-if="!mobileMenu" class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                 </svg>
-                <svg
-                    v-else
-                    class="h-6 w-6"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                >
-                    <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M6 18L18 6M6 6l12 12"
-                    />
+                <svg v-else class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
             </button>
         </div>
 
         <!-- Mobile Menu -->
-        <Transition
-            enter-active-class="transition-all duration-300 ease-out"
-            leave-active-class="transition-all duration-200 ease-in"
-            enter-from-class="opacity-0 -translate-y-4"
-            enter-to-class="opacity-100 translate-y-0"
-            leave-from-class="opacity-100 translate-y-0"
-            leave-to-class="opacity-0 -translate-y-4"
-        >
-            <div
-                v-if="mobileMenu"
-                class="absolute left-0 right-0 top-full z-50 border-t bg-white shadow-lg lg:hidden"
-            >
+        <Transition enter-active-class="transition-all duration-300 ease-out"
+            leave-active-class="transition-all duration-200 ease-in" enter-from-class="opacity-0 -translate-y-4"
+            enter-to-class="opacity-100 translate-y-0" leave-from-class="opacity-100 translate-y-0"
+            leave-to-class="opacity-0 -translate-y-4">
+            <div v-if="mobileMenu" class="absolute left-0 right-0 top-full z-50 border-t bg-white shadow-lg lg:hidden">
                 <div class="flex flex-col space-y-4 p-4">
                     <!-- Mobile Searchbar -->
                     <div
-                        class="group flex items-center rounded-md border-2 border-transparent shadow-lg transition-colors duration-200 focus-within:border-primaryDark"
-                    >
+                        class="group flex items-center rounded-md border-2 border-transparent shadow-lg transition-colors duration-200 focus-within:border-primaryDark">
                         <div class="px-3">
                             <Magnifer
-                                class="h-5 w-auto text-gray-400 transition-colors duration-200 group-focus-within:text-primaryDark"
-                            />
+                                class="h-5 w-auto text-gray-400 transition-colors duration-200 group-focus-within:text-primaryDark" />
                         </div>
-                        <input
-                            type="text"
+                        <input type="text"
                             class="w-full border-none bg-transparent px-2 py-2 text-sm outline-none focus:ring-0"
-                            placeholder="Search..."
-                        />
+                            placeholder="Search..." />
                     </div>
 
                     <!-- Mobile Dropdown -->
                     <div>
-                        <button
-                            @click="dropMobile = !dropMobile"
-                            class="btn w-full justify-between rounded bg-gray-50 text-left text-primaryDark"
-                        >
+                        <button @click="dropMobile = !dropMobile"
+                            class="btn w-full justify-between rounded bg-gray-50 text-left text-primaryDark">
                             Clinics
-                            <span
-                                class="transition-transform duration-150 ease-in-out"
-                                :class="{ 'rotate-180': dropMobile }"
-                            >
-                                <SquareAltArrowUp
-                                    v-show="!dropMobile"
-                                    weight="Broken"
-                                />
-                                <SquareAltArrowDown
-                                    v-show="dropMobile"
-                                    class="rotate-180"
-                                    weight="Broken"
-                                />
+                            <span class="transition-transform duration-150 ease-in-out"
+                                :class="{ 'rotate-180': dropMobile }">
+                                <SquareAltArrowUp v-show="!dropMobile" weight="Broken" />
+                                <SquareAltArrowDown v-show="dropMobile" class="rotate-180" weight="Broken" />
                             </span>
                         </button>
-                        <Transition
-                            enter-active-class="transition-all duration-200"
-                            leave-active-class="transition-all duration-150"
-                            enter-from-class="opacity-0 -translate-y-2"
-                            enter-to-class="opacity-100 translate-y-0"
-                            leave-from-class="opacity-100 translate-y-0"
-                            leave-to-class="opacity-0 -translate-y-2"
-                        >
-                            <ul
-                                v-if="dropMobile"
-                                class="mt-2 space-y-1 rounded-md bg-primaryDark p-1"
-                            >
+                        <Transition enter-active-class="transition-all duration-200"
+                            leave-active-class="transition-all duration-150" enter-from-class="opacity-0 -translate-y-2"
+                            enter-to-class="opacity-100 translate-y-0" leave-from-class="opacity-100 translate-y-0"
+                            leave-to-class="opacity-0 -translate-y-2">
+                            <ul v-if="dropMobile" class="mt-2 space-y-1 rounded-md bg-primaryDark p-1">
                                 <li
-                                    class="rounded-md p-2 text-white transition-colors duration-150 hover:bg-white hover:text-primaryDark"
-                                >
+                                    class="rounded-md p-2 text-white transition-colors duration-150 hover:bg-white hover:text-primaryDark">
                                     <a>Item 1</a>
                                 </li>
                                 <li
-                                    class="rounded-md p-2 text-white transition-colors duration-150 hover:bg-white hover:text-primaryDark"
-                                >
+                                    class="rounded-md p-2 text-white transition-colors duration-150 hover:bg-white hover:text-primaryDark">
                                     <a>Item 2</a>
                                 </li>
                             </ul>
@@ -256,29 +150,23 @@
                     <!-- Mobile Links -->
                     <div class="flex flex-col space-y-3 border-t pt-2">
                         <p
-                            class="cursor-pointer text-primaryDark transition-transform duration-200 hover:translate-x-1"
-                        >
+                            class="cursor-pointer text-primaryDark transition-transform duration-200 hover:translate-x-1">
                             Blog
                         </p>
                         <p
-                            class="cursor-pointer text-primaryDark transition-transform duration-200 hover:translate-x-1"
-                        >
+                            class="cursor-pointer text-primaryDark transition-transform duration-200 hover:translate-x-1">
                             About Us
                         </p>
                     </div>
 
                     <!-- Mobile Auth Buttons -->
                     <div class="flex flex-col space-y-3 border-t pt-2">
-                        <Link
-                            :href="route('login')"
-                            class="btn flex cursor-pointer items-center justify-center rounded-lg bg-primaryDark text-white transition-all duration-200 hover:shadow-lg hover:shadow-primaryDark/30"
-                        >
-                            Login
+                        <Link :href="route('login')"
+                            class="btn flex cursor-pointer items-center justify-center rounded-lg bg-primaryDark text-white transition-all duration-200 hover:shadow-lg hover:shadow-primaryDark/30">
+                        Login
                         </Link>
-                        <div
-                            @click="signup"
-                            class="btn flex cursor-pointer items-center justify-center rounded-lg bg-primaryDark text-white transition-all duration-200 hover:shadow-lg hover:shadow-primaryDark/30"
-                        >
+                        <div @click="signup"
+                            class="btn flex cursor-pointer items-center justify-center rounded-lg bg-primaryDark text-white transition-all duration-200 hover:shadow-lg hover:shadow-primaryDark/30">
                             Signup for free
                         </div>
                     </div>
@@ -288,33 +176,17 @@
     </nav>
 
     <!-- Modal Overlay -->
-    <div
-        id="modal"
-        autofocus
-        v-if="selectionModal"
-        class="fixed inset-0 z-50 flex h-screen items-center justify-center bg-black bg-opacity-50 p-4 py-20"
-    >
+    <div id="modal" autofocus v-if="selectionModal"
+        class="fixed inset-0 z-50 flex h-screen items-center justify-center bg-black bg-opacity-50 p-4 py-20">
         <!-- Modal Container -->
         <div
-            class="relative h-full w-full max-w-4xl overflow-y-auto rounded-2xl bg-white p-6 pb-20 pt-14 shadow-2xl scrollbar-none md:p-10 lg:h-max"
-        >
+            class="relative h-full w-full max-w-4xl overflow-y-auto rounded-2xl bg-white p-6 pb-20 pt-14 shadow-2xl scrollbar-none md:p-10 lg:h-max">
             <!-- Close Button -->
-            <button
-                @click="closeModal"
-                class="absolute right-4 top-4 text-gray-400 transition-colors hover:text-gray-600"
-            >
-                <svg
-                    class="h-6 w-6"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                >
-                    <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M6 18L18 6M6 6l12 12"
-                    ></path>
+            <button @click="closeModal"
+                class="absolute right-4 top-4 text-gray-400 transition-colors hover:text-gray-600">
+                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                    </path>
                 </svg>
             </button>
 
@@ -331,93 +203,64 @@
             <!-- Options Container -->
             <div class="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6">
                 <!-- Clinics Option -->
-                <div
-                    @click=""
-                    class="group cursor-pointer rounded-xl border-2 border-gray-200 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-primaryDark hover:shadow-xl md:p-8"
-                >
+                <div @click=""
+                    class="group cursor-pointer rounded-xl border-2 border-gray-200 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-primaryDark hover:shadow-xl md:p-8">
                     <!-- Icon -->
                     <div
-                        class="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primaryLight transition-colors duration-300 group-hover:bg-primaryDark"
-                    >
-                        <svg
-                            class="h-8 w-8 text-primaryDark transition-colors duration-300 group-hover:text-white"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                        >
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
-                            ></path>
+                        class="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primaryLight transition-colors duration-300 group-hover:bg-primaryDark">
+                        <svg class="h-8 w-8 text-primaryDark transition-colors duration-300 group-hover:text-white"
+                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4">
+                            </path>
                         </svg>
                     </div>
 
                     <!-- Content -->
                     <h3
-                        class="mb-3 text-xl font-bold text-gray-800 transition-colors group-hover:text-primaryDark md:text-2xl"
-                    >
+                        class="mb-3 text-xl font-bold text-gray-800 transition-colors group-hover:text-primaryDark md:text-2xl">
                         Clinics
                     </h3>
-                    <p
-                        class="text-sm leading-relaxed text-gray-600 md:text-base"
-                    >
+                    <p class="text-sm leading-relaxed text-gray-600 md:text-base">
                         Manage multiple patients efficiently through
                         clinic-based workflows and batch operations
                     </p>
 
                     <!-- Action Button -->
                     <Link :href="route('signup')">
-                        <button
-                            class="mt-6 w-full rounded-lg bg-primaryDark px-6 py-3 font-semibold text-white transition-colors duration-300 hover:bg-primaryDark group-hover:shadow-lg"
-                        >
-                            Select Clinics
-                        </button>
+                    <button
+                        class="mt-6 w-full rounded-lg bg-primaryDark px-6 py-3 font-semibold text-white transition-colors duration-300 hover:bg-primaryDark group-hover:shadow-lg">
+                        Select Clinics
+                    </button>
                     </Link>
                 </div>
 
                 <!-- Individual Option -->
-                <div
-                    @click=""
-                    class="group cursor-pointer rounded-xl border-2 border-gray-200 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-primaryDark hover:shadow-xl md:p-8"
-                >
+                <div @click=""
+                    class="group cursor-pointer rounded-xl border-2 border-gray-200 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-primaryDark hover:shadow-xl md:p-8">
                     <!-- Icon -->
                     <div
-                        class="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primaryLight transition-colors duration-300 group-hover:bg-blue-500"
-                    >
-                        <svg
-                            class="h-8 w-8 text-primaryDark transition-colors duration-300 group-hover:text-white"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                        >
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                            ></path>
+                        class="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primaryLight transition-colors duration-300 group-hover:bg-blue-500">
+                        <svg class="h-8 w-8 text-primaryDark transition-colors duration-300 group-hover:text-white"
+                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                         </svg>
                     </div>
 
                     <!-- Content -->
                     <h3
-                        class="mb-3 text-xl font-bold text-gray-800 transition-colors group-hover:text-primaryDark md:text-2xl"
-                    >
+                        class="mb-3 text-xl font-bold text-gray-800 transition-colors group-hover:text-primaryDark md:text-2xl">
                         Individual
                     </h3>
-                    <p
-                        class="text-sm leading-relaxed text-gray-600 md:text-base"
-                    >
+                    <p class="text-sm leading-relaxed text-gray-600 md:text-base">
                         Add patients one at a time with complete control over
                         each entry and detailed information
                     </p>
 
                     <!-- Action Button -->
                     <button
-                        class="btn-disabled mt-6 w-full rounded-lg bg-primaryDark px-6 py-3 font-semibold text-white transition-colors duration-300 hover:bg-primaryDark group-hover:shadow-lg"
-                    >
+                        class="btn-disabled mt-6 w-full rounded-lg bg-primaryDark px-6 py-3 font-semibold text-white transition-colors duration-300 hover:bg-primaryDark group-hover:shadow-lg">
                         Coming Soon...
                     </button>
                 </div>

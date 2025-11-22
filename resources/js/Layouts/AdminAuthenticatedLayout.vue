@@ -9,7 +9,7 @@ import { Bell } from '@solar-icons/vue';
 const auth = usePage().props.auth;
 </script>
 
-<template class="fixed h-screen bg-primaryLight">
+<template class="fixed h-fill bg-primaryLight">
     <SidebarProvider>
         <AppSidebar />
         <main class="relative h-screen w-full bg-primaryLight">

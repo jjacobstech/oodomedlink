@@ -17,11 +17,13 @@ return new class extends Migration
             $table->string('patient_email', 225)->references('email')->on('patients')->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('sent_by', 225);
             $table->string('subject', 225);
-            $table->longText('body');
-            $table->enum('status', ['sent', 'pending', 'failed', 'bounced'])->default('pending');
-            $table->timestamp('sent_at');
+            $table->longText('body')->nullable();
+            $table->enum('status', ['sent', 'pending', 'failed', 'bounced', 'scheduled'])->default('pending');
+            $table->timestamp('sent_at')->nullable();
+            $table->timestamp('scheduled_at');
             $table->integer('delivery_attempts')->default(0);
             $table->longText('error_message')->nullable();
+
             $table->timestamps();
 
             $table->index('patient_result_id', 'idx_email_deliveries_patient_result_id');

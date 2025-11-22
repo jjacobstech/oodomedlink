@@ -30,10 +30,33 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property string|null $remember_token
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- *
  * @property Collection|PatientResult[] $patient_results
- *
  * @package App\Models
+ * @property string $name
+ * @property string|null $staff_no
+ * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
+ * @property-read int|null $notifications_count
+ * @property-read int|null $patient_results_count
+ * @method static \Database\Factories\ClinicFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Clinic newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Clinic newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Clinic query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Clinic whereAddress($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Clinic whereAvatar($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Clinic whereCountry($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Clinic whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Clinic whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Clinic whereEmailVerifiedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Clinic whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Clinic whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Clinic wherePassword($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Clinic wherePhoneNo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Clinic whereRememberToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Clinic whereStaffNo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Clinic whereState($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Clinic whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Clinic whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 class Clinic extends Authenticatable
 {

@@ -50,7 +50,7 @@ interface PatientResult {
     test_date: string;
     status: 'pending' | 'processed' | 'sent' | 'archived';
     uploaded_at: string;
-    files: file
+    files: file[]
 }
 
 interface EmailDelivery {
@@ -327,7 +327,7 @@ const getStatusColor = (status: string) => {
     <Head title="Admin Panel" />
 
     <AdminAuthenticatedLayout>
-        <div class="flex h-full w-full gap-1 overflow-hidden bg-gray-100">
+        <div class="flex w-full h-screen gap-1 overflow-hidden bg-gray-100">
             <!-- Main Content -->
             <div class="w-full overflow-y-auto p-6">
                 <!-- Header -->
@@ -458,44 +458,44 @@ const getStatusColor = (status: string) => {
                         </div>
                     </div>
 
+                    <!-- <!~~ Quick Actions ~~> -->
+                    <!-- <div class="rounded-xl bg-white p-6 shadow-sm"> -->
+                    <!-- <h3 class="mb-4 text-xl font-bold text-gray-900"> -->
                     <!-- Quick Actions -->
-                    <div class="rounded-xl bg-white p-6 shadow-sm">
-                        <h3 class="mb-4 text-xl font-bold text-gray-900">
-                            Quick Actions
-                        </h3>
-                        <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
-                            <button @click="openModal('clinic')"
-                                class="rounded-lg bg-blue-50 p-4 text-left transition-colors hover:bg-blue-100">
-                                <span class="text-2xl">🏥</span>
-                                <p class="mt-2 font-semibold text-gray-900">
-                                    Add New Clinic
-                                </p>
-                                <p class="text-sm text-gray-600">
-                                    Register a new healthcare facility
-                                </p>
-                            </button>
-                            <button @click="openModal('patient')"
-                                class="rounded-lg bg-green-50 p-4 text-left transition-colors hover:bg-green-100">
-                                <span class="text-2xl">👤</span>
-                                <p class="mt-2 font-semibold text-gray-900">
-                                    Add New Patient
-                                </p>
-                                <p class="text-sm text-gray-600">
-                                    Register a new patient record
-                                </p>
-                            </button>
-                            <button @click="openModal('admin')"
-                                class="rounded-lg bg-purple-50 p-4 text-left transition-colors hover:bg-purple-100">
-                                <span class="text-2xl">⚙️</span>
-                                <p class="mt-2 font-semibold text-gray-900">
-                                    Add New Admin
-                                </p>
-                                <p class="text-sm text-gray-600">
-                                    Create a new administrator account
-                                </p>
-                            </button>
-                        </div>
-                    </div>
+                    <!-- </h3> -->
+                    <!-- <div class="grid grid-cols-1 gap-4 md:grid-cols-3"> -->
+                    <!-- <button @click="openModal('clinic')" -->
+                    <!-- class="rounded-lg bg-blue-50 p-4 text-left transition-colors hover:bg-blue-100"> -->
+                    <!-- <span class="text-2xl">🏥</span> -->
+                    <!-- <p class="mt-2 font-semibold text-gray-900"> -->
+                    <!-- Add New Clinic -->
+                    <!-- </p> -->
+                    <!-- <p class="text-sm text-gray-600"> -->
+                    <!-- Register a new healthcare facility -->
+                    <!-- </p> -->
+                    <!-- </button> -->
+                    <!-- <button @click="openModal('patient')" -->
+                    <!-- class="rounded-lg bg-green-50 p-4 text-left transition-colors hover:bg-green-100"> -->
+                    <!-- <span class="text-2xl">👤</span> -->
+                    <!-- <p class="mt-2 font-semibold text-gray-900"> -->
+                    <!-- Add New Patient -->
+                    <!-- </p> -->
+                    <!-- <p class="text-sm text-gray-600"> -->
+                    <!-- Register a new patient record -->
+                    <!-- </p> -->
+                    <!-- </button> -->
+                    <!-- <button @click="openModal('admin')" -->
+                    <!-- class="rounded-lg bg-purple-50 p-4 text-left transition-colors hover:bg-purple-100"> -->
+                    <!-- <span class="text-2xl">⚙️</span> -->
+                    <!-- <p class="mt-2 font-semibold text-gray-900"> -->
+                    <!-- Add New Admin -->
+                    <!-- </p> -->
+                    <!-- <p class="text-sm text-gray-600"> -->
+                    <!-- Create a new administrator account -->
+                    <!-- </p> -->
+                    <!-- </button> -->
+                    <!-- </div> -->
+                    <!-- </div> -->
                 </div>
 
                 <!-- Clinics Tab -->
@@ -505,10 +505,10 @@ const getStatusColor = (status: string) => {
                             <h2 class="text-xl font-bold text-gray-900">
                                 Manage Clinics
                             </h2>
-                            <button @click="openModal('clinic')"
-                                class="rounded-lg bg-blue-600 px-6 py-3 font-semibold text-white transition-colors hover:bg-blue-700">
-                                + Add Clinic
-                            </button>
+                            <!-- <button @click="openModal('clinic')" -->
+                            <!-- class="rounded-lg bg-blue-600 px-6 py-3 font-semibold text-white transition-colors hover:bg-blue-700"> -->
+                            <!-- + Add Clinic -->
+                            <!-- </button> -->
                         </div>
 
                         <!-- Filters -->
@@ -526,11 +526,11 @@ const getStatusColor = (status: string) => {
                                     " class="rounded-lg px-4 py-2 font-medium transition-colors">
                                     Active
                                 </button>
-                                <button @click="filterStatus = 'suspended'" :class="filterStatus === 'suspended'
+                                <button @click="filterStatus = 'inactive'" :class="filterStatus === 'inactive'
                                     ? 'bg-red-600 text-white'
                                     : 'bg-gray-200 text-gray-700'
                                     " class="rounded-lg px-4 py-2 font-medium transition-colors">
-                                    Suspended
+                                    Inactive
                                 </button>
                             </div>
 
@@ -563,10 +563,10 @@ const getStatusColor = (status: string) => {
                                             class="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-700">
                                             Status
                                         </th>
-                                        <th
-                                            class="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-700">
-                                            Actions
-                                        </th>
+                                        <!-- <th -->
+                                        <!-- class="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-700"> -->
+                                        <!-- Actions -->
+                                        <!-- </th> -->
                                     </tr>
                                 </thead>
                                 <tbody class="divide-y divide-gray-200 bg-white">
@@ -592,42 +592,42 @@ const getStatusColor = (status: string) => {
                                                 {{ clinic.status }}
                                             </span>
                                         </td>
-                                        <td class="px-4 py-4 text-sm">
-                                            <div class="flex gap-2">
-                                                <button @click="
-                                                    openModal(
-                                                        'clinic',
-                                                        clinic,
-                                                    )
-                                                    "
-                                                    class="rounded bg-blue-100 px-3 py-1 text-xs font-medium text-blue-700 hover:bg-blue-200">
-                                                    Edit
-                                                </button>
-                                                <button v-if="
-                                                    clinic.status ===
-                                                    'active'
-                                                " @click="
-                                                    updateStatus(
-                                                        'clinic',
-                                                        clinic.id,
-                                                        'suspended',
-                                                    )
-                                                    "
-                                                    class="rounded bg-red-100 px-3 py-1 text-xs font-medium text-red-700 hover:bg-red-200">
-                                                    Suspend
-                                                </button>
-                                                <button v-else @click="
-                                                    updateStatus(
-                                                        'clinic',
-                                                        clinic.id,
-                                                        'active',
-                                                    )
-                                                    "
-                                                    class="rounded bg-green-100 px-3 py-1 text-xs font-medium text-green-700 hover:bg-green-200">
-                                                    Activate
-                                                </button>
-                                            </div>
-                                        </td>
+                                        <!-- <td class="px-4 py-4 text-sm"> -->
+                                        <!-- <div class="flex gap-2"> -->
+                                        <!-- <button @click=" -->
+                                        <!-- openModal( -->
+                                        <!-- 'clinic', -->
+                                        <!-- clinic, -->
+                                        <!-- ) -->
+                                        <!-- " -->
+                                        <!-- class="rounded bg-blue-100 px-3 py-1 text-xs font-medium text-blue-700 hover:bg-blue-200"> -->
+                                        <!-- Edit -->
+                                        <!-- </button> -->
+                                        <!-- <button v-if=" -->
+                                        <!-- clinic.status === -->
+                                        <!-- 'active' -->
+                                        <!-- " @click=" -->
+                                        <!-- updateStatus( -->
+                                        <!-- 'clinic', -->
+                                        <!-- clinic.id, -->
+                                        <!-- 'suspended', -->
+                                        <!-- ) -->
+                                        <!-- " -->
+                                        <!-- class="rounded bg-red-100 px-3 py-1 text-xs font-medium text-red-700 hover:bg-red-200"> -->
+                                        <!-- Suspend -->
+                                        <!-- </button> -->
+                                        <!-- <button v-else @click=" -->
+                                        <!-- updateStatus( -->
+                                        <!-- 'clinic', -->
+                                        <!-- clinic.id, -->
+                                        <!-- 'active', -->
+                                        <!-- ) -->
+                                        <!-- " -->
+                                        <!-- class="rounded bg-green-100 px-3 py-1 text-xs font-medium text-green-700 hover:bg-green-200"> -->
+                                        <!-- Activate -->
+                                        <!-- </button> -->
+                                        <!-- </div> -->
+                                        <!-- </td> -->
                                     </tr>
                                 </tbody>
                             </table>
@@ -642,10 +642,10 @@ const getStatusColor = (status: string) => {
                             <h2 class="text-xl font-bold text-gray-900">
                                 Manage Patients
                             </h2>
-                            <button @click="openModal('patient')"
-                                class="rounded-lg bg-green-600 px-6 py-3 font-semibold text-white transition-colors hover:bg-green-700">
-                                + Add Patient
-                            </button>
+                            <!-- <button @click="openModal('patient')" -->
+                            <!-- class="rounded-lg bg-green-600 px-6 py-3 font-semibold text-white transition-colors hover:bg-green-700"> -->
+                            <!-- + Add Patient -->
+                            <!-- </button> -->
                         </div>
 
                         <!-- Search -->
@@ -660,10 +660,7 @@ const getStatusColor = (status: string) => {
                             <table class="w-full">
                                 <thead class="bg-gray-50">
                                     <tr>
-                                        <th
-                                            class="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-700">
-                                            Patient ID
-                                        </th>
+
                                         <th
                                             class="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-700">
                                             Full Name
@@ -686,15 +683,13 @@ const getStatusColor = (status: string) => {
                                         </th>
                                         <th
                                             class="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-700">
-                                            Actions
+                                            Address
                                         </th>
                                     </tr>
                                 </thead>
                                 <tbody class="divide-y divide-gray-200 bg-white">
                                     <tr v-for="patient in filteredPatients" :key="patient.id" class="hover:bg-gray-50">
-                                        <td class="px-4 py-4 text-sm font-medium text-gray-900">
-                                            {{ patient.id }}
-                                        </td>
+
                                         <td class="px-4 py-4 text-sm text-gray-700">
                                             {{ patient.full_name }}
                                         </td>
@@ -702,37 +697,18 @@ const getStatusColor = (status: string) => {
                                             {{ patient.email }}
                                         </td>
                                         <td class="px-4 py-4 text-sm text-gray-700">
-                                            {{ patient.phone_no }}
+                                            {{ patient.phone_no ?? 'N/A' }}
                                         </td>
                                         <td class="px-4 py-4 text-sm text-gray-700">
                                             <span class="capitalize">{{
-                                                patient.gender
+                                                patient.gender ?? 'N/A'
                                             }}</span>
                                         </td>
                                         <td class="px-4 py-4 text-sm text-gray-700">
-                                            {{ patient.date_of_birth }}
+                                            {{ patient.date_of_birth ?? 'N/A' }}
                                         </td>
-                                        <td class="px-4 py-4 text-sm">
-                                            <div class="flex gap-2">
-                                                <button @click="
-                                                    openModal(
-                                                        'patient',
-                                                        patient,
-                                                    )
-                                                    "
-                                                    class="rounded bg-blue-100 px-3 py-1 text-xs font-medium text-blue-700 hover:bg-blue-200">
-                                                    Edit
-                                                </button>
-                                                <button @click="
-                                                    deleteItem(
-                                                        'patient',
-                                                        patient.id,
-                                                    )
-                                                    "
-                                                    class="rounded bg-red-100 px-3 py-1 text-xs font-medium text-red-700 hover:bg-red-200">
-                                                    Delete
-                                                </button>
-                                            </div>
+                                        <td class="px-4 py-4 text-sm text-gray-700">
+                                            {{ patient.date_of_birth ?? 'N/A' }}
                                         </td>
                                     </tr>
                                 </tbody>
@@ -812,10 +788,7 @@ const getStatusColor = (status: string) => {
                                             class="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-700">
                                             Uploaded
                                         </th>
-                                        <th
-                                            class="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-700">
-                                            Actions
-                                        </th>
+
                                     </tr>
                                 </thead>
                                 <tbody class="divide-y divide-gray-200 bg-white">
@@ -830,10 +803,10 @@ const getStatusColor = (status: string) => {
                                             {{ formatDate(result.test_date) }}
                                         </td>
                                         <td class="px-4 py-4 text-sm text-gray-700">
-                                            <span class="uppercase">{{
-                                                result.files.file_type || 'N/A'
+                                            <span class="probab">{{
+                                                result.files.map(file => file.file_type).join(', ') || 'N/A'
                                             }}
-                                        </span>
+                                            </span>
                                         </td>
                                         <td class="px-4 py-4 text-sm">
                                             <span :class="getStatusColor(
@@ -846,12 +819,7 @@ const getStatusColor = (status: string) => {
                                         <td class="px-4 py-4 text-sm text-gray-700">
                                             {{ formatDate(result.uploaded_at) }}
                                         </td>
-                                        <td class="px-4 py-4 text-sm">
-                                            <button v-if="result.files.file_path"
-                                                class="rounded bg-green-100 px-3 py-1 text-xs font-medium text-green-700 hover:bg-green-200">
-                                                View
-                                            </button>
-                                        </td>
+
                                     </tr>
                                 </tbody>
                             </table>
@@ -949,10 +917,7 @@ const getStatusColor = (status: string) => {
                                             class="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-700">
                                             Sent At
                                         </th>
-                                        <th
-                                            class="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-700">
-                                            Actions
-                                        </th>
+
                                     </tr>
                                 </thead>
                                 <tbody class="divide-y divide-gray-200 bg-white">
@@ -978,19 +943,9 @@ const getStatusColor = (status: string) => {
                                         <td class="px-4 py-4 text-sm text-gray-700">
                                             {{ formatDate(email.sent_at) }}
                                         </td>
-                                        <td class="px-4 py-4 text-sm">
-                                            <button v-if="email.status === 'failed'" @click="retryEmail(email.id)"
-                                                class="rounded bg-blue-100 px-3 py-1 text-xs font-medium text-blue-700 hover:bg-blue-200">
-                                                Retry
-                                            </button>
-                                            <span v-else class="text-xs text-gray-400">-</span>
-                                        </td>
+
                                     </tr>
-                                    <!-- <tr v-if="email.error_message" class="bg-red-50"> -->
-                                    <!-- <td colspan="7" class="px-4 py-2 text-xs text-red-700"> -->
-                                    <!-- Error: {{ email.error_message }} -->
-                                    <!-- </td> -->
-                                    <!-- </tr> -->
+
                                 </tbody>
                             </table>
                         </div>
@@ -999,15 +954,15 @@ const getStatusColor = (status: string) => {
 
                 <!-- Admins Tab -->
                 <div v-if="activeTab === 'admins'">
-                    <div class="rounded-xl bg-white p-6 shadow-sm">
+                    <div class="rounded-xl h-full bg-white p-6 shadow-sm">
                         <div class="mb-6 flex items-center justify-between">
                             <h2 class="text-xl font-bold text-gray-900">
                                 System Administrators
                             </h2>
-                            <button @click="openModal('admin')"
-                                class="rounded-lg bg-purple-600 px-6 py-3 font-semibold text-white transition-colors hover:bg-purple-700">
-                                + Add Admin
-                            </button>
+                            <!-- <button @click="openModal('admin')" -->
+                            <!-- class="rounded-lg bg-purple-600 px-6 py-3 font-semibold text-white transition-colors hover:bg-purple-700"> -->
+                            <!-- + Add Admin -->
+                            <!-- </button> -->
                         </div>
 
                         <!-- Admins Table -->
@@ -1039,10 +994,7 @@ const getStatusColor = (status: string) => {
                                             class="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-700">
                                             Created
                                         </th>
-                                        <th
-                                            class="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-700">
-                                            Actions
-                                        </th>
+
                                     </tr>
                                 </thead>
                                 <tbody class="divide-y divide-gray-200 bg-white">
@@ -1077,47 +1029,7 @@ const getStatusColor = (status: string) => {
                                         <td class="px-4 py-4 text-sm text-gray-700">
                                             {{ formatDate(admin.created_at) }}
                                         </td>
-                                        <td class="px-4 py-4 text-sm">
-                                            <div class="flex gap-2">
-                                                <button @click="
-                                                    openModal(
-                                                        'admin',
-                                                        admin,
-                                                    )
-                                                    "
-                                                    class="rounded bg-blue-100 px-3 py-1 text-xs font-medium text-blue-700 hover:bg-blue-200">
-                                                    Edit
-                                                </button>
-                                                <button v-if="
-                                                    admin.status ===
-                                                    'active' &&
-                                                    admin.role !==
-                                                    'super_admin'
-                                                " @click="
-                                                    updateStatus(
-                                                        'admin',
-                                                        admin.id,
-                                                        'suspended',
-                                                    )
-                                                    "
-                                                    class="rounded bg-red-100 px-3 py-1 text-xs font-medium text-red-700 hover:bg-red-200">
-                                                    Suspend
-                                                </button>
-                                                <button v-else-if="
-                                                    admin.status !==
-                                                    'active'
-                                                " @click="
-                                                    updateStatus(
-                                                        'admin',
-                                                        admin.id,
-                                                        'active',
-                                                    )
-                                                    "
-                                                    class="rounded bg-green-100 px-3 py-1 text-xs font-medium text-green-700 hover:bg-green-200">
-                                                    Activate
-                                                </button>
-                                            </div>
-                                        </td>
+
                                     </tr>
                                 </tbody>
                             </table>
@@ -1125,218 +1037,218 @@ const getStatusColor = (status: string) => {
                     </div>
                 </div>
 
-                <!-- Modal for Add/Edit -->
-                <div v-if="showModal"
-                    class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-                    <div class="max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-xl bg-white p-6">
-                        <h3 class="mb-6 text-2xl font-bold text-gray-900">
-                            {{ selectedItem ? 'Edit' : 'Add New' }}
-                            {{
-                                modalType === 'clinic'
-                                    ? 'Clinic'
-                                    : modalType === 'patient'
-                                        ? 'Patient'
-                                        : 'Administrator'
-                            }}
-                        </h3>
-
-                        <!-- Clinic Form -->
-                        <form v-if="modalType === 'clinic'" @submit.prevent="submitForm" class="space-y-4">
-                            <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-                                <div>
-                                    <label class="mb-2 block text-sm font-medium text-gray-700">Clinic Name *</label>
-                                    <input v-model="clinicForm.name" type="text" required
-                                        class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-blue-500" />
-                                </div>
-                                <div>
-                                    <label class="mb-2 block text-sm font-medium text-gray-700">Email *</label>
-                                    <input v-model="clinicForm.email" type="email" required
-                                        class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-blue-500" />
-                                </div>
-                            </div>
-
-                            <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-                                <div>
-                                    <label class="mb-2 block text-sm font-medium text-gray-700">Phone Number *</label>
-                                    <input v-model="clinicForm.phone_no" type="tel" required
-                                        class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-blue-500" />
-                                </div>
-                                <div>
-                                    <label class="mb-2 block text-sm font-medium text-gray-700">Staff Number</label>
-                                    <input v-model="clinicForm.staff_no" type="text"
-                                        class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-blue-500" />
-                                </div>
-                            </div>
-
-                            <div>
-                                <label class="mb-2 block text-sm font-medium text-gray-700">Address *</label>
-                                <textarea v-model="clinicForm.address" required rows="3"
-                                    class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-blue-500"></textarea>
-                            </div>
-
-                            <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-                                <div>
-                                    <label class="mb-2 block text-sm font-medium text-gray-700">State *</label>
-                                    <input v-model="clinicForm.state" type="text" required
-                                        class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-blue-500" />
-                                </div>
-                                <div>
-                                    <label class="mb-2 block text-sm font-medium text-gray-700">Country *</label>
-                                    <input v-model="clinicForm.country" type="text" required
-                                        class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-blue-500" />
-                                </div>
-                            </div>
-
-                            <div v-if="!selectedItem">
-                                <label class="mb-2 block text-sm font-medium text-gray-700">Password *</label>
-                                <input v-model="clinicForm.password" type="password" :required="!selectedItem"
-                                    class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-blue-500" />
-                            </div>
-
-                            <div class="flex gap-3 pt-4">
-                                <button type="submit" :disabled="clinicForm.processing"
-                                    class="flex-1 rounded-lg bg-blue-600 px-4 py-3 font-semibold text-white hover:bg-blue-700 disabled:bg-gray-400">
-                                    {{
-                                        clinicForm.processing
-                                            ? 'Saving...'
-                                            : selectedItem
-                                                ? 'Update'
-                                                : 'Create'
-                                    }}
-                                </button>
-                                <button type="button" @click="closeModal"
-                                    class="flex-1 rounded-lg bg-gray-200 px-4 py-3 font-semibold text-gray-700 hover:bg-gray-300">
-                                    Cancel
-                                </button>
-                            </div>
-                        </form>
-
-                        <!-- Patient Form -->
-                        <form v-if="modalType === 'patient'" @submit.prevent="submitForm" class="space-y-4">
-                            <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-                                <div>
-                                    <label class="mb-2 block text-sm font-medium text-gray-700">Patient ID *</label>
-                                    <input v-model="patientForm.patient_id" type="text" required
-                                        class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-green-500" />
-                                </div>
-                                <div>
-                                    <label class="mb-2 block text-sm font-medium text-gray-700">Full Name *</label>
-                                    <input v-model="patientForm.full_name" type="text" required
-                                        class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-green-500" />
-                                </div>
-                            </div>
-
-                            <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-                                <div>
-                                    <label class="mb-2 block text-sm font-medium text-gray-700">Email *</label>
-                                    <input v-model="patientForm.email" type="email" required
-                                        class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-green-500" />
-                                </div>
-                                <div>
-                                    <label class="mb-2 block text-sm font-medium text-gray-700">Phone Number *</label>
-                                    <input v-model="patientForm.phone_no" type="tel" required
-                                        class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-green-500" />
-                                </div>
-                            </div>
-
-                            <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-                                <div>
-                                    <label class="mb-2 block text-sm font-medium text-gray-700">Date of Birth *</label>
-                                    <input v-model="patientForm.date_of_birth" type="date" required
-                                        class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-green-500" />
-                                </div>
-                                <div>
-                                    <label class="mb-2 block text-sm font-medium text-gray-700">Gender *</label>
-                                    <select v-model="patientForm.gender" required
-                                        class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-green-500">
-                                        <option value="male">Male</option>
-                                        <option value="female">Female</option>
-                                        <option value="other">Other</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div>
-                                <label class="mb-2 block text-sm font-medium text-gray-700">Address *</label>
-                                <textarea v-model="patientForm.address" required rows="3"
-                                    class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-green-500"></textarea>
-                            </div>
-
-                            <div class="flex gap-3 pt-4">
-                                <button type="submit" :disabled="patientForm.processing"
-                                    class="flex-1 rounded-lg bg-green-600 px-4 py-3 font-semibold text-white hover:bg-green-700 disabled:bg-gray-400">
-                                    {{
-                                        patientForm.processing
-                                            ? 'Saving...'
-                                            : selectedItem
-                                                ? 'Update'
-                                                : 'Create'
-                                    }}
-                                </button>
-                                <button type="button" @click="closeModal"
-                                    class="flex-1 rounded-lg bg-gray-200 px-4 py-3 font-semibold text-gray-700 hover:bg-gray-300">
-                                    Cancel
-                                </button>
-                            </div>
-                        </form>
-
-                        <!-- Admin Form -->
-                        <form v-if="modalType === 'admin'" @submit.prevent="submitForm" class="space-y-4">
-                            <div>
-                                <label class="mb-2 block text-sm font-medium text-gray-700">Name *</label>
-                                <input v-model="adminForm.name" type="text" required
-                                    class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-purple-500" />
-                            </div>
-
-                            <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-                                <div>
-                                    <label class="mb-2 block text-sm font-medium text-gray-700">Email *</label>
-                                    <input v-model="adminForm.email" type="email" required
-                                        class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-purple-500" />
-                                </div>
-                                <div>
-                                    <label class="mb-2 block text-sm font-medium text-gray-700">Phone Number *</label>
-                                    <input v-model="adminForm.phone_no" type="tel" required
-                                        class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-purple-500" />
-                                </div>
-                            </div>
-
-                            <div>
-                                <label class="mb-2 block text-sm font-medium text-gray-700">Role *</label>
-                                <select v-model="adminForm.role" required
-                                    class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-purple-500">
-                                    <option value="admin">Admin</option>
-                                    <option value="super_admin">
-                                        Super Admin
-                                    </option>
-                                </select>
-                            </div>
-
-                            <div v-if="!selectedItem">
-                                <label class="mb-2 block text-sm font-medium text-gray-700">Password *</label>
-                                <input v-model="adminForm.password" type="password" :required="!selectedItem"
-                                    class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-purple-500" />
-                            </div>
-
-                            <div class="flex gap-3 pt-4">
-                                <button type="submit" :disabled="adminForm.processing"
-                                    class="flex-1 rounded-lg bg-purple-600 px-4 py-3 font-semibold text-white hover:bg-purple-700 disabled:bg-gray-400">
-                                    {{
-                                        adminForm.processing
-                                            ? 'Saving...'
-                                            : selectedItem
-                                                ? 'Update'
-                                                : 'Create'
-                                    }}
-                                </button>
-                                <button type="button" @click="closeModal"
-                                    class="flex-1 rounded-lg bg-gray-200 px-4 py-3 font-semibold text-gray-700 hover:bg-gray-300">
-                                    Cancel
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+                <!-- <!~~ Modal for Add/Edit ~~> -->
+                <!-- <div v-if="showModal" -->
+                <!-- class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"> -->
+                <!-- <div class="max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-xl bg-white p-6"> -->
+                <!-- <h3 class="mb-6 text-2xl font-bold text-gray-900"> -->
+                <!-- {{ selectedItem ? 'Edit' : 'Add New' }} -->
+                <!-- {{ -->
+                <!-- modalType === 'clinic' -->
+                <!-- ? 'Clinic' -->
+                <!-- : modalType === 'patient' -->
+                <!-- ? 'Patient' -->
+                <!-- : 'Administrator' -->
+                <!-- }} -->
+                <!-- </h3> -->
+                <!--  -->
+                <!-- <!~~ Clinic Form ~~> -->
+                <!-- <form v-if="modalType === 'clinic'" @submit.prevent="submitForm" class="space-y-4"> -->
+                <!-- <div class="grid grid-cols-1 gap-4 md:grid-cols-2"> -->
+                <!-- <div> -->
+                <!-- <label class="mb-2 block text-sm font-medium text-gray-700">Clinic Name *</label> -->
+                <!-- <input v-model="clinicForm.name" type="text" required -->
+                <!-- class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-blue-500" /> -->
+                <!-- </div> -->
+                <!-- <div> -->
+                <!-- <label class="mb-2 block text-sm font-medium text-gray-700">Email *</label> -->
+                <!-- <input v-model="clinicForm.email" type="email" required -->
+                <!-- class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-blue-500" /> -->
+                <!-- </div> -->
+                <!-- </div> -->
+                <!--  -->
+                <!-- <div class="grid grid-cols-1 gap-4 md:grid-cols-2"> -->
+                <!-- <div> -->
+                <!-- <label class="mb-2 block text-sm font-medium text-gray-700">Phone Number *</label> -->
+                <!-- <input v-model="clinicForm.phone_no" type="tel" required -->
+                <!-- class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-blue-500" /> -->
+                <!-- </div> -->
+                <!-- <div> -->
+                <!-- <label class="mb-2 block text-sm font-medium text-gray-700">Staff Number</label> -->
+                <!-- <input v-model="clinicForm.staff_no" type="text" -->
+                <!-- class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-blue-500" /> -->
+                <!-- </div> -->
+                <!-- </div> -->
+                <!--  -->
+                <!-- <div> -->
+                <!-- <label class="mb-2 block text-sm font-medium text-gray-700">Address *</label> -->
+                <!-- <textarea v-model="clinicForm.address" required rows="3" -->
+                <!-- class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-blue-500"></textarea> -->
+                <!-- </div> -->
+                <!--  -->
+                <!-- <div class="grid grid-cols-1 gap-4 md:grid-cols-2"> -->
+                <!-- <div> -->
+                <!-- <label class="mb-2 block text-sm font-medium text-gray-700">State *</label> -->
+                <!-- <input v-model="clinicForm.state" type="text" required -->
+                <!-- class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-blue-500" /> -->
+                <!-- </div> -->
+                <!-- <div> -->
+                <!-- <label class="mb-2 block text-sm font-medium text-gray-700">Country *</label> -->
+                <!-- <input v-model="clinicForm.country" type="text" required -->
+                <!-- class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-blue-500" /> -->
+                <!-- </div> -->
+                <!-- </div> -->
+                <!--  -->
+                <!-- <div v-if="!selectedItem"> -->
+                <!-- <label class="mb-2 block text-sm font-medium text-gray-700">Password *</label> -->
+                <!-- <input v-model="clinicForm.password" type="password" :required="!selectedItem" -->
+                <!-- class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-blue-500" /> -->
+                <!-- </div> -->
+                <!--  -->
+                <!-- <div class="flex gap-3 pt-4"> -->
+                <!-- <button type="submit" :disabled="clinicForm.processing" -->
+                <!-- class="flex-1 rounded-lg bg-blue-600 px-4 py-3 font-semibold text-white hover:bg-blue-700 disabled:bg-gray-400"> -->
+                <!-- {{ -->
+                <!-- clinicForm.processing -->
+                <!-- ? 'Saving...' -->
+                <!-- : selectedItem -->
+                <!-- ? 'Update' -->
+                <!-- : 'Create' -->
+                <!-- }} -->
+                <!-- </button> -->
+                <!-- <button type="button" @click="closeModal" -->
+                <!-- class="flex-1 rounded-lg bg-gray-200 px-4 py-3 font-semibold text-gray-700 hover:bg-gray-300"> -->
+                <!-- Cancel -->
+                <!-- </button> -->
+                <!-- </div> -->
+                <!-- </form> -->
+                <!--  -->
+                <!-- <!~~ Patient Form ~~> -->
+                <!-- <form v-if="modalType === 'patient'" @submit.prevent="submitForm" class="space-y-4"> -->
+                <!-- <div class="grid grid-cols-1 gap-4 md:grid-cols-2"> -->
+                <!-- <div> -->
+                <!-- <label class="mb-2 block text-sm font-medium text-gray-700">Patient ID *</label> -->
+                <!-- <input v-model="patientForm.patient_id" type="text" required -->
+                <!-- class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-green-500" /> -->
+                <!-- </div> -->
+                <!-- <div> -->
+                <!-- <label class="mb-2 block text-sm font-medium text-gray-700">Full Name *</label> -->
+                <!-- <input v-model="patientForm.full_name" type="text" required -->
+                <!-- class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-green-500" /> -->
+                <!-- </div> -->
+                <!-- </div> -->
+                <!--  -->
+                <!-- <div class="grid grid-cols-1 gap-4 md:grid-cols-2"> -->
+                <!-- <div> -->
+                <!-- <label class="mb-2 block text-sm font-medium text-gray-700">Email *</label> -->
+                <!-- <input v-model="patientForm.email" type="email" required -->
+                <!-- class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-green-500" /> -->
+                <!-- </div> -->
+                <!-- <div> -->
+                <!-- <label class="mb-2 block text-sm font-medium text-gray-700">Phone Number *</label> -->
+                <!-- <input v-model="patientForm.phone_no" type="tel" required -->
+                <!-- class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-green-500" /> -->
+                <!-- </div> -->
+                <!-- </div> -->
+                <!--  -->
+                <!-- <div class="grid grid-cols-1 gap-4 md:grid-cols-2"> -->
+                <!-- <div> -->
+                <!-- <label class="mb-2 block text-sm font-medium text-gray-700">Date of Birth *</label> -->
+                <!-- <input v-model="patientForm.date_of_birth" type="date" required -->
+                <!-- class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-green-500" /> -->
+                <!-- </div> -->
+                <!-- <div> -->
+                <!-- <label class="mb-2 block text-sm font-medium text-gray-700">Gender *</label> -->
+                <!-- <select v-model="patientForm.gender" required -->
+                <!-- class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-green-500"> -->
+                <!-- <option value="male">Male</option> -->
+                <!-- <option value="female">Female</option> -->
+                <!-- <option value="other">Other</option> -->
+                <!-- </select> -->
+                <!-- </div> -->
+                <!-- </div> -->
+                <!--  -->
+                <!-- <div> -->
+                <!-- <label class="mb-2 block text-sm font-medium text-gray-700">Address *</label> -->
+                <!-- <textarea v-model="patientForm.address" required rows="3" -->
+                <!-- class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-green-500"></textarea> -->
+                <!-- </div> -->
+                <!--  -->
+                <!-- <div class="flex gap-3 pt-4"> -->
+                <!-- <button type="submit" :disabled="patientForm.processing" -->
+                <!-- class="flex-1 rounded-lg bg-green-600 px-4 py-3 font-semibold text-white hover:bg-green-700 disabled:bg-gray-400"> -->
+                <!-- {{ -->
+                <!-- patientForm.processing -->
+                <!-- ? 'Saving...' -->
+                <!-- : selectedItem -->
+                <!-- ? 'Update' -->
+                <!-- : 'Create' -->
+                <!-- }} -->
+                <!-- </button> -->
+                <!-- <button type="button" @click="closeModal" -->
+                <!-- class="flex-1 rounded-lg bg-gray-200 px-4 py-3 font-semibold text-gray-700 hover:bg-gray-300"> -->
+                <!-- Cancel -->
+                <!-- </button> -->
+                <!-- </div> -->
+                <!-- </form> -->
+                <!--  -->
+                <!-- <!~~ Admin Form ~~> -->
+                <!-- <form v-if="modalType === 'admin'" @submit.prevent="submitForm" class="space-y-4"> -->
+                <!-- <div> -->
+                <!-- <label class="mb-2 block text-sm font-medium text-gray-700">Name *</label> -->
+                <!-- <input v-model="adminForm.name" type="text" required -->
+                <!-- class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-purple-500" /> -->
+                <!-- </div> -->
+                <!--  -->
+                <!-- <div class="grid grid-cols-1 gap-4 md:grid-cols-2"> -->
+                <!-- <div> -->
+                <!-- <label class="mb-2 block text-sm font-medium text-gray-700">Email *</label> -->
+                <!-- <input v-model="adminForm.email" type="email" required -->
+                <!-- class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-purple-500" /> -->
+                <!-- </div> -->
+                <!-- <div> -->
+                <!-- <label class="mb-2 block text-sm font-medium text-gray-700">Phone Number *</label> -->
+                <!-- <input v-model="adminForm.phone_no" type="tel" required -->
+                <!-- class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-purple-500" /> -->
+                <!-- </div> -->
+                <!-- </div> -->
+                <!--  -->
+                <!-- <div> -->
+                <!-- <label class="mb-2 block text-sm font-medium text-gray-700">Role *</label> -->
+                <!-- <select v-model="adminForm.role" required -->
+                <!-- class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-purple-500"> -->
+                <!-- <option value="admin">Admin</option> -->
+                <!-- <option value="super_admin"> -->
+                <!-- Super Admin -->
+                <!-- </option> -->
+                <!-- </select> -->
+                <!-- </div> -->
+                <!--  -->
+                <!-- <div v-if="!selectedItem"> -->
+                <!-- <label class="mb-2 block text-sm font-medium text-gray-700">Password *</label> -->
+                <!-- <input v-model="adminForm.password" type="password" :required="!selectedItem" -->
+                <!-- class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-purple-500" /> -->
+                <!-- </div> -->
+                <!--  -->
+                <!-- <div class="flex gap-3 pt-4"> -->
+                <!-- <button type="submit" :disabled="adminForm.processing" -->
+                <!-- class="flex-1 rounded-lg bg-purple-600 px-4 py-3 font-semibold text-white hover:bg-purple-700 disabled:bg-gray-400"> -->
+                <!-- {{ -->
+                <!-- adminForm.processing -->
+                <!-- ? 'Saving...' -->
+                <!-- : selectedItem -->
+                <!-- ? 'Update' -->
+                <!-- : 'Create' -->
+                <!-- }} -->
+                <!-- </button> -->
+                <!-- <button type="button" @click="closeModal" -->
+                <!-- class="flex-1 rounded-lg bg-gray-200 px-4 py-3 font-semibold text-gray-700 hover:bg-gray-300"> -->
+                <!-- Cancel -->
+                <!-- </button> -->
+                <!-- </div> -->
+                <!-- </form> -->
+                <!-- </div> -->
+                <!-- </div> -->
             </div>
         </div>
     </AdminAuthenticatedLayout>

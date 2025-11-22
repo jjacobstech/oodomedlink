@@ -16,10 +16,10 @@
     "/build/assets/AdminAuthenticatedLayout-BxrYm2in.css"
   ],
   "resources/js/Components/Admin/NavBar.vue": [
-    "/build/assets/AdminAuthLayout-tgL6Td7e.js"
+    "/build/assets/AdminAuthLayout-tfmoBy5o.js"
   ],
   "resources/js/Components/Admin/NavBar.vue?vue&type=script&setup=true&lang.jsx": [
-    "/build/assets/AdminAuthLayout-tgL6Td7e.js"
+    "/build/assets/AdminAuthLayout-tfmoBy5o.js"
   ],
   "resources/js/Components/ApplicationLogo.vue": [
     "/build/assets/ApplicationLogo-Bxi8t0Nk.js"
@@ -40,25 +40,25 @@
     "/build/assets/AuthenticatedLayout-DG3cH2uf.css"
   ],
   "resources/js/Components/Home/GuestFooter.vue": [
-    "/build/assets/Welcome-8__9qshn.js"
+    "/build/assets/Welcome-BpEX30XV.js"
   ],
   "resources/js/Components/Home/GuestFooter.vue?vue&type=script&setup=true&lang.ts": [
-    "/build/assets/Welcome-8__9qshn.js"
+    "/build/assets/Welcome-BpEX30XV.js"
   ],
   "resources/js/Components/Home/NavBar.vue": [
-    "/build/assets/Welcome-8__9qshn.js"
+    "/build/assets/Welcome-BpEX30XV.js"
   ],
   "resources/js/Components/Home/NavBar.vue?vue&type=script&setup=true&lang.ts": [
-    "/build/assets/Welcome-8__9qshn.js"
+    "/build/assets/Welcome-BpEX30XV.js"
   ],
   "resources/js/Components/PasswordInput.vue": [
     "/build/assets/index-CJv9bgxr.js"
   ],
   "resources/js/Layouts/AdminAuthLayout.vue": [
-    "/build/assets/AdminAuthLayout-tgL6Td7e.js"
+    "/build/assets/AdminAuthLayout-tfmoBy5o.js"
   ],
   "resources/js/Layouts/AdminAuthLayout.vue?vue&type=script&setup=true&lang.ts": [
-    "/build/assets/AdminAuthLayout-tgL6Td7e.js"
+    "/build/assets/AdminAuthLayout-tfmoBy5o.js"
   ],
   "resources/js/Layouts/AdminAuthenticatedLayout.vue": [
     "/build/assets/AdminAuthenticatedLayout-CrwmDkVx.js",
@@ -80,16 +80,16 @@
     "/build/assets/AuthenticatedLayout-DG3cH2uf.css"
   ],
   "resources/js/Layouts/GuestLayout.vue": [
-    "/build/assets/Welcome-8__9qshn.js"
+    "/build/assets/Welcome-BpEX30XV.js"
   ],
   "resources/js/Layouts/GuestLayout.vue?vue&type=script&setup=true&lang.ts": [
-    "/build/assets/Welcome-8__9qshn.js"
+    "/build/assets/Welcome-BpEX30XV.js"
   ],
   "resources/js/Pages/Admin/Dashboard.vue": [
-    "/build/assets/Dashboard-ZmgbYCFh.js"
+    "/build/assets/Dashboard-BfnDbcEk.js"
   ],
   "resources/js/Pages/Admin/Dashboard.vue?vue&type=script&setup=true&lang.ts": [
-    "/build/assets/Dashboard-ZmgbYCFh.js"
+    "/build/assets/Dashboard-BfnDbcEk.js"
   ],
   "resources/js/Pages/Admin/Emails.vue": [
     "/build/assets/Emails-DG861mLw.js"
@@ -110,13 +110,13 @@
     "/build/assets/Settings-hVUJF539.js"
   ],
   "resources/js/Pages/Auth/Admin/ForgotPassword.vue": [
-    "/build/assets/ForgotPassword-DAJ5mLKB.js"
+    "/build/assets/ForgotPassword-Cg5cCWwX.js"
   ],
   "resources/js/Pages/Auth/Admin/Login.vue": [
-    "/build/assets/Login-KDKeKo6d.js"
+    "/build/assets/Login-hkNn7FLl.js"
   ],
   "resources/js/Pages/Auth/Admin/Register.vue": [
-    "/build/assets/Register-D-gKdR78.js"
+    "/build/assets/Register-X9svZsPS.js"
   ],
   "resources/js/Pages/Auth/User/ForgotPassword.vue": [
     "/build/assets/ForgotPassword-DuKgKVZg.js"
@@ -128,16 +128,16 @@
     "/build/assets/Register-CJdhdMnX.js"
   ],
   "resources/js/Pages/User/Dashboard.vue": [
-    "/build/assets/Dashboard-Ae6fqpLn.js"
+    "/build/assets/Dashboard-DGsh9N8c.js"
   ],
   "resources/js/Pages/User/Dashboard.vue?vue&type=script&setup=true&lang.ts": [
-    "/build/assets/Dashboard-Ae6fqpLn.js"
+    "/build/assets/Dashboard-DGsh9N8c.js"
   ],
   "resources/js/Pages/User/Emails.vue": [
-    "/build/assets/Emails-BcNEHDkM.js"
+    "/build/assets/Emails-Go2S5YcU.js"
   ],
   "resources/js/Pages/User/Emails.vue?vue&type=script&setup=true&lang.ts": [
-    "/build/assets/Emails-BcNEHDkM.js"
+    "/build/assets/Emails-Go2S5YcU.js"
   ],
   "resources/js/Pages/User/Patient.vue": [
     "/build/assets/Patient-ARNwM9lK.js"
@@ -146,10 +146,10 @@
     "/build/assets/Patient-ARNwM9lK.js"
   ],
   "resources/js/Pages/User/Patients.vue": [
-    "/build/assets/Patients-jgm1i3MO.js"
+    "/build/assets/Patients-DyQxZmpJ.js"
   ],
   "resources/js/Pages/User/Patients.vue?vue&type=script&setup=true&lang.ts": [
-    "/build/assets/Patients-jgm1i3MO.js"
+    "/build/assets/Patients-DyQxZmpJ.js"
   ],
   "resources/js/Pages/User/Settings.vue": [
     "/build/assets/Settings-B7GPcBWA.js"
@@ -158,7 +158,7 @@
     "/build/assets/Settings-B7GPcBWA.js"
   ],
   "resources/js/Pages/Welcome.vue": [
-    "/build/assets/Welcome-8__9qshn.js"
+    "/build/assets/Welcome-BpEX30XV.js"
   ],
   "resources/js/components/ui/avatar/Avatar.vue": [
     "/build/assets/index-Ch8fN83j.js"
@@ -191,43 +191,43 @@
     "/build/assets/index-D-5AVEXV.js"
   ],
   "resources/js/components/ui/card/Card.vue": [
-    "/build/assets/Welcome-8__9qshn.js"
+    "/build/assets/Welcome-BpEX30XV.js"
   ],
   "resources/js/components/ui/card/Card.vue?vue&type=script&setup=true&lang.ts": [
-    "/build/assets/Welcome-8__9qshn.js"
+    "/build/assets/Welcome-BpEX30XV.js"
   ],
   "resources/js/components/ui/carousel/Carousel.vue": [
-    "/build/assets/Welcome-8__9qshn.js"
+    "/build/assets/Welcome-BpEX30XV.js"
   ],
   "resources/js/components/ui/carousel/Carousel.vue?vue&type=script&setup=true&lang.ts": [
-    "/build/assets/Welcome-8__9qshn.js"
+    "/build/assets/Welcome-BpEX30XV.js"
   ],
   "resources/js/components/ui/carousel/CarouselContent.vue": [
-    "/build/assets/Welcome-8__9qshn.js"
+    "/build/assets/Welcome-BpEX30XV.js"
   ],
   "resources/js/components/ui/carousel/CarouselContent.vue?vue&type=script&setup=true&lang.ts": [
-    "/build/assets/Welcome-8__9qshn.js"
+    "/build/assets/Welcome-BpEX30XV.js"
   ],
   "resources/js/components/ui/carousel/CarouselItem.vue": [
-    "/build/assets/Welcome-8__9qshn.js"
+    "/build/assets/Welcome-BpEX30XV.js"
   ],
   "resources/js/components/ui/carousel/CarouselItem.vue?vue&type=script&setup=true&lang.ts": [
-    "/build/assets/Welcome-8__9qshn.js"
+    "/build/assets/Welcome-BpEX30XV.js"
   ],
   "resources/js/components/ui/carousel/CarouselNext.vue": [
-    "/build/assets/Welcome-8__9qshn.js"
+    "/build/assets/Welcome-BpEX30XV.js"
   ],
   "resources/js/components/ui/carousel/CarouselNext.vue?vue&type=script&setup=true&lang.ts": [
-    "/build/assets/Welcome-8__9qshn.js"
+    "/build/assets/Welcome-BpEX30XV.js"
   ],
   "resources/js/components/ui/carousel/CarouselPrevious.vue": [
-    "/build/assets/Welcome-8__9qshn.js"
+    "/build/assets/Welcome-BpEX30XV.js"
   ],
   "resources/js/components/ui/carousel/CarouselPrevious.vue?vue&type=script&setup=true&lang.ts": [
-    "/build/assets/Welcome-8__9qshn.js"
+    "/build/assets/Welcome-BpEX30XV.js"
   ],
   "resources/js/components/ui/carousel/useCarousel.ts": [
-    "/build/assets/Welcome-8__9qshn.js"
+    "/build/assets/Welcome-BpEX30XV.js"
   ],
   "resources/js/components/ui/input/Input.vue": [
     "/build/assets/index-Ch8fN83j.js"

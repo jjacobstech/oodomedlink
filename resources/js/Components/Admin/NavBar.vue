@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar fixed top-0 z-50 flex w-full items-center  bg-primaryDark px-4 py-3 shadow-md md:px-8 lg:px-12">
+    <nav class="navbar fixed top-0 z-50 flex w-full items-center  bg-white px-4 py-3 shadow-md md:px-8 lg:px-12">
         <div class="flex w-full items-center justify-between">
             <!-- Logo -->
             <ApplicationLogo />

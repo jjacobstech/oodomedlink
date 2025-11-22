@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\Clinic;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Support\Carbon;
@@ -21,18 +22,21 @@ class ResultMail extends Mailable
 
     public string $notes;
 
+    public $clinic;
+
 
 
 
     /**
      * Create a new message instance.
      */
-    public function __construct(object $receipient, string $subject, array $attachments,  string $notes)
+    public function __construct(object $receipient, string $subject, array $attachments,  string $notes, $clinic)
     {
         $this->receipient = $receipient;
         $this->subject($subject);
         $this->mailAttachments = $attachments;
         $this->notes = $notes;
+        $this->clinic = $clinic;
 
     }
 
@@ -59,7 +63,7 @@ class ResultMail extends Mailable
             view: 'mail.result-mail',
             with: [
                 'receipient' => $this->receipient,
-                'clinic' => Auth::user(),
+                'clinic' =>  $this->clinic,
                 'year' => Carbon::now()->year,
                 'notes' => $this->notes
             ],

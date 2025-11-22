@@ -13,64 +13,56 @@ class DashboardController extends Controller
 {
     public function index(Request $request)
     {
-
         $user = Auth::user();
 
-        $validated = (object) $request->validate([
+        $validated = $request->validate([
             'filter' => 'nullable|string|in:all,pending,sent,failed',
-            'search' => 'nullable|string|min:1'
+            'search' => 'nullable|string|min:1|max:255'
         ]);
 
+        $filter = $validated['filter'] ?? 'all';
+        $search = $validated['search'] ?? '';
 
-
-        $filter = filled($request->filter) ? $validated->filter : 'all';
-        $search = filled($request->search) ? $validated->search : '';
-
-        $perPage = 10;
-
-        $query = $request->query('page');
-
-        $page  = filled($query) ? $query : 1;
-        // dd($search);
-
-        $total_uploads = PatientResult::where('clinic_id', $user->id)->count();
-        $total_patients = Patient::where('clinic_id', $user->id)->count();
-        $pending_results = PatientResult::where('clinic_id', $user->id)->where('status', 'pending')->count();
-        $completed_results = PatientResult::where('clinic_id', operator: $user->id)->where('status', 'completed')->count();
-        $results  = PatientResult::where('clinic_id', $user->id)
-            // ->orWhere('result_type', 'like', "%{$search}%")
-            ->when($filter != 'all', function ($q) use ($filter) {
-                $q->where('status', $filter);
-            })
-            ->whereHas('patient', function ($q) use ($search) {
-                $q->where('full_name', 'like', "%{$search}%");
-            })
-            ->with(['patient', 'files'])->paginate(perPage: $perPage, page: $page);
-
-        // dd($results);
-
+        // Get statistics
         $stats = [
-
-            'total_uploads' => $total_uploads,
-            'total_patients' => $total_patients,
-            'pending_results' => $pending_results,
-            'completed_result' => $completed_results
+            'total_uploads' => PatientResult::where('clinic_id', $user->id)->count(),
+            'total_patients' => Patient::where('clinic_id', $user->id)->count(),
+            'pending_results' => PatientResult::where('clinic_id', $user->id)
+                ->where('status', 'pending')
+                ->count(),
+            'completed_result' => PatientResult::where('clinic_id', $user->id)
+                ->where('status', 'sent') // Changed from 'completed' to match frontend expectations
+                ->count(),
         ];
 
-
-
+        // Query results with filters
+        $results = PatientResult::where('clinic_id', $user->id)
+            ->with(['patient:id,full_name,email', 'files'])
+            ->when($filter !== 'all', function ($query) use ($filter) {
+                $query->where('status', $filter);
+            })
+            ->when(!empty($search), function ($query) use ($search) {
+                $query->where(function ($q) use ($search) {
+                    // Search in patient name
+                    $q->whereHas('patient', function ($patientQuery) use ($search) {
+                        $patientQuery->where('full_name', 'like', "%{$search}%");
+                    })
+                    // OR search in result type
+                    ->orWhere('result_type', 'like', "%{$search}%");
+            });
+            })
+            ->latest('uploaded_at')
+            ->paginate(10)
+            ->withQueryString();
 
         return Inertia::render('User/Dashboard', [
             'user' => $user,
             'stats' => $stats,
-            'results' => $results->items(),
-            'filter' => $filter,
-            'search' => $search,
-            'page' => $page,
-            'prevPage' => $results->previousPageUrl(),
-            'nextPage' => $results->nextPageUrl()
-
-
+            'results' => $results,
+            'filters' => [
+                'search' => $search,
+                'filter' => $filter,
+            ]
         ]);
     }
 }

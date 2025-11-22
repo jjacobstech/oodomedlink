@@ -5,25 +5,27 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Clinics\EmailController;
-use App\Http\Controllers\Clinics\FilesController;
+use App\Http\Controllers\Clinics\ResultsController;
 use App\Http\Controllers\Clinics\DashboardController;
-use App\Http\Controllers\Clinics\PatientController;
+use App\Http\Controllers\Clinics\PatientsController;
 
-Route::prefix('clinic')->middleware(['auth:clinic'])->group(function () {
+Route::prefix('clinic')->middleware(['auth:clinic'])->name('user.')->group(function () {
       Route::middleware(['verified'])->group(
             function () {
 
-                  Route::get("/dashboard",  [DashboardController::class, 'index'])->name('user.dashboard');
+                  Route::get("/dashboard",  [DashboardController::class, 'index'])->name('dashboard');
 
-                  Route::get('/emails', [EmailController::class, 'index'])->name('user.emails');
+                  Route::get('/emails', [EmailController::class, 'index'])->name('emails');
 
-                  Route::get('/patients', [PatientController::class, 'index'])->name('user.patients');
-
-                  // Patient Routes
-                  Route::post('/patient', [PatientController::class, 'create'])->name('create.patient');
-                  Route::post('/patient', [PatientController::class, 'show'])->name('show.patient');
-                  Route::post('/patient', [PatientController::class, 'update'])->name('update.patient');
-                  Route::post('/patient', [PatientController::class, 'delete'])->name('delete.patient');
+                  Route::controller(PatientsController::class)->prefix('patients')->group(function () {
+                        Route::get('/', 'index')->name('patients');
+                        Route::get('/create', 'create')->name('patients.create');
+                        Route::post('/', 'store')->name('patients.store');
+                        Route::get('/{patient}', 'show')->name('patients.show');
+                        Route::get('/{patient}/edit', 'edit')->name('patients.edit');
+                        Route::put('/{patient}', 'update')->name('patients.update');
+                        Route::delete('/{patient}', 'destroy')->name('patients.destroy');
+                  });
 
 
                   Route::get('/settings', function () {
@@ -31,7 +33,7 @@ Route::prefix('clinic')->middleware(['auth:clinic'])->group(function () {
                         return Inertia::render('User/Settings', [
                               'user' => Auth::user(),
                         ]);
-                  })->name('user.settings');
+                  })->name('settings');
             }
       );
 
@@ -40,9 +42,17 @@ Route::prefix('clinic')->middleware(['auth:clinic'])->group(function () {
       Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
       Route::prefix('result')->group(function () {
-            Route::post("/fetch",  [DashboardController::class, 'fetchDashboard'])->name('user.fetch.dashboard');
-            Route::post('/', [FilesController::class, 'index'])->name('clinic.result');
-            Route::post('upload', [FilesController::class, 'upload'])->name('clinic.result.upload');
-            Route::post('send', [FilesController::class, 'send'])->name('clinic.result.send');
+            Route::post("/fetch",  [DashboardController::class, 'fetchDashboard'])->name('fetch.dashboard');
+            Route::post('/', [ResultsController::class, 'index'])->name('result');
+            Route::post('upload', [ResultsController::class, 'upload'])->name('result.upload');
+            Route::post('send', [ResultsController::class, 'send'])->name('result.send');
+            Route::post('/user/emails/{email}/retry', [EmailController::class, 'retry'])
+                  ->name('emails.retry');
+      });
+
+      Route::prefix('/email')->group(function () {
+
+            Route::post('retry', [EmailController::class, 'retry'])
+                  ->name('email.retry');
       });
 });

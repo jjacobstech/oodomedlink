@@ -77,20 +77,20 @@
                                                 {{ $receipient->full_name }} Test Result
                                           </h1>
                                           <p style="margin:6px 0 0;font-size:13px;opacity:0.95">Thank you for visiting
-                                                {{ $clinic->name }}
-                                          </p>
-                                    </td>
-                              </tr>
-
-                              <!-- Content -->
-                              <tr>
-                                    <td style="padding:28px;color:#0f1724;">
-
-                                          <p style="margin:0 0 16px;font-size:15px;">Hello {{ $receipient->full_name }},
-                                          </p>
-
-                                          <p style="margin:0 0 24px;font-size:15px;color:#334155;line-height:1.45;">
-                                                Thank you for visiting {{ Str::ucfirst($clinic->name) }}, here is your test result
+                                                {{ $clinic->name ?? '' }}
+                                                </p>
+                                                </td>
+                                                </tr>
+                                                
+                                                <!-- Content -->
+                                                <tr>
+                                                      <td style="padding:28px;color:#0f1724;">
+                                                
+                                                            <p style="margin:0 0 16px;font-size:15px;">Hello {{ $receipient->full_name }},
+                                                            </p>
+                                                
+                                                            <p style="margin:0 0 24px;font-size:15px;color:#334155;line-height:1.45;">
+                                                                  Thank you for visiting {{ Str::ucfirst($clinic->name) ?? '' }}, here is your test result
                                                 attaches to this mail.
 
                                           </p>

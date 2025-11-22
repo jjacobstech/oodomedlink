@@ -26,12 +26,27 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $status
  * @property Carbon $uploaded_at
  * @property Carbon $updated_at
- *
  * @property Clinic $clinic
  * @property Patient $patient
  * @property Collection|File[] $files
- *
  * @package App\Models
+ * @property-read int|null $files_count
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|PatientResult newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|PatientResult newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|PatientResult query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|PatientResult whereClinicId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|PatientResult whereData($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|PatientResult whereEncrypted($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|PatientResult whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|PatientResult whereNotes($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|PatientResult wherePatientId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|PatientResult whereResultType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|PatientResult whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|PatientResult whereTestDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|PatientResult whereTestName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|PatientResult whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|PatientResult whereUploadedAt($value)
+ * @mixin \Eloquent
  */
 class PatientResult extends Model
 {

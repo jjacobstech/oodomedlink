@@ -30,31 +30,10 @@ class DashboardController extends Controller
 
         $admins = Admin::all();
 
-
         $total_patients_count = $total_patients->count();
         $total_clinics_count = $total_clinics->count();
         $total_results_count = $total_results->count();
         $total_emails_count = $total_emails->count();
-
-
-
-        // dd([
-        //     'stats' => [
-        //         'totalPatients' => $total_patients_count,
-        //         'totalClinics' => $total_clinics_count,
-        //         'totalResults' => $total_results_count,
-        //         'totalEmails' => $total_emails_count,
-        //         'pendingResults' => $pending_results,
-        //         'emailsFailed' => $emails_failed,
-        //         'activeClinics' => $active_clinic,
-
-        //     ],
-        //     'patients' => $total_patients,
-        //     'clinics' => $total_clinics,
-        //     'results' => $total_results,
-        //     'emails' => $total_emails,
-        //     'admins' => $admins
-        // ]);
 
         return Inertia::render('Admin/Dashboard', [
             'user' => Auth::user(),

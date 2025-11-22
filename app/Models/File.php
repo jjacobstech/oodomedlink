@@ -21,10 +21,24 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $original_file_name
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- *
  * @property PatientResult $patient_result
- *
  * @package App\Models
+ * @property string $file_name
+ * @property string $file_url
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|File newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|File newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|File query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|File whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|File whereFileName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|File whereFilePath($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|File whereFileSize($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|File whereFileType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|File whereFileUrl($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|File whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|File whereOriginalFileName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|File whereResult($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|File whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 class File extends Model
 {

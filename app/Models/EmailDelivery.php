@@ -25,8 +25,27 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $error_message
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- *
  * @package App\Models
+ * @property string|null $scheduled_at
+ * @property-read \App\Models\Patient|null $patient
+ * @property-read \App\Models\PatientResult|null $result
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|EmailDelivery newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|EmailDelivery newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|EmailDelivery query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|EmailDelivery whereBody($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|EmailDelivery whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|EmailDelivery whereDeliveryAttempts($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|EmailDelivery whereErrorMessage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|EmailDelivery whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|EmailDelivery wherePatientEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|EmailDelivery wherePatientResultId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|EmailDelivery whereScheduledAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|EmailDelivery whereSentAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|EmailDelivery whereSentBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|EmailDelivery whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|EmailDelivery whereSubject($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|EmailDelivery whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 class EmailDelivery extends Model
 {
@@ -36,6 +55,7 @@ class EmailDelivery extends Model
 
 	protected $casts = [
 		'sent_at' => 'datetime',
+
 		'delivery_attempts' => 'int'
 	];
 
@@ -48,7 +68,8 @@ class EmailDelivery extends Model
 		'status',
 		'sent_at',
 		'delivery_attempts',
-		'error_message'
+		'error_message',
+		'scheduled_at'
 	];
 
 	public function patient()
