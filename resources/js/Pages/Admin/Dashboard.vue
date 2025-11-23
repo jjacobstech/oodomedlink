@@ -59,7 +59,7 @@ interface EmailDelivery {
     patient_email: string;
     sent_by: string;
     subject: string;
-    status: 'sent' | 'pending' | 'failed' | 'bounced';
+    status: 'sent' | 'pending' | 'failed' | 'bounced' | 'scheduled';
     sent_at: string;
     delivery_attempts: number;
     error_message?: string;
@@ -95,7 +95,6 @@ interface Props {
 
 const props = defineProps<Props>();
 
-console.log(props)
 
 // State
 const activeTab = ref<
@@ -316,7 +315,7 @@ const getStatusColor = (status: string) => {
         sent: 'bg-green-100 text-green-800',
         archived: 'bg-purple-100 text-purple-800',
         failed: 'bg-red-100 text-red-800',
-        bounced: 'bg-orange-100 text-orange-800',
+        scheduled: 'bg-orange-100 text-orange-800',
     };
     return colors[status] || 'bg-gray-100 text-gray-800';
 };
@@ -702,7 +701,7 @@ const getStatusColor = (status: string) => {
                                         <td class="px-4 py-4 text-sm text-gray-700">
                                             <span class="capitalize">{{
                                                 patient.gender ?? 'N/A'
-                                            }}</span>
+                                                }}</span>
                                         </td>
                                         <td class="px-4 py-4 text-sm text-gray-700">
                                             {{ patient.date_of_birth ?? 'N/A' }}
@@ -805,7 +804,7 @@ const getStatusColor = (status: string) => {
                                         <td class="px-4 py-4 text-sm text-gray-700">
                                             <span class="probab">{{
                                                 result.files.map(file => file.file_type).join(', ') || 'N/A'
-                                            }}
+                                                }}
                                             </span>
                                         </td>
                                         <td class="px-4 py-4 text-sm">
@@ -862,6 +861,18 @@ const getStatusColor = (status: string) => {
                                     }}
                                 </p>
                             </div>
+                            <div class="rounded-lg bg-yellow-50 p-4">
+                                <p class="text-sm font-medium text-gray-600">
+                                    Schedule
+                                </p>
+                                <p class="mt-1 text-2xl font-bold text-yellow-600">
+                                    {{
+                                        emails?.filter(
+                                            (e) => e.status === 'scheduled',
+                                        ).length
+                                    }}
+                                </p>
+                            </div>
                             <div class="rounded-lg bg-red-50 p-4">
                                 <p class="text-sm font-medium text-gray-600">
                                     Failed
@@ -874,18 +885,7 @@ const getStatusColor = (status: string) => {
                                     }}
                                 </p>
                             </div>
-                            <div class="rounded-lg bg-orange-50 p-4">
-                                <p class="text-sm font-medium text-gray-600">
-                                    Bounced
-                                </p>
-                                <p class="mt-1 text-2xl font-bold text-orange-600">
-                                    {{
-                                        emails?.filter(
-                                            (e) => e.status === 'bounced',
-                                        ).length
-                                    }}
-                                </p>
-                            </div>
+
                         </div>
 
                         <!-- Emails Table -->
@@ -959,10 +959,7 @@ const getStatusColor = (status: string) => {
                             <h2 class="text-xl font-bold text-gray-900">
                                 System Administrators
                             </h2>
-                            <!-- <button @click="openModal('admin')" -->
-                            <!-- class="rounded-lg bg-purple-600 px-6 py-3 font-semibold text-white transition-colors hover:bg-purple-700"> -->
-                            <!-- + Add Admin -->
-                            <!-- </button> -->
+
                         </div>
 
                         <!-- Admins Table -->
@@ -1037,218 +1034,6 @@ const getStatusColor = (status: string) => {
                     </div>
                 </div>
 
-                <!-- <!~~ Modal for Add/Edit ~~> -->
-                <!-- <div v-if="showModal" -->
-                <!-- class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"> -->
-                <!-- <div class="max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-xl bg-white p-6"> -->
-                <!-- <h3 class="mb-6 text-2xl font-bold text-gray-900"> -->
-                <!-- {{ selectedItem ? 'Edit' : 'Add New' }} -->
-                <!-- {{ -->
-                <!-- modalType === 'clinic' -->
-                <!-- ? 'Clinic' -->
-                <!-- : modalType === 'patient' -->
-                <!-- ? 'Patient' -->
-                <!-- : 'Administrator' -->
-                <!-- }} -->
-                <!-- </h3> -->
-                <!--  -->
-                <!-- <!~~ Clinic Form ~~> -->
-                <!-- <form v-if="modalType === 'clinic'" @submit.prevent="submitForm" class="space-y-4"> -->
-                <!-- <div class="grid grid-cols-1 gap-4 md:grid-cols-2"> -->
-                <!-- <div> -->
-                <!-- <label class="mb-2 block text-sm font-medium text-gray-700">Clinic Name *</label> -->
-                <!-- <input v-model="clinicForm.name" type="text" required -->
-                <!-- class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-blue-500" /> -->
-                <!-- </div> -->
-                <!-- <div> -->
-                <!-- <label class="mb-2 block text-sm font-medium text-gray-700">Email *</label> -->
-                <!-- <input v-model="clinicForm.email" type="email" required -->
-                <!-- class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-blue-500" /> -->
-                <!-- </div> -->
-                <!-- </div> -->
-                <!--  -->
-                <!-- <div class="grid grid-cols-1 gap-4 md:grid-cols-2"> -->
-                <!-- <div> -->
-                <!-- <label class="mb-2 block text-sm font-medium text-gray-700">Phone Number *</label> -->
-                <!-- <input v-model="clinicForm.phone_no" type="tel" required -->
-                <!-- class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-blue-500" /> -->
-                <!-- </div> -->
-                <!-- <div> -->
-                <!-- <label class="mb-2 block text-sm font-medium text-gray-700">Staff Number</label> -->
-                <!-- <input v-model="clinicForm.staff_no" type="text" -->
-                <!-- class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-blue-500" /> -->
-                <!-- </div> -->
-                <!-- </div> -->
-                <!--  -->
-                <!-- <div> -->
-                <!-- <label class="mb-2 block text-sm font-medium text-gray-700">Address *</label> -->
-                <!-- <textarea v-model="clinicForm.address" required rows="3" -->
-                <!-- class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-blue-500"></textarea> -->
-                <!-- </div> -->
-                <!--  -->
-                <!-- <div class="grid grid-cols-1 gap-4 md:grid-cols-2"> -->
-                <!-- <div> -->
-                <!-- <label class="mb-2 block text-sm font-medium text-gray-700">State *</label> -->
-                <!-- <input v-model="clinicForm.state" type="text" required -->
-                <!-- class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-blue-500" /> -->
-                <!-- </div> -->
-                <!-- <div> -->
-                <!-- <label class="mb-2 block text-sm font-medium text-gray-700">Country *</label> -->
-                <!-- <input v-model="clinicForm.country" type="text" required -->
-                <!-- class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-blue-500" /> -->
-                <!-- </div> -->
-                <!-- </div> -->
-                <!--  -->
-                <!-- <div v-if="!selectedItem"> -->
-                <!-- <label class="mb-2 block text-sm font-medium text-gray-700">Password *</label> -->
-                <!-- <input v-model="clinicForm.password" type="password" :required="!selectedItem" -->
-                <!-- class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-blue-500" /> -->
-                <!-- </div> -->
-                <!--  -->
-                <!-- <div class="flex gap-3 pt-4"> -->
-                <!-- <button type="submit" :disabled="clinicForm.processing" -->
-                <!-- class="flex-1 rounded-lg bg-blue-600 px-4 py-3 font-semibold text-white hover:bg-blue-700 disabled:bg-gray-400"> -->
-                <!-- {{ -->
-                <!-- clinicForm.processing -->
-                <!-- ? 'Saving...' -->
-                <!-- : selectedItem -->
-                <!-- ? 'Update' -->
-                <!-- : 'Create' -->
-                <!-- }} -->
-                <!-- </button> -->
-                <!-- <button type="button" @click="closeModal" -->
-                <!-- class="flex-1 rounded-lg bg-gray-200 px-4 py-3 font-semibold text-gray-700 hover:bg-gray-300"> -->
-                <!-- Cancel -->
-                <!-- </button> -->
-                <!-- </div> -->
-                <!-- </form> -->
-                <!--  -->
-                <!-- <!~~ Patient Form ~~> -->
-                <!-- <form v-if="modalType === 'patient'" @submit.prevent="submitForm" class="space-y-4"> -->
-                <!-- <div class="grid grid-cols-1 gap-4 md:grid-cols-2"> -->
-                <!-- <div> -->
-                <!-- <label class="mb-2 block text-sm font-medium text-gray-700">Patient ID *</label> -->
-                <!-- <input v-model="patientForm.patient_id" type="text" required -->
-                <!-- class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-green-500" /> -->
-                <!-- </div> -->
-                <!-- <div> -->
-                <!-- <label class="mb-2 block text-sm font-medium text-gray-700">Full Name *</label> -->
-                <!-- <input v-model="patientForm.full_name" type="text" required -->
-                <!-- class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-green-500" /> -->
-                <!-- </div> -->
-                <!-- </div> -->
-                <!--  -->
-                <!-- <div class="grid grid-cols-1 gap-4 md:grid-cols-2"> -->
-                <!-- <div> -->
-                <!-- <label class="mb-2 block text-sm font-medium text-gray-700">Email *</label> -->
-                <!-- <input v-model="patientForm.email" type="email" required -->
-                <!-- class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-green-500" /> -->
-                <!-- </div> -->
-                <!-- <div> -->
-                <!-- <label class="mb-2 block text-sm font-medium text-gray-700">Phone Number *</label> -->
-                <!-- <input v-model="patientForm.phone_no" type="tel" required -->
-                <!-- class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-green-500" /> -->
-                <!-- </div> -->
-                <!-- </div> -->
-                <!--  -->
-                <!-- <div class="grid grid-cols-1 gap-4 md:grid-cols-2"> -->
-                <!-- <div> -->
-                <!-- <label class="mb-2 block text-sm font-medium text-gray-700">Date of Birth *</label> -->
-                <!-- <input v-model="patientForm.date_of_birth" type="date" required -->
-                <!-- class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-green-500" /> -->
-                <!-- </div> -->
-                <!-- <div> -->
-                <!-- <label class="mb-2 block text-sm font-medium text-gray-700">Gender *</label> -->
-                <!-- <select v-model="patientForm.gender" required -->
-                <!-- class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-green-500"> -->
-                <!-- <option value="male">Male</option> -->
-                <!-- <option value="female">Female</option> -->
-                <!-- <option value="other">Other</option> -->
-                <!-- </select> -->
-                <!-- </div> -->
-                <!-- </div> -->
-                <!--  -->
-                <!-- <div> -->
-                <!-- <label class="mb-2 block text-sm font-medium text-gray-700">Address *</label> -->
-                <!-- <textarea v-model="patientForm.address" required rows="3" -->
-                <!-- class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-green-500"></textarea> -->
-                <!-- </div> -->
-                <!--  -->
-                <!-- <div class="flex gap-3 pt-4"> -->
-                <!-- <button type="submit" :disabled="patientForm.processing" -->
-                <!-- class="flex-1 rounded-lg bg-green-600 px-4 py-3 font-semibold text-white hover:bg-green-700 disabled:bg-gray-400"> -->
-                <!-- {{ -->
-                <!-- patientForm.processing -->
-                <!-- ? 'Saving...' -->
-                <!-- : selectedItem -->
-                <!-- ? 'Update' -->
-                <!-- : 'Create' -->
-                <!-- }} -->
-                <!-- </button> -->
-                <!-- <button type="button" @click="closeModal" -->
-                <!-- class="flex-1 rounded-lg bg-gray-200 px-4 py-3 font-semibold text-gray-700 hover:bg-gray-300"> -->
-                <!-- Cancel -->
-                <!-- </button> -->
-                <!-- </div> -->
-                <!-- </form> -->
-                <!--  -->
-                <!-- <!~~ Admin Form ~~> -->
-                <!-- <form v-if="modalType === 'admin'" @submit.prevent="submitForm" class="space-y-4"> -->
-                <!-- <div> -->
-                <!-- <label class="mb-2 block text-sm font-medium text-gray-700">Name *</label> -->
-                <!-- <input v-model="adminForm.name" type="text" required -->
-                <!-- class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-purple-500" /> -->
-                <!-- </div> -->
-                <!--  -->
-                <!-- <div class="grid grid-cols-1 gap-4 md:grid-cols-2"> -->
-                <!-- <div> -->
-                <!-- <label class="mb-2 block text-sm font-medium text-gray-700">Email *</label> -->
-                <!-- <input v-model="adminForm.email" type="email" required -->
-                <!-- class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-purple-500" /> -->
-                <!-- </div> -->
-                <!-- <div> -->
-                <!-- <label class="mb-2 block text-sm font-medium text-gray-700">Phone Number *</label> -->
-                <!-- <input v-model="adminForm.phone_no" type="tel" required -->
-                <!-- class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-purple-500" /> -->
-                <!-- </div> -->
-                <!-- </div> -->
-                <!--  -->
-                <!-- <div> -->
-                <!-- <label class="mb-2 block text-sm font-medium text-gray-700">Role *</label> -->
-                <!-- <select v-model="adminForm.role" required -->
-                <!-- class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-purple-500"> -->
-                <!-- <option value="admin">Admin</option> -->
-                <!-- <option value="super_admin"> -->
-                <!-- Super Admin -->
-                <!-- </option> -->
-                <!-- </select> -->
-                <!-- </div> -->
-                <!--  -->
-                <!-- <div v-if="!selectedItem"> -->
-                <!-- <label class="mb-2 block text-sm font-medium text-gray-700">Password *</label> -->
-                <!-- <input v-model="adminForm.password" type="password" :required="!selectedItem" -->
-                <!-- class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-purple-500" /> -->
-                <!-- </div> -->
-                <!--  -->
-                <!-- <div class="flex gap-3 pt-4"> -->
-                <!-- <button type="submit" :disabled="adminForm.processing" -->
-                <!-- class="flex-1 rounded-lg bg-purple-600 px-4 py-3 font-semibold text-white hover:bg-purple-700 disabled:bg-gray-400"> -->
-                <!-- {{ -->
-                <!-- adminForm.processing -->
-                <!-- ? 'Saving...' -->
-                <!-- : selectedItem -->
-                <!-- ? 'Update' -->
-                <!-- : 'Create' -->
-                <!-- }} -->
-                <!-- </button> -->
-                <!-- <button type="button" @click="closeModal" -->
-                <!-- class="flex-1 rounded-lg bg-gray-200 px-4 py-3 font-semibold text-gray-700 hover:bg-gray-300"> -->
-                <!-- Cancel -->
-                <!-- </button> -->
-                <!-- </div> -->
-                <!-- </form> -->
-                <!-- </div> -->
-                <!-- </div> -->
             </div>
         </div>
     </AdminAuthenticatedLayout>

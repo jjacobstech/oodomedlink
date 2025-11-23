@@ -225,7 +225,7 @@ const handleEmailSubmit = async () => {
             },
         });
     } catch (error) {
-        console.error(error);
+        // console.error(error);
     }
 
     isLoading.value = false;
@@ -233,13 +233,11 @@ const handleEmailSubmit = async () => {
 
 // Step 2: Handle OTP verification
 const handleOtpSubmit = async () => {
-    console.log(otpForm.email);
     isLoading.value = true;
     const validation = otpSchema.safeParse(otpForm);
 
     if (!validation.success) {
         for (const error in flattenError(validation.error)?.fieldErrors) {
-            // console.log(flattenError(form.error)?.fieldErrors[error][0])
             const inputError = flattenError(validation.error)?.fieldErrors[
                 error
             ][0];
@@ -277,11 +275,11 @@ const handleOtpSubmit = async () => {
                     variant: 'destructive',
                     class: 'text-primaryDark bg-white shadow-lg',
                 });
-                console.log(error);
+                // console.log(error);
             },
         });
     } catch (error) {
-        console.error(error);
+        // console.error(error);
     }
 
     isLoading.value = false;
@@ -290,7 +288,6 @@ const handleOtpSubmit = async () => {
 // Resend OTP
 const resendOtp = async () => {
     isLoading.value = true;
-    console.log(otpForm.email);
     try {
         emailForm.post(route('admin.password.request.opt'), {
             onSuccess: () => {
@@ -311,7 +308,7 @@ const resendOtp = async () => {
             },
         });
     } catch (error) {
-        console.error(error);
+        // console.error(error);
     }
 
     isLoading.value = false;
@@ -320,7 +317,7 @@ const resendOtp = async () => {
 // Step 3: Handle reset
 const handleReset = async () => {
     isLoading.value = true;
-    console.log(resetForm.email);
+
     const validation = resetSchema.safeParse(resetForm);
 
     if (!validation.success) {
@@ -352,7 +349,6 @@ const handleReset = async () => {
                 }
             },
             onSuccess: (response) => {
-                console.log(response);
                 toast({
                     title: 'Password Reset Successful',
                     description: ' Redirecting to login...',
@@ -361,7 +357,7 @@ const handleReset = async () => {
             },
         });
     } catch (error) {
-        console.error(error);
+        // console.error(error);
     }
 
     isLoading.value = false;

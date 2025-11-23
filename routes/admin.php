@@ -71,9 +71,5 @@ Route::prefix('admin')->group(function () {
             });
 
             Route::get('/dashboard', [DashboardController::class, 'dashboard'])->middleware(['auth:admin', 'verified'])->name('admin.dashboard');
-
-            Route::get('/settings', function () {
-                  return Inertia::render('Admin/Settings');
-            })->middleware(['auth:admin', 'verified'])->name('admin.settings');
       });
 });

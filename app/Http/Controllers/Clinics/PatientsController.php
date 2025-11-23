@@ -111,7 +111,9 @@ class PatientsController extends Controller
             }
         ]);
 
-        return Inertia::render('User/Patients', [
+
+
+        return Inertia::render('User/Patient', [
             'patient' => $patient,
         ]);
     }
@@ -127,6 +129,7 @@ class PatientsController extends Controller
         if ($patient->clinic_id !== $user->id) {
             abort(403, 'Unauthorized action.');
         }
+
 
         return Inertia::render('User/Patients', [
             'patient' => $patient,
@@ -181,11 +184,11 @@ class PatientsController extends Controller
         }
 
         // Check if patient has results
-        if ($patient->results()->count() > 0) {
-            return redirect()
-                ->back()
-                ->with('error', 'Cannot delete patient with existing results.');
-        }
+        // if ($patient->results()->count() > 0) {
+        //     return redirect()
+        //         ->back()
+        //         ->with('error', 'Cannot delete patient with existing results.');
+        // }
 
         $patient->delete();
 

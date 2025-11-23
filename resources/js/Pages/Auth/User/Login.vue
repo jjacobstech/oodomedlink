@@ -152,7 +152,6 @@ const handleLogin = async () => {
 
     if (form.error) {
         for (const error in flattenError(form.error)?.fieldErrors) {
-            // console.log(flattenError(form.error)?.fieldErrors[error][0])
             const inputError = flattenError(form.error)?.fieldErrors[error][0];
             toast({
                 title: 'Login failed',
@@ -171,9 +170,7 @@ const handleLogin = async () => {
             isLoading.value = false;
         },
         onError: (error) => {
-            console.log(error[0]);
             for (const err in error) {
-                console.log(error[err]);
                 const inputError = error[err];
                 toast({
                     title: 'Login failed',
@@ -185,8 +182,6 @@ const handleLogin = async () => {
             }
         },
         onSuccess: (page) => {
-            console.log('Login Success - Page:', page); // See what page is returned
-            console.log('Current URL:', window.location.href);
             toast({
                 title: 'Login Successful',
                 variant: 'destructive',

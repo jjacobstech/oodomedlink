@@ -180,7 +180,7 @@ const applyFilters = (filterValue?: string) => {
 
       router.get(route('user.dashboard'), payload, {
             onError: (response) => {
-                  console.error('Filter error:', response);
+                  // console.error('Filter error:', response);
             },
             preserveScroll: true,
             preserveState: true,
@@ -194,7 +194,7 @@ const clearFilters = () => {
 
       router.get(route('user.dashboard'), {}, {
             onError: (response) => {
-                  console.error('Clear error:', response);
+                  // console.error('Clear error:', response);
             },
             preserveScroll: true,
             preserveState: true,

@@ -6,7 +6,6 @@ use App\Models\Clinic;
 use App\Mail\ResultMail;
 use App\Models\EmailDelivery;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
@@ -23,14 +22,14 @@ class ResultJob implements ShouldQueue
      *
      * @var int
      */
-    public $tries;
+    public $tries = 3;
 
     /**
-     * The number of seconds to wait before retrying the job.
+     * The number of seconds the job can run before timing out.
      *
      * @var int
      */
-    public $backoff;
+    public $timeout = 120;
 
     /**
      * Delete the job if its models no longer exist.
@@ -44,7 +43,6 @@ class ResultJob implements ShouldQueue
     public array $attachments;
     public string $notes;
     public ?string $emailDeliveryId;
-
     public Clinic $clinic;
 
     /**
@@ -56,7 +54,7 @@ class ResultJob implements ShouldQueue
         array $attachments,
         string $notes,
         string $emailDeliveryId,
-        $clinic
+        Clinic $clinic
     ) {
         $this->subject = $subject;
         $this->recipient = $recipient;
@@ -82,7 +80,13 @@ class ResultJob implements ShouldQueue
                 return;
             }
 
-            // Update status to in_progress
+            // Check if already sent
+            if ($emailDelivery->status === 'sent') {
+                Log::info("Email already sent, skipping: {$this->emailDeliveryId}");
+                return;
+            }
+
+            // Update status to pending with delivery attempt
             $emailDelivery->update([
                 'status' => 'pending',
                 'delivery_attempts' => $emailDelivery->delivery_attempts + 1,
@@ -106,12 +110,14 @@ class ResultJob implements ShouldQueue
                 $emailDelivery->update([
                     'status' => 'sent',
                     'sent_at' => now(),
+                    'error_message' => null,
                 ]);
             }
 
             Log::info("Email sent successfully to {$this->recipient->email}", [
                 'subject' => $this->subject,
                 'email_delivery_id' => $this->emailDeliveryId,
+                'attempt' => $this->attempts(),
             ]);
         } catch (\Exception $e) {
             // Log the error
@@ -120,6 +126,7 @@ class ResultJob implements ShouldQueue
                 'subject' => $this->subject,
                 'email_delivery_id' => $this->emailDeliveryId,
                 'attempt' => $this->attempts(),
+                'max_tries' => $this->tries,
             ]);
 
             // Update status to failed if this is the last attempt
@@ -157,6 +164,7 @@ class ResultJob implements ShouldQueue
             'trace' => $exception->getTraceAsString(),
             'subject' => $this->subject,
             'email_delivery_id' => $this->emailDeliveryId,
+            'total_attempts' => $this->attempts(),
         ]);
     }
 

@@ -4,17 +4,15 @@
     <Toaster />
     <AdminAuthLayout>
         <div class="w-full overflow-hidden">
-            <!-- Toast -->
-
             <!-- Main content -->
             <div
-                class="container relative z-10 mx-auto flex min-h-[calc(100vh-80px)] max-w-3xl items-center justify-center px-4 py-12">
-                <div class="w-full space-y-5 px-40 py-10">
-
+                class="container relative z-10 mx-auto flex min-h-[calc(100vh-80px)] items-center justify-center px-4 py-8 sm:py-12">
+                <div class="w-full max-w-md lg:max-w-lg space-y-4 sm:space-y-5">
+                    <!-- Back Button -->
                     <div class="flex justify-start">
                         <Link href="/"
-                            class="text-primaryDark hover:bg-primaryDark glass hover:shadow-primaryDark/30 inline-flex items-center gap-2 rounded-lg px-4 py-2 text-lg transition-all duration-200 hover:-translate-y-0.5 hover:text-white hover:shadow-lg">
-                        <ArrowLeft class="h-4 w-4" />
+                            class="text-primaryDark hover:bg-primaryDark glass hover:shadow-primaryDark/30 inline-flex items-center gap-2 rounded-lg px-3 sm:px-4 py-2 text-sm sm:text-base lg:text-lg transition-all duration-200 hover:-translate-y-0.5 hover:text-white hover:shadow-lg">
+                        <ArrowLeft class="h-4 w-4 sm:h-5 sm:w-5" />
                         <span>Back to Home</span>
                         </Link>
                     </div>
@@ -22,62 +20,68 @@
                     <!-- Login Card -->
                     <div class="rounded-lg bg-white shadow-xl">
                         <!-- Header -->
-                        <div class="border-primaryDark bg-primaryDark space-y-1 rounded-t-lg border-b p-6">
-                            <h2 class="text-center text-2xl font-bold text-white">
+                        <div class="border-primaryDark bg-primaryDark space-y-1 rounded-t-lg border-b p-4 sm:p-6">
+                            <h2 class="text-center text-xl sm:text-2xl font-bold text-white">
                                 Admin
                             </h2>
-                            <p class="text-center text-lg text-white">
+                            <p class="text-center text-sm sm:text-base lg:text-lg text-white">
                                 Enter your email address and password
                             </p>
                         </div>
 
                         <!-- Form -->
-                        <div class="p-6">
-                            <form @submit.prevent="handleLogin" class="space-y-5">
+                        <div class="p-4 sm:p-6">
+                            <form @submit.prevent="handleLogin" class="space-y-4 sm:space-y-5">
                                 <!-- Email Field -->
                                 <div class="space-y-2">
-                                    <label for="login-email" class="block text-lg font-extrabold text-gray-600">
+                                    <label for="login-email"
+                                        class="block text-sm sm:text-base lg:text-lg font-extrabold text-gray-600">
                                         Email
                                     </label>
                                     <input id="login-email" v-model="loginForm.email" type="email"
                                         placeholder="Enter your email"
-                                        class="focus:ring-primaryDark w-full rounded-lg border border-gray-300 px-4 py-2.5 transition-all focus:border-transparent focus:outline-none focus:ring-2"
+                                        class="focus:ring-primaryDark w-full rounded-lg border border-gray-300 px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base transition-all focus:border-transparent focus:outline-none focus:ring-2"
                                         required />
+                                    <p v-if="loginForm.errors.email" class="text-red-500 text-xs sm:text-sm mt-1">
+                                        {{ loginForm.errors.email }}
+                                    </p>
                                 </div>
 
                                 <!-- Password Field -->
                                 <div class="space-y-2">
-                                    <div class="flex items-center justify-between">
-                                        <label for="login-password" class="block text-lg font-extrabold text-gray-600">
+                                    <div
+                                        class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 sm:gap-2">
+                                        <label for="login-password"
+                                            class="block text-sm sm:text-base lg:text-lg font-extrabold text-gray-600">
                                             Password
                                         </label>
-                                        <Link :href="route('admin.password.request')
-                                            "
-                                            class="text-lg font-extrabold text-black transition-colors hover:text-primary/80">
+                                        <Link :href="route('admin.password.request')"
+                                            class="text-xs sm:text-sm lg:text-base font-extrabold text-black transition-colors hover:text-primary/80">
                                         Forgot password?
                                         </Link>
                                     </div>
                                     <PasswordInput v-model="loginForm.password" />
+                                    <p v-if="loginForm.errors.password" class="text-red-500 text-xs sm:text-sm mt-1">
+                                        {{ loginForm.errors.password }}
+                                    </p>
                                 </div>
 
                                 <!-- Submit Button -->
                                 <button type="submit"
-                                    class="bg-primaryDark hover:shadow-primaryDark/30 group w-full rounded-lg px-4 py-2.5 font-extrabold text-lg text-white transition-all duration-200 hover:-translate-y-1 hover:bg-white hover:shadow-lg disabled:cursor-not-allowed disabled:opacity-50"
+                                    class="bg-primaryDark hover:shadow-primaryDark/30 group w-full rounded-lg px-4 py-2.5 sm:py-3 font-extrabold text-sm sm:text-base lg:text-lg text-white transition-all duration-200 hover:-translate-y-1 hover:bg-white hover:shadow-lg disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0"
                                     :disabled="isLoading">
                                     <p
                                         class="group-hover:bg-primaryDark group-hover:bg-clip-text group-hover:text-transparent">
                                         {{
-                                            isLoading
-                                                ? 'Logging in...'
-                                        : 'Log in'
+                                        isLoading ? 'Logging in...' : 'Log in'
                                         }}
                                     </p>
                                 </button>
                             </form>
 
                             <!-- Sign Up Link -->
-                            <div class="mt-6 text-center">
-                                <p class="text-lg font-bold text-gray-600">
+                            <div class="mt-4 sm:mt-6 text-center">
+                                <p class="text-sm sm:text-base lg:text-lg font-bold text-gray-600">
                                     New here?
                                     <Link :href="route('admin.signup')"
                                         class="text-primaryDark hover:text-primaryDark/80 font-medium transition-colors">
@@ -92,6 +96,7 @@
         </div>
     </AdminAuthLayout>
 </template>
+
 <script setup>
 import { useToast } from '@/components/ui/toast';
 import Toaster from '@/components/ui/toast/Toaster.vue';
@@ -111,25 +116,24 @@ const loginForm = useForm({
 });
 
 const loginSchema = z.object({
-    email: z.email('Invalid email address').max(255),
+    email: z.string().email('Invalid email address').max(255),
     password: z.string().min(6, 'Password must be at least 6 characters'),
 });
 
 const handleLogin = async () => {
     isLoading.value = true;
 
-    const form = loginSchema.safeParse(loginForm);
+    const form = loginSchema.safeParse(loginForm.data());
 
-    if (form.error) {
-        for (const error in flattenError(form.error)?.fieldErrors) {
-            // console.log(flattenError(form.error)?.fieldErrors[error][0])
-            const inputError = flattenError(form.error)?.fieldErrors[error][0];
+    if (!form.success) {
+        const errors = flattenError(form.error)?.fieldErrors;
+        for (const field in errors) {
+            const errorMessage = errors[field][0];
             toast({
-                title: 'Login failed',
-                description: inputError,
+                title: 'Validation Error',
+                description: errorMessage,
                 variant: 'destructive',
-                open: true,
-                class: 'text-primaryDark bg-white shadow-lg bottom-96',
+                duration: 5000,
             });
         }
         isLoading.value = false;
@@ -140,28 +144,24 @@ const handleLogin = async () => {
         onFinish: () => {
             isLoading.value = false;
         },
-        onError: (error) => {
-            console.log(error[0]);
-            for (const err in error) {
-                console.log(error[err]);
-                const inputError = error[err];
+        onError: (errors) => {
+            // Display first error message
+            const firstError = Object.values(errors)[0];
+            if (firstError) {
                 toast({
-                    title: 'Login failed',
-                    description: inputError,
+                    title: 'Login Failed',
+                    description: firstError,
                     variant: 'destructive',
-                    open: true,
-                    class: 'text-primaryDark bg-white shadow-lg bottom-96',
+                    duration: 5000,
                 });
             }
         },
-        onSuccess: (page) => {
-            console.log('Login Success - Page:', page); // See what page is returned
-            console.log('Current URL:', window.location.href);
+        onSuccess: () => {
             toast({
                 title: 'Login Successful',
-                variant: 'destructive',
-                open: true,
-                class: 'text-primaryDark bg-white shadow-lg bottom-96',
+                description: 'Welcome back!',
+                variant: 'default',
+                duration: 3000,
             });
         },
     });

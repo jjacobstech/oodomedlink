@@ -37,6 +37,8 @@ class HandleInertiaRequests extends Middleware
                 'admin' => $request->user('admin'),
             ],
             'session_data' => session()->get('data'),
+            'success' => session()->get('success'),
+            'error' => session()->get('error'),
             'ziggy' => fn() => [
                 ...(new Ziggy)->toArray(),
                 'location' => $request->url(),

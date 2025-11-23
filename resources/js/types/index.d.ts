@@ -13,5 +13,8 @@ export type PageProps<
     auth: {
         user: User;
     };
+    session_data: string;
+    success: string;
+    error: string;
     ziggy: Config & { location: string, base_url: string };
 };

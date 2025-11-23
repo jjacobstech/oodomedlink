@@ -37,15 +37,17 @@ class ResultsController extends Controller
             'notes' => 'nullable|string|max:1000'
         ]);
 
+        $timezone = config('app.timezone');
+
         // Parse schedule time properly
         $schedule = null;
         if (!empty($validated['scheduleDate']) && !empty($validated['scheduleTime'])) {
-            $schedule = Carbon::parse($validated['scheduleDate'] . ' ' . $validated['scheduleTime']);
+            $schedule = Carbon::parse($validated['scheduleDate'] . ' ' . $validated['scheduleTime'], $timezone);
         }
 
         $uploadedFiles = [];
-
-        dd(now()->diffInSeconds($schedule, true));
+        $delayInSeconds = now()->diffInSeconds($schedule, false);
+        $time = ceil($delayInSeconds);
 
         try {
             DB::beginTransaction();
@@ -136,7 +138,7 @@ class ResultsController extends Controller
                     $notes,
                     $emailDelivery->id,
                     $user
-                )->delay(now());
+                )->delay($time);
             }
 
             DB::commit();

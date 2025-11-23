@@ -400,7 +400,7 @@ const handleEmailSubmit = async () => {
             },
         });
     } catch (error) {
-        console.error(error);
+        // console.error(error);
     }
 
     isLoading.value = false;
@@ -408,13 +408,11 @@ const handleEmailSubmit = async () => {
 
 // Step 2: Handle OTP verification
 const handleOtpSubmit = async () => {
-    console.log(otpForm.email);
     isLoading.value = true;
     const validation = otpSchema.safeParse(otpForm);
 
     if (!validation.success) {
         for (const error in flattenError(validation.error)?.fieldErrors) {
-            // console.log(flattenError(form.error)?.fieldErrors[error][0])
             const inputError = flattenError(validation.error)?.fieldErrors[
                 error
             ][0];
@@ -449,11 +447,11 @@ const handleOtpSubmit = async () => {
                     variant: 'destructive',
                     class: 'text-primaryDark bg-white shadow-lg',
                 });
-                console.log(error);
+                // console.log(error);
             },
         });
     } catch (error) {
-        console.error(error);
+        // console.error(error);
     }
 
     isLoading.value = false;
@@ -462,7 +460,6 @@ const handleOtpSubmit = async () => {
 // Resend OTP
 const resendOtp = async () => {
     isLoading.value = true;
-    console.log(otpForm.email);
     try {
         emailForm.post(route('send.otp'), {
             onSuccess: () => {
@@ -483,7 +480,7 @@ const resendOtp = async () => {
             },
         });
     } catch (error) {
-        console.error(error);
+        // console.error(error);
     }
 
     isLoading.value = false;
@@ -538,7 +535,7 @@ const handleSignup = async () => {
             },
         });
     } catch (error) {
-        console.error(error);
+        // console.error(error);
     }
 
     isLoading.value = false;

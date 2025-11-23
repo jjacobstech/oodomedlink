@@ -6,11 +6,13 @@ import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
 import { usePage } from '@inertiajs/vue3';
 import { Bell } from '@solar-icons/vue';
 
+import Toaster from '@/components/ui/toast/Toaster.vue';
 const auth = usePage().props.auth;
 </script>
 
 <template class="fixed h-screen bg-primaryLight">
     <SidebarProvider>
+        <Toaster />
         <AppSidebar />
         <main class="relative h-screen w-full bg-primaryLight">
             <div class="flex items-center justify-between bg-primaryDark/50 p-5 px-10">
