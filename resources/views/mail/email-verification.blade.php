@@ -285,15 +285,20 @@
                     <!-- Header -->
                     <tr>
                         <td class="header-bg">
-                        
-                            <table width="100%" cellpadding="0" cellspacing="0" role="presentation" class="logo-text-wrapper">
-                                <tr class="logo-row">
-                                    <!-- Logo space -->
-                                    <td class="logo-cell">
-                                        <img src="{{ asset('assets/logo1.jpg') }}" alt="Company Logo" width="100" height="48">
-                                    </td>
-                                </tr>
-                            </table>
+<table width="100%" cellpadding="0" cellspacing="0" role="presentation" class="logo-text-wrapper">
+                        <tr>
+                            <td align="center">
+                                <table cellpadding="0" cellspacing="0" role="presentation">
+                                    <tr>
+                                        <td style="background-color: #ffffff; border-radius: 8px; padding: 16px 32px;" align="center">
+                                            <img src="{{ asset('assets/logo1.jpg') }}" alt="Company Logo" width="100" height="48"
+                                                style="display: block; width: 100px; height: 48px;">
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        </table>
 
                         </td>
                     </tr>
@@ -307,16 +312,21 @@
                             <p class="text-md font-bold">Thanks for creating an account. Use the one-time code below to verify your email. The code
                                 will expire in <strong class="text-xl font-extrabold">10 minutes</strong>.</p>
 
-                            <!-- OTP box -->
-                            <table width="100%" cellpadding="0" cellspacing="0" role="presentation" class="otp-container">
-                                <tr>
-                                    <td align="center">
-                                        <div class="otp-bg">
-                                            <p class="otp">123456</p>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
+<!-- OTP box -->
+<table width="100%" cellpadding="0" cellspacing="0" role="presentation" class="otp-container">
+    <tr>
+        <td align="center">
+            <table cellpadding="0" cellspacing="0" role="presentation">
+                <tr>
+                    <td
+                        style="background-image: linear-gradient(90deg, #0466fc 0%, #4CAF50 100%); color: #ffffff; border-radius: 8px; padding: 12px 24px; letter-spacing: 0.1em; font-size: 30px; font-weight: 800;">
+                        123456
+                    </td>
+                </tr>
+            </table>
+            </td>
+            </tr>
+            </table>
 
                             <p class="text-black font-extrabold text-md">
                                 If you didn't request this, you can safely ignore this email — no changes were made to your account.</p>
