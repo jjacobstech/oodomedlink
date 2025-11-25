@@ -1,6 +1,6 @@
 import { defineComponent, ref, unref, withCtx, createVNode, createBlock, createCommentVNode, openBlock, Fragment, renderList, toDisplayString, withDirectives, vModelText, createTextVNode, withModifiers, useSSRContext } from "vue";
 import { ssrRenderComponent, ssrRenderList, ssrRenderClass, ssrInterpolate, ssrRenderAttr, ssrIncludeBooleanAttr } from "vue/server-renderer";
-import { _ as _sfc_main$1 } from "./AuthenticatedLayout-DN147pOI.js";
+import { _ as _sfc_main$1 } from "./AuthenticatedLayout-ZGkphgCd.js";
 import { Head, router, useForm } from "@inertiajs/vue3";
 import "./index-Cx41EZFO.js";
 import "class-variance-authority";

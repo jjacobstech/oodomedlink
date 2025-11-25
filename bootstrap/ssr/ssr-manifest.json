@@ -22,28 +22,28 @@
     "/build/assets/ApplicationLogo-_si3TCMD.js"
   ],
   "resources/js/Components/Dashboard/AppSidebar.vue": [
-    "/build/assets/AuthenticatedLayout-DN147pOI.js",
-    "/build/assets/AuthenticatedLayout-DAHdWwjU.css"
+    "/build/assets/AuthenticatedLayout-ZGkphgCd.js",
+    "/build/assets/AuthenticatedLayout-sQ7lVWCh.css"
   ],
   "resources/js/Components/Dashboard/AppSidebar.vue?vue&type=script&setup=true&lang.ts": [
-    "/build/assets/AuthenticatedLayout-DN147pOI.js",
-    "/build/assets/AuthenticatedLayout-DAHdWwjU.css"
+    "/build/assets/AuthenticatedLayout-ZGkphgCd.js",
+    "/build/assets/AuthenticatedLayout-sQ7lVWCh.css"
   ],
   "resources/js/Components/Dashboard/AppSidebar.vue?vue&type=style&index=0&scoped=b8da4938&lang.css": [
-    "/build/assets/AuthenticatedLayout-DN147pOI.js",
-    "/build/assets/AuthenticatedLayout-DAHdWwjU.css"
+    "/build/assets/AuthenticatedLayout-ZGkphgCd.js",
+    "/build/assets/AuthenticatedLayout-sQ7lVWCh.css"
   ],
   "resources/js/Components/Dashboard/Notifications.vue": [
-    "/build/assets/AuthenticatedLayout-DN147pOI.js",
-    "/build/assets/AuthenticatedLayout-DAHdWwjU.css"
+    "/build/assets/AuthenticatedLayout-ZGkphgCd.js",
+    "/build/assets/AuthenticatedLayout-sQ7lVWCh.css"
   ],
   "resources/js/Components/Dashboard/Notifications.vue?vue&type=script&setup=true&lang.ts": [
-    "/build/assets/AuthenticatedLayout-DN147pOI.js",
-    "/build/assets/AuthenticatedLayout-DAHdWwjU.css"
+    "/build/assets/AuthenticatedLayout-ZGkphgCd.js",
+    "/build/assets/AuthenticatedLayout-sQ7lVWCh.css"
   ],
-  "resources/js/Components/Dashboard/Notifications.vue?vue&type=style&index=0&scoped=6301220e&lang.css": [
-    "/build/assets/AuthenticatedLayout-DN147pOI.js",
-    "/build/assets/AuthenticatedLayout-DAHdWwjU.css"
+  "resources/js/Components/Dashboard/Notifications.vue?vue&type=style&index=0&scoped=f690a82b&lang.css": [
+    "/build/assets/AuthenticatedLayout-ZGkphgCd.js",
+    "/build/assets/AuthenticatedLayout-sQ7lVWCh.css"
   ],
   "resources/js/Components/Home/GuestFooter.vue": [
     "/build/assets/Welcome-D-uqiTmN.js"
@@ -78,12 +78,12 @@
     "/build/assets/AuthLayout-BLjU_tSH.js"
   ],
   "resources/js/Layouts/AuthenticatedLayout.vue": [
-    "/build/assets/AuthenticatedLayout-DN147pOI.js",
-    "/build/assets/AuthenticatedLayout-DAHdWwjU.css"
+    "/build/assets/AuthenticatedLayout-ZGkphgCd.js",
+    "/build/assets/AuthenticatedLayout-sQ7lVWCh.css"
   ],
   "resources/js/Layouts/AuthenticatedLayout.vue?vue&type=script&setup=true&lang.ts": [
-    "/build/assets/AuthenticatedLayout-DN147pOI.js",
-    "/build/assets/AuthenticatedLayout-DAHdWwjU.css"
+    "/build/assets/AuthenticatedLayout-ZGkphgCd.js",
+    "/build/assets/AuthenticatedLayout-sQ7lVWCh.css"
   ],
   "resources/js/Layouts/GuestLayout.vue": [
     "/build/assets/Welcome-D-uqiTmN.js"
@@ -118,34 +118,34 @@
     "/build/assets/Register-B_r2jmAo.js"
   ],
   "resources/js/Pages/User/Dashboard.vue": [
-    "/build/assets/Dashboard-C6_3EBHB.js"
+    "/build/assets/Dashboard-5gAkSDsl.js"
   ],
   "resources/js/Pages/User/Dashboard.vue?vue&type=script&setup=true&lang.ts": [
-    "/build/assets/Dashboard-C6_3EBHB.js"
+    "/build/assets/Dashboard-5gAkSDsl.js"
   ],
   "resources/js/Pages/User/Emails.vue": [
-    "/build/assets/Emails-CSA3h7bw.js"
+    "/build/assets/Emails-DUmqGCPg.js"
   ],
   "resources/js/Pages/User/Emails.vue?vue&type=script&setup=true&lang.ts": [
-    "/build/assets/Emails-CSA3h7bw.js"
+    "/build/assets/Emails-DUmqGCPg.js"
   ],
   "resources/js/Pages/User/Patient.vue": [
-    "/build/assets/Patient-BAFj7rYn.js"
+    "/build/assets/Patient-DEOMp6Gm.js"
   ],
   "resources/js/Pages/User/Patient.vue?vue&type=script&setup=true&lang.ts": [
-    "/build/assets/Patient-BAFj7rYn.js"
+    "/build/assets/Patient-DEOMp6Gm.js"
   ],
   "resources/js/Pages/User/Patients.vue": [
-    "/build/assets/Patients-CThjQb9M.js"
+    "/build/assets/Patients-C3SZdxgd.js"
   ],
   "resources/js/Pages/User/Patients.vue?vue&type=script&setup=true&lang.ts": [
-    "/build/assets/Patients-CThjQb9M.js"
+    "/build/assets/Patients-C3SZdxgd.js"
   ],
   "resources/js/Pages/User/Settings.vue": [
-    "/build/assets/Settings-QKYoHzx2.js"
+    "/build/assets/Settings-BelZhCOz.js"
   ],
   "resources/js/Pages/User/Settings.vue?vue&type=script&setup=true&lang.ts": [
-    "/build/assets/Settings-QKYoHzx2.js"
+    "/build/assets/Settings-BelZhCOz.js"
   ],
   "resources/js/Pages/Welcome.vue": [
     "/build/assets/Welcome-D-uqiTmN.js"
@@ -172,16 +172,16 @@
     "/build/assets/index-Cx41EZFO.js"
   ],
   "resources/js/components/ui/badge/Badge.vue": [
-    "/build/assets/AuthenticatedLayout-DN147pOI.js",
-    "/build/assets/AuthenticatedLayout-DAHdWwjU.css"
+    "/build/assets/AuthenticatedLayout-ZGkphgCd.js",
+    "/build/assets/AuthenticatedLayout-sQ7lVWCh.css"
   ],
   "resources/js/components/ui/badge/Badge.vue?vue&type=script&setup=true&lang.ts": [
-    "/build/assets/AuthenticatedLayout-DN147pOI.js",
-    "/build/assets/AuthenticatedLayout-DAHdWwjU.css"
+    "/build/assets/AuthenticatedLayout-ZGkphgCd.js",
+    "/build/assets/AuthenticatedLayout-sQ7lVWCh.css"
   ],
   "resources/js/components/ui/badge/index.ts": [
-    "/build/assets/AuthenticatedLayout-DN147pOI.js",
-    "/build/assets/AuthenticatedLayout-DAHdWwjU.css"
+    "/build/assets/AuthenticatedLayout-ZGkphgCd.js",
+    "/build/assets/AuthenticatedLayout-sQ7lVWCh.css"
   ],
   "resources/js/components/ui/button/Button.vue": [
     "/build/assets/ApplicationLogo-_si3TCMD.js"
@@ -232,116 +232,116 @@
     "/build/assets/Welcome-D-uqiTmN.js"
   ],
   "resources/js/components/ui/dropdown-menu/DropdownMenu.vue": [
-    "/build/assets/AuthenticatedLayout-DN147pOI.js",
-    "/build/assets/AuthenticatedLayout-DAHdWwjU.css"
+    "/build/assets/AuthenticatedLayout-ZGkphgCd.js",
+    "/build/assets/AuthenticatedLayout-sQ7lVWCh.css"
   ],
   "resources/js/components/ui/dropdown-menu/DropdownMenu.vue?vue&type=script&setup=true&lang.ts": [
-    "/build/assets/AuthenticatedLayout-DN147pOI.js",
-    "/build/assets/AuthenticatedLayout-DAHdWwjU.css"
+    "/build/assets/AuthenticatedLayout-ZGkphgCd.js",
+    "/build/assets/AuthenticatedLayout-sQ7lVWCh.css"
   ],
   "resources/js/components/ui/dropdown-menu/DropdownMenuCheckboxItem.vue": [
-    "/build/assets/AuthenticatedLayout-DN147pOI.js",
-    "/build/assets/AuthenticatedLayout-DAHdWwjU.css"
+    "/build/assets/AuthenticatedLayout-ZGkphgCd.js",
+    "/build/assets/AuthenticatedLayout-sQ7lVWCh.css"
   ],
   "resources/js/components/ui/dropdown-menu/DropdownMenuCheckboxItem.vue?vue&type=script&setup=true&lang.ts": [
-    "/build/assets/AuthenticatedLayout-DN147pOI.js",
-    "/build/assets/AuthenticatedLayout-DAHdWwjU.css"
+    "/build/assets/AuthenticatedLayout-ZGkphgCd.js",
+    "/build/assets/AuthenticatedLayout-sQ7lVWCh.css"
   ],
   "resources/js/components/ui/dropdown-menu/DropdownMenuContent.vue": [
-    "/build/assets/AuthenticatedLayout-DN147pOI.js",
-    "/build/assets/AuthenticatedLayout-DAHdWwjU.css"
+    "/build/assets/AuthenticatedLayout-ZGkphgCd.js",
+    "/build/assets/AuthenticatedLayout-sQ7lVWCh.css"
   ],
   "resources/js/components/ui/dropdown-menu/DropdownMenuContent.vue?vue&type=script&setup=true&lang.ts": [
-    "/build/assets/AuthenticatedLayout-DN147pOI.js",
-    "/build/assets/AuthenticatedLayout-DAHdWwjU.css"
+    "/build/assets/AuthenticatedLayout-ZGkphgCd.js",
+    "/build/assets/AuthenticatedLayout-sQ7lVWCh.css"
   ],
   "resources/js/components/ui/dropdown-menu/DropdownMenuGroup.vue": [
-    "/build/assets/AuthenticatedLayout-DN147pOI.js",
-    "/build/assets/AuthenticatedLayout-DAHdWwjU.css"
+    "/build/assets/AuthenticatedLayout-ZGkphgCd.js",
+    "/build/assets/AuthenticatedLayout-sQ7lVWCh.css"
   ],
   "resources/js/components/ui/dropdown-menu/DropdownMenuGroup.vue?vue&type=script&setup=true&lang.ts": [
-    "/build/assets/AuthenticatedLayout-DN147pOI.js",
-    "/build/assets/AuthenticatedLayout-DAHdWwjU.css"
+    "/build/assets/AuthenticatedLayout-ZGkphgCd.js",
+    "/build/assets/AuthenticatedLayout-sQ7lVWCh.css"
   ],
   "resources/js/components/ui/dropdown-menu/DropdownMenuItem.vue": [
-    "/build/assets/AuthenticatedLayout-DN147pOI.js",
-    "/build/assets/AuthenticatedLayout-DAHdWwjU.css"
+    "/build/assets/AuthenticatedLayout-ZGkphgCd.js",
+    "/build/assets/AuthenticatedLayout-sQ7lVWCh.css"
   ],
   "resources/js/components/ui/dropdown-menu/DropdownMenuItem.vue?vue&type=script&setup=true&lang.ts": [
-    "/build/assets/AuthenticatedLayout-DN147pOI.js",
-    "/build/assets/AuthenticatedLayout-DAHdWwjU.css"
+    "/build/assets/AuthenticatedLayout-ZGkphgCd.js",
+    "/build/assets/AuthenticatedLayout-sQ7lVWCh.css"
   ],
   "resources/js/components/ui/dropdown-menu/DropdownMenuLabel.vue": [
-    "/build/assets/AuthenticatedLayout-DN147pOI.js",
-    "/build/assets/AuthenticatedLayout-DAHdWwjU.css"
+    "/build/assets/AuthenticatedLayout-ZGkphgCd.js",
+    "/build/assets/AuthenticatedLayout-sQ7lVWCh.css"
   ],
   "resources/js/components/ui/dropdown-menu/DropdownMenuLabel.vue?vue&type=script&setup=true&lang.ts": [
-    "/build/assets/AuthenticatedLayout-DN147pOI.js",
-    "/build/assets/AuthenticatedLayout-DAHdWwjU.css"
+    "/build/assets/AuthenticatedLayout-ZGkphgCd.js",
+    "/build/assets/AuthenticatedLayout-sQ7lVWCh.css"
   ],
   "resources/js/components/ui/dropdown-menu/DropdownMenuRadioGroup.vue": [
-    "/build/assets/AuthenticatedLayout-DN147pOI.js",
-    "/build/assets/AuthenticatedLayout-DAHdWwjU.css"
+    "/build/assets/AuthenticatedLayout-ZGkphgCd.js",
+    "/build/assets/AuthenticatedLayout-sQ7lVWCh.css"
   ],
   "resources/js/components/ui/dropdown-menu/DropdownMenuRadioGroup.vue?vue&type=script&setup=true&lang.ts": [
-    "/build/assets/AuthenticatedLayout-DN147pOI.js",
-    "/build/assets/AuthenticatedLayout-DAHdWwjU.css"
+    "/build/assets/AuthenticatedLayout-ZGkphgCd.js",
+    "/build/assets/AuthenticatedLayout-sQ7lVWCh.css"
   ],
   "resources/js/components/ui/dropdown-menu/DropdownMenuRadioItem.vue": [
-    "/build/assets/AuthenticatedLayout-DN147pOI.js",
-    "/build/assets/AuthenticatedLayout-DAHdWwjU.css"
+    "/build/assets/AuthenticatedLayout-ZGkphgCd.js",
+    "/build/assets/AuthenticatedLayout-sQ7lVWCh.css"
   ],
   "resources/js/components/ui/dropdown-menu/DropdownMenuRadioItem.vue?vue&type=script&setup=true&lang.ts": [
-    "/build/assets/AuthenticatedLayout-DN147pOI.js",
-    "/build/assets/AuthenticatedLayout-DAHdWwjU.css"
+    "/build/assets/AuthenticatedLayout-ZGkphgCd.js",
+    "/build/assets/AuthenticatedLayout-sQ7lVWCh.css"
   ],
   "resources/js/components/ui/dropdown-menu/DropdownMenuSeparator.vue": [
-    "/build/assets/AuthenticatedLayout-DN147pOI.js",
-    "/build/assets/AuthenticatedLayout-DAHdWwjU.css"
+    "/build/assets/AuthenticatedLayout-ZGkphgCd.js",
+    "/build/assets/AuthenticatedLayout-sQ7lVWCh.css"
   ],
   "resources/js/components/ui/dropdown-menu/DropdownMenuSeparator.vue?vue&type=script&setup=true&lang.ts": [
-    "/build/assets/AuthenticatedLayout-DN147pOI.js",
-    "/build/assets/AuthenticatedLayout-DAHdWwjU.css"
+    "/build/assets/AuthenticatedLayout-ZGkphgCd.js",
+    "/build/assets/AuthenticatedLayout-sQ7lVWCh.css"
   ],
   "resources/js/components/ui/dropdown-menu/DropdownMenuShortcut.vue": [
-    "/build/assets/AuthenticatedLayout-DN147pOI.js",
-    "/build/assets/AuthenticatedLayout-DAHdWwjU.css"
+    "/build/assets/AuthenticatedLayout-ZGkphgCd.js",
+    "/build/assets/AuthenticatedLayout-sQ7lVWCh.css"
   ],
   "resources/js/components/ui/dropdown-menu/DropdownMenuShortcut.vue?vue&type=script&setup=true&lang.ts": [
-    "/build/assets/AuthenticatedLayout-DN147pOI.js",
-    "/build/assets/AuthenticatedLayout-DAHdWwjU.css"
+    "/build/assets/AuthenticatedLayout-ZGkphgCd.js",
+    "/build/assets/AuthenticatedLayout-sQ7lVWCh.css"
   ],
   "resources/js/components/ui/dropdown-menu/DropdownMenuSub.vue": [
-    "/build/assets/AuthenticatedLayout-DN147pOI.js",
-    "/build/assets/AuthenticatedLayout-DAHdWwjU.css"
+    "/build/assets/AuthenticatedLayout-ZGkphgCd.js",
+    "/build/assets/AuthenticatedLayout-sQ7lVWCh.css"
   ],
   "resources/js/components/ui/dropdown-menu/DropdownMenuSub.vue?vue&type=script&setup=true&lang.ts": [
-    "/build/assets/AuthenticatedLayout-DN147pOI.js",
-    "/build/assets/AuthenticatedLayout-DAHdWwjU.css"
+    "/build/assets/AuthenticatedLayout-ZGkphgCd.js",
+    "/build/assets/AuthenticatedLayout-sQ7lVWCh.css"
   ],
   "resources/js/components/ui/dropdown-menu/DropdownMenuSubContent.vue": [
-    "/build/assets/AuthenticatedLayout-DN147pOI.js",
-    "/build/assets/AuthenticatedLayout-DAHdWwjU.css"
+    "/build/assets/AuthenticatedLayout-ZGkphgCd.js",
+    "/build/assets/AuthenticatedLayout-sQ7lVWCh.css"
   ],
   "resources/js/components/ui/dropdown-menu/DropdownMenuSubContent.vue?vue&type=script&setup=true&lang.ts": [
-    "/build/assets/AuthenticatedLayout-DN147pOI.js",
-    "/build/assets/AuthenticatedLayout-DAHdWwjU.css"
+    "/build/assets/AuthenticatedLayout-ZGkphgCd.js",
+    "/build/assets/AuthenticatedLayout-sQ7lVWCh.css"
   ],
   "resources/js/components/ui/dropdown-menu/DropdownMenuSubTrigger.vue": [
-    "/build/assets/AuthenticatedLayout-DN147pOI.js",
-    "/build/assets/AuthenticatedLayout-DAHdWwjU.css"
+    "/build/assets/AuthenticatedLayout-ZGkphgCd.js",
+    "/build/assets/AuthenticatedLayout-sQ7lVWCh.css"
   ],
   "resources/js/components/ui/dropdown-menu/DropdownMenuSubTrigger.vue?vue&type=script&setup=true&lang.ts": [
-    "/build/assets/AuthenticatedLayout-DN147pOI.js",
-    "/build/assets/AuthenticatedLayout-DAHdWwjU.css"
+    "/build/assets/AuthenticatedLayout-ZGkphgCd.js",
+    "/build/assets/AuthenticatedLayout-sQ7lVWCh.css"
   ],
   "resources/js/components/ui/dropdown-menu/DropdownMenuTrigger.vue": [
-    "/build/assets/AuthenticatedLayout-DN147pOI.js",
-    "/build/assets/AuthenticatedLayout-DAHdWwjU.css"
+    "/build/assets/AuthenticatedLayout-ZGkphgCd.js",
+    "/build/assets/AuthenticatedLayout-sQ7lVWCh.css"
   ],
   "resources/js/components/ui/dropdown-menu/DropdownMenuTrigger.vue?vue&type=script&setup=true&lang.ts": [
-    "/build/assets/AuthenticatedLayout-DN147pOI.js",
-    "/build/assets/AuthenticatedLayout-DAHdWwjU.css"
+    "/build/assets/AuthenticatedLayout-ZGkphgCd.js",
+    "/build/assets/AuthenticatedLayout-sQ7lVWCh.css"
   ],
   "resources/js/components/ui/input/Input.vue": [
     "/build/assets/index-Cx41EZFO.js"

@@ -1,7 +1,7 @@
 import { defineComponent, ref, unref, mergeProps, withCtx, createVNode, resolveDynamicComponent, createBlock, openBlock, toDisplayString, Fragment, renderList, useSSRContext, renderSlot, computed, createCommentVNode, createTextVNode } from "vue";
 import { ssrRenderComponent, ssrRenderList, ssrRenderVNode, ssrInterpolate, ssrRenderSlot, ssrRenderAttrs } from "vue/server-renderer";
 import { _ as _sfc_main$i, a as _sfc_main$j, b as _sfc_main$l, c as _sfc_main$m, d as _sfc_main$n, e as _sfc_main$o, f as _sfc_main$p, g as _sfc_main$r, h as _sfc_main$s, i as _sfc_main$t, j as _sfc_main$u } from "./index-Cx41EZFO.js";
-import { usePage, useForm, Link } from "@inertiajs/vue3";
+import { usePage, useForm, Link, router } from "@inertiajs/vue3";
 import { Home, Letter, UserBlock, Logout, Bell } from "@solar-icons/vue";
 import { Cog, Check, Circle, ChevronRight } from "lucide-vue-next";
 import { _ as _sfc_main$k } from "./ApplicationLogo-_si3TCMD.js";
@@ -1078,13 +1078,8 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
     const unreadCount = computed(() => notifications.filter((n) => !n.read_at).length);
     const markAsRead = async (notification) => {
       if (notification.read_at) return;
-      const notificationForm = useForm({
-        id: notification.id
-      });
       try {
-        notificationForm.post(route("user.notification"), {
-          preserveScroll: true
-        });
+        router.visit(route("user.notification"), { only: ["auth"] });
       } catch (error) {
         console.error("Error marking notification as read:", error);
       }
@@ -1105,7 +1100,7 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
             _push2(ssrRenderComponent(unref(_sfc_main$3), { class: "relative focus:outline-none" }, {
               default: withCtx((_2, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
-                  _push3(`<div class="relative flex items-center justify-center rounded-full p-2 transition-colors hover:bg-gray-100 dark:hover:bg-gray-800" data-v-6301220e${_scopeId2}>`);
+                  _push3(`<div class="relative flex items-center justify-center rounded-full p-2 transition-colors hover:bg-gray-100 dark:hover:bg-gray-800" data-v-f690a82b${_scopeId2}>`);
                   _push3(ssrRenderComponent(unref(Bell), { class: "h-6 w-6 fill-primaryDark text-primaryLight transition-transform hover:scale-110 md:h-7 md:w-7" }, null, _parent3, _scopeId2));
                   if (unreadCount.value > 0) {
                     _push3(ssrRenderComponent(_sfc_main$2, {
@@ -1114,7 +1109,7 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
                     }, {
                       default: withCtx((_3, _push4, _parent4, _scopeId3) => {
                         if (_push4) {
-                          _push4(`<span class="font-bold text-white" data-v-6301220e${_scopeId3}>${ssrInterpolate(unreadCount.value > 99 ? "99+" : unreadCount.value)}</span>`);
+                          _push4(`<span class="font-bold text-white" data-v-f690a82b${_scopeId3}>${ssrInterpolate(unreadCount.value > 99 ? "99+" : unreadCount.value)}</span>`);
                         } else {
                           return [
                             createVNode("span", { class: "font-bold text-white" }, toDisplayString(unreadCount.value > 99 ? "99+" : unreadCount.value), 1)
@@ -1156,7 +1151,7 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
                   _push3(ssrRenderComponent(unref(_sfc_main$b), { class: "border-b px-4 py-3" }, {
                     default: withCtx((_3, _push4, _parent4, _scopeId3) => {
                       if (_push4) {
-                        _push4(`<div class="flex items-center justify-between" data-v-6301220e${_scopeId3}><h3 class="text-base font-semibold" data-v-6301220e${_scopeId3}>Notifications</h3>`);
+                        _push4(`<div class="flex items-center justify-between" data-v-f690a82b${_scopeId3}><h3 class="text-base font-semibold" data-v-f690a82b${_scopeId3}>Notifications</h3>`);
                         _push4(ssrRenderComponent(_sfc_main$2, {
                           variant: "secondary",
                           class: "text-xs"
@@ -1192,7 +1187,7 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
                     }),
                     _: 1
                   }, _parent3, _scopeId2));
-                  _push3(`<div class="max-h-[60vh] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent" data-v-6301220e${_scopeId2}>`);
+                  _push3(`<div class="max-h-[60vh] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent" data-v-f690a82b${_scopeId2}>`);
                   if (unref(notifications).length > 0) {
                     _push3(`<!--[-->`);
                     ssrRenderList(unref(notifications), (notification) => {
@@ -1206,13 +1201,13 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
                       }, {
                         default: withCtx((_3, _push4, _parent4, _scopeId3) => {
                           if (_push4) {
-                            _push4(`<div class="flex w-full items-start gap-3" data-v-6301220e${_scopeId3}>`);
+                            _push4(`<div class="flex w-full items-start gap-3" data-v-f690a82b${_scopeId3}>`);
                             if (!notification.read_at) {
-                              _push4(`<div class="mt-1.5 h-2 w-2 flex-shrink-0 rounded-full bg-blue-500" data-v-6301220e${_scopeId3}></div>`);
+                              _push4(`<div class="mt-1.5 h-2 w-2 flex-shrink-0 rounded-full bg-blue-500" data-v-f690a82b${_scopeId3}></div>`);
                             } else {
-                              _push4(`<div class="mt-1.5 h-2 w-2 flex-shrink-0" data-v-6301220e${_scopeId3}></div>`);
+                              _push4(`<div class="mt-1.5 h-2 w-2 flex-shrink-0" data-v-f690a82b${_scopeId3}></div>`);
                             }
-                            _push4(`<div class="flex-1 space-y-1" data-v-6301220e${_scopeId3}><p class="text-sm leading-relaxed text-gray-900 dark:text-gray-100" data-v-6301220e${_scopeId3}>${ssrInterpolate(notification.data.data)}</p><p class="text-xs text-gray-500 dark:text-gray-400" data-v-6301220e${_scopeId3}>${ssrInterpolate(getNotificationTime(notification))}</p></div></div>`);
+                            _push4(`<div class="flex-1 space-y-1" data-v-f690a82b${_scopeId3}><p class="text-sm leading-relaxed text-gray-900 dark:text-gray-100" data-v-f690a82b${_scopeId3}>${ssrInterpolate(notification.data.data)}</p><p class="text-xs text-gray-500 dark:text-gray-400" data-v-f690a82b${_scopeId3}>${ssrInterpolate(getNotificationTime(notification))}</p></div></div>`);
                           } else {
                             return [
                               createVNode("div", { class: "flex w-full items-start gap-3" }, [
@@ -1236,13 +1231,13 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
                     });
                     _push3(`<!--]-->`);
                   } else {
-                    _push3(`<div class="flex flex-col items-center justify-center py-12 px-4" data-v-6301220e${_scopeId2}>`);
+                    _push3(`<div class="flex flex-col items-center justify-center py-12 px-4" data-v-f690a82b${_scopeId2}>`);
                     _push3(ssrRenderComponent(unref(Bell), { class: "h-12 w-12 fill-gray-300 text-gray-200 dark:fill-gray-600 dark:text-gray-700" }, null, _parent3, _scopeId2));
-                    _push3(`<p class="mt-3 text-sm text-gray-500 dark:text-gray-400" data-v-6301220e${_scopeId2}> No notifications yet </p></div>`);
+                    _push3(`<p class="mt-3 text-sm text-gray-500 dark:text-gray-400" data-v-f690a82b${_scopeId2}> No notifications yet </p></div>`);
                   }
                   _push3(`</div>`);
                   _push3(ssrRenderComponent(unref(_sfc_main$8), { class: "my-0" }, null, _parent3, _scopeId2));
-                  _push3(`<div class="p-2" data-v-6301220e${_scopeId2}><button class="w-full rounded px-3 py-2 text-center text-sm font-medium text-primaryDark transition-colors hover:bg-gray-100 dark:hover:bg-gray-800" data-v-6301220e${_scopeId2}> View all notifications </button></div>`);
+                  _push3(`<div class="p-2" data-v-f690a82b${_scopeId2}><button class="w-full rounded px-3 py-2 text-center text-sm font-medium text-primaryDark transition-colors hover:bg-gray-100 dark:hover:bg-gray-800" data-v-f690a82b${_scopeId2}> View all notifications </button></div>`);
                 } else {
                   return [
                     createVNode(unref(_sfc_main$b), { class: "border-b px-4 py-3" }, {
@@ -1404,7 +1399,7 @@ _sfc_main$1.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Components/Dashboard/Notifications.vue");
   return _sfc_setup$1 ? _sfc_setup$1(props, ctx) : void 0;
 };
-const Notifications = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-6301220e"]]);
+const Notifications = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-f690a82b"]]);
 const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "AuthenticatedLayout",
   __ssrInlineRender: true,

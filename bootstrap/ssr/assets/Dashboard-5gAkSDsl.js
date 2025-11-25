@@ -1,6 +1,6 @@
 import { defineComponent, ref, unref, withCtx, createVNode, createBlock, createCommentVNode, openBlock, Fragment, renderList, toDisplayString, withDirectives, vModelText, withModifiers, vModelSelect, createTextVNode, vModelCheckbox, useSSRContext } from "vue";
 import { ssrRenderComponent, ssrRenderList, ssrInterpolate, ssrRenderClass, ssrRenderAttr, ssrIncludeBooleanAttr, ssrLooseContain, ssrLooseEqual } from "vue/server-renderer";
-import { _ as _sfc_main$1 } from "./AuthenticatedLayout-DN147pOI.js";
+import { _ as _sfc_main$1 } from "./AuthenticatedLayout-ZGkphgCd.js";
 import { useForm, Head, router } from "@inertiajs/vue3";
 import { CloseCircle } from "@solar-icons/vue";
 import { u as useToast } from "./index-D9olpTuq.js";

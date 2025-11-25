@@ -9,7 +9,7 @@ import {
 } from '@/components/ui/dropdown-menu'
 import Badge from '@/components/ui/badge/Badge.vue';
 import { Bell } from '@solar-icons/vue';
-import { usePage, useForm } from '@inertiajs/vue3';
+import { usePage, router } from '@inertiajs/vue3';
 import { Notification } from '@/types/index';
 import { computed } from 'vue';
 import axios from 'axios';
@@ -22,15 +22,11 @@ const unreadCount = computed(() => notifications.filter((n: Notification) => !n.
 const markAsRead = async (notification: Notification) => {
       if (notification.read_at) return;
 
-      const notificationForm = useForm({
-            id: notification.id
-      });
+
       try {
 
-            notificationForm.post(route('user.notification'), {
-                  preserveScroll: true,
-            });
 
+            router.visit(route('user.notification'), { only: ['auth'] });
 
             // Reload the page data to refresh notifications
 

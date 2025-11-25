@@ -51,6 +51,8 @@ class EmailController extends Controller
 
     public function retry(Request $request)
     {
+
+        $user = Auth::user();
         $validated = $request->validate([
             'id' => 'required|exists:email_deliveries,id'
         ]);
@@ -90,6 +92,10 @@ class EmailController extends Controller
                 $email->id,
                 Auth::user()
             );
+
+            $message = 'Result uploaded and sent successfully';
+
+            $user->notify(new EmailNotification($message));
 
             return redirect()->route('user.emails')->with('success', 'Email retry initiated successfully.');
         } catch (\Exception $e) {
