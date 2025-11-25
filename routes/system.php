@@ -47,6 +47,43 @@ Route::middleware(['throttle:6,1'])->prefix('system')->group(function () {
                   'output' => Artisan::output()
             ]);
       })->name('system.optimize.clear');
+
+      Route::get('/db/migrate', function () {
+            if (RateLimiter::tooManyAttempts('db-migrate:' . request()->ip(), 5)) {
+                  return response()->json([
+                        'success' => false,
+                        'message' => 'Too many requests. Please try again later.'
+                  ], 429);
+            }
+
+            RateLimiter::hit('db-migrate:' . request()->ip(), 3600);
+
+            Artisan::call('migrate');
+
+            return response()->json([
+                  'success' => true,
+                  'message' => 'Migration successful',
+                  'output' => Artisan::output()
+            ]);
+      })->name('db.migrate/force');
+      Route::get('/db/migrate/fresh', function () {
+            if (RateLimiter::tooManyAttempts('db-migrate-fresh:' . request()->ip(), 5)) {
+                  return response()->json([
+                        'success' => false,
+                        'message' => 'Too many requests. Please try again later.'
+                  ], 429);
+            }
+
+            RateLimiter::hit('db-migrate-fresh:' . request()->ip(), 3600);
+
+            Artisan::call('migrate:fresh');
+
+            return response()->json([
+                  'success' => true,
+                  'message' => 'Migration successful',
+                  'output' => Artisan::output()
+            ]);
+      })->name('db.migrate.fresh');
 });
 
 // In RouteServiceProvider or bootstrap/app.php, add rate limiter

@@ -97,7 +97,6 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
             class: "text-primaryDark bg-white shadow-lg bottom-96",
             open: true
           });
-          console.error("Upload error:", response.props.errors ?? response.props.error);
         },
         onError: (errors) => {
           console.error("Upload error:", errors);
@@ -184,7 +183,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
             _push2(`<!--]--></div><div class="p-4 sm:p-6 lg:p-8 bg-white shadow-md rounded-xl"${_scopeId}><div class="mb-4 sm:mb-6"${_scopeId}><h2 class="mb-3 sm:mb-4 text-xl sm:text-2xl lg:text-3xl font-bold text-gray-800"${_scopeId}> Patient Results </h2><div class="flex flex-col gap-3 sm:gap-4 mb-4"${_scopeId}><div class="flex flex-wrap gap-2 sm:gap-3"${_scopeId}><!--[-->`);
             ssrRenderList(selectionFilter, (selection) => {
               _push2(`<button class="${ssrRenderClass([
-                selectedFilter.value === selection ? "bg-primaryDark text-white" : "bg-gray-200 tex-700",
+                selectedFilter.value === selection ? "bg-primaryDark text-white" : "bg-gray-200 text-gray-700",
                 "px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm lg:text-base font-medium rounded-lg transition-all hover:shadow-md"
               ])}"${_scopeId}>${ssrInterpolate(selection.charAt(0).toUpperCase() + selection.slice(1))}</button>`);
             });
@@ -322,7 +321,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                               key: selection,
                               onClick: ($event) => applyFilters(selection),
                               class: [
-                                selectedFilter.value === selection ? "bg-primaryDark text-white" : "bg-gray-200 tex-700",
+                                selectedFilter.value === selection ? "bg-primaryDark text-white" : "bg-gray-200 text-gray-700",
                                 "px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm lg:text-base font-medium rounded-lg transition-all hover:shadow-md"
                               ]
                             }, toDisplayString(selection.charAt(0).toUpperCase() + selection.slice(1)), 11, ["onClick"]);
