@@ -184,11 +184,11 @@ class PatientsController extends Controller
         }
 
         // Check if patient has results
-        // if ($patient->results()->count() > 0) {
-        //     return redirect()
-        //         ->back()
-        //         ->with('error', 'Cannot delete patient with existing results.');
-        // }
+        if ($patient->results()->count() > 0) {
+            return redirect()
+                ->back()
+                ->with('error', 'Cannot delete patient with existing results.');
+        }
 
         $patient->delete();
 

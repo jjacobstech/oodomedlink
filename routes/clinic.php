@@ -9,8 +9,10 @@ use App\Http\Controllers\Clinics\ResultsController;
 use App\Http\Controllers\Clinics\PatientsController;
 use App\Http\Controllers\Clinics\SettingsController;
 use App\Http\Controllers\Clinics\DashboardController;
+use App\Http\Controllers\Clinics\NotificationController;
 
 Route::prefix('clinic')->middleware(['auth:clinic'])->name('user.')->group(function () {
+
       Route::middleware(['verified'])->group(
             function () {
 
@@ -58,4 +60,6 @@ Route::prefix('clinic')->middleware(['auth:clinic'])->name('user.')->group(funct
             Route::post('retry', [EmailController::class, 'retry'])
                   ->name('email.retry');
       });
+
+      Route::post('/notifications', [NotificationController::class, 'index'])->name('notification');
 });

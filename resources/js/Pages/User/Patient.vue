@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head, router, usePage } from '@inertiajs/vue3';
+import { Head, router, useForm, usePage } from '@inertiajs/vue3';
 import { ref } from 'vue';
 import { useToast } from '@/components/ui/toast';
 
-interface File {
+interface file {
       id: string;
       original_file_name: string;
       file_path: string;
@@ -13,6 +13,22 @@ interface File {
       file_type: string;
       file_size: number;
       result: string;
+
+}
+
+
+
+interface FormData {
+      patient_name: string;
+      patient_email: string;
+      test_date: string;
+      test_name: string;
+      result_type: string;
+      file: File[];
+      notes: string;
+      sendViaEmail: boolean;
+      scheduleDate: string;
+      scheduleTime: string;
 }
 
 interface PatientResult {
@@ -23,7 +39,7 @@ interface PatientResult {
       notes: string;
       uploaded_at: string;
       status: 'pending' | 'sent' | 'failed';
-      files: File[];
+      files: file[];
 }
 
 interface Patient {
@@ -69,6 +85,65 @@ const formatDateTime = (dateString: string | null | undefined) => {
             minute: '2-digit',
       });
 };
+const showUploadModal = ref(false);
+const p = props.patient;
+
+// Upload form
+const uploadForm = useForm<FormData>({
+      patient_name: p.full_name ?? '',
+      patient_email: p.email ?? '',
+      test_date: '',
+      test_name: '',
+      result_type: '',
+      file: [] as File[],
+      notes: '',
+      sendViaEmail: true,
+      scheduleDate: '',
+      scheduleTime: '',
+});
+
+// File input handling
+const handleFileChange = (event: Event) => {
+      const target = event.target as HTMLInputElement;
+      if (target.files && target.files.length > 0) {
+            for (let file of target.files) {
+                  uploadedFiles.value.push(file);
+                  uploadForm.file.push(file);
+            }
+      }
+}
+
+const uploadedFiles = ref<File[]>([]);
+
+const handleFileRemove = (index: number) => {
+      uploadedFiles.value.splice(index, 1);
+      uploadForm.file.splice(index, 1);
+};
+
+// Submit upload
+const submitUpload = () => {
+      uploadForm.post(route('user.result.upload'), {
+            onSuccess: (response) => {
+                  uploadForm.reset();
+                  uploadedFiles.value = [];
+                  showUploadModal.value = false;
+
+                  toast({
+                        title: response.props.error ? 'Error' : 'Success',
+                        description: response.props.error ? response.props.error : 'Upload successful',
+                        type: 'foreground',
+                        variant: 'default',
+                        class: 'text-primaryDark bg-white shadow-lg bottom-96',
+                        open: true,
+
+                  });
+
+            },
+            onError: (errors) => {
+                  console.error('Upload error:', errors);
+            },
+      });
+}
 
 // Calculate age from date of birth
 const calculateAge = (dob: string | null) => {
@@ -112,7 +187,7 @@ const deletePatient = () => {
                         });
                   },
                   onError: (error) => {
-                  //      console.error('Error:', error);
+                        //      console.error('Error:', error);
                         toast({
                               title: 'Deletion Failed',
                               description: 'Failed to delete patient. Please try again.',
@@ -144,7 +219,7 @@ const viewResult = (result: PatientResult) => {
 };
 
 // Download file
-const downloadFile = (file: File) => {
+const downloadFile = (file: file) => {
       window.open(file.file_url, '_blank');
 };
 
@@ -257,10 +332,10 @@ const formatFileSize = (bytes: number) => {
                                     class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-4 pb-2 border-b">
                                     <h2 class="text-lg sm:text-xl font-bold text-gray-800">
                                           Medical Results ({{
-                                                patient.results?.length || 0
+                                          patient.results?.length || 0
                                           }})
                                     </h2>
-                                    <button
+                                    <button @click="showUploadModal = true"
                                           class="w-full sm:w-auto rounded-md bg-primaryDark px-4 py-2 text-sm font-semibold text-white transition-all duration-150 hover:shadow-lg">
                                           + Upload Result
                                     </button>
@@ -447,6 +522,195 @@ const formatFileSize = (bytes: number) => {
                                                 Close
                                           </button>
                                     </div>
+                              </div>
+                        </div>
+
+
+                        <!-- Upload Modal -->
+                        <div v-if="showUploadModal"
+                              class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4 sm:p-6 lg:p-10"
+                              @click.self="showUploadModal = false">
+                              <div
+                                    class="w-full max-w-md sm:max-w-lg lg:max-w-2xl xl:max-w-3xl p-6 sm:p-8 lg:p-10 xl:p-16 bg-white rounded-xl shadow-2xl max-h-[90vh] overflow-y-auto">
+                                    <h3 class="mb-4 sm:mb-6 text-xl sm:text-2xl lg:text-3xl font-bold text-gray-800">
+                                          Upload Patient Result
+                                    </h3>
+
+                                    <form @submit.prevent="submitUpload" class="space-y-4 sm:space-y-5 lg:space-y-6">
+                                          <!-- Patient Name -->
+                                          <div>
+                                                <label
+                                                      class="block mb-2 text-sm sm:text-base font-extrabold text-gray-700">
+                                                      Patient Name
+                                                </label>
+                                                <input v-model="uploadForm.patient_name" type="text" required
+                                                      class="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                                                      placeholder="Enter patient name" autocomplete="name" />
+                                          </div>
+
+                                          <!-- Patient Email -->
+                                          <div>
+                                                <label
+                                                      class="block mb-2 text-sm sm:text-base font-extrabold text-gray-700">
+                                                      Patient Email
+                                                </label>
+                                                <input v-model="uploadForm.patient_email" type="email" required
+                                                      class="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                                                      placeholder="Enter patient email" autocomplete="email" />
+                                          </div>
+
+                                          <!-- Test Name -->
+                                          <div>
+                                                <label
+                                                      class="block mb-2 text-sm sm:text-base font-extrabold text-gray-700">
+                                                      Test Name
+                                                </label>
+                                                <input v-model="uploadForm.test_name" type="text" required
+                                                      class="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                                                      placeholder="Enter test name" />
+                                          </div>
+
+                                          <!-- Result Type -->
+                                          <div>
+                                                <label
+                                                      class="block mb-2 text-sm sm:text-base font-extrabold text-gray-700">
+                                                      Result Type
+                                                </label>
+                                                <select v-model="uploadForm.result_type" required
+                                                      class="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
+                                                      <option value="">Select result type</option>
+                                                      <option value="Blood Test">Blood Test</option>
+                                                      <option value="X-Ray">X-Ray</option>
+                                                      <option value="MRI">MRI</option>
+                                                      <option value="CT Scan">CT Scan</option>
+                                                      <option value="Lab Analysis">
+                                                            Lab Analysis
+                                                      </option>
+                                                      <option value="Other">Other</option>
+                                                </select>
+                                          </div>
+
+                                          <!-- Test Date -->
+                                          <div>
+                                                <label
+                                                      class="block mb-2 text-sm sm:text-base font-extrabold text-gray-700">
+                                                      Test Date
+                                                </label>
+                                                <input v-model="uploadForm.test_date" type="date" required
+                                                      class="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                                                      autocomplete="date" />
+                                          </div>
+
+                                          <!-- Notes -->
+                                          <div>
+                                                <label
+                                                      class="block mb-2 text-sm font-extrabold sm:text-base text-gray-700">
+                                                      Notes
+                                                </label>
+                                                <textarea v-model="uploadForm.notes" rows="3"
+                                                      class="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                                                      placeholder="e.g referrals, prescriptions etc">
+                                </textarea>
+                                          </div>
+
+                                          <!-- File Upload Dropzone -->
+                                          <div class="flex items-center justify-center w-full">
+                                                <label for="dropzone-file"
+                                                      class="flex flex-col items-center justify-center w-full h-48 sm:h-56 lg:h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-primaryLight/30 transition-colors group">
+                                                      <div class="flex flex-col items-center justify-center px-4">
+                                                            <svg class="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 mb-3 sm:mb-4 text-gray-500 group-hover:text-gray-600 transition-colors"
+                                                                  aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                                                  fill="none" viewBox="0 0 20 16">
+                                                                  <path stroke="currentColor" stroke-linecap="round"
+                                                                        stroke-linejoin="round" stroke-width="2"
+                                                                        d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
+                                                            </svg>
+                                                            <p
+                                                                  class="mb-2 text-sm sm:text-base lg:text-lg text-gray-500 text-center">
+                                                                  <span class="font-semibold">Click to upload</span>
+                                                                  or drag and drop
+                                                            </p>
+                                                            <p class="text-xs sm:text-sm text-gray-500 text-center">
+                                                                  PDF, PNG, JPG (MAX. 10MB per file)
+                                                            </p>
+                                                      </div>
+                                                      <input id="dropzone-file" type="file" multiple
+                                                            accept=".pdf,.png,.jpg,.jpeg" @change="handleFileChange"
+                                                            class="hidden" />
+                                                </label>
+                                          </div>
+
+                                          <!-- Uploaded Files List -->
+                                          <div v-if="uploadedFiles.length > 0" class="space-y-2">
+                                                <p class="text-sm font-semibold text-gray-700 mb-2">
+                                                      Selected Files ({{ uploadedFiles.length }})
+                                                </p>
+                                                <div v-for="(file, index) in uploadedFiles" :key="index"
+                                                      class="w-full flex justify-between items-center px-3 sm:px-4 py-2 text-sm sm:text-base border border-gray-300 rounded-lg bg-gray-50">
+                                                      <span
+                                                            class="truncate max-w-[200px] md:max-w-[300px] xl:max-w-[400px]">
+                                                            {{ file.name }}
+                                                      </span>
+
+                                                      <button type="button" @click="handleFileRemove(index)"
+                                                            class="text-red-600 hover:text-red-800 transition-colors">
+                                                            <CloseCircle weight="Bold" :size="24" />
+                                                      </button>
+                                                </div>
+                                          </div>
+
+                                          <div v-if="uploadForm.sendViaEmail" class="space-y-2">
+                                                <label
+                                                      class="block mb-2 text-sm sm:text-base font-extrabold text-gray-700">
+                                                      Schedule Date
+                                                </label>
+                                                <input v-model="uploadForm.scheduleDate" type="date"
+                                                      class="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all" />
+                                                <label
+                                                      class="block mb-2 text-sm sm:text-base font-extrabold text-gray-700">
+                                                      Schedule Time
+                                                </label>
+                                                <input v-model="uploadForm.scheduleTime" type="time"
+                                                      class="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all" />
+                                          </div>
+
+                                          <!-- Actions Section -->
+                                          <div class="flex flex-col sm:flex-row sm:justify-between gap-4 pt-2 sm:pt-4">
+                                                <!-- Checkbox -->
+                                                <div class="flex items-center gap-2 sm:gap-3">
+                                                      <input type="checkbox" v-model="uploadForm.sendViaEmail"
+                                                            class="w-4 h-4 sm:w-5 sm:h-5 text-primaryDark bg-gray-100 border-gray-300 rounded focus:ring-primaryDark focus:ring-2 transition-all flex-shrink-0" />
+                                                      <span
+                                                            class="text-xs font-extrabold sm:text-sm lg:text-base text-gray-700">
+                                                            Upload and send result immediately
+                                                      </span>
+                                                </div>
+
+                                                <!-- Buttons -->
+                                                <div class="flex gap-2 sm:gap-3 w-full sm:w-auto">
+                                                      <button type="submit" :disabled="uploadForm.processing ||
+                                                            uploadedFiles.length === 0
+                                                            "
+                                                            class="flex-1 sm:flex-none sm:min-w-[100px] hover:-translate-y-1 duration-150 px-4 py-2 sm:py-2.5 text-sm sm:text-base font-semibold text-white transition-all bg-blue-600 rounded-lg hover:bg-blue-700 hover:shadow-lg disabled:bg-gray-400 disabled:cursor-not-allowed disabled:hover:transform-none">
+                                                            {{
+                                                                  uploadForm.processing
+                                                                        ? 'Uploading...'
+                                                                        : 'Upload'
+                                                            }}
+                                                      </button>
+                                                      <button type="button" @click="
+                                                            () => {
+                                                                  showUploadModal = false;
+                                                                  uploadForm.reset();
+                                                                  uploadedFiles = [];
+                                                            }
+                                                      "
+                                                            class="flex-1 sm:flex-none sm:min-w-[100px] px-4 py-2 sm:py-2.5 text-sm sm:text-base font-semibold text-gray-700 transition-all hover:-translate-y-1 duration-150 bg-gray-200 rounded-lg hover:bg-gray-300 hover:shadow-lg">
+                                                            Cancel
+                                                      </button>
+                                                </div>
+                                          </div>
+                                    </form>
                               </div>
                         </div>
                   </div>

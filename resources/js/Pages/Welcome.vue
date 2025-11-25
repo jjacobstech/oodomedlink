@@ -390,6 +390,6 @@ watchOnce(emblaMainApi, (emblaMainApi) => {
 
 const startNow = () => {
     sessionStorage.setItem('email', email.value);
-    return router.get('/signup');
+    return router.get(route('signup'));
 };
 </script>

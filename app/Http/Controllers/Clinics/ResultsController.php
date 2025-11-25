@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Clinics;
 
+use App\Notifications\EmailNotification;
 use Carbon\Carbon;
 use App\Models\File;
 use App\Jobs\ResultJob;
@@ -122,7 +123,7 @@ class ResultsController extends Controller
                 $emailDelivery = EmailDelivery::create([
                     'patient_result_id' => $result->id,
                     'patient_email' => $patient->email,
-                    'sent_by' => $user->name,
+                    'sent_by' => Str::lower($user->name),
                     'subject' => $subject,
                     'body' => $notes,
                     'status' => $schedule ? 'scheduled' : 'pending',
@@ -139,6 +140,12 @@ class ResultsController extends Controller
                     $emailDelivery->id,
                     $user
                 )->delay($time);
+
+                $message = 'Result uploaded and email ' .
+                    ($schedule ? 'scheduled for ' . $schedule->format('d M Y h:ia') : 'sent') .
+                    ' successfully';
+
+                $user->notify(new EmailNotification($message));
             }
 
             DB::commit();
@@ -163,7 +170,7 @@ class ResultsController extends Controller
                 'trace' => $th->getTraceAsString()
             ]);
 
-            return redirect()->route('user.dashboard')
+            return redirect()->back()
                 ->with(['error' => 'An error occurred while uploading the result. Please try again.']);
         }
     }

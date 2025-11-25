@@ -33,8 +33,9 @@ class HandleInertiaRequests extends Middleware
         return [
             ...parent::share($request),
             'auth' => [
-                'user' => $request->user(),
+                'user' => $request->user('clinic'),
                 'admin' => $request->user('admin'),
+                'notifications' => $request->user()?->unreadNotifications ?? $request->user('admin')->unreadNotifications ?? collect(),
             ],
             'session_data' => session()->get('data'),
             'success' => session()->get('success'),

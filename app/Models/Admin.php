@@ -9,6 +9,7 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 /**
  * Class Admin
@@ -43,7 +44,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  */
 class Admin extends Authenticatable
 {
-	use HasUuids;
+	use HasUuids, Notifiable;
 	protected $table = 'admins';
 	public $incrementing = false;
 

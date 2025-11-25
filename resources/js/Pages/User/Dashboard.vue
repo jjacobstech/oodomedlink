@@ -3,6 +3,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, useForm, router } from '@inertiajs/vue3';
 import { ref } from 'vue';
 import { CloseCircle } from '@solar-icons/vue';
+import { useToast } from '@/components/ui/toast';
 
 interface file {
       id: string;
@@ -85,6 +86,7 @@ const showUploadModal = ref(false);
 const selectedFilter = ref(props.filters?.filter || 'all');
 const searchQuery = ref(props.filters?.search || '');
 const previewFile = ref<PatientResult | null>(null);
+const { toast } = useToast();
 
 const stats = [
       {
@@ -151,10 +153,21 @@ const handleFileRemove = (index: number) => {
 // Submit upload
 const submitUpload = () => {
       uploadForm.post(route('user.result.upload'), {
-            onSuccess: () => {
+            onSuccess: (response) => {
                   uploadForm.reset();
                   uploadedFiles.value = [];
                   showUploadModal.value = false;
+
+                  toast({
+                        title: response.props.error ? 'Error' : 'Success',
+                        description: response.props.error ? response.props.error : 'Upload successful',
+                        type: 'foreground',
+                        variant: 'default',
+                        class: 'text-primaryDark bg-white shadow-lg bottom-96',
+                        open: true,
+
+                  });
+
             },
             onError: (errors) => {
                   console.error('Upload error:', errors);
@@ -315,7 +328,7 @@ const handleSearchKeydown = (event: KeyboardEvent) => {
                                                 <button v-for="selection in selectionFilter" :key="selection"
                                                       @click="applyFilters(selection)" :class="selectedFilter === selection
                                                             ? 'bg-primaryDark text-white'
-                                                            : 'bg-gray-200 text-gray-700'
+                                                            : 'bg-gray-200 tex-700'
                                                             "
                                                       class="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm lg:text-base font-medium rounded-lg transition-all hover:shadow-md">
                                                       {{
@@ -411,7 +424,7 @@ const handleSearchKeydown = (event: KeyboardEvent) => {
                                                                         </div>
                                                                   </td>
 
-                                                                  <!-- Result Type (hidden on mobile) -->
+                                                                  <!-- Result hidden on mobile) -->
                                                                   <td
                                                                         class="hidden md:table-cell px-3 sm:px-4 lg:px-6 py-3 sm:py-4 text-xs sm:text-sm lg:text-base text-gray-700">
                                                                         {{ result.result_type }}
@@ -429,13 +442,13 @@ const handleSearchKeydown = (event: KeyboardEvent) => {
                                                                                     class="flex items-center gap-2 text-xs sm:text-sm text-gray-700">
                                                                                     <span>{{
                                                                                           getFileIcon(
-                                                                                                result.file_type
+                                                                                          result.file_type
                                                                                           )
-                                                                                    }}</span>
+                                                                                          }}</span>
                                                                                     <span
                                                                                           class="truncate max-w-[150px] xl:max-w-[200px]">
                                                                                           {{
-                                                                                                file.original_file_name
+                                                                                          file.original_file_name
                                                                                           }}
                                                                                     </span>
                                                                               </span>
@@ -446,9 +459,9 @@ const handleSearchKeydown = (event: KeyboardEvent) => {
                                                                   <td
                                                                         class="hidden xl:table-cell px-3 sm:px-4 lg:px-6 py-3 sm:py-4 text-xs sm:text-sm text-gray-700">
                                                                         {{
-                                                                              formatDate(
-                                                                                    result.uploaded_at
-                                                                              )
+                                                                        formatDate(
+                                                                        result.uploaded_at
+                                                                        )
                                                                         }}
                                                                   </td>
 
@@ -686,9 +699,9 @@ const handleSearchKeydown = (event: KeyboardEvent) => {
                                                             "
                                                             class="flex-1 sm:flex-none sm:min-w-[100px] hover:-translate-y-1 duration-150 px-4 py-2 sm:py-2.5 text-sm sm:text-base font-semibold text-white transition-all bg-blue-600 rounded-lg hover:bg-blue-700 hover:shadow-lg disabled:bg-gray-400 disabled:cursor-not-allowed disabled:hover:transform-none">
                                                             {{
-                                                                  uploadForm.processing
-                                                                        ? 'Uploading...'
-                                                                        : 'Upload'
+                                                            uploadForm.processing
+                                                            ? 'Uploading...'
+                                                            : 'Upload'
                                                             }}
                                                       </button>
                                                       <button type="button" @click="
@@ -727,7 +740,7 @@ const handleSearchKeydown = (event: KeyboardEvent) => {
                                           <p class="text-sm text-gray-600">
                                                 <strong>Patient:</strong>
                                                 {{ previewFile.patient.full_name }} ({{
-                                                      previewFile.patient.email
+                                                previewFile.patient.email
                                                 }})
                                           </p>
                                           <p class="text-sm text-gray-600">

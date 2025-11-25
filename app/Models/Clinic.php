@@ -92,4 +92,5 @@ class Clinic extends Authenticatable
 	{
 		return $this->hasMany(PatientResult::class);
 	}
+
 }

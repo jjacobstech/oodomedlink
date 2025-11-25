@@ -11,12 +11,13 @@ class EmailNotification extends Notification
 {
     use Queueable;
 
+    protected $data;
     /**
      * Create a new notification instance.
      */
-    public function __construct()
+    public function __construct($data)
     {
-        //
+        $this->data = $data;
     }
 
     /**
@@ -26,7 +27,7 @@ class EmailNotification extends Notification
      */
     public function via(object $notifiable): array
     {
-        return ['mail'];
+        return ['database'];
     }
 
     /**
@@ -48,7 +49,8 @@ class EmailNotification extends Notification
     public function toArray(object $notifiable): array
     {
         return [
-            //
+            'data' => $this->data
         ];
+
     }
 }

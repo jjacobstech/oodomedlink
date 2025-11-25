@@ -195,7 +195,7 @@ const submitAddPatient = () => {
             showAddPatientModal.value = false;
         },
         onError: (errors) => {
-            // console.error('Add patient error:', errors);
+            console.error('Add patient error:', errors);
         },
     });
 };

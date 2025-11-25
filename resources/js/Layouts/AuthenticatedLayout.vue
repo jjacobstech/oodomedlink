@@ -1,12 +1,11 @@
 <script setup lang="ts">
 import AppSidebar from '@/Components/Dashboard/AppSidebar.vue';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import Badge from '@/components/ui/badge/Badge.vue';
 import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
 import { usePage } from '@inertiajs/vue3';
-import { Bell } from '@solar-icons/vue';
-
 import Toaster from '@/components/ui/toast/Toaster.vue';
+import Notifications from '@/Components/Dashboard/Notifications.vue';
+
 const auth = usePage().props.auth;
 </script>
 
@@ -20,19 +19,7 @@ const auth = usePage().props.auth;
                     class="text-white transition-all duration-150 hover:-translate-y-1 hover:bg-white hover:text-primaryDark" />
 
                 <div class="flex items-center justify-between gap-16">
-                    <!-- <div class="relative flex items-center"> -->
-                    <!-- <Bell -->
-                    <!-- class="h-8 w-8 fill-primaryDark text-primaryLight" -->
-                    <!-- /> -->
-                    <!-- <Badge -->
-                    <!-- variant="outline" -->
-                    <!-- class="absolute mb-3 ml-4 animate-bounce border-primaryDark bg-primaryDark" -->
-                    <!-- > -->
-                    <!-- <span class="text-sm font-extrabold text-white"> -->
-                    <!-- {{ 3 }} -->
-                    <!-- </span> -->
-                    <!-- </Badge> -->
-                    <!-- </div> -->
+                    <Notifications />
                     <Avatar>
                         <AvatarImage src="/assets/doctor.jpeg" alt="@unovue" />
                         <AvatarFallback

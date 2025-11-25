@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers\Clinics;
 
-use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
 use App\Jobs\ResultJob;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\EmailDelivery;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Notifications\EmailNotification;
 
 class EmailController extends Controller
 {
@@ -52,9 +54,11 @@ class EmailController extends Controller
         $validated = $request->validate([
             'id' => 'required|exists:email_deliveries,id'
         ]);
+
         $email = EmailDelivery::find($validated['id']);
+
         // Verify the email belongs to the current user
-        if ($email->sent_by !== Auth::user()->name) {
+        if (Str::lower($email->sent_by) !== Str::lower(Auth::user()->name)) {
             abort(403, 'Unauthorized action.');
         }
 
@@ -101,7 +105,7 @@ class EmailController extends Controller
     public function show(EmailDelivery $email)
     {
         // Verify the email belongs to the current user
-        if ($email->sent_by !== Auth::user()->name) {
+        if ($email->sent_by !== Auth::user()->id) {
             abort(403, 'Unauthorized action.');
         }
 

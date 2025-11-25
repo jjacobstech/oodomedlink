@@ -41,6 +41,9 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Admin whereRole($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Admin whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Admin whereUpdatedAt($value)
+ * @mixin \Eloquent
+ * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
+ * @property-read int|null $notifications_count
  */
 	class Admin extends \Eloquent {}
 }
@@ -59,6 +62,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Cache whereExpiration($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Cache whereKey($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Cache whereValue($value)
+ * @mixin \Eloquent
  */
 	class Cache extends \Eloquent {}
 }
@@ -77,6 +81,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CacheLock whereExpiration($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CacheLock whereKey($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CacheLock whereOwner($value)
+ * @mixin \Eloquent
  */
 	class CacheLock extends \Eloquent {}
 }
@@ -125,6 +130,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Clinic whereState($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Clinic whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Clinic whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 	class Clinic extends \Eloquent {}
 }
@@ -165,6 +171,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EmailDelivery whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EmailDelivery whereSubject($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EmailDelivery whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 	class EmailDelivery extends \Eloquent {}
 }
@@ -191,6 +198,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|FailedJob wherePayload($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|FailedJob whereQueue($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|FailedJob whereUuid($value)
+ * @mixin \Eloquent
  */
 	class FailedJob extends \Eloquent {}
 }
@@ -224,6 +232,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|File whereOriginalFileName($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|File whereResult($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|File whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 	class File extends \Eloquent {}
 }
@@ -250,6 +259,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Job wherePayload($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Job whereQueue($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Job whereReservedAt($value)
+ * @mixin \Eloquent
  */
 	class Job extends \Eloquent {}
 }
@@ -282,8 +292,37 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|JobBatch whereOptions($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|JobBatch wherePendingJobs($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|JobBatch whereTotalJobs($value)
+ * @mixin \Eloquent
  */
 	class JobBatch extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * Class Notification
+ *
+ * @property string $id
+ * @property string $type
+ * @property string $notifiable_type
+ * @property string $notifiable_id
+ * @property string $data
+ * @property Carbon|null $read_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @package App\Models
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Notification newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Notification newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Notification query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Notification whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Notification whereData($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Notification whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Notification whereNotifiableId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Notification whereNotifiableType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Notification whereReadAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Notification whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Notification whereUpdatedAt($value)
+ */
+	class Notification extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -302,10 +341,10 @@ namespace App\Models{
  * @property Carbon|null $updated_at
  * @property Collection|PatientResult[] $patient_results
  * @package App\Models
- * @property-read \App\Models\Clinic|null $clinic
+ * @property-read Clinic|null $clinic
  * @property-read int|null $age
  * @property-read \App\Models\PatientResult|null $latestResult
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\PatientResult> $results
+ * @property-read Collection<int, \App\Models\PatientResult> $results
  * @property-read int|null $results_count
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient byGender($gender)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient forClinic($clinicId)
@@ -323,6 +362,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient wherePhoneNo($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 	class Patient extends \Eloquent {}
 }
@@ -363,6 +403,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PatientResult whereTestName($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PatientResult whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PatientResult whereUploadedAt($value)
+ * @mixin \Eloquent
  */
 	class PatientResult extends \Eloquent {}
 }
@@ -387,6 +428,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Session wherePayload($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Session whereUserAgent($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Session whereUserId($value)
+ * @mixin \Eloquent
  */
 	class Session extends \Eloquent {}
 }
@@ -399,6 +441,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User query()
+ * @mixin \Eloquent
  */
 	class User extends \Eloquent {}
 }

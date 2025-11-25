@@ -164,6 +164,8 @@ const retryEmail = (email: PatientEmail) => {
           //  console.error('Retry error:', errors);
             retrying.value = null;
         },
+        preserveScroll: true,
+        preserveState: true,
     });
 };
 
