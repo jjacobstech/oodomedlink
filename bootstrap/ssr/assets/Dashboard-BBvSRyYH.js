@@ -97,6 +97,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
             class: "text-primaryDark bg-white shadow-lg bottom-96",
             open: true
           });
+          console.error("Upload error:", response.props.errors ?? response.props.error);
         },
         onError: (errors) => {
           console.error("Upload error:", errors);

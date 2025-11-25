@@ -167,6 +167,7 @@ const submitUpload = () => {
                         open: true,
 
                   });
+                  console.error('Upload error:', response.props.errors ?? response.props.error);
 
             },
             onError: (errors) => {
