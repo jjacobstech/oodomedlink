@@ -8,7 +8,6 @@
         "dev": "vite",
         "lint": "eslint resources/js --ext .js,.ts,.vue --ignore-path .gitignore --fix",
         "deploy": "npm run build && php artisan optimize && npm run commit"
-
     },
     "devDependencies": {
         "@inertiajs/vue3": "^2.0.0",

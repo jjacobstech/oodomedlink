@@ -61,5 +61,27 @@ Route::prefix('clinic')->middleware(['auth:clinic'])->name('user.')->group(funct
                   ->name('email.retry');
       });
 
-      Route::post('/notifications', [NotificationController::class, 'index'])->name('notification');
+      // Mark single notification as read
+      Route::post('/notifications/mark-as-read', [NotificationController::class, 'markAsRead'])
+            ->name('notification');
+
+      // Mark all notifications as read
+      Route::post('/notifications/mark-all-read', [NotificationController::class, 'markAllAsRead'])
+            ->name('notifications.mark-all-read');
+
+      // Get all notifications (paginated)
+      Route::get('/notifications', [NotificationController::class, 'index'])
+            ->name('notifications.index');
+
+      // Delete a notification
+      Route::delete('/notifications/{id}', [NotificationController::class, 'destroy'])
+            ->name('notifications.destroy');
+
+      // Clear all read notifications
+      Route::delete('/notifications/clear-read', [NotificationController::class, 'clearRead'])
+            ->name('notifications.clear-read');
+
+      // Get notification count
+      Route::get('/notifications/count', [NotificationController::class, 'getCount'])
+            ->name('notifications.count');
 });

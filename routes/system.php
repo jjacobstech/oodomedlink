@@ -65,7 +65,8 @@ Route::middleware(['throttle:6,1'])->prefix('system')->group(function () {
                   'message' => 'Migration successful',
                   'output' => Artisan::output()
             ]);
-      })->name('db.migrate/force');
+      })->name('db.migrate.force');
+
       Route::get('/db/migrate/fresh', function () {
             if (RateLimiter::tooManyAttempts('db-migrate-fresh:' . request()->ip(), 5)) {
                   return response()->json([
