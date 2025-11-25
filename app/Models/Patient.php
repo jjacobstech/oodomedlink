@@ -90,7 +90,7 @@ class Patient extends Model
 	 */
 	public function latestResult()
 	{
-		return $this->hasOne(PatientResult::class)->latestOfMany('uploaded_at');
+		return $this->hasMany(PatientResult::class, 'patient_id')->latest('uploaded_at');
 	}
 
 	/**

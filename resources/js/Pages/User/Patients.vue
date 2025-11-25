@@ -336,14 +336,7 @@ const handleSearchKeydown = (event: KeyboardEvent) => {
                                 <span class="font-medium">DOB:</span>
                                 {{ formatDate(patient.date_of_birth) }}
                             </div>
-                            <div>
-                                <span class="font-medium">Last Result:</span>
-                                {{
-                                    patient.latest_result
-                                        ? formatDate(patient.latest_result.uploaded_at)
-                                        : 'N/A'
-                                }}
-                            </div>
+
                         </div>
 
                         <div class="flex gap-2 pt-2">
@@ -389,9 +382,6 @@ const handleSearchKeydown = (event: KeyboardEvent) => {
                                     Total Results
                                 </th>
                                 <th class="px-4 py-3 text-left text-xs font-semibold uppercase text-gray-700">
-                                    Last Result
-                                </th>
-                                <th class="px-4 py-3 text-left text-xs font-semibold uppercase text-gray-700">
                                     Actions
                                 </th>
                             </tr>
@@ -419,15 +409,7 @@ const handleSearchKeydown = (event: KeyboardEvent) => {
                                         {{ patient.results_count }}
                                     </span>
                                 </td>
-                                <td class="px-4 py-3 text-gray-600">
-                                    {{
-                                        patient.latest_result
-                                            ? formatDate(
-                                                patient.latest_result.uploaded_at
-                                            )
-                                            : 'N/A'
-                                    }}
-                                </td>
+
                                 <td class="px-4 py-3">
                                     <div class="flex gap-2">
                                         <button @click="viewPatient(patient)"
@@ -550,9 +532,9 @@ const handleSearchKeydown = (event: KeyboardEvent) => {
                                 <button type="submit" :disabled="addPatientForm.processing"
                                     class="flex-1 px-4 py-2 text-sm sm:text-base font-semibold text-white bg-primaryDark rounded-lg hover:bg-primaryDark/90 hover:shadow-lg transition disabled:bg-gray-400 disabled:cursor-not-allowed">
                                     {{
-                                        addPatientForm.processing
-                                            ? 'Adding...'
-                                            : 'Add Patient'
+                                    addPatientForm.processing
+                                    ? 'Adding...'
+                                    : 'Add Patient'
                                     }}
                                 </button>
                                 <button type="button" @click="
@@ -647,9 +629,9 @@ const handleSearchKeydown = (event: KeyboardEvent) => {
                                 <button type="submit" :disabled="editPatientForm.processing"
                                     class="flex-1 px-4 py-2 text-sm sm:text-base font-semibold text-white bg-primaryDark rounded-lg hover:bg-primaryDark/90 hover:shadow-lg transition disabled:bg-gray-400 disabled:cursor-not-allowed">
                                     {{
-                                        editPatientForm.processing
-                                            ? 'Updating...'
-                                            : 'Update Patient'
+                                    editPatientForm.processing
+                                    ? 'Updating...'
+                                    : 'Update Patient'
                                     }}
                                 </button>
                                 <button type="button" @click="

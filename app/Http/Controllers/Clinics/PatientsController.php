@@ -43,6 +43,8 @@ class PatientsController extends Controller
             ->paginate(10)
             ->withQueryString();
 
+        // dd($patients);
+
         return Inertia::render('User/Patients', [
             'patients' => $patients,
             'filters' => [

@@ -159,13 +159,19 @@ const retryEmail = (email: PatientEmail) => {
     retryForm.post(route('user.email.retry'), {
         onSuccess: () => {
             retrying.value = null;
+            router.reload({
+                only: ['emails', 'filter']
+
+
+            })
         },
         onError: (errors) => {
           //  console.error('Retry error:', errors);
             retrying.value = null;
         },
         preserveScroll: true,
-        preserveState: true,
+        preserveUrl: selectedFilter.value !== 'all' ? true : false
+
     });
 };
 

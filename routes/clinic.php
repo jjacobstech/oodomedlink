@@ -20,7 +20,7 @@ Route::prefix('clinic')->middleware(['auth:clinic'])->name('user.')->group(funct
 
                   Route::get('/emails', [EmailController::class, 'index'])->name('emails');
 
-                  Route::get('/', [PatientsController::class, 'index'])->name('patients');
+                  Route::get('/patients', [PatientsController::class, 'index'])->name('patients');
                   Route::controller(PatientsController::class)->prefix('patients')->name('patients.')->group(function () {
                         Route::get('/create', 'create')->name('create');
                         Route::post('/', 'store')->name('store');

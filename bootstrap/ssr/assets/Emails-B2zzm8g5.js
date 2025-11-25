@@ -89,12 +89,15 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       retryForm.post(route("user.email.retry"), {
         onSuccess: () => {
           retrying.value = null;
+          router.reload({
+            only: ["emails", "filter"]
+          });
         },
         onError: (errors) => {
           retrying.value = null;
         },
         preserveScroll: true,
-        preserveState: true
+        preserveUrl: selectedFilter.value !== "all" ? true : false
       });
     };
     const handleSearchKeydown = (event) => {

@@ -42,10 +42,8 @@ class EmailController extends Controller
 
         return Inertia::render('User/Emails', [
             'emails' => $emails,
-            'filters' => [
                 'search' => $search,
-                'filter' => $filter,
-            ]
+            'filter' => $filter,
         ]);
     }
 
@@ -66,7 +64,6 @@ class EmailController extends Controller
 
         // Only retry failed emails
         if ($email->status !== 'failed' && $email->status !== 'scheduled' && $email->status !== 'pending') {
-            dd('retry', $email->status);
             return redirect()->route('user.emails')->with('error', 'Only failed emails can be retried.');
         }
 
@@ -84,7 +81,7 @@ class EmailController extends Controller
 
 
             // Dispatch the job
-            ResultJob::dispatch(
+            ResultJob::dispatchSync(
                 $email->subject,
                 $email->patient,
                 $attachments,
