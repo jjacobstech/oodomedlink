@@ -285,20 +285,21 @@
                     <!-- Header -->
                     <tr>
                         <td class="header-bg">
+
 <table width="100%" cellpadding="0" cellspacing="0" role="presentation" class="logo-text-wrapper">
-                        <tr>
-                            <td align="center">
-                                <table cellpadding="0" cellspacing="0" role="presentation">
-                                    <tr>
-                                        <td style="background-color: #ffffff; border-radius: 8px; padding: 16px 32px;" align="center">
-                                            <img src="{{ asset('assets/logo1.jpg') }}" alt="Company Logo" width="100" height="48"
-                                                style="display: block; width: 100px; height: 48px;">
-                                        </td>
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr>
-                        </table>
+    <tr>
+        <td align="center">
+            <table cellpadding="0" cellspacing="0" role="presentation">
+                <tr>
+                    <td style="background-color: #ffffff; border-radius: 8px; padding: 16px 200px;" align="center">
+                        <img src="{{ asset('assets/logo1.jpg') }}" alt="Company Logo" width="100" height="48"
+                            style="display: block; width: 190px; height: auto;">
+                    </td>
+                    </tr>
+                    </table>
+                    </td>
+                    </tr>
+                    </table>
 
                         </td>
                     </tr>
