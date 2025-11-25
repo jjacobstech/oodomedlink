@@ -15,6 +15,11 @@ Route::get('/', function () {
 
 
 
+Route::get('/mail', function () {
+
+    return view('mail.email-verification');
+});
+
 require __DIR__ . '/auth.php';
 require __DIR__ . '/admin.php';
 require __DIR__ . '/clinic.php';
