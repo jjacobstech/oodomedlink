@@ -316,7 +316,7 @@
 
                             <p class="text-md font-bold">Thanks for creating an account. Use the one-time code below to
                                 verify your email. The code
-                                will expire in <strong class="text-xl font-extrabold">{{  }} minutes</strong>.</p>
+                                will expire in <strong class="text-xl font-extrabold">{{ $time  }} minutes</strong>.</p>
 
                             <!-- OTP box -->
                             <table width="100%" cellpadding="0" cellspacing="0" role="presentation"
@@ -327,7 +327,7 @@
                                             <tr>
                                                 <td
                                                     style="background-image: linear-gradient(90deg, #0466fc 0%, #4CAF50 100%); color: #ffffff; border-radius: 8px; padding: 12px 24px; letter-spacing: 0.1em; font-size: 30px; font-weight: 800;">
-                                                    {{ otp }}
+                                                    {{ $otp }}
                                                 </td>
                                             </tr>
                                         </table>
@@ -359,8 +359,8 @@
                     </div>
                 </td>
                 <td class="footer-right" style="vertical-align: top; text-align: right; white-space: nowrap;">
-                    <a href="{{$helpUrl}}" style="color: #0066cc; text-decoration: none; font-size: 13px; margin-left: 15px;">Help</a>
-                    <a href="{{$privacyUrl}}" style="color: #0066cc; text-decoration: none; font-size: 13px; margin-left: 15px;">Privacy</a>
+                    <a href="" style="color: #0066cc; text-decoration: none; font-size: 13px; margin-left: 15px;">Help</a>
+                    <a href="" style="color: #0066cc; text-decoration: none; font-size: 13px; margin-left: 15px;">Privacy</a>
                 </td>
             </tr>
         </table>

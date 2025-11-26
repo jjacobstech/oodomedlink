@@ -51,7 +51,13 @@ class EmailVerification extends Mailable
     {
         return new Content(
             view: 'mail.email-verification',
-            with: ['otp' => $this->otp, 'email' =>  $this->support, 'time' =>  $this->time, 'recipient' => $this->email, 'year' => Carbon::now()->year]
+            with: [
+                'otp' => $this->otp,
+                'email' =>  $this->support,
+                'time' =>  $this->time,
+                'recipient' => $this->email,
+                'year' => Carbon::now()->year
+            ]
         );
     }
 
