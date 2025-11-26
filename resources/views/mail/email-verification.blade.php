@@ -316,7 +316,7 @@
 
                             <p class="text-md font-bold">Thanks for creating an account. Use the one-time code below to
                                 verify your email. The code
-                                will expire in <strong class="text-xl font-extrabold">10 minutes</strong>.</p>
+                                will expire in <strong class="text-xl font-extrabold">{{  }} minutes</strong>.</p>
 
                             <!-- OTP box -->
                             <table width="100%" cellpadding="0" cellspacing="0" role="presentation"
@@ -327,7 +327,7 @@
                                             <tr>
                                                 <td
                                                     style="background-image: linear-gradient(90deg, #0466fc 0%, #4CAF50 100%); color: #ffffff; border-radius: 8px; padding: 12px 24px; letter-spacing: 0.1em; font-size: 30px; font-weight: 800;">
-                                                    123456
+                                                    {{ otp }}
                                                 </td>
                                             </tr>
                                         </table>
@@ -347,24 +347,25 @@
                     </tr>
 
                     <!-- Footer -->
-                    <tr>
-                        <td class="footer-bg">
-                            <table width="100%" cellpadding="0" cellspacing="0" role="presentation"
-                                class="footer-table">
-                                <tr>
-                                    <td class="footer-left">
-                                        <strong class="text-black font-extrabold text-lg">Your Company</strong>
-                                        <div class="text-gray-600">This email was sent to Test Patient. © 2025
-                                            OodoMedlink</div>
-                                    </td>
-                                    <td class="footer-right" style="vertical-align:middle;">
-                                        <a href="#" style="margin-right:15px;">Help</a>
-                                        <a href="#">Privacy</a>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
+                 <tr>
+    <td class="footer-bg" style="background-color: #f5f5f5; padding: 30px 20px;">
+        <table width="100%" cellpadding="0" cellspacing="0" role="presentation" class="footer-table" style="max-width: 600px; margin: 0 auto;">
+            <tr>
+                <td class="footer-left" style="vertical-align: top; padding-right: 20px;">
+                    <strong style="color: #0f1724; font-size: 14px; display: block; margin-bottom: 8px;">OodoMedlink</strong>
+                    <div style="font-size: 12px; color: #666; line-height: 1.5;">
+                        This email was sent to {{$recipient}}.<br>
+                        © {{$year}} OodoMedlink. All rights reserved.
+                    </div>
+                </td>
+                <td class="footer-right" style="vertical-align: top; text-align: right; white-space: nowrap;">
+                    <a href="{{$helpUrl}}" style="color: #0066cc; text-decoration: none; font-size: 13px; margin-left: 15px;">Help</a>
+                    <a href="{{$privacyUrl}}" style="color: #0066cc; text-decoration: none; font-size: 13px; margin-left: 15px;">Privacy</a>
+                </td>
+            </tr>
+        </table>
+    </td>
+</tr>
 
                 </table>
 
