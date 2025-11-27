@@ -1,8 +1,14 @@
 <template>
       <div class="min-h-screen bg-gradient-to-br from-slate-50 to-indigo-50">
             <!-- Header -->
-            <header class="bg-primaryDark shadow-sm border-b border-slate-200">
-                  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <header class="bg-primaryDark flex shadow-sm border-b border-slate-200 px-10">
+
+                  <Link href="/"
+                        class=" flex hover:-translate-y-1 font-bold text-md items-center gap-2 text-xl text-white   transition">
+                  <ArrowLeft class="h-5 w-5" />
+                  Back
+                  </Link>
+                  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
                         <div class="text-center">
                               <h1 class="text-3xl font-extrabold text-white">Help Center</h1>
                               <p class="text-white text-lg font-bold mt-2">Always available to help you work smoothly
@@ -26,7 +32,12 @@
 
             <!-- Quick Links -->
             <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-                  <h2 class="text-2xl font-bold text-slate-900 mb-6">Quick Access</h2>
+                  <div class="flex  items-center">
+                        <h2 class="text-2xl flex justify-start w-1/2 items-center font-extrabold text-slate-900 mb-6">
+                              <span>Quick Access</span>
+                        </h2>
+
+                  </div>
                   <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
                         <button v-for="quick in quickLinks" :key="quick.title"
                               @click="selectedCategory = quick.category"
@@ -138,6 +149,8 @@
 
 <script setup>
 import { ref, computed } from 'vue';
+import { Link } from '@inertiajs/vue3';
+import { ArrowLeft } from 'lucide-vue-next';
 
 const searchQuery = ref('');
 const selectedCategory = ref('All Topics');

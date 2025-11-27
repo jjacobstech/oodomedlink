@@ -1,5 +1,7 @@
-import { ref, computed, mergeProps, useSSRContext } from "vue";
-import { ssrRenderAttrs, ssrRenderAttr, ssrRenderList, ssrRenderClass, ssrInterpolate } from "vue/server-renderer";
+import { ref, computed, mergeProps, unref, withCtx, createVNode, createTextVNode, useSSRContext } from "vue";
+import { ssrRenderAttrs, ssrRenderComponent, ssrRenderAttr, ssrRenderList, ssrRenderClass, ssrInterpolate } from "vue/server-renderer";
+import { Link } from "@inertiajs/vue3";
+import { ArrowLeft } from "lucide-vue-next";
 const _sfc_main = {
   __name: "FAQ",
   __ssrInlineRender: true,
@@ -197,7 +199,25 @@ const _sfc_main = {
       return filtered;
     });
     return (_ctx, _push, _parent, _attrs) => {
-      _push(`<div${ssrRenderAttrs(mergeProps({ class: "min-h-screen bg-gradient-to-br from-slate-50 to-indigo-50" }, _attrs))}><header class="bg-primaryDark shadow-sm border-b border-slate-200"><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6"><div class="text-center"><h1 class="text-3xl font-extrabold text-white">Help Center</h1><p class="text-white text-lg font-bold mt-2">Always available to help you work smoothly </p></div></div></header><section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12"><div class="relative"><input${ssrRenderAttr("value", searchQuery.value)} type="text" placeholder="Search for help articles..." class="w-full px-6 py-4 pr-12 rounded-xl border-2 border-slate-200 focus:border-primaryDark focus:outline-none text-xl shadow-sm"><svg class="absolute right-4 top-1/2 transform -translate-y-1/2 w-6 h-6 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg></div></section><section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8"><h2 class="text-2xl font-bold text-slate-900 mb-6">Quick Access</h2><div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4"><!--[-->`);
+      _push(`<div${ssrRenderAttrs(mergeProps({ class: "min-h-screen bg-gradient-to-br from-slate-50 to-indigo-50" }, _attrs))}><header class="bg-primaryDark flex shadow-sm border-b border-slate-200 px-10">`);
+      _push(ssrRenderComponent(unref(Link), {
+        href: "/",
+        class: "flex hover:-translate-y-1 font-bold text-md items-center gap-2 text-xl text-white transition"
+      }, {
+        default: withCtx((_, _push2, _parent2, _scopeId) => {
+          if (_push2) {
+            _push2(ssrRenderComponent(unref(ArrowLeft), { class: "h-5 w-5" }, null, _parent2, _scopeId));
+            _push2(` Back `);
+          } else {
+            return [
+              createVNode(unref(ArrowLeft), { class: "h-5 w-5" }),
+              createTextVNode(" Back ")
+            ];
+          }
+        }),
+        _: 1
+      }, _parent));
+      _push(`<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4"><div class="text-center"><h1 class="text-3xl font-extrabold text-white">Help Center</h1><p class="text-white text-lg font-bold mt-2">Always available to help you work smoothly </p></div></div></header><section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12"><div class="relative"><input${ssrRenderAttr("value", searchQuery.value)} type="text" placeholder="Search for help articles..." class="w-full px-6 py-4 pr-12 rounded-xl border-2 border-slate-200 focus:border-primaryDark focus:outline-none text-xl shadow-sm"><svg class="absolute right-4 top-1/2 transform -translate-y-1/2 w-6 h-6 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg></div></section><section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8"><div class="flex items-center"><h2 class="text-2xl flex justify-start w-1/2 items-center font-extrabold text-slate-900 mb-6"><span>Quick Access</span></h2></div><div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4"><!--[-->`);
       ssrRenderList(quickLinks, (quick) => {
         _push(`<button class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition text-left group"><div class="${ssrRenderClass(["w-12 h-12 rounded-lg mb-4 flex items-center justify-center", quick.bgColor])}"><span class="text-2xl">${ssrInterpolate(quick.icon)}</span></div><h3 class="font-semibold text-slate-900 group-hover:text-primaryDark transition">${ssrInterpolate(quick.title)}</h3><p class="text-lg text-slate-600 mt-1">${ssrInterpolate(quick.description)}</p></button>`);
       });
