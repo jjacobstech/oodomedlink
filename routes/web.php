@@ -13,12 +13,25 @@ Route::get('/', function () {
     ]);
 });
 
-
-
 Route::get('/mail', function () {
 
     return view('mail.email-verification');
 });
+
+Route::get('/terms-and-conditions', function () {
+
+    return Inertia::render('TermsAndConditions');
+})->name('terms-and-conditions');
+
+Route::get('/blog', function () {
+
+    return Inertia::render('Blog');
+})->name('blog');
+
+Route::get('/help-center', function () {
+
+    return Inertia::render('FAQ');
+})->name('faq');
 
 require __DIR__ . '/auth.php';
 require __DIR__ . '/admin.php';

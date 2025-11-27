@@ -46,16 +46,16 @@
     "/build/assets/AuthenticatedLayout-CFJw24O_.css"
   ],
   "resources/js/Components/Home/GuestFooter.vue": [
-    "/build/assets/Welcome-D-uqiTmN.js"
+    "/build/assets/Welcome-BODaqCbs.js"
   ],
   "resources/js/Components/Home/GuestFooter.vue?vue&type=script&setup=true&lang.ts": [
-    "/build/assets/Welcome-D-uqiTmN.js"
+    "/build/assets/Welcome-BODaqCbs.js"
   ],
   "resources/js/Components/Home/NavBar.vue": [
-    "/build/assets/Welcome-D-uqiTmN.js"
+    "/build/assets/Welcome-BODaqCbs.js"
   ],
   "resources/js/Components/Home/NavBar.vue?vue&type=script&setup=true&lang.ts": [
-    "/build/assets/Welcome-D-uqiTmN.js"
+    "/build/assets/Welcome-BODaqCbs.js"
   ],
   "resources/js/Components/PasswordInput.vue": [
     "/build/assets/PasswordInput-BkOFItoK.js"
@@ -86,10 +86,10 @@
     "/build/assets/AuthenticatedLayout-CFJw24O_.css"
   ],
   "resources/js/Layouts/GuestLayout.vue": [
-    "/build/assets/Welcome-D-uqiTmN.js"
+    "/build/assets/Welcome-BODaqCbs.js"
   ],
   "resources/js/Layouts/GuestLayout.vue?vue&type=script&setup=true&lang.ts": [
-    "/build/assets/Welcome-D-uqiTmN.js"
+    "/build/assets/Welcome-BODaqCbs.js"
   ],
   "resources/js/Pages/Admin/Dashboard.vue": [
     "/build/assets/Dashboard-C8pEAf-8.js",
@@ -116,6 +116,20 @@
   ],
   "resources/js/Pages/Auth/User/Register.vue": [
     "/build/assets/Register-B_r2jmAo.js"
+  ],
+  "resources/js/Pages/Blog.vue": [
+    "/build/assets/Blog-xIpId8i0.js",
+    "/build/assets/Blog-Dx0VeDd3.css"
+  ],
+  "resources/js/Pages/Blog.vue?vue&type=style&index=0&scoped=96884ab8&lang.css": [
+    "/build/assets/Blog-xIpId8i0.js",
+    "/build/assets/Blog-Dx0VeDd3.css"
+  ],
+  "resources/js/Pages/FAQ.vue": [
+    "/build/assets/FAQ-gZxbRTNL.js"
+  ],
+  "resources/js/Pages/TermsAndConditions.vue": [
+    "/build/assets/TermsAndConditions-BJTU2YHb.js"
   ],
   "resources/js/Pages/User/Dashboard.vue": [
     "/build/assets/Dashboard-C8UDuCnc.js"
@@ -148,7 +162,7 @@
     "/build/assets/Settings-Ctug960M.js"
   ],
   "resources/js/Pages/Welcome.vue": [
-    "/build/assets/Welcome-D-uqiTmN.js"
+    "/build/assets/Welcome-BODaqCbs.js"
   ],
   "resources/js/components/ui/avatar/Avatar.vue": [
     "/build/assets/index-Cx41EZFO.js"
@@ -193,43 +207,43 @@
     "/build/assets/ApplicationLogo-_si3TCMD.js"
   ],
   "resources/js/components/ui/card/Card.vue": [
-    "/build/assets/Welcome-D-uqiTmN.js"
+    "/build/assets/Welcome-BODaqCbs.js"
   ],
   "resources/js/components/ui/card/Card.vue?vue&type=script&setup=true&lang.ts": [
-    "/build/assets/Welcome-D-uqiTmN.js"
+    "/build/assets/Welcome-BODaqCbs.js"
   ],
   "resources/js/components/ui/carousel/Carousel.vue": [
-    "/build/assets/Welcome-D-uqiTmN.js"
+    "/build/assets/Welcome-BODaqCbs.js"
   ],
   "resources/js/components/ui/carousel/Carousel.vue?vue&type=script&setup=true&lang.ts": [
-    "/build/assets/Welcome-D-uqiTmN.js"
+    "/build/assets/Welcome-BODaqCbs.js"
   ],
   "resources/js/components/ui/carousel/CarouselContent.vue": [
-    "/build/assets/Welcome-D-uqiTmN.js"
+    "/build/assets/Welcome-BODaqCbs.js"
   ],
   "resources/js/components/ui/carousel/CarouselContent.vue?vue&type=script&setup=true&lang.ts": [
-    "/build/assets/Welcome-D-uqiTmN.js"
+    "/build/assets/Welcome-BODaqCbs.js"
   ],
   "resources/js/components/ui/carousel/CarouselItem.vue": [
-    "/build/assets/Welcome-D-uqiTmN.js"
+    "/build/assets/Welcome-BODaqCbs.js"
   ],
   "resources/js/components/ui/carousel/CarouselItem.vue?vue&type=script&setup=true&lang.ts": [
-    "/build/assets/Welcome-D-uqiTmN.js"
+    "/build/assets/Welcome-BODaqCbs.js"
   ],
   "resources/js/components/ui/carousel/CarouselNext.vue": [
-    "/build/assets/Welcome-D-uqiTmN.js"
+    "/build/assets/Welcome-BODaqCbs.js"
   ],
   "resources/js/components/ui/carousel/CarouselNext.vue?vue&type=script&setup=true&lang.ts": [
-    "/build/assets/Welcome-D-uqiTmN.js"
+    "/build/assets/Welcome-BODaqCbs.js"
   ],
   "resources/js/components/ui/carousel/CarouselPrevious.vue": [
-    "/build/assets/Welcome-D-uqiTmN.js"
+    "/build/assets/Welcome-BODaqCbs.js"
   ],
   "resources/js/components/ui/carousel/CarouselPrevious.vue?vue&type=script&setup=true&lang.ts": [
-    "/build/assets/Welcome-D-uqiTmN.js"
+    "/build/assets/Welcome-BODaqCbs.js"
   ],
   "resources/js/components/ui/carousel/useCarousel.ts": [
-    "/build/assets/Welcome-D-uqiTmN.js"
+    "/build/assets/Welcome-BODaqCbs.js"
   ],
   "resources/js/components/ui/dropdown-menu/DropdownMenu.vue": [
     "/build/assets/AuthenticatedLayout-Cd_SSTEz.js",

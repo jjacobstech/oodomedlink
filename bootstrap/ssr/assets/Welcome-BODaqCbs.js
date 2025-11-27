@@ -1,12 +1,12 @@
-import { defineComponent, mergeProps, unref, useSSRContext, ref, onMounted, withCtx, renderSlot, createVNode, onUnmounted, createTextVNode, createBlock, openBlock, Fragment, renderList, withKeys, withModifiers, resolveDynamicComponent, toDisplayString, withDirectives, vModelText } from "vue";
-import { ssrRenderAttrs, ssrRenderComponent, ssrRenderSlot, ssrRenderClass, ssrRenderList, ssrInterpolate, ssrRenderAttr, ssrRenderVNode } from "vue/server-renderer";
-import { HeartShine, SquareAltArrowUp, SquareAltArrowDown, Magnifer, Upload, FileText, Mailbox, Shield, ClockCircle, PieChart2, CheckCircle } from "@solar-icons/vue";
+import { defineComponent, mergeProps, unref, withCtx, createTextVNode, useSSRContext, ref, onMounted, renderSlot, createVNode, onUnmounted, createBlock, openBlock, Fragment, renderList, withKeys, withModifiers, resolveDynamicComponent, toDisplayString, withDirectives, vModelText } from "vue";
+import { ssrRenderAttrs, ssrRenderComponent, ssrRenderSlot, ssrRenderClass, ssrRenderAttr, ssrRenderList, ssrRenderVNode, ssrInterpolate } from "vue/server-renderer";
+import { HeartShine, Magnifer, SquareAltArrowUp, SquareAltArrowDown, Upload, FileText, Bell, PieChart2, Buildings2, DiplomaVerified, CheckCircle, Phone } from "@solar-icons/vue";
+import { Link, Head, router } from "@inertiajs/vue3";
 import { _ as _sfc_main$a, a as _sfc_main$b } from "./ApplicationLogo-_si3TCMD.js";
 import { c as cn } from "./utils-H80jjgLf.js";
 import { createInjectionState, onClickOutside, watchOnce } from "@vueuse/core";
 import emblaCarouselVue from "embla-carousel-vue";
-import { ArrowRight, ArrowLeft } from "lucide-vue-next";
-import { Link, Head, router } from "@inertiajs/vue3";
+import { ArrowRight, ArrowLeft, Bot, ChevronRight, Mail, MapPin } from "lucide-vue-next";
 import Autoplay from "embla-carousel-autoplay";
 import "class-variance-authority";
 import "reka-ui";
@@ -19,7 +19,39 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
     return (_ctx, _push, _parent, _attrs) => {
       _push(`<footer${ssrRenderAttrs(mergeProps({ class: "border-t border-border bg-card bg-primaryDark py-12 text-xl" }, _attrs))}><div class="container mx-auto px-4 sm:px-6 lg:px-8"><div class="mb-8 grid gap-8 text-xl md:grid-cols-4"><div class="space-y-4"><button class="rounded-lg bg-white p-1">`);
       _push(ssrRenderComponent(_sfc_main$a, null, null, _parent));
-      _push(`</button><p class="text-xl font-extrabold text-primaryLight"> Streamlining test results delivery for modern healthcare providers </p></div><div><h4 class="mb-4 font-extrabold text-primaryLight"> Product </h4><ul class="space-y-2 text-xl font-extrabold text-primaryLight"><li><a href="#" class="transition-colors hover:text-primary">Features</a></li><li><a href="#" class="transition-colors hover:text-primary">Pricing</a></li><li><a href="#" class="transition-colors hover:text-primary">Security</a></li><li><a href="#" class="transition-colors hover:text-primary">Integration</a></li></ul></div><div><h4 class="mb-4 font-extrabold text-primaryLight"> Company </h4><ul class="space-y-2 text-xl font-extrabold text-primaryLight"><li><a href="#" class="transition-colors hover:text-primary">About Us</a></li><li><a href="#" class="transition-colors hover:text-primary">Careers</a></li><li><a href="#" class="transition-colors hover:text-primary">Blog</a></li><li><a href="#" class="transition-colors hover:text-primary">Contact</a></li></ul></div><div><h4 class="mb-4 font-extrabold text-primaryLight"> Support </h4><ul class="space-y-2 text-xl font-extrabold text-primaryLight"><li><a href="#" class="transition-colors hover:text-primary">Help Center</a></li><li><a href="#" class="transition-colors hover:text-primary">Documentation</a></li><li><a href="#" class="transition-colors hover:text-primary">Privacy Policy</a></li><li><a href="#" class="transition-colors hover:text-primary">Terms of Service</a></li></ul></div></div><div class="flex flex-col items-center justify-between gap-4 border-t border-border bg-primaryDark pt-8 md:flex-row"><p class="text-xl font-extrabold text-primaryLight"> © 2025 OodoMedlink. All rights reserved. </p><div class="flex items-center gap-2 text-xl font-extrabold text-primaryLight"><span>Made with</span>`);
+      _push(`</button><p class="text-xl font-extrabold text-primaryLight"> Streamlining test results delivery for modern healthcare providers </p></div><div><h4 class="mb-4 font-extrabold text-primaryLight"> Product </h4><ul class="space-y-2 text-xl font-extrabold text-primaryLight"><li><a href="#features" class="transition-colors hover:text-primary">Features</a></li><li><a href="#pricing" class="transition-colors hover:text-primary">Pricing</a></li><li><a href="#security" class="transition-colors hover:text-primary">Security</a></li><li><a href="#integration" class="transition-colors hover:text-primary">Integration</a></li></ul></div><div><h4 class="mb-4 font-extrabold text-primaryLight"> Company </h4><ul class="space-y-2 text-xl font-extrabold text-primaryLight"><li><a href="#about" class="transition-colors hover:text-primary">About Us</a></li><li><a href="#careers" class="transition-colors hover:text-primary">Careers</a></li><li>`);
+      _push(ssrRenderComponent(unref(Link), {
+        href: _ctx.route("blog"),
+        class: "transition-colors hover:text-primary"
+      }, {
+        default: withCtx((_, _push2, _parent2, _scopeId) => {
+          if (_push2) {
+            _push2(`Blog `);
+          } else {
+            return [
+              createTextVNode("Blog ")
+            ];
+          }
+        }),
+        _: 1
+      }, _parent));
+      _push(`</li><li><a href="#contact" class="transition-colors hover:text-primary">Contact</a></li></ul></div><div><h4 class="mb-4 font-extrabold text-primaryLight"> Support </h4><ul class="space-y-2 text-xl font-extrabold text-primaryLight"><li><a href="#" class="transition-colors hover:text-primary">Help Center</a></li><li><a href="#documentation" class="transition-colors hover:text-primary">Documentation</a></li><li><a href="#" class="transition-colors hover:text-primary">Privacy Policy</a></li><li>`);
+      _push(ssrRenderComponent(unref(Link), {
+        href: _ctx.route("terms-and-conditions"),
+        class: "transition-colors hover:text-primary"
+      }, {
+        default: withCtx((_, _push2, _parent2, _scopeId) => {
+          if (_push2) {
+            _push2(` Terms of Service`);
+          } else {
+            return [
+              createTextVNode(" Terms of Service")
+            ];
+          }
+        }),
+        _: 1
+      }, _parent));
+      _push(`</li></ul></div></div><div class="flex flex-col items-center justify-between gap-4 border-t border-border bg-primaryDark pt-8 md:flex-row"><p class="text-xl font-extrabold text-primaryLight"> © 2025 OodoMedlink. All rights reserved. </p><div class="flex items-center gap-2 text-xl font-extrabold text-primaryLight"><span>Made with</span>`);
       _push(ssrRenderComponent(unref(HeartShine), {
         weight: "Bold",
         class: "h-8 w-auto fill-primaryDark text-primaryLight"
@@ -327,7 +359,7 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
     const dropMobile = ref(false);
     const dropDown = ref();
     const resultDropDown = ref();
-    const searchResults = ref([]);
+    ref([]);
     const searchDropDown = ref(false);
     const mobileMenu = ref(false);
     const selectionModal = ref(false);
@@ -348,47 +380,38 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
     return (_ctx, _push, _parent, _attrs) => {
       _push(`<!--[--><nav class="navbar fixed top-0 z-50 flex w-full items-center bg-base-100 bg-white px-4 py-3 shadow-md md:px-8 lg:px-12"><div class="flex w-full items-center gap-5 justify-between">`);
       _push(ssrRenderComponent(_sfc_main$a, null, null, _parent));
-      _push(`<div class="hidden items-center justify-center gap-6 text-xl lg:flex xl:gap-10"><div class="flex-none"><div class="relative"><div tabindex="0" role="button" class="btn m-1 rounded bg-white text-xl text-primaryDark"> Clinics <span class="${ssrRenderClass([{ "rotate-180": drop.value }, "transition-all duration-150 ease-in-out"])}">`);
-      _push(ssrRenderComponent(unref(SquareAltArrowUp), {
-        style: !drop.value ? null : { display: "none" },
-        class: "animate-in-out duration-150",
-        weight: "Broken"
-      }, null, _parent));
-      _push(ssrRenderComponent(unref(SquareAltArrowDown), {
-        style: drop.value ? null : { display: "none" },
-        class: "animate-in-out rotate-180 duration-150",
-        weight: "Broken"
-      }, null, _parent));
-      _push(`</span></div>`);
-      if (drop.value) {
-        _push(`<ul class="z-1 menu-compact dropdown-content menu absolute w-52 rounded-md bg-base-100 bg-primaryDark p-1 text-xl text-white shadow-sm"><li class="rounded-md hover:bg-white hover:text-primaryDark"><a>Item 1</a></li><li class="rounded-md hover:bg-white hover:text-primaryDark"><a>Item 2</a></li></ul>`);
-      } else {
-        _push(`<!---->`);
-      }
-      _push(`</div></div><div class="group relative flex w-48 items-center justify-center rounded-md border-2 border-transparent text-xl shadow-lg transition-colors duration-200 focus-within:border-primaryDark xl:w-80"><div class="px-2">`);
-      _push(ssrRenderComponent(unref(Magnifer), { class: "h-5 w-auto text-gray-400 transition-colors duration-200 group-focus-within:text-primaryDark" }, null, _parent));
-      _push(`</div><input type="text" class="w-full border-none bg-transparent px-2 py-2 text-xl outline-none focus:ring-0" placeholder="Search...">`);
-      if (searchDropDown.value) {
-        _push(`<div>`);
-        if (searchResults.value.length <= 0) {
-          _push(`<div class="absolute right-0 top-14 flex h-auto w-full items-center justify-center rounded-md bg-white text-white shadow-lg"><p class="text-black">No results found</p></div>`);
-        } else {
-          _push(`<!---->`);
-        }
-        if (searchResults.value.length > 0) {
-          _push(`<div class="absolute right-0 top-11 z-50 grid h-auto w-full items-center gap-2 rounded-md bg-blue-200 px-3 py-3 text-white shadow-lg"><!--[-->`);
-          ssrRenderList(searchResults.value, (result) => {
-            _push(`<div class="w-full rounded-md bg-black px-3 py-1 text-white shadow-md"><p>${ssrInterpolate(result.title)}</p><p>${ssrInterpolate(result.description)}</p></div>`);
-          });
-          _push(`<!--]--></div>`);
-        } else {
-          _push(`<!---->`);
-        }
-        _push(`</div>`);
-      } else {
-        _push(`<!---->`);
-      }
-      _push(`</div><div class="flex items-center justify-center gap-6 text-xl font-extrabold xl:gap-10"><p class="relative cursor-pointer text-primaryDark duration-200 after:absolute after:bottom-0 after:left-1/2 after:h-0.5 after:w-0 after:-translate-x-1/2 after:bg-primaryDark after:transition-all after:duration-300 after:content-[&#39;&#39;] hover:-translate-y-1 hover:after:w-full"> Blog </p><p class="relative cursor-pointer text-primaryDark duration-200 after:absolute after:bottom-0 after:left-1/2 after:h-0.5 after:w-0 after:-translate-x-1/2 after:bg-primaryDark after:transition-all after:duration-300 after:content-[&#39;&#39;] hover:-translate-y-1 hover:after:w-full"> About Us </p></div></div><div class="hidden items-center justify-center gap-4 text-xl font-extrabold lg:flex xl:gap-10">`);
+      _push(`<div class="hidden items-center justify-center gap-6 text-xl lg:flex xl:gap-10"><div class="flex items-center justify-center gap-6 text-xl font-extrabold xl:gap-10">`);
+      _push(ssrRenderComponent(unref(Link), {
+        href: _ctx.route("faq"),
+        class: "relative cursor-pointer text-primaryDark duration-200 after:absolute after:bottom-0 after:left-1/2 after:h-0.5 after:w-0 after:-translate-x-1/2 after:bg-primaryDark after:transition-all after:duration-300 after:content-[''] hover:-translate-y-1 hover:after:w-full"
+      }, {
+        default: withCtx((_, _push2, _parent2, _scopeId) => {
+          if (_push2) {
+            _push2(` Help Center `);
+          } else {
+            return [
+              createTextVNode(" Help Center ")
+            ];
+          }
+        }),
+        _: 1
+      }, _parent));
+      _push(ssrRenderComponent(unref(Link), {
+        href: _ctx.route("blog"),
+        class: "relative cursor-pointer text-primaryDark duration-200 after:absolute after:bottom-0 after:left-1/2 after:h-0.5 after:w-0 after:-translate-x-1/2 after:bg-primaryDark after:transition-all after:duration-300 after:content-[''] hover:-translate-y-1 hover:after:w-full"
+      }, {
+        default: withCtx((_, _push2, _parent2, _scopeId) => {
+          if (_push2) {
+            _push2(` Blog `);
+          } else {
+            return [
+              createTextVNode(" Blog ")
+            ];
+          }
+        }),
+        _: 1
+      }, _parent));
+      _push(`<a href="#pricing" class="relative cursor-pointer text-primaryDark duration-200 after:absolute after:bottom-0 after:left-1/2 after:h-0.5 after:w-0 after:-translate-x-1/2 after:bg-primaryDark after:transition-all after:duration-300 after:content-[&#39;&#39;] hover:-translate-y-1 hover:after:w-full"> Pricing </a><a href="#about" class="relative cursor-pointer text-primaryDark duration-200 after:absolute after:bottom-0 after:left-1/2 after:h-0.5 after:w-0 after:-translate-x-1/2 after:bg-primaryDark after:transition-all after:duration-300 after:content-[&#39;&#39;] hover:-translate-y-1 hover:after:w-full"> About Us </a></div></div><div class="hidden items-center justify-center gap-4 text-xl font-extrabold lg:flex xl:gap-10">`);
       _push(ssrRenderComponent(unref(Link), {
         href: _ctx.route("login"),
         class: "btn btn-lg flex cursor-pointer items-center justify-center rounded-lg border-2 border-primaryDark bg-white text-xl text-primaryDark transition-all duration-200 hover:-translate-y-1 hover:bg-primaryDark hover:text-white hover:shadow-lg hover:shadow-primaryDark/30"
@@ -486,7 +509,7 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
   __ssrInlineRender: true,
   setup(__props) {
     return (_ctx, _push, _parent, _attrs) => {
-      _push(`<!--[--><video src="/assets/background.mp4" class="fixed left-0 top-0 h-full w-full object-cover" autoplay muted loop></video><div class="relative z-50 flex h-screen w-screen">`);
+      _push(`<!--[--><video src="/assets/background.mp4" class="fixed left-0 top-0 h-full w-full object-cover" autoplay muted loop playsinline preload="auto" disablePictureInPicture webkit-playsinline></video><div class="relative z-50 flex h-screen w-screen">`);
       _push(ssrRenderComponent(_sfc_main$2, null, null, _parent));
       _push(`<div class="h-full w-full scrollbar-none">`);
       ssrRenderSlot(_ctx.$slots, "default", {}, null, _push, _parent);
@@ -525,7 +548,7 @@ const _sfc_main = {
         alt: "med3"
       }
     ]);
-    const benefits = ref([
+    ref([
       {
         title: "Reduce Administrative Burden",
         description: "Automate repetitive tasks and free up staff to focus on patient care."
@@ -543,7 +566,7 @@ const _sfc_main = {
         description: "Handle growing patient volumes without adding administrative overhead."
       }
     ]);
-    const stats = ref([
+    ref([
       {
         title: "80%",
         subject: "Time Saved",
@@ -563,34 +586,60 @@ const _sfc_main = {
     const features = ref([
       {
         icon: Upload,
-        title: "Easy Upload",
-        description: "Drag and drop test results in any format. Bulk upload support for multiple patients."
+        title: "Instant Delivery",
+        description: "Upload and send results directly to patients via WhatsApp or email."
       },
       {
         icon: FileText,
-        title: "Smart Management",
-        description: "Organize, categorize, and search through all test results with powerful filters."
+        title: "Secure Storage",
+        description: "Safely store digital copies of all results in an organized, encrypted system."
       },
       {
-        icon: Mailbox,
-        title: "Automated Delivery",
-        description: "Send results directly to patients via secure email with customizable templates."
+        icon: Bot,
+        title: "AI Result Explanation",
+        description: "Provide simple summaries to help patients understand their results."
       },
       {
-        icon: Shield,
-        title: "HIPAA Compliant",
-        description: "End-to-end encryption and compliance with healthcare data protection standards."
-      },
-      {
-        icon: ClockCircle,
-        title: "Save Time",
-        description: "Reduce manual work by 80%. Automated workflows free up your staff's time."
+        icon: Bell,
+        title: "Automated Notifications",
+        description: "Notify patients immediately when results are ready"
       },
       {
         icon: PieChart2,
-        title: "Analytics",
-        description: "Track delivery status, patient engagement, and workflow efficiency metrics."
+        title: "Performance Reports",
+        description: "Monthly insights to help labs track efficiency."
+      },
+      {
+        icon: Buildings2,
+        title: "Multi-Branch Support",
+        description: "Manage multiple lab locations from one dashboard."
+      },
+      {
+        icon: DiplomaVerified,
+        title: "Staff Training",
+        description: "We guide lab teams to use the platform easily."
       }
+    ]);
+    const securityFeatures = ref([
+      "End-to-end encryption",
+      "Secure cloud backup",
+      "Strict access control for lab staff",
+      "Encrypted download links for patients",
+      "Regular security audits"
+    ]);
+    const integrationFeatures = ref([
+      "Simple drag-and-drop result upload",
+      "Optional LIS integration",
+      "Direct WhatsApp and email sending",
+      "API for advanced automation"
+    ]);
+    const documentationFeatures = ref([
+      "Setup instructions",
+      "Permissions and user roles",
+      "File upload formats",
+      "API documentation",
+      "Security standards",
+      "Frequently asked questions"
     ]);
     const onSelect = () => {
       if (!emblaMainApi.value || !emblaThumbnailApi.value) return;
@@ -617,7 +666,7 @@ const _sfc_main = {
       _push(ssrRenderComponent(_sfc_main$1, null, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(`<div class="my-20 flex w-full flex-col items-center justify-center gap-8 px-4 sm:my-32 sm:px-6 lg:my-40 lg:flex-row lg:gap-16 lg:px-12 2xl:my-44 2xl:gap-32 2xl:px-10"${_scopeId}><div class="flex w-full max-w-2xl flex-col space-y-4 sm:space-y-6 lg:w-1/2"${_scopeId}><h1 class="text-3xl font-bold leading-tight text-black sm:text-4xl md:text-5xl lg:text-6xl 2xl:text-8xl"${_scopeId}> Fast,<br${_scopeId}> Secure and<br${_scopeId}> Convenient<br${_scopeId}> Test Results </h1><p class="text-sm font-bold leading-relaxed text-gray-700 sm:text-base md:text-lg lg:text-xl 2xl:text-2xl"${_scopeId}> Your health and peace of mind should not be a gamble. Oodo Medlink gives you fast, secure and convenient access to your lab test results anytime, anywhere. </p><div class="w-full pt-2"${_scopeId}><form class="flex flex-col gap-3 sm:flex-row sm:gap-4"${_scopeId}><label for="email-input" class="sr-only"${_scopeId}>Email address</label><input type="email" id="email-input"${ssrRenderAttr("value", email.value)} required class="flex-1 rounded-md border border-gray-300 px-3 py-2.5 text-base font-extrabold focus:border-transparent focus:outline-none focus:ring-2 focus:ring-primaryDark sm:px-4 sm:py-3 sm:text-lg lg:text-xl" placeholder="Enter your email" aria-label="Enter your email address"${_scopeId}><button type="submit" class="whitespace-nowrap rounded-md bg-primaryDark px-5 py-2.5 text-base font-extrabold text-white transition-opacity duration-300 hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-primaryDark sm:px-6 sm:py-3 sm:text-lg lg:text-xl" aria-label="Start now"${_scopeId}> Start Now </button></form></div></div><div class="flex w-full justify-center lg:w-1/2"${_scopeId}><div class="w-full max-w-2xl space-y-4"${_scopeId}>`);
+            _push2(`<div class="my-20 flex w-full flex-col items-center justify-center gap-8 px-4 sm:my-32 sm:px-6 lg:my-40 lg:flex-row lg:gap-16 lg:px-12 2xl:my-44 2xl:gap-32 2xl:px-10"${_scopeId}><div class="flex w-full max-w-2xl flex-col space-y-4 sm:space-y-6 lg:w-1/2"${_scopeId}><h1 class="text-3xl font-bold leading-tight text-black sm:text-4xl md:text-5xl lg:text-6xl 2xl:text-8xl"${_scopeId}> Fast,<br${_scopeId}> Secure and<br${_scopeId}> Convenient<br${_scopeId}> Test Results </h1><p class="text-sm font-bold leading-relaxed text-gray-700 sm:text-base md:text-lg lg:text-xl 2xl:text-2xl"${_scopeId}> Your health and peace of mind should not be a gamble. Oodo Medlink gives you fast, secure and convenient access to your lab test results anytime, anywhere. </p><div class="w-full pt-2"${_scopeId}><div class="flex flex-col gap-3 sm:flex-row sm:gap-4"${_scopeId}><label for="email-input" class="sr-only"${_scopeId}>Email address</label><input type="email" id="email-input"${ssrRenderAttr("value", email.value)} required class="flex-1 rounded-md border border-gray-300 px-3 py-2.5 text-base font-extrabold focus:border-transparent focus:outline-none focus:ring-2 focus:ring-primaryDark sm:px-4 sm:py-3 sm:text-lg lg:text-xl" placeholder="Enter your email" aria-label="Enter your email address"${_scopeId}><button class="whitespace-nowrap rounded-md bg-primaryDark px-5 py-2.5 text-base font-extrabold text-white transition-opacity duration-300 hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-primaryDark sm:px-6 sm:py-3 sm:text-lg lg:text-xl" aria-label="Start now"${_scopeId}> Start Now </button></div></div></div><div class="flex w-full justify-center lg:w-1/2"${_scopeId}><div class="w-full max-w-2xl space-y-4"${_scopeId}>`);
             _push2(ssrRenderComponent(unref(_sfc_main$7), {
               plugins: [unref(Autoplay)({ delay: 5e3 })],
               class: "w-full overflow-hidden rounded-lg shadow-lg",
@@ -834,7 +883,7 @@ const _sfc_main = {
               }),
               _: 1
             }, _parent2, _scopeId));
-            _push2(`</div></div></div><section class="bg-gradient-to-b from-background to-secondary/20 py-24"${_scopeId}><div class="container mx-auto px-4 sm:px-6 lg:px-8"${_scopeId}><div class="mx-auto mb-16 max-w-3xl text-center"${_scopeId}><h2 class="mb-4 text-4xl font-extrabold sm:text-5xl 2xl:text-7xl"${_scopeId}> Everything You Need </h2><p class="text-xl font-extrabold text-muted-foreground 2xl:text-2xl"${_scopeId}> Powerful features designed specifically for modern clinics </p></div><div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3"${_scopeId}><!--[-->`);
+            _push2(`</div></div></div><section id="features" class="bg-gradient-to-b from-background to-secondary/20 py-24"${_scopeId}><div class="container mx-auto px-4 sm:px-6 lg:px-8"${_scopeId}><div class="mx-auto mb-16 max-w-3xl text-center"${_scopeId}><h2 class="mb-4 text-4xl font-extrabold sm:text-5xl 2xl:text-7xl"${_scopeId}> Everything You Need </h2><p class="text-xl font-extrabold text-muted-foreground 2xl:text-2xl"${_scopeId}> Powerful features designed specifically for modern clinics </p></div><div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3"${_scopeId}><!--[-->`);
             ssrRenderList(features.value, (feature, index) => {
               _push2(ssrRenderComponent(_sfc_main$8, {
                 key: index,
@@ -858,17 +907,31 @@ const _sfc_main = {
                 _: 2
               }, _parent2, _scopeId));
             });
-            _push2(`<!--]--></div></div></section><section class="bg-primaryLight py-24"${_scopeId}><div class="container mx-auto grid space-y-28 px-4 sm:px-6 lg:px-5"${_scopeId}><div class="grid items-center gap-16 lg:grid-cols-1"${_scopeId}><div class="space-y-8"${_scopeId}><div${_scopeId}><h2 class="mb-4 text-4xl font-extrabold sm:text-5xl 2xl:text-6xl"${_scopeId}> Why Clinics Choose Us </h2><p class="text-xl font-extrabold 2xl:text-3xl"${_scopeId}> Join hundreds of healthcare providers who have transformed their workflow </p></div><div class="space-y-6 font-extrabold"${_scopeId}><!--[-->`);
-            ssrRenderList(benefits.value, (benefit) => {
-              _push2(`<div${_scopeId}><div class="mt-1 flex-shrink-0"${_scopeId}>`);
-              _push2(ssrRenderComponent(unref(CheckCircle), { class: "h-6 w-6 text-primary transition-transform group-hover:scale-110" }, null, _parent2, _scopeId));
-              _push2(`</div><div${_scopeId}><h3 class="mb-2 font-extrabold lg:text-3xl"${_scopeId}>${ssrInterpolate(benefit.title)}</h3><p class="leading-relaxed text-muted-foreground lg:text-2xl"${_scopeId}>${ssrInterpolate(benefit.description)}</p></div></div>`);
+            _push2(`<!--]--></div></div></section><section id="about" class="bg-primaryLight py-24"${_scopeId}><div class="container mx-auto px-4 sm:px-6 lg:px-8"${_scopeId}><div class="mx-auto max-w-4xl"${_scopeId}><h2 class="mb-8 text-center text-4xl font-extrabold sm:text-5xl 2xl:text-6xl"${_scopeId}> About Us </h2><p class="mb-6 text-lg font-extrabold leading-relaxed text-gray-700 2xl:text-2xl"${_scopeId}> Oodo Medlink is a digital platform that helps medical laboratories send test results to patients instantly. The idea was inspired by real challenges many Nigerians face—long wait times, repeated visits to collect printed results, and outdated systems that slow down treatment. </p><p class="text-lg font-extrabold leading-relaxed text-gray-700 2xl:text-2xl"${_scopeId}> We make result delivery fast, secure, and stress-free. With Oodo Medlink, labs upload results in seconds, patients receive them instantly, and healthcare becomes more efficient for everyone. </p></div></div></section><section id="about" class="bg-primaryLight py-24"${_scopeId}><div class="container mx-auto px-4 sm:px-6 lg:px-8"${_scopeId}><div class="mx-auto max-w-4xl"${_scopeId}><h2 class="mb-8 text-center text-4xl font-extrabold sm:text-5xl 2xl:text-6xl"${_scopeId}> Careers </h2><p class="mb-6 text-lg font-extrabold leading-relaxed text-gray-700 2xl:text-2xl"${_scopeId}> Join a team building the future of digital healthcare in Africa. We hire for engineering, design, support, sales, and lab relations. Send your CV to: support@oodomedlink.com </p></div></div></section><section id="security" class="bg-primaryLight py-24"${_scopeId}><div class="container mx-auto px-4 sm:px-6 lg:px-8"${_scopeId}><div class="mx-auto max-w-4xl"${_scopeId}><h2 class="mb-8 text-center text-4xl font-extrabold sm:text-5xl 2xl:text-6xl"${_scopeId}> Security </h2><p class="mb-6 text-center text-lg font-extrabold text-gray-700 2xl:text-2xl"${_scopeId}> We protect every file and message with: </p><div class="grid gap-6 md:grid-cols-2"${_scopeId}><!--[-->`);
+            ssrRenderList(securityFeatures.value, (item, index) => {
+              _push2(`<div class="flex items-center gap-3 rounded-lg bg-white p-4"${_scopeId}>`);
+              _push2(ssrRenderComponent(unref(CheckCircle), { class: "h-5 w-5 flex-shrink-0 text-primaryDark" }, null, _parent2, _scopeId));
+              _push2(`<span class="font-extrabold"${_scopeId}>${ssrInterpolate(item)}</span></div>`);
             });
-            _push2(`<!--]--></div></div></div><div class="space-y-6"${_scopeId}><!--[-->`);
-            ssrRenderList(stats.value, (stat) => {
-              _push2(`<div class="rounded-2xl border border-none bg-primaryDark p-8 text-white shadow-lg"${_scopeId}><div class="mb-2 font-extrabold text-white md:text-5xl 2xl:text-6xl"${_scopeId}>${ssrInterpolate(stat.title)}</div><div class="mb-2 font-extrabold md:text-lg 2xl:text-2xl"${_scopeId}>${ssrInterpolate(stat.subject)}</div><p class="bg-primaryDark bg-clip-text font-extrabold 2xl:text-xl"${_scopeId}>${ssrInterpolate(stat.description)}</p></div>`);
+            _push2(`<!--]--></div><p class="mt-8 text-center text-lg font-extrabold text-gray-700 2xl:text-2xl"${_scopeId}> Patient data stays private, safe, and fully controlled by the lab. </p></div></div></section><section id="integration" class="bg-white py-24"${_scopeId}><div class="container mx-auto px-4 sm:px-6 lg:px-8"${_scopeId}><div class="mx-auto max-w-4xl"${_scopeId}><h2 class="mb-8 text-center text-4xl font-extrabold sm:text-5xl 2xl:text-6xl"${_scopeId}> Integration </h2><p class="mb-8 text-center text-lg font-extrabold text-gray-700 2xl:text-2xl"${_scopeId}> Oodo Medlink works smoothly with your existing workflow: </p><div class="grid gap-6 md:grid-cols-2"${_scopeId}><!--[-->`);
+            ssrRenderList(integrationFeatures.value, (item, index) => {
+              _push2(`<div class="flex items-start gap-3 rounded-lg bg-primaryLight p-6"${_scopeId}>`);
+              _push2(ssrRenderComponent(unref(ChevronRight), { class: "mt-1 h-5 w-5 flex-shrink-0 text-primaryDark" }, null, _parent2, _scopeId));
+              _push2(`<span class="font-extrabold"${_scopeId}>${ssrInterpolate(item)}</span></div>`);
             });
-            _push2(`<!--]--></div></div></section>`);
+            _push2(`<!--]--></div><p class="mt-8 text-center text-lg font-extrabold text-gray-700 2xl:text-2xl"${_scopeId}> No complex setup, no disruption to your current process. </p></div></div></section><section id="documentation" class="bg-white py-24"${_scopeId}><div class="container mx-auto px-4 sm:px-6 lg:px-8"${_scopeId}><div class="mx-auto max-w-4xl"${_scopeId}><h2 class="mb-8 text-center text-4xl font-extrabold sm:text-5xl 2xl:text-6xl"${_scopeId}> Documentation </h2><p class="mb-8 text-center text-lg font-extrabold text-gray-700 2xl:text-2xl"${_scopeId}> Technical and user guides including: </p><div class="grid gap-6 md:grid-cols-2"${_scopeId}><!--[-->`);
+            ssrRenderList(documentationFeatures.value, (item, index) => {
+              _push2(`<div class="flex items-start gap-3 rounded-lg bg-primaryLight p-6"${_scopeId}>`);
+              _push2(ssrRenderComponent(unref(ChevronRight), { class: "mt-1 h-5 w-5 flex-shrink-0 text-primaryDark" }, null, _parent2, _scopeId));
+              _push2(`<span class="font-extrabold"${_scopeId}>${ssrInterpolate(item)}</span></div>`);
+            });
+            _push2(`<!--]--></div><p class="mt-8 text-center text-lg font-extrabold text-gray-700 2xl:text-2xl"${_scopeId}> Clear, simple, and updated regularly. </p></div></div></section><section id="about" class="bg-primaryLight py-24"${_scopeId}><div class="container mx-auto px-4 sm:px-6 lg:px-8"${_scopeId}><div class="mx-auto max-w-4xl"${_scopeId}><h2 class="mb-8 text-center text-4xl font-extrabold sm:text-5xl 2xl:text-6xl"${_scopeId}> Privacy Policy </h2><p class="mb-6 text-lg font-extrabold leading-relaxed text-gray-700 2xl:text-2xl"${_scopeId}> We collect only the information needed to deliver our services. All data is encrypted, securely stored, and never shared with third parties. </p><p class="text-lg font-extrabold leading-relaxed text-gray-700 2xl:text-2xl"${_scopeId}> Patients may request access or deletion of their records at any time. Using Oodo Medlink means you agree to our secure handling of your information. </p></div></div></section><section id="pricing" class="bg-primaryLight py-24"${_scopeId}><div class="container mx-auto px-4 sm:px-6 lg:px-8"${_scopeId}><div class="mx-auto max-w-2xl text-center"${_scopeId}><h2 class="mb-4 text-4xl font-extrabold sm:text-5xl 2xl:text-6xl"${_scopeId}> Pricing </h2><p class="mb-8 text-xl font-extrabold text-gray-700 2xl:text-2xl"${_scopeId}> Contact us for a tailored quote that fits your clinic&#39;s needs. </p><a href="#contact" class="inline-block rounded-md bg-primaryDark px-8 py-4 text-lg font-extrabold text-white transition-opacity hover:opacity-90 2xl:text-xl"${_scopeId}> Get in Touch </a></div></div></section><section id="contact" class="bg-primaryDark py-24 text-white"${_scopeId}><div class="container mx-auto px-4 sm:px-6 lg:px-8"${_scopeId}><div class="mx-auto max-w-4xl text-center"${_scopeId}><h2 class="mb-12 text-4xl font-extrabold sm:text-5xl 2xl:text-6xl"${_scopeId}> Contact Us </h2><div class="grid gap-8 md:grid-cols-3"${_scopeId}><div class="space-y-3"${_scopeId}>`);
+            _push2(ssrRenderComponent(unref(Mail), { class: "mx-auto h-8 w-8" }, null, _parent2, _scopeId));
+            _push2(`<h3 class="text-xl font-extrabold"${_scopeId}>Email</h3><p class="font-extrabold"${_scopeId}>support@oodomedlink.com</p></div><div class="space-y-3"${_scopeId}>`);
+            _push2(ssrRenderComponent(unref(Phone), { class: "mx-auto h-8 w-8" }, null, _parent2, _scopeId));
+            _push2(`<h3 class="text-xl font-extrabold"${_scopeId}>Phone</h3><p class="font-extrabold"${_scopeId}>+234 (0) XXX XXX XXXX</p></div><div class="space-y-3"${_scopeId}>`);
+            _push2(ssrRenderComponent(unref(MapPin), { class: "mx-auto h-8 w-8" }, null, _parent2, _scopeId));
+            _push2(`<h3 class="text-xl font-extrabold"${_scopeId}>Location</h3><p class="font-extrabold"${_scopeId}>Lagos, Nigeria</p></div></div><p class="mt-12 text-lg font-extrabold"${_scopeId}>We respond quickly.</p></div></div></section>`);
             _push2(ssrRenderComponent(_sfc_main$9, null, null, _parent2, _scopeId));
           } else {
             return [
@@ -885,10 +948,7 @@ const _sfc_main = {
                   ]),
                   createVNode("p", { class: "text-sm font-bold leading-relaxed text-gray-700 sm:text-base md:text-lg lg:text-xl 2xl:text-2xl" }, " Your health and peace of mind should not be a gamble. Oodo Medlink gives you fast, secure and convenient access to your lab test results anytime, anywhere. "),
                   createVNode("div", { class: "w-full pt-2" }, [
-                    createVNode("form", {
-                      onSubmit: withModifiers(startNow, ["prevent"]),
-                      class: "flex flex-col gap-3 sm:flex-row sm:gap-4"
-                    }, [
+                    createVNode("div", { class: "flex flex-col gap-3 sm:flex-row sm:gap-4" }, [
                       createVNode("label", {
                         for: "email-input",
                         class: "sr-only"
@@ -905,11 +965,11 @@ const _sfc_main = {
                         [vModelText, email.value]
                       ]),
                       createVNode("button", {
-                        type: "submit",
+                        onClick: startNow,
                         class: "whitespace-nowrap rounded-md bg-primaryDark px-5 py-2.5 text-base font-extrabold text-white transition-opacity duration-300 hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-primaryDark sm:px-6 sm:py-3 sm:text-lg lg:text-xl",
                         "aria-label": "Start now"
                       }, " Start Now ")
-                    ], 32)
+                    ])
                   ])
                 ]),
                 createVNode("div", { class: "flex w-full justify-center lg:w-1/2" }, [
@@ -992,7 +1052,10 @@ const _sfc_main = {
                   ])
                 ])
               ]),
-              createVNode("section", { class: "bg-gradient-to-b from-background to-secondary/20 py-24" }, [
+              createVNode("section", {
+                id: "features",
+                class: "bg-gradient-to-b from-background to-secondary/20 py-24"
+              }, [
                 createVNode("div", { class: "container mx-auto px-4 sm:px-6 lg:px-8" }, [
                   createVNode("div", { class: "mx-auto mb-16 max-w-3xl text-center" }, [
                     createVNode("h2", { class: "mb-4 text-4xl font-extrabold sm:text-5xl 2xl:text-7xl" }, " Everything You Need "),
@@ -1017,42 +1080,150 @@ const _sfc_main = {
                   ])
                 ])
               ]),
-              createVNode("section", { class: "bg-primaryLight py-24" }, [
-                createVNode("div", { class: "container mx-auto grid space-y-28 px-4 sm:px-6 lg:px-5" }, [
-                  createVNode("div", { class: "grid items-center gap-16 lg:grid-cols-1" }, [
-                    createVNode("div", { class: "space-y-8" }, [
-                      createVNode("div", null, [
-                        createVNode("h2", { class: "mb-4 text-4xl font-extrabold sm:text-5xl 2xl:text-6xl" }, " Why Clinics Choose Us "),
-                        createVNode("p", { class: "text-xl font-extrabold 2xl:text-3xl" }, " Join hundreds of healthcare providers who have transformed their workflow ")
+              createVNode("section", {
+                id: "about",
+                class: "bg-primaryLight py-24"
+              }, [
+                createVNode("div", { class: "container mx-auto px-4 sm:px-6 lg:px-8" }, [
+                  createVNode("div", { class: "mx-auto max-w-4xl" }, [
+                    createVNode("h2", { class: "mb-8 text-center text-4xl font-extrabold sm:text-5xl 2xl:text-6xl" }, " About Us "),
+                    createVNode("p", { class: "mb-6 text-lg font-extrabold leading-relaxed text-gray-700 2xl:text-2xl" }, " Oodo Medlink is a digital platform that helps medical laboratories send test results to patients instantly. The idea was inspired by real challenges many Nigerians face—long wait times, repeated visits to collect printed results, and outdated systems that slow down treatment. "),
+                    createVNode("p", { class: "text-lg font-extrabold leading-relaxed text-gray-700 2xl:text-2xl" }, " We make result delivery fast, secure, and stress-free. With Oodo Medlink, labs upload results in seconds, patients receive them instantly, and healthcare becomes more efficient for everyone. ")
+                  ])
+                ])
+              ]),
+              createVNode("section", {
+                id: "about",
+                class: "bg-primaryLight py-24"
+              }, [
+                createVNode("div", { class: "container mx-auto px-4 sm:px-6 lg:px-8" }, [
+                  createVNode("div", { class: "mx-auto max-w-4xl" }, [
+                    createVNode("h2", { class: "mb-8 text-center text-4xl font-extrabold sm:text-5xl 2xl:text-6xl" }, " Careers "),
+                    createVNode("p", { class: "mb-6 text-lg font-extrabold leading-relaxed text-gray-700 2xl:text-2xl" }, " Join a team building the future of digital healthcare in Africa. We hire for engineering, design, support, sales, and lab relations. Send your CV to: support@oodomedlink.com ")
+                  ])
+                ])
+              ]),
+              createVNode("section", {
+                id: "security",
+                class: "bg-primaryLight py-24"
+              }, [
+                createVNode("div", { class: "container mx-auto px-4 sm:px-6 lg:px-8" }, [
+                  createVNode("div", { class: "mx-auto max-w-4xl" }, [
+                    createVNode("h2", { class: "mb-8 text-center text-4xl font-extrabold sm:text-5xl 2xl:text-6xl" }, " Security "),
+                    createVNode("p", { class: "mb-6 text-center text-lg font-extrabold text-gray-700 2xl:text-2xl" }, " We protect every file and message with: "),
+                    createVNode("div", { class: "grid gap-6 md:grid-cols-2" }, [
+                      (openBlock(true), createBlock(Fragment, null, renderList(securityFeatures.value, (item, index) => {
+                        return openBlock(), createBlock("div", {
+                          key: index,
+                          class: "flex items-center gap-3 rounded-lg bg-white p-4"
+                        }, [
+                          createVNode(unref(CheckCircle), { class: "h-5 w-5 flex-shrink-0 text-primaryDark" }),
+                          createVNode("span", { class: "font-extrabold" }, toDisplayString(item), 1)
+                        ]);
+                      }), 128))
+                    ]),
+                    createVNode("p", { class: "mt-8 text-center text-lg font-extrabold text-gray-700 2xl:text-2xl" }, " Patient data stays private, safe, and fully controlled by the lab. ")
+                  ])
+                ])
+              ]),
+              createVNode("section", {
+                id: "integration",
+                class: "bg-white py-24"
+              }, [
+                createVNode("div", { class: "container mx-auto px-4 sm:px-6 lg:px-8" }, [
+                  createVNode("div", { class: "mx-auto max-w-4xl" }, [
+                    createVNode("h2", { class: "mb-8 text-center text-4xl font-extrabold sm:text-5xl 2xl:text-6xl" }, " Integration "),
+                    createVNode("p", { class: "mb-8 text-center text-lg font-extrabold text-gray-700 2xl:text-2xl" }, " Oodo Medlink works smoothly with your existing workflow: "),
+                    createVNode("div", { class: "grid gap-6 md:grid-cols-2" }, [
+                      (openBlock(true), createBlock(Fragment, null, renderList(integrationFeatures.value, (item, index) => {
+                        return openBlock(), createBlock("div", {
+                          key: index,
+                          class: "flex items-start gap-3 rounded-lg bg-primaryLight p-6"
+                        }, [
+                          createVNode(unref(ChevronRight), { class: "mt-1 h-5 w-5 flex-shrink-0 text-primaryDark" }),
+                          createVNode("span", { class: "font-extrabold" }, toDisplayString(item), 1)
+                        ]);
+                      }), 128))
+                    ]),
+                    createVNode("p", { class: "mt-8 text-center text-lg font-extrabold text-gray-700 2xl:text-2xl" }, " No complex setup, no disruption to your current process. ")
+                  ])
+                ])
+              ]),
+              createVNode("section", {
+                id: "documentation",
+                class: "bg-white py-24"
+              }, [
+                createVNode("div", { class: "container mx-auto px-4 sm:px-6 lg:px-8" }, [
+                  createVNode("div", { class: "mx-auto max-w-4xl" }, [
+                    createVNode("h2", { class: "mb-8 text-center text-4xl font-extrabold sm:text-5xl 2xl:text-6xl" }, " Documentation "),
+                    createVNode("p", { class: "mb-8 text-center text-lg font-extrabold text-gray-700 2xl:text-2xl" }, " Technical and user guides including: "),
+                    createVNode("div", { class: "grid gap-6 md:grid-cols-2" }, [
+                      (openBlock(true), createBlock(Fragment, null, renderList(documentationFeatures.value, (item, index) => {
+                        return openBlock(), createBlock("div", {
+                          key: index,
+                          class: "flex items-start gap-3 rounded-lg bg-primaryLight p-6"
+                        }, [
+                          createVNode(unref(ChevronRight), { class: "mt-1 h-5 w-5 flex-shrink-0 text-primaryDark" }),
+                          createVNode("span", { class: "font-extrabold" }, toDisplayString(item), 1)
+                        ]);
+                      }), 128))
+                    ]),
+                    createVNode("p", { class: "mt-8 text-center text-lg font-extrabold text-gray-700 2xl:text-2xl" }, " Clear, simple, and updated regularly. ")
+                  ])
+                ])
+              ]),
+              createVNode("section", {
+                id: "about",
+                class: "bg-primaryLight py-24"
+              }, [
+                createVNode("div", { class: "container mx-auto px-4 sm:px-6 lg:px-8" }, [
+                  createVNode("div", { class: "mx-auto max-w-4xl" }, [
+                    createVNode("h2", { class: "mb-8 text-center text-4xl font-extrabold sm:text-5xl 2xl:text-6xl" }, " Privacy Policy "),
+                    createVNode("p", { class: "mb-6 text-lg font-extrabold leading-relaxed text-gray-700 2xl:text-2xl" }, " We collect only the information needed to deliver our services. All data is encrypted, securely stored, and never shared with third parties. "),
+                    createVNode("p", { class: "text-lg font-extrabold leading-relaxed text-gray-700 2xl:text-2xl" }, " Patients may request access or deletion of their records at any time. Using Oodo Medlink means you agree to our secure handling of your information. ")
+                  ])
+                ])
+              ]),
+              createVNode("section", {
+                id: "pricing",
+                class: "bg-primaryLight py-24"
+              }, [
+                createVNode("div", { class: "container mx-auto px-4 sm:px-6 lg:px-8" }, [
+                  createVNode("div", { class: "mx-auto max-w-2xl text-center" }, [
+                    createVNode("h2", { class: "mb-4 text-4xl font-extrabold sm:text-5xl 2xl:text-6xl" }, " Pricing "),
+                    createVNode("p", { class: "mb-8 text-xl font-extrabold text-gray-700 2xl:text-2xl" }, " Contact us for a tailored quote that fits your clinic's needs. "),
+                    createVNode("a", {
+                      href: "#contact",
+                      class: "inline-block rounded-md bg-primaryDark px-8 py-4 text-lg font-extrabold text-white transition-opacity hover:opacity-90 2xl:text-xl"
+                    }, " Get in Touch ")
+                  ])
+                ])
+              ]),
+              createVNode("section", {
+                id: "contact",
+                class: "bg-primaryDark py-24 text-white"
+              }, [
+                createVNode("div", { class: "container mx-auto px-4 sm:px-6 lg:px-8" }, [
+                  createVNode("div", { class: "mx-auto max-w-4xl text-center" }, [
+                    createVNode("h2", { class: "mb-12 text-4xl font-extrabold sm:text-5xl 2xl:text-6xl" }, " Contact Us "),
+                    createVNode("div", { class: "grid gap-8 md:grid-cols-3" }, [
+                      createVNode("div", { class: "space-y-3" }, [
+                        createVNode(unref(Mail), { class: "mx-auto h-8 w-8" }),
+                        createVNode("h3", { class: "text-xl font-extrabold" }, "Email"),
+                        createVNode("p", { class: "font-extrabold" }, "support@oodomedlink.com")
                       ]),
-                      createVNode("div", { class: "space-y-6 font-extrabold" }, [
-                        (openBlock(true), createBlock(Fragment, null, renderList(benefits.value, (benefit) => {
-                          return openBlock(), createBlock("div", {
-                            key: benefit.title
-                          }, [
-                            createVNode("div", { class: "mt-1 flex-shrink-0" }, [
-                              createVNode(unref(CheckCircle), { class: "h-6 w-6 text-primary transition-transform group-hover:scale-110" })
-                            ]),
-                            createVNode("div", null, [
-                              createVNode("h3", { class: "mb-2 font-extrabold lg:text-3xl" }, toDisplayString(benefit.title), 1),
-                              createVNode("p", { class: "leading-relaxed text-muted-foreground lg:text-2xl" }, toDisplayString(benefit.description), 1)
-                            ])
-                          ]);
-                        }), 128))
+                      createVNode("div", { class: "space-y-3" }, [
+                        createVNode(unref(Phone), { class: "mx-auto h-8 w-8" }),
+                        createVNode("h3", { class: "text-xl font-extrabold" }, "Phone"),
+                        createVNode("p", { class: "font-extrabold" }, "+234 (0) XXX XXX XXXX")
+                      ]),
+                      createVNode("div", { class: "space-y-3" }, [
+                        createVNode(unref(MapPin), { class: "mx-auto h-8 w-8" }),
+                        createVNode("h3", { class: "text-xl font-extrabold" }, "Location"),
+                        createVNode("p", { class: "font-extrabold" }, "Lagos, Nigeria")
                       ])
-                    ])
-                  ]),
-                  createVNode("div", { class: "space-y-6" }, [
-                    (openBlock(true), createBlock(Fragment, null, renderList(stats.value, (stat) => {
-                      return openBlock(), createBlock("div", {
-                        key: stat.title,
-                        class: "rounded-2xl border border-none bg-primaryDark p-8 text-white shadow-lg"
-                      }, [
-                        createVNode("div", { class: "mb-2 font-extrabold text-white md:text-5xl 2xl:text-6xl" }, toDisplayString(stat.title), 1),
-                        createVNode("div", { class: "mb-2 font-extrabold md:text-lg 2xl:text-2xl" }, toDisplayString(stat.subject), 1),
-                        createVNode("p", { class: "bg-primaryDark bg-clip-text font-extrabold 2xl:text-xl" }, toDisplayString(stat.description), 1)
-                      ]);
-                    }), 128))
+                    ]),
+                    createVNode("p", { class: "mt-12 text-lg font-extrabold" }, "We respond quickly.")
                   ])
                 ])
               ]),

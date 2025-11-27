@@ -8,72 +8,54 @@
             <!-- Desktop Navigation -->
             <div class="hidden items-center justify-center gap-6 text-xl lg:flex xl:gap-10">
                 <!-- dropdown -->
-                <div class="flex-none">
-                    <div class="relative">
-                        <div tabindex="0" role="button" @click="drop = !drop"
-                            class="btn m-1 rounded bg-white text-xl text-primaryDark">
-                            Clinics
-                            <span class="transition-all duration-150 ease-in-out" :class="{ 'rotate-180': drop }">
-                                <SquareAltArrowUp v-show="!drop" class="animate-in-out duration-150" weight="Broken" />
-                                <SquareAltArrowDown v-show="drop" class="animate-in-out rotate-180 duration-150"
-                                    weight="Broken" />
-                            </span>
-                        </div>
-                        <Transition v-if="drop" ref="dropDown" enter-active-class="transition-all duration-200"
-                            leave-active-class="transition-all duration-150" enter-from-class="opacity-0 translate-y-1"
-                            enter-to-class="opacity-100 translate-y-0" leave-from-class="opacity-100 translate-y-0"
-                            leave-to-class="opacity-0 translate-y-1">
-                            <ul
-                                class="z-1 menu-compact dropdown-content menu absolute w-52 rounded-md bg-base-100 bg-primaryDark p-1 text-xl text-white shadow-sm">
-                                <li class="rounded-md hover:bg-white hover:text-primaryDark">
-                                    <a>Item 1</a>
-                                </li>
-                                <li class="rounded-md hover:bg-white hover:text-primaryDark">
-                                    <a>Item 2</a>
-                                </li>
-                            </ul>
-                        </Transition>
-                    </div>
-                </div>
+                <!-- <div class="flex-none"> -->
+                <!-- <div class="relative"> -->
+                <!-- <div tabindex="0" role="button" @click="drop = !drop" -->
+                <!-- class="btn m-1 rounded bg-white text-xl text-primaryDark"> -->
+                <!-- Clinics -->
+                <!-- <span class="transition-all duration-150 ease-in-out" :class="{ 'rotate-180': drop }"> -->
+                <!-- <SquareAltArrowUp v-show="!drop" class="animate-in-out duration-150" weight="Broken" /> -->
+                <!-- <SquareAltArrowDown v-show="drop" class="animate-in-out rotate-180 duration-150" -->
+                <!-- weight="Broken" /> -->
+                <!-- </span> -->
+                <!-- </div> -->
+                <!-- <Transition v-if="drop" ref="dropDown" enter-active-class="transition-all duration-200" -->
+                <!-- leave-active-class="transition-all duration-150" enter-from-class="opacity-0 translate-y-1" -->
+                <!-- enter-to-class="opacity-100 translate-y-0" leave-from-class="opacity-100 translate-y-0" -->
+                <!-- leave-to-class="opacity-0 translate-y-1"> -->
+                <!-- <ul -->
+                <!-- class="z-1 menu-compact dropdown-content menu absolute w-52 rounded-md bg-base-100 bg-primaryDark p-1 text-xl text-white shadow-sm"> -->
+                <!-- <li class="rounded-md hover:bg-white hover:text-primaryDark"> -->
+                <!-- <a>Item 1</a> -->
+                <!-- </li> -->
+                <!-- <li class="rounded-md hover:bg-white hover:text-primaryDark"> -->
+                <!-- <a>Item 2</a> -->
+                <!-- </li> -->
+                <!-- </ul> -->
+                <!-- </Transition> -->
+                <!-- </div> -->
+                <!-- </div> -->
 
-                <!-- Searchbar -->
-                <div
-                    class="group relative flex w-48 items-center justify-center rounded-md border-2 border-transparent text-xl shadow-lg transition-colors duration-200 focus-within:border-primaryDark xl:w-80">
-                    <div class="px-2">
-                        <Magnifer
-                            class="h-5 w-auto text-gray-400 transition-colors duration-200 group-focus-within:text-primaryDark" />
-                    </div>
-                    <input type="text" @click="loadResults"
-                        class="w-full border-none bg-transparent px-2 py-2 text-xl outline-none focus:ring-0"
-                        placeholder="Search..." />
 
-                    <div v-if="searchDropDown" ref="resultDropDown">
-                        <div v-if="searchResults.length <= 0"
-                            class="absolute right-0 top-14 flex h-auto w-full items-center justify-center rounded-md bg-white text-white shadow-lg">
-                            <p class="text-black">No results found</p>
-                        </div>
-
-                        <div v-if="searchResults.length > 0"
-                            class="absolute right-0 top-11 z-50 grid h-auto w-full items-center gap-2 rounded-md bg-blue-200 px-3 py-3 text-white shadow-lg">
-                            <div class="w-full rounded-md bg-black px-3 py-1 text-white shadow-md"
-                                v-for="result in searchResults" :key="result.id">
-                                <p>{{ result.title }}</p>
-                                <p>{{ result.description }}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
                 <!-- Links -->
                 <div class="flex items-center justify-center gap-6 text-xl font-extrabold xl:gap-10">
-                    <p
+                    <Link :href="route('faq')"
                         class="relative cursor-pointer text-primaryDark duration-200 after:absolute after:bottom-0 after:left-1/2 after:h-0.5 after:w-0 after:-translate-x-1/2 after:bg-primaryDark after:transition-all after:duration-300 after:content-[''] hover:-translate-y-1 hover:after:w-full">
-                        Blog
-                    </p>
-                    <p
+                    Help Center
+                    </Link>
+                    <Link :href="route('blog')"
+                        class="relative cursor-pointer text-primaryDark duration-200 after:absolute after:bottom-0 after:left-1/2 after:h-0.5 after:w-0 after:-translate-x-1/2 after:bg-primaryDark after:transition-all after:duration-300 after:content-[''] hover:-translate-y-1 hover:after:w-full">
+                    Blog
+                    </Link>
+                    <a href="#pricing"
+                        class="relative cursor-pointer text-primaryDark duration-200 after:absolute after:bottom-0 after:left-1/2 after:h-0.5 after:w-0 after:-translate-x-1/2 after:bg-primaryDark after:transition-all after:duration-300 after:content-[''] hover:-translate-y-1 hover:after:w-full">
+                        Pricing
+                    </a>
+                    <a href="#about"
                         class="relative cursor-pointer text-primaryDark duration-200 after:absolute after:bottom-0 after:left-1/2 after:h-0.5 after:w-0 after:-translate-x-1/2 after:bg-primaryDark after:transition-all after:duration-300 after:content-[''] hover:-translate-y-1 hover:after:w-full">
                         About Us
-                    </p>
+                    </a>
                 </div>
             </div>
 

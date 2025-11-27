@@ -1,55 +1,38 @@
 <template>
+
     <Head title="Home" />
 
     <GuestLayout>
         <!-- Hero Section -->
         <div
-            class="my-20 flex w-full flex-col items-center justify-center gap-8 px-4 sm:my-32 sm:px-6 lg:my-40 lg:flex-row lg:gap-16 lg:px-12 2xl:my-44 2xl:gap-32 2xl:px-10"
-        >
+            class="my-20 flex w-full flex-col items-center justify-center gap-8 px-4 sm:my-32 sm:px-6 lg:my-40 lg:flex-row lg:gap-16 lg:px-12 2xl:my-44 2xl:gap-32 2xl:px-10">
             <!-- Text Content -->
-            <div
-                class="flex w-full max-w-2xl flex-col space-y-4 sm:space-y-6 lg:w-1/2"
-            >
+            <div class="flex w-full max-w-2xl flex-col space-y-4 sm:space-y-6 lg:w-1/2">
                 <h1
-                    class="text-3xl font-bold leading-tight text-black sm:text-4xl md:text-5xl lg:text-6xl 2xl:text-8xl"
-                >
+                    class="text-3xl font-bold leading-tight text-black sm:text-4xl md:text-5xl lg:text-6xl 2xl:text-8xl">
                     Fast,<br />
                     Secure and<br />
                     Convenient<br />
                     Test Results
                 </h1>
                 <p
-                    class="text-sm font-bold leading-relaxed text-gray-700 sm:text-base md:text-lg lg:text-xl 2xl:text-2xl"
-                >
+                    class="text-sm font-bold leading-relaxed text-gray-700 sm:text-base md:text-lg lg:text-xl 2xl:text-2xl">
                     Your health and peace of mind should not be a gamble. Oodo
                     Medlink gives you fast, secure and convenient access to your
                     lab test results anytime, anywhere.
                 </p>
                 <div class="w-full pt-2">
-                    <form
-                        @submit.prevent="startNow"
-                        class="flex flex-col gap-3 sm:flex-row sm:gap-4"
-                    >
-                        <label for="email-input" class="sr-only"
-                            >Email address</label
-                        >
-                        <input
-                            type="email"
-                            id="email-input"
-                            v-model="email"
-                            required
+                    <div class="flex flex-col gap-3 sm:flex-row sm:gap-4">
+                        <label for="email-input" class="sr-only">Email address</label>
+                        <input type="email" id="email-input" v-model="email" required
                             class="flex-1 rounded-md border border-gray-300 px-3 py-2.5 text-base font-extrabold focus:border-transparent focus:outline-none focus:ring-2 focus:ring-primaryDark sm:px-4 sm:py-3 sm:text-lg lg:text-xl"
-                            placeholder="Enter your email"
-                            aria-label="Enter your email address"
-                        />
-                        <button
-                            type="submit"
+                            placeholder="Enter your email" aria-label="Enter your email address" />
+                        <button @click="startNow"
                             class="whitespace-nowrap rounded-md bg-primaryDark px-5 py-2.5 text-base font-extrabold text-white transition-opacity duration-300 hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-primaryDark sm:px-6 sm:py-3 sm:text-lg lg:text-xl"
-                            aria-label="Start now"
-                        >
+                            aria-label="Start now">
                             Start Now
                         </button>
-                    </form>
+                    </div>
                 </div>
             </div>
 
@@ -57,61 +40,31 @@
             <div class="flex w-full justify-center lg:w-1/2">
                 <div class="w-full max-w-2xl space-y-4">
                     <!-- Main Carousel -->
-                    <Carousel
-                        :plugins="[Autoplay({ delay: 5000 })]"
-                        class="w-full overflow-hidden rounded-lg shadow-lg"
-                        @init-api="(val) => (emblaMainApi = val)"
-                        aria-label="Featured images carousel"
-                    >
+                    <Carousel :plugins="[Autoplay({ delay: 5000 })]" class="w-full overflow-hidden rounded-lg shadow-lg"
+                        @init-api="(val) => (emblaMainApi = val)" aria-label="Featured images carousel">
                         <CarouselContent>
-                            <CarouselItem
-                                v-for="image in images"
-                                :key="image.id"
-                                class="rounded-lg"
-                            >
-                                <img
-                                    :src="image.src"
-                                    :alt="image.alt"
-                                    class="h-full w-full rounded-lg object-cover"
-                                />
+                            <CarouselItem v-for="image in images" :key="image.id" class="rounded-lg">
+                                <img :src="image.src" :alt="image.alt" class="h-full w-full rounded-lg object-cover" />
                             </CarouselItem>
                         </CarouselContent>
                     </Carousel>
 
                     <!-- Thumbnail Indicators -->
-                    <Carousel
-                        class="relative w-full"
-                        @init-api="(val) => (emblaThumbnailApi = val)"
-                        aria-label="Carousel navigation"
-                    >
+                    <Carousel class="relative w-full" @init-api="(val) => (emblaThumbnailApi = val)"
+                        aria-label="Carousel navigation">
                         <CarouselContent class="ml-0 flex justify-center gap-2">
-                            <CarouselItem
-                                v-for="(_, index) in images.length"
-                                :key="index"
-                                class="basis-auto cursor-pointer pl-0"
-                                @click="onThumbClick(index)"
-                                :aria-label="`Go to slide ${index + 1}`"
-                                role="button"
-                                tabindex="0"
-                                @keydown.enter="onThumbClick(index)"
-                                @keydown.space.prevent="onThumbClick(index)"
-                            >
-                                <div
-                                    class="transition-opacity duration-300"
-                                    :class="
-                                        index === selectedIndex
-                                            ? 'opacity-100'
-                                            : 'opacity-50'
-                                    "
-                                >
-                                    <div
-                                        class="h-2 rounded-full transition-all duration-300"
-                                        :class="
-                                            index === selectedIndex
-                                                ? 'w-16 bg-primaryDark sm:w-20'
-                                                : 'w-6 bg-gray-400 sm:w-8'
-                                        "
-                                    />
+                            <CarouselItem v-for="(_, index) in images.length" :key="index"
+                                class="basis-auto cursor-pointer pl-0" @click="onThumbClick(index)"
+                                :aria-label="`Go to slide ${index + 1}`" role="button" tabindex="0"
+                                @keydown.enter="onThumbClick(index)" @keydown.space.prevent="onThumbClick(index)">
+                                <div class="transition-opacity duration-300" :class="index === selectedIndex
+                                    ? 'opacity-100'
+                                    : 'opacity-50'
+    ">
+                                    <div class="h-2 rounded-full transition-all duration-300" :class="index === selectedIndex
+                                        ? 'w-16 bg-primaryDark sm:w-20'
+                                        : 'w-6 bg-gray-400 sm:w-8'
+    " />
                                 </div>
                             </CarouselItem>
                         </CarouselContent>
@@ -121,42 +74,30 @@
         </div>
 
         <!-- Feature Section -->
-        <section class="bg-gradient-to-b from-background to-secondary/20 py-24">
+        <section id="features" class="bg-gradient-to-b from-background to-secondary/20 py-24">
             <div class="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="mx-auto mb-16 max-w-3xl text-center">
-                    <h2
-                        class="mb-4 text-4xl font-extrabold sm:text-5xl 2xl:text-7xl"
-                    >
+                    <h2 class="mb-4 text-4xl font-extrabold sm:text-5xl 2xl:text-7xl">
                         Everything You Need
                     </h2>
-                    <p
-                        class="text-xl font-extrabold text-muted-foreground 2xl:text-2xl"
-                    >
+                    <p class="text-xl font-extrabold text-muted-foreground 2xl:text-2xl">
                         Powerful features designed specifically for modern
                         clinics
                     </p>
                 </div>
 
                 <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-                    <Card
-                        :key="index"
-                        v-for="(feature, index) in features"
-                        class="group border-border bg-card/50 p-8 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-none hover:bg-primaryDark hover:text-white hover:shadow-lg"
-                    >
+                    <Card :key="index" v-for="(feature, index) in features"
+                        class="group border-border bg-card/50 p-8 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-none hover:bg-primaryDark hover:text-white hover:shadow-lg">
                         <div
-                            class="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 transition-colors group-hover:bg-primary/20 group-hover:bg-white"
-                        >
-                            <component
-                                :is="feature.icon"
-                                class="h-6 w-6 text-primary"
-                            />
+                            class="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 transition-colors group-hover:bg-primary/20 group-hover:bg-white">
+                            <component :is="feature.icon" class="h-6 w-6 text-primary" />
                         </div>
                         <h3 class="mb-3 font-extrabold lg:text-2xl">
                             {{ feature.title }}
                         </h3>
                         <p
-                            class="font-extrabold leading-relaxed text-muted-foreground group-hover:text-white lg:text-xl"
-                        >
+                            class="font-extrabold leading-relaxed text-muted-foreground group-hover:text-white lg:text-xl">
                             {{ feature.description }}
                         </p>
                     </Card>
@@ -164,77 +105,180 @@
             </div>
         </section>
 
-        <!-- Benefit Section -->
-        <section class="bg-primaryLight py-24">
-            <div class="container mx-auto grid space-y-28 px-4 sm:px-6 lg:px-5">
-                <div class="grid items-center gap-16 lg:grid-cols-1">
-                    <!-- Left: Text content -->
-                    <div class="space-y-8">
-                        <div>
-                            <h2
-                                class="mb-4 text-4xl font-extrabold sm:text-5xl 2xl:text-6xl"
-                            >
-                                Why Clinics Choose Us
-                            </h2>
-                            <p class="text-xl font-extrabold 2xl:text-3xl">
-                                Join hundreds of healthcare providers who have
-                                transformed their workflow
-                            </p>
-                        </div>
-
-                        <div class="space-y-6 font-extrabold">
-                            <div
-                                :key="benefit.title"
-                                v-for="benefit in benefits"
-                            >
-                                <div class="mt-1 flex-shrink-0">
-                                    <CheckCircle
-                                        class="h-6 w-6 text-primary transition-transform group-hover:scale-110"
-                                    />
-                                </div>
-                                <div>
-                                    <h3 class="mb-2 font-extrabold lg:text-3xl">
-                                        {{ benefit.title }}
-                                    </h3>
-                                    <p
-                                        class="leading-relaxed text-muted-foreground lg:text-2xl"
-                                    >
-                                        {{ benefit.description }}
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Right: Stats cards  -->
-                <div class="space-y-6">
-                    <div
-                        v-for="stat in stats"
-                        :key="stat.title"
-                        class="rounded-2xl border border-none bg-primaryDark p-8 text-white shadow-lg"
-                    >
-                        <div
-                            class="mb-2 font-extrabold text-white md:text-5xl 2xl:text-6xl"
-                        >
-                            {{ stat.title }}
-                        </div>
-                        <div
-                            class="mb-2 font-extrabold md:text-lg 2xl:text-2xl"
-                        >
-                            {{ stat.subject }}
-                        </div>
-                        <p
-                            class="bg-primaryDark bg-clip-text font-extrabold 2xl:text-xl"
-                        >
-                            {{ stat.description }}
-                        </p>
-                    </div>
+        <!-- About Section -->
+        <section id="about" class="bg-primaryLight py-24">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="mx-auto max-w-4xl">
+                    <h2 class="mb-8 text-center text-4xl font-extrabold sm:text-5xl 2xl:text-6xl">
+                        About Us
+                    </h2>
+                    <p class="mb-6 text-lg font-extrabold leading-relaxed text-gray-700 2xl:text-2xl">
+                        Oodo Medlink is a digital platform that helps medical laboratories send test results to patients
+                        instantly. The idea was inspired by real challenges many Nigerians face—long wait times,
+                        repeated visits to collect printed results, and outdated systems that slow down treatment.
+                    </p>
+                    <p class="text-lg font-extrabold leading-relaxed text-gray-700 2xl:text-2xl">
+                        We make result delivery fast, secure, and stress-free. With Oodo Medlink, labs upload results in
+                        seconds, patients receive them instantly, and healthcare becomes more efficient for everyone.
+                    </p>
                 </div>
             </div>
         </section>
 
-        <!-- footer -->
+        <section id="about" class="bg-primaryLight py-24">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="mx-auto max-w-4xl">
+                    <h2 class="mb-8 text-center text-4xl font-extrabold sm:text-5xl 2xl:text-6xl">
+                        Careers
+                    </h2>
+                    <p class="mb-6 text-lg font-extrabold leading-relaxed text-gray-700 2xl:text-2xl">
+                        Join a team building the future of digital healthcare in Africa.
+                        We hire for engineering, design, support, sales, and lab relations.
+                        Send your CV to: support@oodomedlink.com
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Security Section -->
+        <section id="security" class="bg-primaryLight py-24">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="mx-auto max-w-4xl">
+                    <h2 class="mb-8 text-center text-4xl font-extrabold sm:text-5xl 2xl:text-6xl">
+                        Security
+                    </h2>
+                    <p class="mb-6 text-center text-lg font-extrabold text-gray-700 2xl:text-2xl">
+                        We protect every file and message with:
+                    </p>
+                    <div class="grid gap-6 md:grid-cols-2">
+                        <div v-for="(item, index) in securityFeatures" :key="index"
+                            class="flex items-center gap-3 rounded-lg bg-white p-4">
+                            <CheckCircle class="h-5 w-5 flex-shrink-0 text-primaryDark" />
+                            <span class="font-extrabold">{{ item }}</span>
+                        </div>
+                    </div>
+                    <p class="mt-8 text-center text-lg font-extrabold text-gray-700 2xl:text-2xl">
+                        Patient data stays private, safe, and fully controlled by the lab.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Integration Section -->
+        <section id="integration" class="bg-white py-24">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="mx-auto max-w-4xl">
+                    <h2 class="mb-8 text-center text-4xl font-extrabold sm:text-5xl 2xl:text-6xl">
+                        Integration
+                    </h2>
+                    <p class="mb-8 text-center text-lg font-extrabold text-gray-700 2xl:text-2xl">
+                        Oodo Medlink works smoothly with your existing workflow:
+                    </p>
+                    <div class="grid gap-6 md:grid-cols-2">
+                        <div v-for="(item, index) in integrationFeatures" :key="index"
+                            class="flex items-start gap-3 rounded-lg bg-primaryLight p-6">
+                            <ChevronRight class="mt-1 h-5 w-5 flex-shrink-0 text-primaryDark" />
+                            <span class="font-extrabold">{{ item }}</span>
+                        </div>
+                    </div>
+                    <p class="mt-8 text-center text-lg font-extrabold text-gray-700 2xl:text-2xl">
+                        No complex setup, no disruption to your current process.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Documentation Section -->
+        <section id="documentation" class="bg-white py-24">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="mx-auto max-w-4xl">
+                    <h2 class="mb-8 text-center text-4xl font-extrabold sm:text-5xl 2xl:text-6xl">
+                        Documentation
+                    </h2>
+                    <p class="mb-8 text-center text-lg font-extrabold text-gray-700 2xl:text-2xl">
+                        Technical and user guides including:
+                    </p>
+                    <div class="grid gap-6 md:grid-cols-2">
+                        <div v-for="(item, index) in documentationFeatures" :key="index"
+                            class="flex items-start gap-3 rounded-lg bg-primaryLight p-6">
+                            <ChevronRight class="mt-1 h-5 w-5 flex-shrink-0 text-primaryDark" />
+                            <span class="font-extrabold">{{ item }}</span>
+                        </div>
+                    </div>
+                    <p class="mt-8 text-center text-lg font-extrabold text-gray-700 2xl:text-2xl">
+                        Clear, simple, and updated regularly.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="bg-primaryLight py-24">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="mx-auto max-w-4xl">
+                    <h2 class="mb-8 text-center text-4xl font-extrabold sm:text-5xl 2xl:text-6xl">
+                        Privacy Policy
+                    </h2>
+                    <p class="mb-6 text-lg font-extrabold leading-relaxed text-gray-700 2xl:text-2xl">
+                        We collect only the information needed to deliver our services.
+                        All data is encrypted, securely stored, and never shared with third parties.
+                    </p>
+                    <p class="text-lg font-extrabold leading-relaxed text-gray-700 2xl:text-2xl">
+                        Patients may request access or deletion of their records at any time.
+                        Using Oodo Medlink means you agree to our secure handling of your information.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Section -->
+        <section id="pricing" class="bg-primaryLight py-24">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="mx-auto max-w-2xl text-center">
+                    <h2 class="mb-4 text-4xl font-extrabold sm:text-5xl 2xl:text-6xl">
+                        Pricing
+                    </h2>
+                    <p class="mb-8 text-xl font-extrabold text-gray-700 2xl:text-2xl">
+                        Contact us for a tailored quote that fits your clinic's needs.
+                    </p>
+                    <a href="#contact"
+                        class="inline-block rounded-md bg-primaryDark px-8 py-4 text-lg font-extrabold text-white transition-opacity hover:opacity-90 2xl:text-xl">
+                        Get in Touch
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="bg-primaryDark py-24 text-white">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="mx-auto max-w-4xl text-center">
+                    <h2 class="mb-12 text-4xl font-extrabold sm:text-5xl 2xl:text-6xl">
+                        Contact Us
+                    </h2>
+                    <div class="grid gap-8 md:grid-cols-3">
+                        <div class="space-y-3">
+                            <Mail class="mx-auto h-8 w-8" />
+                            <h3 class="text-xl font-extrabold">Email</h3>
+                            <p class="font-extrabold">support@oodomedlink.com</p>
+                        </div>
+                        <div class="space-y-3">
+                            <Phone class="mx-auto h-8 w-8" />
+                            <h3 class="text-xl font-extrabold">Phone</h3>
+                            <p class="font-extrabold">+234 (0) XXX XXX XXXX</p>
+                        </div>
+                        <div class="space-y-3">
+                            <MapPin class="mx-auto h-8 w-8" />
+                            <h3 class="text-xl font-extrabold">Location</h3>
+                            <p class="font-extrabold">Lagos, Nigeria</p>
+                        </div>
+                    </div>
+                    <p class="mt-12 text-lg font-extrabold">We respond quickly.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
         <GuestFooter />
     </GuestLayout>
 </template>
@@ -251,13 +295,15 @@ import GuestLayout from '@/Layouts/GuestLayout.vue';
 import { Head, router } from '@inertiajs/vue3';
 import {
     CheckCircle,
-    ClockCircle,
     FileText,
-    Mailbox,
     PieChart2,
-    Shield,
+    DiplomaVerified,
     Upload,
+    Bell,
+    Buildings2,
+    Phone,
 } from '@solar-icons/vue';
+import { ChevronRight, MapPin, Mail, Bot } from 'lucide-vue-next'
 import { watchOnce } from '@vueuse/core';
 import Autoplay from 'embla-carousel-autoplay';
 import { ref } from 'vue';
@@ -333,40 +379,67 @@ const stats = ref([
 const features = ref([
     {
         icon: Upload,
-        title: 'Easy Upload',
-        description:
-            'Drag and drop test results in any format. Bulk upload support for multiple patients.',
+        title: 'Instant Delivery',
+        description: 'Upload and send results directly to patients via WhatsApp or email.',
     },
     {
         icon: FileText,
-        title: 'Smart Management',
-        description:
-            'Organize, categorize, and search through all test results with powerful filters.',
+        title: 'Secure Storage',
+        description: 'Safely store digital copies of all results in an organized, encrypted system.',
     },
     {
-        icon: Mailbox,
-        title: 'Automated Delivery',
-        description:
-            'Send results directly to patients via secure email with customizable templates.',
+        icon: Bot,
+        title: 'AI Result Explanation',
+        description: 'Provide simple summaries to help patients understand their results.',
     },
     {
-        icon: Shield,
-        title: 'HIPAA Compliant',
+        icon: Bell,
+        title: 'Automated Notifications',
         description:
-            'End-to-end encryption and compliance with healthcare data protection standards.',
-    },
-    {
-        icon: ClockCircle,
-        title: 'Save Time',
-        description:
-            "Reduce manual work by 80%. Automated workflows free up your staff's time.",
+            'Notify patients immediately when results are ready',
     },
     {
         icon: PieChart2,
-        title: 'Analytics',
+        title: 'Performance Reports',
         description:
-            'Track delivery status, patient engagement, and workflow efficiency metrics.',
+            'Monthly insights to help labs track efficiency.',
     },
+    {
+        icon: Buildings2,
+        title: 'Multi-Branch Support',
+        description:
+            "Manage multiple lab locations from one dashboard.",
+    },
+    {
+        icon: DiplomaVerified,
+        title: 'Staff Training',
+        description:
+            'We guide lab teams to use the platform easily.',
+    },
+]);
+
+const securityFeatures = ref([
+    'End-to-end encryption',
+    'Secure cloud backup',
+    'Strict access control for lab staff',
+    'Encrypted download links for patients',
+    'Regular security audits'
+]);
+
+const integrationFeatures = ref([
+    'Simple drag-and-drop result upload',
+    'Optional LIS integration',
+    'Direct WhatsApp and email sending',
+    'API for advanced automation'
+]);
+
+const documentationFeatures = ref([
+    'Setup instructions',
+    'Permissions and user roles',
+    'File upload formats',
+    'API documentation',
+    'Security standards',
+    'Frequently asked questions'
 ]);
 
 const onSelect = () => {

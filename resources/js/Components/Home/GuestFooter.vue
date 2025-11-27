@@ -19,36 +19,18 @@
                     <h4 class="mb-4 font-extrabold text-primaryLight">
                         Product
                     </h4>
-                    <ul
-                        class="space-y-2 text-xl font-extrabold text-primaryLight"
-                    >
+                    <ul class="space-y-2 text-xl font-extrabold text-primaryLight">
                         <li>
-                            <a
-                                href="#"
-                                class="transition-colors hover:text-primary"
-                                >Features</a
-                            >
+                            <a href="#features" class="transition-colors hover:text-primary">Features</a>
                         </li>
                         <li>
-                            <a
-                                href="#"
-                                class="transition-colors hover:text-primary"
-                                >Pricing</a
-                            >
+                            <a href="#pricing" class="transition-colors hover:text-primary">Pricing</a>
                         </li>
                         <li>
-                            <a
-                                href="#"
-                                class="transition-colors hover:text-primary"
-                                >Security</a
-                            >
+                            <a href="#security" class="transition-colors hover:text-primary">Security</a>
                         </li>
                         <li>
-                            <a
-                                href="#"
-                                class="transition-colors hover:text-primary"
-                                >Integration</a
-                            >
+                            <a href="#integration" class="transition-colors hover:text-primary">Integration</a>
                         </li>
                     </ul>
                 </div>
@@ -58,36 +40,19 @@
                     <h4 class="mb-4 font-extrabold text-primaryLight">
                         Company
                     </h4>
-                    <ul
-                        class="space-y-2 text-xl font-extrabold text-primaryLight"
-                    >
+                    <ul class="space-y-2 text-xl font-extrabold text-primaryLight">
                         <li>
-                            <a
-                                href="#"
-                                class="transition-colors hover:text-primary"
-                                >About Us</a
-                            >
+                            <a href="#about" class="transition-colors hover:text-primary">About Us</a>
                         </li>
                         <li>
-                            <a
-                                href="#"
-                                class="transition-colors hover:text-primary"
-                                >Careers</a
-                            >
+                            <a href="#careers" class="transition-colors hover:text-primary">Careers</a>
                         </li>
                         <li>
-                            <a
-                                href="#"
-                                class="transition-colors hover:text-primary"
-                                >Blog</a
-                            >
+                            <Link :href="route('blog')" class="transition-colors hover:text-primary">Blog
+                            </Link>
                         </li>
                         <li>
-                            <a
-                                href="#"
-                                class="transition-colors hover:text-primary"
-                                >Contact</a
-                            >
+                            <a href="#contact" class="transition-colors hover:text-primary">Contact</a>
                         </li>
                     </ul>
                 </div>
@@ -97,55 +62,32 @@
                     <h4 class="mb-4 font-extrabold text-primaryLight">
                         Support
                     </h4>
-                    <ul
-                        class="space-y-2 text-xl font-extrabold text-primaryLight"
-                    >
+                    <ul class="space-y-2 text-xl font-extrabold text-primaryLight">
                         <li>
-                            <a
-                                href="#"
-                                class="transition-colors hover:text-primary"
-                                >Help Center</a
-                            >
+                            <a href="#" class="transition-colors hover:text-primary">Help Center</a>
                         </li>
                         <li>
-                            <a
-                                href="#"
-                                class="transition-colors hover:text-primary"
-                                >Documentation</a
-                            >
+                            <a href="#documentation" class="transition-colors hover:text-primary">Documentation</a>
                         </li>
                         <li>
-                            <a
-                                href="#"
-                                class="transition-colors hover:text-primary"
-                                >Privacy Policy</a
-                            >
+                            <a href="#" class="transition-colors hover:text-primary">Privacy Policy</a>
                         </li>
                         <li>
-                            <a
-                                href="#"
-                                class="transition-colors hover:text-primary"
-                                >Terms of Service</a
-                            >
+                            <Link :href="route('terms-and-conditions')" class="transition-colors hover:text-primary">
+                            Terms of Service</Link>
                         </li>
                     </ul>
                 </div>
             </div>
 
             <div
-                class="flex flex-col items-center justify-between gap-4 border-t border-border bg-primaryDark pt-8 md:flex-row"
-            >
+                class="flex flex-col items-center justify-between gap-4 border-t border-border bg-primaryDark pt-8 md:flex-row">
                 <p class="text-xl font-extrabold text-primaryLight">
                     © 2025 OodoMedlink. All rights reserved.
                 </p>
-                <div
-                    class="flex items-center gap-2 text-xl font-extrabold text-primaryLight"
-                >
+                <div class="flex items-center gap-2 text-xl font-extrabold text-primaryLight">
                     <span>Made with</span>
-                    <HeartShine
-                        weight="Bold"
-                        class="h-8 w-auto fill-primaryDark text-primaryLight"
-                    />
+                    <HeartShine weight="Bold" class="h-8 w-auto fill-primaryDark text-primaryLight" />
 
                     <span>for healthcare professionals</span>
                 </div>
@@ -156,5 +98,6 @@
 
 <script setup lang="ts">
 import { HeartShine } from '@solar-icons/vue';
+import { Link } from '@inertiajs/vue3';
 import ApplicationLogo from '../ApplicationLogo.vue';
 </script>
