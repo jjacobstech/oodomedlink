@@ -4,7 +4,6 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import Badge from '@/components/ui/badge/Badge.vue';
 import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
 import { usePage } from '@inertiajs/vue3';
-import { Bell } from '@solar-icons/vue';
 
 const auth = usePage().props.auth;
 </script>
@@ -28,11 +27,10 @@ const auth = usePage().props.auth;
                     <!-- </Badge> -->
                     <!-- </div> -->
                     <Avatar>
-                        <AvatarImage src="/assets/doctor.jpeg" alt="@unovue" />
                         <AvatarFallback
-                            class="flex h-16 w-16 items-center justify-center rounded-full bg-white text-xl font-extrabold text-transparent">
+                            class="flex h-16 w-16 items-center text-primaryDark justify-center rounded-full bg-white text-xl font-extrabold ">
                             <p class="bg-deepgradient bg-clip-text">
-                                {{ auth.user.name.charAt(0).toUpperCase() }}
+                                {{ auth.admin.name.charAt(0).toUpperCase() }}
                             </p>
                         </AvatarFallback>
                     </Avatar>

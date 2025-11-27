@@ -3,6 +3,8 @@
 use Illuminate\Foundation\Application;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\ClinicMiddleware;
+use Illuminate\Console\Scheduling\Schedule;
+use App\Http\Middleware\AdminAuthMiddleware;
 use App\Http\Middleware\RedirectIfAuthenticated;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -22,7 +24,8 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'isAdmin' =>  AdminMiddleware::class,
             'isClinic' => ClinicMiddleware::class,
-            'isAuth' => RedirectIfAuthenticated::class
+        'isAuth' => RedirectIfAuthenticated::class,
+        'AdminIsRegistered' => AdminAuthMiddleware::class
         ]);
         $middleware->validateCsrfTokens(except: [
             'login',
@@ -30,6 +33,10 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
 
         //
+    })->withSchedule(function (Schedule $schedule) {
+        $schedule->command('queue:work --stop-when-empty')
+            ->everyMinute()
+            ->withoutOverlapping();
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

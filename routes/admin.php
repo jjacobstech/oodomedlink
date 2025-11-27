@@ -20,7 +20,7 @@ Route::prefix('admin')->group(function () {
             });
 
             Route::middleware('isAuth')->group(function () {
-                  Route::get('signup', [RegisteredAdminController::class, 'create'])
+                  Route::middleware('AdminIsRegistered')->get('signup', [RegisteredAdminController::class, 'create'])
                         ->name('admin.signup');
 
                   Route::get('login', [AuthenticatedSessionController::class, 'create'])

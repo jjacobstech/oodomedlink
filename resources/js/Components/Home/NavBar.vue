@@ -7,36 +7,6 @@
 
             <!-- Desktop Navigation -->
             <div class="hidden items-center justify-center gap-6 text-xl lg:flex xl:gap-10">
-                <!-- dropdown -->
-                <!-- <div class="flex-none"> -->
-                <!-- <div class="relative"> -->
-                <!-- <div tabindex="0" role="button" @click="drop = !drop" -->
-                <!-- class="btn m-1 rounded bg-white text-xl text-primaryDark"> -->
-                <!-- Clinics -->
-                <!-- <span class="transition-all duration-150 ease-in-out" :class="{ 'rotate-180': drop }"> -->
-                <!-- <SquareAltArrowUp v-show="!drop" class="animate-in-out duration-150" weight="Broken" /> -->
-                <!-- <SquareAltArrowDown v-show="drop" class="animate-in-out rotate-180 duration-150" -->
-                <!-- weight="Broken" /> -->
-                <!-- </span> -->
-                <!-- </div> -->
-                <!-- <Transition v-if="drop" ref="dropDown" enter-active-class="transition-all duration-200" -->
-                <!-- leave-active-class="transition-all duration-150" enter-from-class="opacity-0 translate-y-1" -->
-                <!-- enter-to-class="opacity-100 translate-y-0" leave-from-class="opacity-100 translate-y-0" -->
-                <!-- leave-to-class="opacity-0 translate-y-1"> -->
-                <!-- <ul -->
-                <!-- class="z-1 menu-compact dropdown-content menu absolute w-52 rounded-md bg-base-100 bg-primaryDark p-1 text-xl text-white shadow-sm"> -->
-                <!-- <li class="rounded-md hover:bg-white hover:text-primaryDark"> -->
-                <!-- <a>Item 1</a> -->
-                <!-- </li> -->
-                <!-- <li class="rounded-md hover:bg-white hover:text-primaryDark"> -->
-                <!-- <a>Item 2</a> -->
-                <!-- </li> -->
-                <!-- </ul> -->
-                <!-- </Transition> -->
-                <!-- </div> -->
-                <!-- </div> -->
-
-
 
                 <!-- Links -->
                 <div class="flex items-center justify-center gap-6 text-xl font-extrabold xl:gap-10">

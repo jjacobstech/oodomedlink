@@ -134,6 +134,7 @@ const handleLogin = async () => {
                 description: errorMessage,
                 variant: 'destructive',
                 duration: 5000,
+                class: 'text-primaryDark bg-white shadow-lg bottom-96',
             });
         }
         isLoading.value = false;
@@ -148,12 +149,13 @@ const handleLogin = async () => {
             // Display first error message
             const firstError = Object.values(errors)[0];
             if (firstError) {
-                toast({
-                    title: 'Login Failed',
-                    description: firstError,
-                    variant: 'destructive',
-                    duration: 5000,
-                });
+                // toast({
+                //     title: 'Login Failed',
+                //     description: firstError,
+                //     variant: 'destructive',
+                //     duration: 5000,
+                //     class: 'text-primaryDark bg-white shadow-lg bottom-96',
+                // });
             }
         },
         onSuccess: () => {
@@ -162,6 +164,7 @@ const handleLogin = async () => {
                 description: 'Welcome back!',
                 variant: 'default',
                 duration: 3000,
+                class: 'text-primaryDark bg-white shadow-lg bottom-96',
             });
         },
     });

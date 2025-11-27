@@ -16,24 +16,95 @@ class DashboardController extends Controller
 {
     public function dashboard(Request $request)
     {
+        // Get pagination and filter parameters
+        $perPage = $request->input('per_page', 15);
+        $activeTab = $request->input('tab', 'overview');
+        $searchQuery = $request->input('search', '');
+        $statusFilter = $request->input('status', 'all');
 
-        $total_patients = Patient::all();
+        // Statistics (no pagination needed)
+        $total_patients_count = Patient::count();
+        $total_clinics_count = Clinic::count();
+        $active_clinics_count = Clinic::where('status', 'active')->count();
+        $total_results_count = PatientResult::count();
+        $pending_results_count = PatientResult::where('status', 'pending')->count();
+        $total_emails_count = EmailDelivery::count();
+        $emails_failed_count = EmailDelivery::where('status', 'failed')->count();
 
-        $total_clinics = Clinic::all();
-        $active_clinic = Clinic::where('status', 'active')->count();
+        // Conditionally load data based on active tab to optimize performance
+        $clinics = null;
+        $patients = null;
+        $results = null;
+        $emails = null;
+        $admins = null;
 
-        $total_results = PatientResult::with('files')->get();
-        $pending_results = PatientResult::where('status', 'pending')->count();
+        // Only load data for the active tab
+        if ($activeTab === 'clinics' || $activeTab === 'overview') {
+            $clinicsQuery = Clinic::query();
 
-        $total_emails = EmailDelivery::all();
-        $emails_failed = EmailDelivery::where('status', 'failed')->count();
+            if ($statusFilter !== 'all') {
+                $clinicsQuery->where('status', $statusFilter);
+            }
 
-        $admins = Admin::all();
+            if ($searchQuery) {
+                $clinicsQuery->where(function ($query) use ($searchQuery) {
+                    $query->where('name', 'like', "%{$searchQuery}%")
+                        ->orWhere('email', 'like', "%{$searchQuery}%")
+                        ->orWhere('state', 'like', "%{$searchQuery}%");
+                });
+            }
 
-        $total_patients_count = $total_patients->count();
-        $total_clinics_count = $total_clinics->count();
-        $total_results_count = $total_results->count();
-        $total_emails_count = $total_emails->count();
+            $clinics = $clinicsQuery->orderBy('created_at', 'desc')
+                ->paginate($perPage, ['*'], 'page')
+                ->withQueryString();
+        }
+
+        if ($activeTab === 'patients' || $activeTab === 'overview') {
+            $patientsQuery = Patient::query();
+
+            if ($searchQuery) {
+                $patientsQuery->where(function ($query) use ($searchQuery) {
+                    $query->where('full_name', 'like', "%{$searchQuery}%")
+                        ->orWhere('email', 'like', "%{$searchQuery}%")
+                        ->orWhere('id', 'like', "%{$searchQuery}%");
+                });
+            }
+
+            $patients = $patientsQuery->orderBy('created_at', 'desc')
+                ->paginate($perPage, ['*'], 'page')
+                ->withQueryString();
+        }
+
+        if ($activeTab === 'results' || $activeTab === 'overview') {
+            $resultsQuery = PatientResult::with(['files', 'patient']);
+
+            if ($statusFilter !== 'all') {
+                $resultsQuery->where('status', $statusFilter);
+            }
+
+            if ($searchQuery) {
+                $resultsQuery->where(function ($query) use ($searchQuery) {
+                    $query->where('test_name', 'like', "%{$searchQuery}%")
+                        ->orWhere('result_type', 'like', "%{$searchQuery}%");
+                });
+            }
+
+            $results = $resultsQuery->orderBy('uploaded_at', 'desc')
+                ->paginate($perPage, ['*'],  'page')
+                ->withQueryString();
+        }
+
+        if ($activeTab === 'emails' || $activeTab === 'overview') {
+            $emails = EmailDelivery::orderBy('created_at', 'desc')
+                ->paginate($perPage, ['*'], 'page')
+                ->withQueryString();
+        }
+
+        if ($activeTab === 'admins' || $activeTab === 'overview') {
+            $admins = Admin::orderBy('created_at', 'desc')
+                ->paginate($perPage, ['*'], 'page')
+                ->withQueryString();
+        }
 
         return Inertia::render('Admin/Dashboard', [
             'user' => Auth::user(),
@@ -42,16 +113,21 @@ class DashboardController extends Controller
                 'totalClinics' => $total_clinics_count,
                 'totalResults' => $total_results_count,
                 'totalEmails' => $total_emails_count,
-                'pendingResults' => $pending_results,
-                'emailsFailed' => $emails_failed,
-                'activeClinics' => $active_clinic,
-
+                'pendingResults' => $pending_results_count,
+                'emailsFailed' => $emails_failed_count,
+                'activeClinics' => $active_clinics_count,
             ],
-            'patients' => $total_patients,
-            'clinics' => $total_clinics,
-            'results' => $total_results,
-            'emails' => $total_emails,
-            'admins' => $admins
+            'patients' => $patients,
+            'clinics' => $clinics,
+            'results' => $results,
+            'emails' => $emails,
+            'admins' => $admins,
+            'filters' => [
+                'search' => $searchQuery,
+                'status' => $statusFilter,
+                'per_page' => $perPage,
+                'tab' => $activeTab,
+            ],
         ]);
     }
 }

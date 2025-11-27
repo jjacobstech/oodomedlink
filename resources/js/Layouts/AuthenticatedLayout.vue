@@ -7,6 +7,8 @@ import Toaster from '@/components/ui/toast/Toaster.vue';
 import Notifications from '@/Components/Dashboard/Notifications.vue';
 
 const auth = usePage().props.auth;
+
+console.log(auth.user)
 </script>
 
 <template class="fixed h-screen bg-primaryLight">
@@ -21,9 +23,9 @@ const auth = usePage().props.auth;
                 <div class="flex items-center justify-between gap-16">
                     <Notifications />
                     <Avatar>
-                        <AvatarImage src="/assets/doctor.jpeg" alt="@unovue" />
+                        <AvatarImage :src="auth.user.avatar" alt="@unovue" />
                         <AvatarFallback
-                            class="flex h-16 w-16 items-center justify-center rounded-full bg-white text-xl font-extrabold text-transparent">
+                            class="flex h-16 w-16 items-center justify-center rounded-full bg-white text-xl font-extrabold text-primaryDark">
                             <p class="bg-deepgradient bg-clip-text">
                                 {{ auth.user.name.charAt(0).toUpperCase() }}
                             </p>

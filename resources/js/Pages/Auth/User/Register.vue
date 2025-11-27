@@ -1,29 +1,23 @@
 <template>
+
     <Head title="signup" />
     <AuthLayout :class="currentStep !== 3 ? 'block' : 'hidden'">
         <Toaster />
         <div
-            class="container relative z-10 mx-auto flex min-h-[calc(100vh-80px)] items-center justify-center py-12 lg:max-w-xl"
-        >
-            <div class="w-full space-y-4 px-7 lg:px-20">
+            class="container relative z-10 mx-auto flex min-h-[calc(100vh-80px)] items-center justify-center py-12 lg:max-w-xl">
+            <div class="w-full space-y-4 px-7 lg:px-5">
                 <!-- Back Button -->
-                <Link
-                    href="/"
-                    class="inline-flex items-center gap-2 rounded-lg px-4 py-2 text-xl text-primaryDark transition-all duration-200 hover:-translate-y-0.5 hover:bg-primaryDark hover:text-white hover:shadow-lg hover:shadow-primaryDark/30"
-                >
-                    <ArrowLeft class="h-5 w-5" />
-                    <span>Back to Home</span>
+                <Link href="/"
+                    class="inline-flex items-center gap-2 rounded-lg px-4 py-2 text-xl text-primaryDark transition-all duration-200 hover:-translate-y-0.5 hover:bg-primaryDark hover:text-white hover:shadow-lg hover:shadow-primaryDark/30">
+                <ArrowLeft class="h-5 w-5" />
+                <span>Back to Home</span>
                 </Link>
 
                 <!-- Main content -->
 
-                <div
-                    class="grid w-full items-center justify-center rounded-xl bg-white shadow-xl"
-                >
+                <div class="grid w-full items-center justify-center rounded-xl bg-white shadow-xl">
                     <div class="grid space-y-1 rounded-t-lg bg-primaryDark p-6">
-                        <h2
-                            class="text-center font-bold text-white lg:text-2xl"
-                        >
+                        <h2 class="text-center font-bold text-white lg:text-2xl">
                             Complete Registration
                         </h2>
                         <p class="text-center text-xl text-white">
@@ -36,25 +30,20 @@
                         <div class="px-auto flex items-center justify-between">
                             <div v-for="step in 3" :key="step" class="flex-1">
                                 <div class="flex items-center">
-                                    <div
-                                        :class="[
+                                    <div :class="[
                                             'flex h-10 w-10 items-center justify-center rounded-full text-2xl font-medium transition-all',
                                             currentStep >= step
                                                 ? 'bg-primaryDark text-white'
                                                 : 'bg-gray-200 text-gray-500',
-                                        ]"
-                                    >
+                                        ]">
                                         {{ step }}
                                     </div>
-                                    <div
-                                        v-if="step < 3"
-                                        :class="[
+                                    <div v-if="step < 3" :class="[
                                             'mx-2 h-1 w-20 flex-1 transition-all',
                                             currentStep > step
                                                 ? 'bg-primaryDark'
                                                 : 'bg-gray-200',
-                                        ]"
-                                    ></div>
+                                        ]"></div>
                                 </div>
                             </div>
                         </div>
@@ -62,89 +51,57 @@
 
                     <div class="space-y-4 bg-white p-6">
                         <!-- Step 1: Email Verification -->
-                        <form
-                            v-if="currentStep === 1"
-                            @submit.prevent="handleEmailSubmit"
-                            class="space-y-4"
-                        >
+                        <form v-if="currentStep === 1" @submit.prevent="handleEmailSubmit" class="space-y-4">
                             <div class="space-y-2">
-                                <label for="email" class="text-xl font-medium"
-                                    >Email Address</label
-                                >
-                                <input
-                                    id="email"
-                                    type="email"
-                                    placeholder="Enter your email"
-                                    autocomplete="email"
-                                    autofocus
-                                    v-model="emailForm.email"
-                                    class="w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primaryDark lg:text-lg"
-                                />
+                                <label for="email" class="text-xl font-medium">Email Address</label>
+                                <input id="email" type="email" placeholder="Enter your email" autocomplete="email"
+                                    autofocus v-model="emailForm.email"
+                                    class="w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primaryDark lg:text-lg" />
                             </div>
-                            <button
-                                type="submit"
+                            <button type="submit"
                                 class="hover:shadow-primaryring-primaryDark/30 w-full rounded-lg bg-primaryDark px-4 py-2.5 text-xl font-medium text-white transition-all duration-200 hover:-translate-y-1 hover:bg-white hover:text-primaryDark hover:shadow-md disabled:cursor-not-allowed disabled:opacity-50"
-                                :disabled="isLoading"
-                            >
+                                :disabled="isLoading">
                                 {{
-                                    isLoading
-                                        ? 'Sending OTP...'
-                                        : 'Send Verification Code'
+                                isLoading
+                                ? 'Sending OTP...'
+                                : 'Send Verification Code'
                                 }}
                             </button>
 
                             <div class="mt-6 text-center">
                                 <p class="text-xl text-gray-600">
                                     Already have an account?
-                                    <Link
-                                        :href="route('login')"
-                                        class="text-primaryring-primaryDark hover:text-primaryring-primaryDark/80 font-medium transition-colors"
-                                    >
-                                        Login
+                                    <Link :href="route('login')"
+                                        class="text-primaryring-primaryDark hover:text-primaryring-primaryDark/80 font-medium transition-colors">
+                                    Login
                                     </Link>
                                 </p>
                             </div>
                         </form>
 
                         <!-- Step 2: OTP Verification -->
-                        <form
-                            v-if="currentStep === 2"
-                            @submit.prevent="handleOtpSubmit"
-                            class="space-y-4"
-                        >
+                        <form v-if="currentStep === 2" @submit.prevent="handleOtpSubmit" class="space-y-4">
                             <div class="space-y-2">
-                                <label for="otp" class="font-medium lg:text-xl"
-                                    >Verification Code</label
-                                >
+                                <label for="otp" class="font-medium lg:text-xl">Verification Code</label>
                                 <p class="mb-2 text-gray-500 lg:text-lg">
                                     Enter the 6-digit code sent to
                                     {{ emailForm.email }}
                                 </p>
-                                <input
-                                    id="otp"
-                                    type="text"
-                                    placeholder="Enter 6-digit code"
-                                    maxlength="6"
+                                <input id="otp" type="text" placeholder="Enter 6-digit code" maxlength="6"
                                     v-model="otpForm.otp"
-                                    class="w-full rounded-md border border-gray-300 px-3 py-2 text-center text-2xl tracking-widest focus:outline-none focus:ring-2 focus:ring-primaryDark"
-                                />
+                                    class="w-full rounded-md border border-gray-300 px-3 py-2 text-center text-2xl tracking-widest focus:outline-none focus:ring-2 focus:ring-primaryDark" />
                             </div>
 
-                            <button
-                                type="submit"
+                            <button type="submit"
                                 class="hover:shadow-primaryring-primaryDark/30 w-full rounded-lg bg-primaryDark px-4 py-2.5 font-medium text-white transition-all duration-200 hover:-translate-y-1 hover:bg-white hover:text-primaryDark hover:shadow-md disabled:cursor-not-allowed disabled:opacity-50 lg:text-xl"
-                                :disabled="isLoading"
-                            >
+                                :disabled="isLoading">
                                 {{ isLoading ? 'Verifying...' : 'Verify Code' }}
                             </button>
 
                             <div class="mt-4 text-center">
-                                <button
-                                    type="button"
-                                    @click="resendOtp"
+                                <button type="button" @click="resendOtp"
                                     class="text-primary ring-primaryDark ring-primaryDark/80 transition-colors hover:text-primary lg:text-xl"
-                                    :disabled="isLoading"
-                                >
+                                    :disabled="isLoading">
                                     Resend Code
                                 </button>
                             </div>
@@ -155,64 +112,34 @@
         </div>
     </AuthLayout>
     <!-- Step 3: Biodata Form -->
-    <div
-        v-if="currentStep === 3"
-        class="flex min-h-screen w-full justify-center overflow-y-auto bg-primaryLight pb-20 pt-6 sm:pt-10"
-    >
+    <div v-if="currentStep === 3"
+        class="flex min-h-screen w-full justify-center overflow-y-auto bg-primaryLight pb-20 pt-6 sm:pt-10">
         <div
-            class="mx-4 my-auto h-fit w-full max-w-sm rounded-xl bg-white shadow-lg sm:mx-6 sm:max-w-md md:max-w-lg lg:mx-8 lg:max-w-2xl xl:max-w-4xl 2xl:max-w-6xl"
-        >
-            <div
-                class="grid space-y-1 rounded-t-xl bg-primaryDark px-4 py-4 sm:py-5"
-            >
-                <h2
-                    class="text-center text-xl font-bold text-white sm:text-2xl lg:text-3xl"
-                >
+            class="mx-4 my-auto h-fit w-full max-w-sm rounded-xl bg-white shadow-lg sm:mx-6 sm:max-w-md md:max-w-lg lg:mx-8 lg:max-w-2xl xl:max-w-4xl 2xl:max-w-6xl">
+            <div class="grid space-y-1 rounded-t-xl bg-primaryDark px-4 py-4 sm:py-5">
+                <h2 class="text-center text-xl font-bold text-white sm:text-2xl lg:text-3xl">
                     Complete Registration
                 </h2>
-                <p
-                    class="text-center text-sm text-white sm:text-base lg:text-lg"
-                >
+                <p class="text-center text-sm text-white sm:text-base lg:text-lg">
                     Create an account - Step {{ currentStep }} of 3
                 </p>
             </div>
 
-            <form
-                @submit.prevent="handleSignup"
-                class="space-y-3 p-4 sm:space-y-4 sm:p-6 lg:p-8"
-            >
-                <div
-                    class="space-y-1.5 sm:space-y-2"
-                    v-for="field in biodataFields"
-                    :key="field.id"
-                >
-                    <label
-                        :for="field.id"
-                        class="block text-sm font-medium text-gray-700 sm:text-base lg:text-lg"
-                    >
+            <form @submit.prevent="handleSignup" class="space-y-3 p-4 sm:space-y-4 sm:p-6 lg:p-8">
+                <div class="space-y-1.5 sm:space-y-2" v-for="field in biodataFields" :key="field.id">
+                    <label :for="field.id" class="block text-sm font-medium text-gray-700 sm:text-base lg:text-lg">
                         {{ field.name }}
                     </label>
-                    <input
-                        v-if="field.type !== 'password'"
-                        :id="field.id"
-                        :type="field.type"
-                        :placeholder="field.placeholder"
-                        :autocomplete="field.autocomplete"
+                    <input v-if="field.type !== 'password'" :id="field.id" :type="field.type"
+                        :placeholder="field.placeholder" :autocomplete="field.autocomplete"
                         v-model="signupForm[field.model]"
-                        class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm transition-all focus:border-transparent focus:outline-none focus:ring-2 focus:ring-primaryDark sm:py-2.5 sm:text-base"
-                    />
-                    <PasswordInput
-                        v-else
-                        :id="field.id"
-                        :placeholder="field.placeholder"
-                        v-model="signupForm[field.model]"
-                    />
+                        class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm transition-all focus:border-transparent focus:outline-none focus:ring-2 focus:ring-primaryDark sm:py-2.5 sm:text-base" />
+                    <PasswordInput v-else :id="field.id" :placeholder="field.placeholder"
+                        v-model="signupForm[field.model]" />
                 </div>
-                <button
-                    type="submit"
+                <button type="submit"
                     class="mt-6 w-full rounded-lg bg-primaryDark px-4 py-2.5 text-sm font-medium text-white transition-all duration-200 hover:-translate-y-1 hover:bg-white hover:text-primaryDark hover:shadow-lg hover:shadow-primaryDark/30 disabled:cursor-not-allowed disabled:opacity-50 sm:py-3 sm:text-base lg:text-lg"
-                    :disabled="isLoading"
-                >
+                    :disabled="isLoading">
                     {{ isLoading ? 'Signing up...' : 'Complete Registration' }}
                 </button>
             </form>

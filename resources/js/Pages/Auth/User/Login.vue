@@ -1,4 +1,5 @@
 <template>
+
     <Head title="Login" />
     <AuthLayout>
         <div class="flex w-full justify-center overflow-hidden">
@@ -7,29 +8,22 @@
 
             <!-- Main content -->
             <div
-                class="container relative z-10 mx-auto flex min-h-[calc(100vh-80px)] items-center justify-center py-12 lg:max-w-xl"
-            >
-                <div class="w-full space-y-4 px-5 lg:px-20">
+                class="container relative z-10 mx-auto flex min-h-[calc(100vh-80px)] items-center justify-center py-12 lg:max-w-2xl">
+                <div class="w-full space-y-4 px-5 lg:px-5">
                     <!-- Back Button -->
                     <div class="flex justify-start">
-                        <Link
-                            href="/"
-                            class="inline-flex items-center gap-2 rounded-lg px-4 py-2 text-xl text-primaryDark transition-all duration-200 hover:-translate-y-0.5 hover:bg-primaryDark hover:text-white hover:shadow-lg hover:shadow-primaryDark/30"
-                        >
-                            <ArrowLeft class="h-4 w-4" />
-                            <span>Back to Home</span>
+                        <Link href="/"
+                            class="inline-flex items-center gap-2 rounded-lg px-4 py-2 text-xl text-primaryDark transition-all duration-200 hover:-translate-y-0.5 hover:bg-primaryDark hover:text-white hover:shadow-lg hover:shadow-primaryDark/30">
+                        <ArrowLeft class="h-4 w-4" />
+                        <span>Back to Home</span>
                         </Link>
                     </div>
 
                     <!-- Login Card -->
                     <div class="rounded-lg bg-white shadow-xl">
                         <!-- Header -->
-                        <div
-                            class="space-y-1 rounded-t-lg border-b border-primaryDark bg-primaryDark p-6"
-                        >
-                            <h2
-                                class="text-center text-2xl font-bold text-white"
-                            >
+                        <div class="space-y-1 rounded-t-lg border-b border-primaryDark bg-primaryDark p-6">
+                            <h2 class="text-center text-2xl font-bold text-white">
                                 Login
                             </h2>
                             <p class="text-center text-lg text-white">
@@ -39,61 +33,38 @@
 
                         <!-- Form -->
                         <div class="p-6">
-                            <form
-                                @submit.prevent="handleLogin"
-                                class="space-y-5"
-                            >
+                            <form @submit.prevent="handleLogin" class="space-y-5">
                                 <!-- Email Field -->
                                 <div class="space-y-2">
-                                    <label
-                                        for="login-email"
-                                        class="block font-medium text-gray-600 lg:text-xl"
-                                    >
+                                    <label for="login-email" class="block font-medium text-gray-600 lg:text-xl">
                                         Email
                                     </label>
-                                    <input
-                                        id="login-email"
-                                        v-model="loginForm.email"
-                                        type="email"
+                                    <input id="login-email" v-model="loginForm.email" type="email"
                                         placeholder="Enter your email"
                                         class="w-full rounded-lg border border-gray-300 px-4 py-2.5 transition-all focus:border-transparent focus:outline-none focus:ring-2 focus:ring-primaryDark lg:text-xl"
-                                        required
-                                    />
+                                        required />
                                 </div>
 
                                 <!-- Password Field -->
                                 <div class="space-y-2">
-                                    <div
-                                        class="flex items-center justify-between"
-                                    >
-                                        <label
-                                            for="login-password"
-                                            class="block font-medium text-gray-600 lg:text-xl"
-                                        >
+                                    <div class="flex items-center justify-between">
+                                        <label for="login-password" class="block font-medium text-gray-600 lg:text-xl">
                                             Password
                                         </label>
-                                        <Link
-                                            :href="route('password.request')"
-                                            class="text-black transition-colors hover:text-primary/80 lg:text-xl"
-                                        >
-                                            Forgot password?
+                                        <Link :href="route('password.request')"
+                                            class="text-black transition-colors hover:text-primary/80 lg:text-xl">
+                                        Forgot password?
                                         </Link>
                                     </div>
-                                    <PasswordInput
-                                        :placeholder="'Password'"
-                                        v-model="loginForm.password"
-                                    />
+                                    <PasswordInput :placeholder="'Password'" v-model="loginForm.password" />
                                 </div>
 
                                 <!-- Submit Button -->
-                                <button
-                                    type="submit"
+                                <button type="submit"
                                     class="group w-full rounded-lg bg-primaryDark px-4 py-2.5 font-medium text-white transition-all duration-200 hover:-translate-y-1 hover:bg-white hover:shadow-lg hover:shadow-primaryDark/30 disabled:cursor-not-allowed disabled:opacity-50"
-                                    :disabled="isLoading"
-                                >
+                                    :disabled="isLoading">
                                     <p
-                                        class="group-hover:bg-primaryDark group-hover:bg-clip-text group-hover:text-transparent lg:text-xl"
-                                    >
+                                        class="group-hover:bg-primaryDark group-hover:bg-clip-text group-hover:text-transparent lg:text-xl">
                                         {{
                                             isLoading
                                                 ? 'Logging in...'
@@ -107,11 +78,9 @@
                             <div class="mt-6 text-center">
                                 <p class="text-gray-600 lg:text-xl">
                                     New here?
-                                    <Link
-                                        :href="route('signup')"
-                                        class="font-medium text-primaryDark transition-colors hover:text-primaryDark/80"
-                                    >
-                                        Sign up
+                                    <Link :href="route('signup')"
+                                        class="font-medium text-primaryDark transition-colors hover:text-primaryDark/80">
+                                    Sign up
                                     </Link>
                                 </p>
                             </div>
