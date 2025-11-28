@@ -15,8 +15,8 @@
 
                 <!-- Main content -->
 
-                <div class="grid w-full items-center justify-center rounded-xl bg-white shadow-xl">
-                    <div class="grid space-y-1 rounded-t-lg bg-primaryDark p-6">
+                <div class="grid items-center rounded-xl bg-white shadow-xl">
+                    <div class="grid space-y-1 rounded-t-lg w-full bg-primaryDark p-6">
                         <h2 class="text-center font-bold text-white lg:text-2xl">
                             Complete Registration
                         </h2>
@@ -49,7 +49,7 @@
                         </div>
                     </div>
 
-                    <div class="space-y-4 bg-white p-6">
+                    <div class="space-y-4 bg-white rounded-b-lg p-6">
                         <!-- Step 1: Email Verification -->
                         <form v-if="currentStep === 1" @submit.prevent="handleEmailSubmit" class="space-y-4">
                             <div class="space-y-2">

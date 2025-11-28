@@ -34,9 +34,19 @@ return Application::configure(basePath: dirname(__DIR__))
 
         //
     })->withSchedule(function (Schedule $schedule) {
-        $schedule->command('queue:work --stop-when-empty')
-            ->everyMinute()
-            ->withoutOverlapping();
+    // Send scheduled emails every minute
+    $schedule->command('emails:send-scheduled')
+        ->everyMinute()
+        ->withoutOverlapping()
+        ->runInBackground();
+
+    // Check health every hour
+    $schedule->command('emails:health')
+        ->hourly();
+
+    // Auto-retry failed emails daily at 2 AM
+    $schedule->command('emails:retry-failed')
+        ->dailyAt('02:00');
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

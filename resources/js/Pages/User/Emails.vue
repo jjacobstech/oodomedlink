@@ -263,16 +263,16 @@ const formatFileSize = (bytes: number) => {
                                         : 'text-red-800'
                                     ">
                                     {{
-                                        email.patient === null
-                                            ? 'Deleted Patient'
-                                            : email.patient.full_name
+                                    email.patient === null
+                                    ? 'Deleted Patient'
+                                    : email.patient.full_name
                                     }}
                                 </h3>
                                 <p class="text-sm text-gray-600 truncate">
                                     {{
-                                        email.patient === null
-                                            ? 'Deleted Patient'
-                                            : email.patient.email
+                                    email.patient === null
+                                    ? 'Deleted Patient'
+                                    : email.patient.email
                                     }}
                                 </p>
                             </div>
@@ -355,9 +355,9 @@ const formatFileSize = (bytes: number) => {
                                         : 'text-red-800'
                                     ">
                                     {{
-                                        email.patient === null
-                                            ? 'Deleted Patient'
-                                            : email.patient.full_name
+                                    email.patient === null
+                                    ? 'Deleted Patient'
+                                    : email.patient.full_name
                                     }}
                                 </td>
                                 <td class="px-4 py-3 font-medium" :class="email.patient
@@ -365,16 +365,16 @@ const formatFileSize = (bytes: number) => {
                                         : 'text-red-800'
                                     ">
                                     {{
-                                        email.patient === null
-                                            ? 'Deleted Patient'
-                                            : email.patient.email
+                                    email.patient === null
+                                    ? 'Deleted Patient'
+                                    : email.patient.email
                                     }}
                                 </td>
                                 <td class="max-w-[200px] truncate px-4 py-3 text-gray-700">
                                     {{ email.subject }}
                                 </td>
                                 <td class="px-4 py-3 text-gray-600">
-                                    {{ formatDate(email.sent_at) }}
+                                    {{ email.sent_at ? (email.sent_at) : 'N/A' }}
                                 </td>
                                 <td class="px-4 py-3">
                                     <span :class="{
@@ -402,9 +402,9 @@ const formatFileSize = (bytes: number) => {
                                         " @click="retryEmail(email)" :disabled="retrying === email.id"
                                             class="rounded bg-red-100 px-3 py-1 text-xs font-medium text-red-700 transition hover:bg-red-200 disabled:opacity-50 disabled:cursor-not-allowed">
                                             {{
-                                                retrying === email.id
-                                                    ? 'Retrying...'
-                                                    : 'Retry'
+                                            retrying === email.id
+                                            ? 'Retrying...'
+                                            : 'Retry'
                                             }}
                                         </button>
                                     </div>
@@ -462,7 +462,7 @@ const formatFileSize = (bytes: number) => {
                                 <p class="break-words">
                                     <strong>To:</strong>
                                     {{ previewEmail.patient?.full_name }} ({{
-                                        previewEmail.patient_email
+                                    previewEmail.patient_email
                                     }})
                                 </p>
                                 <p>
@@ -506,7 +506,7 @@ const formatFileSize = (bytes: number) => {
                             " class="space-y-4">
                                 <h4 class="text-base sm:text-lg font-semibold text-gray-800">
                                     Attachments ({{
-                                        previewEmail.result.files.length
+                                    previewEmail.result.files.length
                                     }})
                                 </h4>
                                 <div v-for="file in previewEmail.result.files" :key="file.id"

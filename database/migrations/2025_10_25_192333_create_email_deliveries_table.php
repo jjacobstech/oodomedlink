@@ -23,8 +23,8 @@ return new class extends Migration
             $table->timestamp('scheduled_at');
             $table->integer('delivery_attempts')->default(0);
             $table->longText('error_message')->nullable();
-
             $table->timestamps();
+            $table->softDeletes();
 
             $table->index('patient_result_id', 'idx_email_deliveries_patient_result_id');
             $table->index('status', 'idx_email_deliveries_status');

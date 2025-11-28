@@ -6,38 +6,40 @@
 
         <!-- Hero Section -->
         <div
-            class="flex flex-col-reverse lg:flex-row items-center justify-between gap-10 px-4 py-20 sm:px-6 lg:px-12 2xl:px-20">
+            class="flex h-screen flex-col-reverse lg:flex-row items-center justify-between gap-10 px-4 pt-20  sm:px-6 lg:px-12   2xl:px-20">
 
             <!-- Text Content -->
-            <div class="w-full max-w-xl space-y-5 text-center lg:text-left lg:max-w-2xl">
-                <h1
-                    class="text-3xl sm:text-5xl md:text-6xl lg:text-6xl 2xl:text-8xl font-extrabold text-black leading-tight">
-                    Fast,<br />
-                    Secure and<br />
-                    Convenient<br />
-                    Test Results
-                </h1>
+            <div class="w-full md:w-1/2 flex  items-center max-w-xl space-y-5 text-center lg:text-left lg:max-w-2xl">
+                <div>
+                    <h1
+                        class="text-3xl sm:text-5xl md:text-6xl lg:text-6xl 2xl:text-8xl font-extrabold text-black leading-tight">
+                        Fast,<br />
+                        Secure and<br />
+                        Convenient<br />
+                        Test Results
+                    </h1>
 
-                <p class="text-sm sm:text-lg lg:text-xl 2xl:text-2xl font-semibold text-gray-700 leading-relaxed">
-                    Your health and peace of mind should not be a gamble. Oodo Medlink gives you fast, secure and
-                    convenient access to your lab test results anytime, anywhere.
-                </p>
+                    <p class="text-sm sm:text-lg lg:text-xl 2xl:text-2xl font-semibold text-gray-700 leading-relaxed">
+                        Your health and peace of mind should not be a gamble. Oodo Medlink gives you fast, secure and
+                        convenient access to your lab test results anytime, anywhere.
+                    </p>
 
-                <!-- Email Input -->
-                <div class="flex flex-col sm:flex-row items-center gap-3 pt-2 w-full">
-                    <input type="email" id="email-input" v-model="email"
-                        class="w-full rounded-md border border-gray-300 px-3 py-2.5 sm:px-4 sm:py-3 text-base sm:text-lg lg:text-xl font-semibold focus:ring-2 focus:ring-primaryDark focus:outline-none"
-                        placeholder="Enter your email" />
+                    <!-- Email Input -->
+                    <div class="flex flex-col sm:flex-row items-center gap-3 pt-2 w-full">
+                        <input type="email" id="email-input" v-model="email"
+                            class="w-full rounded-md border border-gray-300 px-3 py-2.5 sm:px-4 sm:py-3 text-base sm:text-lg lg:text-xl font-semibold focus:ring-2 focus:ring-primaryDark focus:outline-none"
+                            placeholder="Enter your email" />
 
-                    <button @click="startNow"
-                        class="w-full sm:w-auto whitespace-nowrap rounded-md bg-primaryDark px-5 py-2.5 sm:px-6 sm:py-3 text-base sm:text-lg lg:text-xl font-bold text-white hover:opacity-90 transition">
-                        Start Now
-                    </button>
+                        <button @click="startNow"
+                            class="w-full sm:w-auto whitespace-nowrap rounded-md bg-primaryDark px-5 py-2.5 sm:px-6 sm:py-3 text-base sm:text-lg lg:text-xl font-bold text-white hover:opacity-90 transition">
+                            Start Now
+                        </button>
+                    </div>
                 </div>
             </div>
 
             <!-- Image Carousel -->
-            <div class="w-full max-w-2xl mx-auto lg:w-1/2">
+            <div class="w-full md:w-1/2 max-w-2xl mx-auto lg:w-1/2">
                 <Carousel :plugins="[Autoplay({ delay: 5000 })]" class="w-full rounded-xl shadow-lg overflow-hidden"
                     @init-api="(val) => (emblaMainApi = val)">
                     <CarouselContent>
@@ -128,10 +130,12 @@
                     We protect every file and message with
                 </h1>
 
-                <div class="max-w-3xl mx-auto">
+                <div class="max-w-4xl mx-auto">
                     <div class="grid gap-6 md:grid-cols-2">
-                        <div v-for="(item, index) in securityFeatures" :key="index"
-                            class="flex items-center bg-primaryDark text-white gap-3 rounded-lg p-4 shadow">
+                        <div v-for="(item, index) in securityFeatures" :key="index" :class="[
+                            'flex items-center bg-primaryDark text-white gap-3 rounded-lg p-4 shadow',
+                            index === securityFeatures.length - 1 && securityFeatures.length % 2 !== 0 ? 'md:col-span-2 md:max-w-md md:mx-auto' : ''
+                        ]">
                             <CheckCircle class="h-6 w-6" />
                             <span class="font-bold">{{ item }}</span>
                         </div>
