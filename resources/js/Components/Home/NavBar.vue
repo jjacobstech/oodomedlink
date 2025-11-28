@@ -26,6 +26,10 @@
                         class="relative cursor-pointer text-primaryDark duration-200 after:absolute after:bottom-0 after:left-1/2 after:h-0.5 after:w-0 after:-translate-x-1/2 after:bg-primaryDark after:transition-all after:duration-300 after:content-[''] hover:-translate-y-1 hover:after:w-full">
                         About Us
                     </a>
+                    <a href="#career"
+                        class="relative cursor-pointer text-primaryDark duration-200 after:absolute after:bottom-0 after:left-1/2 after:h-0.5 after:w-0 after:-translate-x-1/2 after:bg-primaryDark after:transition-all after:duration-300 after:content-[''] hover:-translate-y-1 hover:after:w-full">
+                        Career
+                    </a>
                 </div>
             </div>
 

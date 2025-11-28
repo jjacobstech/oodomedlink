@@ -77,9 +77,9 @@
         <section id="features" class="bg-gradient-to-b from-background to-secondary/20 py-24">
             <div class="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="mx-auto mb-16 max-w-3xl text-center">
-                    <h2 class="mb-4 text-4xl font-extrabold sm:text-5xl 2xl:text-7xl">
+                    <h1 class="mb-4 text-4xl font-extrabold sm:text-5xl 2xl:text-7xl">
                         Everything You Need
-                    </h2>
+                    </h1>
                     <p class="text-xl font-extrabold text-muted-foreground 2xl:text-2xl">
                         Powerful features designed specifically for modern
                         clinics
@@ -88,16 +88,15 @@
 
                 <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
                     <Card :key="index" v-for="(feature, index) in features"
-                        class="group border-border bg-card/50 p-8 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-none hover:bg-primaryDark hover:text-white hover:shadow-lg">
+                        class="group border-none  p-8 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1  bg-primaryDark text-white hover:shadow-lg">
                         <div
-                            class="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 transition-colors group-hover:bg-primary/20 group-hover:bg-white">
+                            class="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 transition-colors  bg-white">
                             <component :is="feature.icon" class="h-6 w-6 text-primary" />
                         </div>
-                        <h3 class="mb-3 font-extrabold lg:text-2xl">
+                        <h1 class="mb-3 font-extrabold lg:text-2xl">
                             {{ feature.title }}
-                        </h3>
-                        <p
-                            class="font-extrabold leading-relaxed text-muted-foreground group-hover:text-white lg:text-xl">
+                        </h1>
+                        <p class="font-extrabold leading-relaxed text-muted-foreground text-white lg:text-xl">
                             {{ feature.description }}
                         </p>
                     </Card>
@@ -106,55 +105,54 @@
         </section>
 
         <!-- About Section -->
-        <section id="about" class="bg-primaryLight py-24">
+        <section id="about" class="bg-primaryDark flex items-center justify-between gap-10 px-10 text-white py-24">
             <div class="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="mx-auto max-w-4xl">
-                    <h2 class="mb-8 text-center text-4xl font-extrabold sm:text-5xl 2xl:text-6xl">
+                    <h1 class="mb-8 text-center text-4xl font-extrabold sm:text-7xl 2xl:text-7xl">
                         About Us
-                    </h2>
-                    <p class="mb-6 text-lg font-extrabold leading-relaxed text-gray-700 2xl:text-2xl">
+                    </h1>
+                    <p class="mb-6 text-lg font-extrabold leading-relaxed  2xl:text-2xl">
                         Oodo Medlink is a digital platform that helps medical laboratories send test results to patients
                         instantly. The idea was inspired by real challenges many Nigerians face—long wait times,
                         repeated visits to collect printed results, and outdated systems that slow down treatment.
                     </p>
-                    <p class="text-lg font-extrabold leading-relaxed text-gray-700 2xl:text-2xl">
+                    <p class="text-lg font-extrabold leading-relaxed 2xl:text-2xl">
                         We make result delivery fast, secure, and stress-free. With Oodo Medlink, labs upload results in
                         seconds, patients receive them instantly, and healthcare becomes more efficient for everyone.
                     </p>
                 </div>
             </div>
+            <img src="/assets/med2.jpg" alt="about" class="w-full  rounded-xl" />
         </section>
 
-        <section id="about" class="bg-primaryLight py-24">
-            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="mx-auto max-w-4xl">
-                    <h2 class="mb-8 text-center text-4xl font-extrabold sm:text-5xl 2xl:text-6xl">
-                        Careers
-                    </h2>
-                    <p class="mb-6 text-lg font-extrabold leading-relaxed text-gray-700 2xl:text-2xl">
-                        Join a team building the future of digital healthcare in Africa.
-                        We hire for engineering, design, support, sales, and lab relations.
-                        Send your CV to: support@oodomedlink.com
-                    </p>
-                </div>
-            </div>
-        </section>
+        <!-- <section id="about" class="bg-primaryDark text-white py-24"> -->
+        <!-- <div class="container mx-auto px-4 sm:px-6 lg:px-8"> -->
+        <!-- <div class="mx-auto max-w-4xl"> -->
+        <!-- <h2 class="mb-8 text-center text-4xl font-extrabold sm:text-5xl 2xl:text-6xl"> -->
+        <!-- Careers -->
+        <!-- </h2> -->
+        <!-- <p class="mb-6 text-lg font-extrabold leading-relaxed  2xl:text-2xl"> -->
+        <!-- Join a team building the future of digital healthcare in Africa. -->
+        <!-- We hire for engineering, design, support, sales, and lab relations. -->
+        <!-- Send your CV to: support@oodomedlink.com -->
+        <!-- </p> -->
+        <!-- </div> -->
+        <!-- </div> -->
+        <!-- </section> -->
 
         <!-- Security Section -->
         <section id="security" class="bg-primaryLight py-24">
             <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <h1 class="mb-8 text-center text-4xl font-extrabold sm:text-5xl 2xl:text-7xl">
+                    We protect every file and message with
+                </h1>
                 <div class="mx-auto max-w-4xl">
-                    <h2 class="mb-8 text-center text-4xl font-extrabold sm:text-5xl 2xl:text-6xl">
-                        Security
-                    </h2>
-                    <p class="mb-6 text-center text-lg font-extrabold text-gray-700 2xl:text-2xl">
-                        We protect every file and message with:
-                    </p>
+
                     <div class="grid gap-6 md:grid-cols-2">
                         <div v-for="(item, index) in securityFeatures" :key="index"
-                            class="flex items-center gap-3 rounded-lg bg-white p-4">
-                            <CheckCircle class="h-5 w-5 flex-shrink-0 text-primaryDark" />
-                            <span class="font-extrabold">{{ item }}</span>
+                            class="flex items-center bg-primaryDark gap-3 rounded-lg  p-4">
+                            <CheckCircle class="h-5 w-5 flex-shrink-0 text-white" />
+                            <span class="font-extrabold text-white">{{ item }}</span>
                         </div>
                     </div>
                     <p class="mt-8 text-center text-lg font-extrabold text-gray-700 2xl:text-2xl">
@@ -164,119 +162,29 @@
             </div>
         </section>
 
-        <!-- Integration Section -->
-        <section id="integration" class="bg-white py-24">
-            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="mx-auto max-w-4xl">
-                    <h2 class="mb-8 text-center text-4xl font-extrabold sm:text-5xl 2xl:text-6xl">
-                        Integration
-                    </h2>
-                    <p class="mb-8 text-center text-lg font-extrabold text-gray-700 2xl:text-2xl">
-                        Oodo Medlink works smoothly with your existing workflow:
-                    </p>
-                    <div class="grid gap-6 md:grid-cols-2">
-                        <div v-for="(item, index) in integrationFeatures" :key="index"
-                            class="flex items-start gap-3 rounded-lg bg-primaryLight p-6">
-                            <ChevronRight class="mt-1 h-5 w-5 flex-shrink-0 text-primaryDark" />
-                            <span class="font-extrabold">{{ item }}</span>
-                        </div>
-                    </div>
-                    <p class="mt-8 text-center text-lg font-extrabold text-gray-700 2xl:text-2xl">
-                        No complex setup, no disruption to your current process.
-                    </p>
-                </div>
-            </div>
-        </section>
 
-        <!-- Documentation Section -->
-        <section id="documentation" class="bg-white py-24">
-            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="mx-auto max-w-4xl">
-                    <h2 class="mb-8 text-center text-4xl font-extrabold sm:text-5xl 2xl:text-6xl">
-                        Documentation
-                    </h2>
-                    <p class="mb-8 text-center text-lg font-extrabold text-gray-700 2xl:text-2xl">
-                        Technical and user guides including:
-                    </p>
-                    <div class="grid gap-6 md:grid-cols-2">
-                        <div v-for="(item, index) in documentationFeatures" :key="index"
-                            class="flex items-start gap-3 rounded-lg bg-primaryLight p-6">
-                            <ChevronRight class="mt-1 h-5 w-5 flex-shrink-0 text-primaryDark" />
-                            <span class="font-extrabold">{{ item }}</span>
-                        </div>
-                    </div>
-                    <p class="mt-8 text-center text-lg font-extrabold text-gray-700 2xl:text-2xl">
-                        Clear, simple, and updated regularly.
-                    </p>
-                </div>
-            </div>
-        </section>
 
-        <!-- About Section -->
-        <section id="about" class="bg-primaryLight py-24">
-            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="mx-auto max-w-4xl">
-                    <h2 class="mb-8 text-center text-4xl font-extrabold sm:text-5xl 2xl:text-6xl">
-                        Privacy Policy
-                    </h2>
-                    <p class="mb-6 text-lg font-extrabold leading-relaxed text-gray-700 2xl:text-2xl">
-                        We collect only the information needed to deliver our services.
-                        All data is encrypted, securely stored, and never shared with third parties.
-                    </p>
-                    <p class="text-lg font-extrabold leading-relaxed text-gray-700 2xl:text-2xl">
-                        Patients may request access or deletion of their records at any time.
-                        Using Oodo Medlink means you agree to our secure handling of your information.
-                    </p>
-                </div>
-            </div>
-        </section>
 
-        <!-- Pricing Section -->
-        <section id="pricing" class="bg-primaryLight py-24">
-            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="mx-auto max-w-2xl text-center">
-                    <h2 class="mb-4 text-4xl font-extrabold sm:text-5xl 2xl:text-6xl">
-                        Pricing
-                    </h2>
-                    <p class="mb-8 text-xl font-extrabold text-gray-700 2xl:text-2xl">
-                        Contact us for a tailored quote that fits your clinic's needs.
-                    </p>
-                    <a href="#contact"
-                        class="inline-block rounded-md bg-primaryDark px-8 py-4 text-lg font-extrabold text-white transition-opacity hover:opacity-90 2xl:text-xl">
-                        Get in Touch
-                    </a>
-                </div>
-            </div>
-        </section>
+        <!-- <!~~ Pricing Section ~~> -->
+        <!-- <section id="pricing" class="bg-primaryLight py-24"> -->
+        <!-- <div class="container mx-auto px-4 sm:px-6 lg:px-8"> -->
+        <!-- <div class="mx-auto max-w-2xl text-center"> -->
+        <!-- <h2 class="mb-4 text-4xl font-extrabold sm:text-5xl 2xl:text-6xl"> -->
+        <!-- Pricing -->
+        <!-- </h2> -->
+        <!-- <p class="mb-8 text-xl font-extrabold text-gray-700 2xl:text-2xl"> -->
+        <!-- Contact us for a tailored quote that fits your clinic's needs. -->
+        <!-- </p> -->
+        <!-- <a href="#contact" -->
+        <!-- class="inline-block rounded-md bg-primaryDark px-8 py-4 text-lg font-extrabold text-white transition-opacity hover:opacity-90 2xl:text-xl"> -->
+        <!-- Get in Touch -->
+        <!-- </a> -->
+        <!-- </div> -->
+        <!-- </div> -->
+        <!-- </section> -->
 
-        <!-- Contact Section -->
-        <section id="contact" class="bg-primaryDark py-24 text-white">
-            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="mx-auto max-w-4xl text-center">
-                    <h2 class="mb-12 text-4xl font-extrabold sm:text-5xl 2xl:text-6xl">
-                        Contact Us
-                    </h2>
-                    <div class="grid gap-8 md:grid-cols-3">
-                        <div class="space-y-3">
-                            <Mail class="mx-auto h-8 w-8" />
-                            <h3 class="text-xl font-extrabold">Email</h3>
-                            <p class="font-extrabold">support@oodomedlink.com</p>
-                        </div>
-                        <div class="space-y-3">
-                            <Phone class="mx-auto h-8 w-8" />
-                            <h3 class="text-xl font-extrabold">Phone</h3>
-                            <p class="font-extrabold">+234 (0) XXX XXX XXXX</p>
-                        </div>
-                        <div class="space-y-3">
-                            <MapPin class="mx-auto h-8 w-8" />
-                            <h3 class="text-xl font-extrabold">Location</h3>
-                            <p class="font-extrabold">Lagos, Nigeria</p>
-                        </div>
-                    </div>
-                    <p class="mt-12 text-lg font-extrabold">We respond quickly.</p>
-                </div>
-            </div>
-        </section>
+
+
 
         <!-- Footer -->
         <GuestFooter />
@@ -409,12 +317,6 @@ const features = ref([
         title: 'Multi-Branch Support',
         description:
             "Manage multiple lab locations from one dashboard.",
-    },
-    {
-        icon: DiplomaVerified,
-        title: 'Staff Training',
-        description:
-            'We guide lab teams to use the platform easily.',
     },
 ]);
 

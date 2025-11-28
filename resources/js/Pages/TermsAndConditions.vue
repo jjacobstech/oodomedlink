@@ -68,6 +68,25 @@
                         </div>
                   </div>
 
+                  <!-- About Section -->
+                  <section id="about" class="bg-primaryLight py-24">
+                        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                              <div class="mx-auto max-w-4xl">
+                                    <h2 class="mb-8 text-center text-4xl font-extrabold sm:text-5xl 2xl:text-6xl">
+                                          Privacy Policy
+                                    </h2>
+                                    <p class="mb-6 text-lg font-extrabold leading-relaxed text-gray-700 2xl:text-2xl">
+                                          We collect only the information needed to deliver our services.
+                                          All data is encrypted, securely stored, and never shared with third parties.
+                                    </p>
+                                    <p class="text-lg font-extrabold leading-relaxed text-gray-700 2xl:text-2xl">
+                                          Patients may request access or deletion of their records at any time.
+                                          Using Oodo Medlink means you agree to our secure handling of your information.
+                                    </p>
+                              </div>
+                        </div>
+                  </section>
+
                   <!-- Footer Links -->
                   <div class="mt-8 text-center">
                         <div class="flex justify-center gap-6 text-sm text-gray-600">
@@ -81,6 +100,9 @@
                         </div>
                   </div>
             </div>
+
+
+
       </div>
 </template>
 
