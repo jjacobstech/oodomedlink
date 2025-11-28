@@ -3,100 +3,89 @@
     <Head title="Home" />
 
     <GuestLayout>
+
         <!-- Hero Section -->
         <div
-            class="my-20 flex w-full flex-col items-center justify-center gap-8 px-4 sm:my-32 sm:px-6 lg:my-40 lg:flex-row lg:gap-16 lg:px-12 2xl:my-44 2xl:gap-32 2xl:px-10">
+            class="flex flex-col-reverse lg:flex-row items-center justify-between gap-10 px-4 py-20 sm:px-6 lg:px-12 2xl:px-20">
+
             <!-- Text Content -->
-            <div class="flex w-full max-w-2xl flex-col space-y-4 sm:space-y-6 lg:w-1/2">
+            <div class="w-full max-w-xl space-y-5 text-center lg:text-left lg:max-w-2xl">
                 <h1
-                    class="text-3xl font-bold leading-tight text-black sm:text-4xl md:text-5xl lg:text-6xl 2xl:text-8xl">
+                    class="text-3xl sm:text-5xl md:text-6xl lg:text-6xl 2xl:text-8xl font-extrabold text-black leading-tight">
                     Fast,<br />
                     Secure and<br />
                     Convenient<br />
                     Test Results
                 </h1>
-                <p
-                    class="text-sm font-bold leading-relaxed text-gray-700 sm:text-base md:text-lg lg:text-xl 2xl:text-2xl">
-                    Your health and peace of mind should not be a gamble. Oodo
-                    Medlink gives you fast, secure and convenient access to your
-                    lab test results anytime, anywhere.
+
+                <p class="text-sm sm:text-lg lg:text-xl 2xl:text-2xl font-semibold text-gray-700 leading-relaxed">
+                    Your health and peace of mind should not be a gamble. Oodo Medlink gives you fast, secure and
+                    convenient access to your lab test results anytime, anywhere.
                 </p>
-                <div class="w-full pt-2">
-                    <div class="flex flex-col gap-3 sm:flex-row sm:gap-4">
-                        <label for="email-input" class="sr-only">Email address</label>
-                        <input type="email" id="email-input" v-model="email" required
-                            class="flex-1 rounded-md border border-gray-300 px-3 py-2.5 text-base font-extrabold focus:border-transparent focus:outline-none focus:ring-2 focus:ring-primaryDark sm:px-4 sm:py-3 sm:text-lg lg:text-xl"
-                            placeholder="Enter your email" aria-label="Enter your email address" />
-                        <button @click="startNow"
-                            class="whitespace-nowrap rounded-md bg-primaryDark px-5 py-2.5 text-base font-extrabold text-white transition-opacity duration-300 hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-primaryDark sm:px-6 sm:py-3 sm:text-lg lg:text-xl"
-                            aria-label="Start now">
-                            Start Now
-                        </button>
-                    </div>
+
+                <!-- Email Input -->
+                <div class="flex flex-col sm:flex-row items-center gap-3 pt-2 w-full">
+                    <input type="email" id="email-input" v-model="email"
+                        class="w-full rounded-md border border-gray-300 px-3 py-2.5 sm:px-4 sm:py-3 text-base sm:text-lg lg:text-xl font-semibold focus:ring-2 focus:ring-primaryDark focus:outline-none"
+                        placeholder="Enter your email" />
+
+                    <button @click="startNow"
+                        class="w-full sm:w-auto whitespace-nowrap rounded-md bg-primaryDark px-5 py-2.5 sm:px-6 sm:py-3 text-base sm:text-lg lg:text-xl font-bold text-white hover:opacity-90 transition">
+                        Start Now
+                    </button>
                 </div>
             </div>
 
-            <!-- Carousel Section -->
-            <div class="flex w-full justify-center lg:w-1/2">
-                <div class="w-full max-w-2xl space-y-4">
-                    <!-- Main Carousel -->
-                    <Carousel :plugins="[Autoplay({ delay: 5000 })]" class="w-full overflow-hidden rounded-lg shadow-lg"
-                        @init-api="(val) => (emblaMainApi = val)" aria-label="Featured images carousel">
-                        <CarouselContent>
-                            <CarouselItem v-for="image in images" :key="image.id" class="rounded-lg">
-                                <img :src="image.src" :alt="image.alt" class="h-full w-full rounded-lg object-cover" />
-                            </CarouselItem>
-                        </CarouselContent>
-                    </Carousel>
+            <!-- Image Carousel -->
+            <div class="w-full max-w-2xl mx-auto lg:w-1/2">
+                <Carousel :plugins="[Autoplay({ delay: 5000 })]" class="w-full rounded-xl shadow-lg overflow-hidden"
+                    @init-api="(val) => (emblaMainApi = val)">
+                    <CarouselContent>
+                        <CarouselItem v-for="image in images" :key="image.id">
+                            <img :src="image.src" :alt="image.alt"
+                                class="w-full h-64 sm:h-80 md:h-[26rem] object-cover rounded-xl" />
+                        </CarouselItem>
+                    </CarouselContent>
+                </Carousel>
 
-                    <!-- Thumbnail Indicators -->
-                    <Carousel class="relative w-full" @init-api="(val) => (emblaThumbnailApi = val)"
-                        aria-label="Carousel navigation">
-                        <CarouselContent class="ml-0 flex justify-center gap-2">
-                            <CarouselItem v-for="(_, index) in images.length" :key="index"
-                                class="basis-auto cursor-pointer pl-0" @click="onThumbClick(index)"
-                                :aria-label="`Go to slide ${index + 1}`" role="button" tabindex="0"
-                                @keydown.enter="onThumbClick(index)" @keydown.space.prevent="onThumbClick(index)">
-                                <div class="transition-opacity duration-300" :class="index === selectedIndex
-                                    ? 'opacity-100'
-                                    : 'opacity-50'
-    ">
-                                    <div class="h-2 rounded-full transition-all duration-300" :class="index === selectedIndex
-                                        ? 'w-16 bg-primaryDark sm:w-20'
-                                        : 'w-6 bg-gray-400 sm:w-8'
-    " />
+                <!-- Indicators -->
+                <Carousel class="mt-4 w-full" @init-api="(val) => (emblaThumbnailApi = val)">
+                    <CarouselContent class="flex justify-center gap-2">
+                        <CarouselItem v-for="(_, index) in images.length" :key="index"
+                            class="basis-auto cursor-pointer pl-0" @click="onThumbClick(index)">
+                            <div :class="index === selectedIndex ? 'opacity-100' : 'opacity-40'" class="transition">
+                                <div :class="index === selectedIndex
+                                    ? 'w-12 sm:w-16 bg-primaryDark'
+                                    : 'w-5 bg-gray-400'" class="h-2 rounded-full transition-all">
                                 </div>
-                            </CarouselItem>
-                        </CarouselContent>
-                    </Carousel>
-                </div>
+                            </div>
+                        </CarouselItem>
+                    </CarouselContent>
+                </Carousel>
             </div>
         </div>
 
-        <!-- Feature Section -->
-        <section id="features" class="bg-gradient-to-b from-background to-secondary/20 py-24">
+        <!-- Features Section -->
+        <section id="features" class="bg-white/70 py-20">
             <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="mx-auto mb-16 max-w-3xl text-center">
-                    <h1 class="mb-4 text-4xl font-extrabold sm:text-5xl 2xl:text-7xl">
-                        Everything You Need
-                    </h1>
-                    <p class="text-xl font-extrabold text-muted-foreground 2xl:text-2xl">
-                        Powerful features designed specifically for modern
-                        clinics
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <h1 class="text-3xl sm:text-5xl 2xl:text-7xl font-extrabold mb-4">Everything You Need</h1>
+                    <p class="text-lg sm:text-xl 2xl:text-2xl text-muted-foreground font-semibold">
+                        Powerful features designed specifically for modern clinics
                     </p>
                 </div>
 
                 <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-                    <Card :key="index" v-for="(feature, index) in features"
-                        class="group border-none  p-8 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1  bg-primaryDark text-white hover:shadow-lg">
-                        <div
-                            class="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 transition-colors  bg-white">
-                            <component :is="feature.icon" class="h-6 w-6 text-primary" />
+                    <Card v-for="(feature, index) in features" :key="index"
+                        class="group border-none p-8 bg-primaryDark text-white rounded-xl hover:-translate-y-1 hover:shadow-xl transition-all backdrop-blur-sm">
+
+                        <div class="h-14 w-14 mb-6 flex items-center justify-center bg-white rounded-2xl shadow-sm">
+                            <component :is="feature.icon" class="h-6 w-6 text-primaryDark" />
                         </div>
-                        <h1 class="mb-3 font-extrabold lg:text-2xl">
-                            {{ feature.title }}
-                        </h1>
-                        <p class="font-extrabold leading-relaxed text-muted-foreground text-white lg:text-xl">
+
+                        <h2 class="text-xl lg:text-2xl font-extrabold mb-3">{{ feature.title }}</h2>
+
+                        <p class="font-semibold text-white/80 lg:text-xl">
                             {{ feature.description }}
                         </p>
                     </Card>
@@ -105,89 +94,59 @@
         </section>
 
         <!-- About Section -->
-        <section id="about" class="bg-primaryDark flex items-center justify-between gap-10 px-10 text-white py-24">
-            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="mx-auto max-w-4xl">
-                    <h1 class="mb-8 text-center text-4xl font-extrabold sm:text-7xl 2xl:text-7xl">
+        <section id="about" class="bg-primaryDark py-24 text-white">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center gap-12">
+
+                <div class="max-w-3xl">
+                    <h1 class="text-4xl sm:text-6xl font-extrabold text-center lg:text-left mb-8">
                         About Us
                     </h1>
-                    <p class="mb-6 text-lg font-extrabold leading-relaxed  2xl:text-2xl">
-                        Oodo Medlink is a digital platform that helps medical laboratories send test results to patients
-                        instantly. The idea was inspired by real challenges many Nigerians face—long wait times,
-                        repeated visits to collect printed results, and outdated systems that slow down treatment.
+                    <p class="text-lg sm:text-xl 2xl:text-2xl font-semibold mb-6">
+                        Oodo Medlink is a digital platform that helps medical laboratories send
+                        test results to patients instantly. Inspired by real challenges many Nigerians
+                        face — long wait times, repeated visits to collect printed results, and outdated
+                        systems that slow down treatment.
                     </p>
-                    <p class="text-lg font-extrabold leading-relaxed 2xl:text-2xl">
-                        We make result delivery fast, secure, and stress-free. With Oodo Medlink, labs upload results in
-                        seconds, patients receive them instantly, and healthcare becomes more efficient for everyone.
+                    <p class="text-lg sm:text-xl 2xl:text-2xl font-semibold">
+                        We make result delivery fast, secure and stress-free. With Oodo Medlink,
+                        labs upload results in seconds and patients receive them instantly.
                     </p>
                 </div>
-            </div>
-            <img src="/assets/med2.jpg" alt="about" class="w-full  rounded-xl" />
-        </section>
 
-        <!-- <section id="about" class="bg-primaryDark text-white py-24"> -->
-        <!-- <div class="container mx-auto px-4 sm:px-6 lg:px-8"> -->
-        <!-- <div class="mx-auto max-w-4xl"> -->
-        <!-- <h2 class="mb-8 text-center text-4xl font-extrabold sm:text-5xl 2xl:text-6xl"> -->
-        <!-- Careers -->
-        <!-- </h2> -->
-        <!-- <p class="mb-6 text-lg font-extrabold leading-relaxed  2xl:text-2xl"> -->
-        <!-- Join a team building the future of digital healthcare in Africa. -->
-        <!-- We hire for engineering, design, support, sales, and lab relations. -->
-        <!-- Send your CV to: support@oodomedlink.com -->
-        <!-- </p> -->
-        <!-- </div> -->
-        <!-- </div> -->
-        <!-- </section> -->
+                <div class="w-full lg:w-1/2">
+                    <img src="/assets/med2.jpg" alt="about"
+                        class="rounded-xl shadow-lg w-full object-cover max-h-[450px]" />
+                </div>
+
+            </div>
+        </section>
 
         <!-- Security Section -->
         <section id="security" class="bg-primaryLight py-24">
             <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                <h1 class="mb-8 text-center text-4xl font-extrabold sm:text-5xl 2xl:text-7xl">
+                <h1 class="text-center text-3xl sm:text-5xl 2xl:text-7xl font-extrabold mb-12">
                     We protect every file and message with
                 </h1>
-                <div class="mx-auto max-w-4xl">
 
+                <div class="max-w-3xl mx-auto">
                     <div class="grid gap-6 md:grid-cols-2">
                         <div v-for="(item, index) in securityFeatures" :key="index"
-                            class="flex items-center bg-primaryDark gap-3 rounded-lg  p-4">
-                            <CheckCircle class="h-5 w-5 flex-shrink-0 text-white" />
-                            <span class="font-extrabold text-white">{{ item }}</span>
+                            class="flex items-center bg-primaryDark text-white gap-3 rounded-lg p-4 shadow">
+                            <CheckCircle class="h-6 w-6" />
+                            <span class="font-bold">{{ item }}</span>
                         </div>
                     </div>
-                    <p class="mt-8 text-center text-lg font-extrabold text-gray-700 2xl:text-2xl">
-                        Patient data stays private, safe, and fully controlled by the lab.
+
+                    <p class="mt-8 text-center text-lg sm:text-xl 2xl:text-2xl font-semibold text-gray-700">
+                        Patient data stays private, safe and fully controlled by the lab.
                     </p>
                 </div>
             </div>
         </section>
 
-
-
-
-        <!-- <!~~ Pricing Section ~~> -->
-        <!-- <section id="pricing" class="bg-primaryLight py-24"> -->
-        <!-- <div class="container mx-auto px-4 sm:px-6 lg:px-8"> -->
-        <!-- <div class="mx-auto max-w-2xl text-center"> -->
-        <!-- <h2 class="mb-4 text-4xl font-extrabold sm:text-5xl 2xl:text-6xl"> -->
-        <!-- Pricing -->
-        <!-- </h2> -->
-        <!-- <p class="mb-8 text-xl font-extrabold text-gray-700 2xl:text-2xl"> -->
-        <!-- Contact us for a tailored quote that fits your clinic's needs. -->
-        <!-- </p> -->
-        <!-- <a href="#contact" -->
-        <!-- class="inline-block rounded-md bg-primaryDark px-8 py-4 text-lg font-extrabold text-white transition-opacity hover:opacity-90 2xl:text-xl"> -->
-        <!-- Get in Touch -->
-        <!-- </a> -->
-        <!-- </div> -->
-        <!-- </div> -->
-        <!-- </section> -->
-
-
-
-
         <!-- Footer -->
         <GuestFooter />
+
     </GuestLayout>
 </template>
 

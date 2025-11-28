@@ -1,4 +1,4 @@
-import { defineComponent, resolveComponent, mergeProps, unref, withCtx, createTextVNode, useSSRContext, ref, onMounted, renderSlot, createVNode, onUnmounted, createBlock, openBlock, Fragment, renderList, withKeys, withModifiers, resolveDynamicComponent, toDisplayString, withDirectives, vModelText } from "vue";
+import { defineComponent, resolveComponent, mergeProps, unref, withCtx, createTextVNode, useSSRContext, ref, onMounted, renderSlot, createVNode, onUnmounted, createBlock, openBlock, Fragment, renderList, resolveDynamicComponent, toDisplayString, withDirectives, vModelText } from "vue";
 import { ssrRenderAttrs, ssrRenderComponent, ssrRenderSlot, ssrRenderClass, ssrRenderAttr, ssrRenderList, ssrRenderVNode, ssrInterpolate } from "vue/server-renderer";
 import { HeartShine, Magnifer, SquareAltArrowUp, SquareAltArrowDown, Upload, FileText, Bell, PieChart2, Buildings2, CheckCircle } from "@solar-icons/vue";
 import { Link, Head, router } from "@inertiajs/vue3";
@@ -670,12 +670,11 @@ const _sfc_main = {
       _push(ssrRenderComponent(_sfc_main$1, null, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(`<div class="my-20 flex w-full flex-col items-center justify-center gap-8 px-4 sm:my-32 sm:px-6 lg:my-40 lg:flex-row lg:gap-16 lg:px-12 2xl:my-44 2xl:gap-32 2xl:px-10"${_scopeId}><div class="flex w-full max-w-2xl flex-col space-y-4 sm:space-y-6 lg:w-1/2"${_scopeId}><h1 class="text-3xl font-bold leading-tight text-black sm:text-4xl md:text-5xl lg:text-6xl 2xl:text-8xl"${_scopeId}> Fast,<br${_scopeId}> Secure and<br${_scopeId}> Convenient<br${_scopeId}> Test Results </h1><p class="text-sm font-bold leading-relaxed text-gray-700 sm:text-base md:text-lg lg:text-xl 2xl:text-2xl"${_scopeId}> Your health and peace of mind should not be a gamble. Oodo Medlink gives you fast, secure and convenient access to your lab test results anytime, anywhere. </p><div class="w-full pt-2"${_scopeId}><div class="flex flex-col gap-3 sm:flex-row sm:gap-4"${_scopeId}><label for="email-input" class="sr-only"${_scopeId}>Email address</label><input type="email" id="email-input"${ssrRenderAttr("value", email.value)} required class="flex-1 rounded-md border border-gray-300 px-3 py-2.5 text-base font-extrabold focus:border-transparent focus:outline-none focus:ring-2 focus:ring-primaryDark sm:px-4 sm:py-3 sm:text-lg lg:text-xl" placeholder="Enter your email" aria-label="Enter your email address"${_scopeId}><button class="whitespace-nowrap rounded-md bg-primaryDark px-5 py-2.5 text-base font-extrabold text-white transition-opacity duration-300 hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-primaryDark sm:px-6 sm:py-3 sm:text-lg lg:text-xl" aria-label="Start now"${_scopeId}> Start Now </button></div></div></div><div class="flex w-full justify-center lg:w-1/2"${_scopeId}><div class="w-full max-w-2xl space-y-4"${_scopeId}>`);
+            _push2(`<div class="flex flex-col-reverse lg:flex-row items-center justify-between gap-10 px-4 py-20 sm:px-6 lg:px-12 2xl:px-20"${_scopeId}><div class="w-full max-w-xl space-y-5 text-center lg:text-left lg:max-w-2xl"${_scopeId}><h1 class="text-3xl sm:text-5xl md:text-6xl lg:text-6xl 2xl:text-8xl font-extrabold text-black leading-tight"${_scopeId}> Fast,<br${_scopeId}> Secure and<br${_scopeId}> Convenient<br${_scopeId}> Test Results </h1><p class="text-sm sm:text-lg lg:text-xl 2xl:text-2xl font-semibold text-gray-700 leading-relaxed"${_scopeId}> Your health and peace of mind should not be a gamble. Oodo Medlink gives you fast, secure and convenient access to your lab test results anytime, anywhere. </p><div class="flex flex-col sm:flex-row items-center gap-3 pt-2 w-full"${_scopeId}><input type="email" id="email-input"${ssrRenderAttr("value", email.value)} class="w-full rounded-md border border-gray-300 px-3 py-2.5 sm:px-4 sm:py-3 text-base sm:text-lg lg:text-xl font-semibold focus:ring-2 focus:ring-primaryDark focus:outline-none" placeholder="Enter your email"${_scopeId}><button class="w-full sm:w-auto whitespace-nowrap rounded-md bg-primaryDark px-5 py-2.5 sm:px-6 sm:py-3 text-base sm:text-lg lg:text-xl font-bold text-white hover:opacity-90 transition"${_scopeId}> Start Now </button></div></div><div class="w-full max-w-2xl mx-auto lg:w-1/2"${_scopeId}>`);
             _push2(ssrRenderComponent(unref(_sfc_main$7), {
               plugins: [unref(Autoplay)({ delay: 5e3 })],
-              class: "w-full overflow-hidden rounded-lg shadow-lg",
-              onInitApi: (val) => emblaMainApi.value = val,
-              "aria-label": "Featured images carousel"
+              class: "w-full rounded-xl shadow-lg overflow-hidden",
+              onInitApi: (val) => emblaMainApi.value = val
             }, {
               default: withCtx((_2, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
@@ -685,18 +684,17 @@ const _sfc_main = {
                         _push4(`<!--[-->`);
                         ssrRenderList(images.value, (image) => {
                           _push4(ssrRenderComponent(unref(_sfc_main$5), {
-                            key: image.id,
-                            class: "rounded-lg"
+                            key: image.id
                           }, {
                             default: withCtx((_4, _push5, _parent5, _scopeId4) => {
                               if (_push5) {
-                                _push5(`<img${ssrRenderAttr("src", image.src)}${ssrRenderAttr("alt", image.alt)} class="h-full w-full rounded-lg object-cover"${_scopeId4}>`);
+                                _push5(`<img${ssrRenderAttr("src", image.src)}${ssrRenderAttr("alt", image.alt)} class="w-full h-64 sm:h-80 md:h-[26rem] object-cover rounded-xl"${_scopeId4}>`);
                               } else {
                                 return [
                                   createVNode("img", {
                                     src: image.src,
                                     alt: image.alt,
-                                    class: "h-full w-full rounded-lg object-cover"
+                                    class: "w-full h-64 sm:h-80 md:h-[26rem] object-cover rounded-xl"
                                   }, null, 8, ["src", "alt"])
                                 ];
                               }
@@ -709,14 +707,13 @@ const _sfc_main = {
                         return [
                           (openBlock(true), createBlock(Fragment, null, renderList(images.value, (image) => {
                             return openBlock(), createBlock(unref(_sfc_main$5), {
-                              key: image.id,
-                              class: "rounded-lg"
+                              key: image.id
                             }, {
                               default: withCtx(() => [
                                 createVNode("img", {
                                   src: image.src,
                                   alt: image.alt,
-                                  class: "h-full w-full rounded-lg object-cover"
+                                  class: "w-full h-64 sm:h-80 md:h-[26rem] object-cover rounded-xl"
                                 }, null, 8, ["src", "alt"])
                               ]),
                               _: 2
@@ -733,14 +730,13 @@ const _sfc_main = {
                       default: withCtx(() => [
                         (openBlock(true), createBlock(Fragment, null, renderList(images.value, (image) => {
                           return openBlock(), createBlock(unref(_sfc_main$5), {
-                            key: image.id,
-                            class: "rounded-lg"
+                            key: image.id
                           }, {
                             default: withCtx(() => [
                               createVNode("img", {
                                 src: image.src,
                                 alt: image.alt,
-                                class: "h-full w-full rounded-lg object-cover"
+                                class: "w-full h-64 sm:h-80 md:h-[26rem] object-cover rounded-xl"
                               }, null, 8, ["src", "alt"])
                             ]),
                             _: 2
@@ -755,13 +751,12 @@ const _sfc_main = {
               _: 1
             }, _parent2, _scopeId));
             _push2(ssrRenderComponent(unref(_sfc_main$7), {
-              class: "relative w-full",
-              onInitApi: (val) => emblaThumbnailApi.value = val,
-              "aria-label": "Carousel navigation"
+              class: "mt-4 w-full",
+              onInitApi: (val) => emblaThumbnailApi.value = val
             }, {
               default: withCtx((_2, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
-                  _push3(ssrRenderComponent(unref(_sfc_main$6), { class: "ml-0 flex justify-center gap-2" }, {
+                  _push3(ssrRenderComponent(unref(_sfc_main$6), { class: "flex justify-center gap-2" }, {
                     default: withCtx((_3, _push4, _parent4, _scopeId3) => {
                       if (_push4) {
                         _push4(`<!--[-->`);
@@ -769,34 +764,18 @@ const _sfc_main = {
                           _push4(ssrRenderComponent(unref(_sfc_main$5), {
                             key: index,
                             class: "basis-auto cursor-pointer pl-0",
-                            onClick: ($event) => onThumbClick(index),
-                            "aria-label": `Go to slide ${index + 1}`,
-                            role: "button",
-                            tabindex: "0",
-                            onKeydown: [($event) => onThumbClick(index), ($event) => onThumbClick(index)]
+                            onClick: ($event) => onThumbClick(index)
                           }, {
                             default: withCtx((_5, _push5, _parent5, _scopeId4) => {
                               if (_push5) {
-                                _push5(`<div class="${ssrRenderClass([
-                                  index === selectedIndex.value ? "opacity-100" : "opacity-50",
-                                  "transition-opacity duration-300"
-                                ])}"${_scopeId4}><div class="${ssrRenderClass([
-                                  index === selectedIndex.value ? "w-16 bg-primaryDark sm:w-20" : "w-6 bg-gray-400 sm:w-8",
-                                  "h-2 rounded-full transition-all duration-300"
-                                ])}"${_scopeId4}></div></div>`);
+                                _push5(`<div class="${ssrRenderClass([index === selectedIndex.value ? "opacity-100" : "opacity-40", "transition"])}"${_scopeId4}><div class="${ssrRenderClass([index === selectedIndex.value ? "w-12 sm:w-16 bg-primaryDark" : "w-5 bg-gray-400", "h-2 rounded-full transition-all"])}"${_scopeId4}></div></div>`);
                               } else {
                                 return [
                                   createVNode("div", {
-                                    class: [
-                                      "transition-opacity duration-300",
-                                      index === selectedIndex.value ? "opacity-100" : "opacity-50"
-                                    ]
+                                    class: [index === selectedIndex.value ? "opacity-100" : "opacity-40", "transition"]
                                   }, [
                                     createVNode("div", {
-                                      class: [
-                                        "h-2 rounded-full transition-all duration-300",
-                                        index === selectedIndex.value ? "w-16 bg-primaryDark sm:w-20" : "w-6 bg-gray-400 sm:w-8"
-                                      ]
+                                      class: [index === selectedIndex.value ? "w-12 sm:w-16 bg-primaryDark" : "w-5 bg-gray-400", "h-2 rounded-full transition-all"]
                                     }, null, 2)
                                   ], 2)
                                 ];
@@ -812,32 +791,19 @@ const _sfc_main = {
                             return openBlock(), createBlock(unref(_sfc_main$5), {
                               key: index,
                               class: "basis-auto cursor-pointer pl-0",
-                              onClick: ($event) => onThumbClick(index),
-                              "aria-label": `Go to slide ${index + 1}`,
-                              role: "button",
-                              tabindex: "0",
-                              onKeydown: [
-                                withKeys(($event) => onThumbClick(index), ["enter"]),
-                                withKeys(withModifiers(($event) => onThumbClick(index), ["prevent"]), ["space"])
-                              ]
+                              onClick: ($event) => onThumbClick(index)
                             }, {
                               default: withCtx(() => [
                                 createVNode("div", {
-                                  class: [
-                                    "transition-opacity duration-300",
-                                    index === selectedIndex.value ? "opacity-100" : "opacity-50"
-                                  ]
+                                  class: [index === selectedIndex.value ? "opacity-100" : "opacity-40", "transition"]
                                 }, [
                                   createVNode("div", {
-                                    class: [
-                                      "h-2 rounded-full transition-all duration-300",
-                                      index === selectedIndex.value ? "w-16 bg-primaryDark sm:w-20" : "w-6 bg-gray-400 sm:w-8"
-                                    ]
+                                    class: [index === selectedIndex.value ? "w-12 sm:w-16 bg-primaryDark" : "w-5 bg-gray-400", "h-2 rounded-full transition-all"]
                                   }, null, 2)
                                 ], 2)
                               ]),
                               _: 2
-                            }, 1032, ["onClick", "aria-label", "onKeydown"]);
+                            }, 1032, ["onClick"]);
                           }), 128))
                         ];
                       }
@@ -846,38 +812,25 @@ const _sfc_main = {
                   }, _parent3, _scopeId2));
                 } else {
                   return [
-                    createVNode(unref(_sfc_main$6), { class: "ml-0 flex justify-center gap-2" }, {
+                    createVNode(unref(_sfc_main$6), { class: "flex justify-center gap-2" }, {
                       default: withCtx(() => [
                         (openBlock(true), createBlock(Fragment, null, renderList(images.value.length, (_3, index) => {
                           return openBlock(), createBlock(unref(_sfc_main$5), {
                             key: index,
                             class: "basis-auto cursor-pointer pl-0",
-                            onClick: ($event) => onThumbClick(index),
-                            "aria-label": `Go to slide ${index + 1}`,
-                            role: "button",
-                            tabindex: "0",
-                            onKeydown: [
-                              withKeys(($event) => onThumbClick(index), ["enter"]),
-                              withKeys(withModifiers(($event) => onThumbClick(index), ["prevent"]), ["space"])
-                            ]
+                            onClick: ($event) => onThumbClick(index)
                           }, {
                             default: withCtx(() => [
                               createVNode("div", {
-                                class: [
-                                  "transition-opacity duration-300",
-                                  index === selectedIndex.value ? "opacity-100" : "opacity-50"
-                                ]
+                                class: [index === selectedIndex.value ? "opacity-100" : "opacity-40", "transition"]
                               }, [
                                 createVNode("div", {
-                                  class: [
-                                    "h-2 rounded-full transition-all duration-300",
-                                    index === selectedIndex.value ? "w-16 bg-primaryDark sm:w-20" : "w-6 bg-gray-400 sm:w-8"
-                                  ]
+                                  class: [index === selectedIndex.value ? "w-12 sm:w-16 bg-primaryDark" : "w-5 bg-gray-400", "h-2 rounded-full transition-all"]
                                 }, null, 2)
                               ], 2)
                             ]),
                             _: 2
-                          }, 1032, ["onClick", "aria-label", "onKeydown"]);
+                          }, 1032, ["onClick"]);
                         }), 128))
                       ]),
                       _: 1
@@ -887,43 +840,43 @@ const _sfc_main = {
               }),
               _: 1
             }, _parent2, _scopeId));
-            _push2(`</div></div></div><section id="features" class="bg-gradient-to-b from-background to-secondary/20 py-24"${_scopeId}><div class="container mx-auto px-4 sm:px-6 lg:px-8"${_scopeId}><div class="mx-auto mb-16 max-w-3xl text-center"${_scopeId}><h1 class="mb-4 text-4xl font-extrabold sm:text-5xl 2xl:text-7xl"${_scopeId}> Everything You Need </h1><p class="text-xl font-extrabold text-muted-foreground 2xl:text-2xl"${_scopeId}> Powerful features designed specifically for modern clinics </p></div><div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3"${_scopeId}><!--[-->`);
+            _push2(`</div></div><section id="features" class="bg-white/70 py-20"${_scopeId}><div class="container mx-auto px-4 sm:px-6 lg:px-8"${_scopeId}><div class="text-center max-w-3xl mx-auto mb-16"${_scopeId}><h1 class="text-3xl sm:text-5xl 2xl:text-7xl font-extrabold mb-4"${_scopeId}>Everything You Need</h1><p class="text-lg sm:text-xl 2xl:text-2xl text-muted-foreground font-semibold"${_scopeId}> Powerful features designed specifically for modern clinics </p></div><div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3"${_scopeId}><!--[-->`);
             ssrRenderList(features.value, (feature, index) => {
               _push2(ssrRenderComponent(_sfc_main$8, {
                 key: index,
-                class: "group border-none p-8 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 bg-primaryDark text-white hover:shadow-lg"
+                class: "group border-none p-8 bg-primaryDark text-white rounded-xl hover:-translate-y-1 hover:shadow-xl transition-all backdrop-blur-sm"
               }, {
                 default: withCtx((_2, _push3, _parent3, _scopeId2) => {
                   if (_push3) {
-                    _push3(`<div class="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 transition-colors bg-white"${_scopeId2}>`);
-                    ssrRenderVNode(_push3, createVNode(resolveDynamicComponent(feature.icon), { class: "h-6 w-6 text-primary" }, null), _parent3, _scopeId2);
-                    _push3(`</div><h1 class="mb-3 font-extrabold lg:text-2xl"${_scopeId2}>${ssrInterpolate(feature.title)}</h1><p class="font-extrabold leading-relaxed text-muted-foreground text-white lg:text-xl"${_scopeId2}>${ssrInterpolate(feature.description)}</p>`);
+                    _push3(`<div class="h-14 w-14 mb-6 flex items-center justify-center bg-white rounded-2xl shadow-sm"${_scopeId2}>`);
+                    ssrRenderVNode(_push3, createVNode(resolveDynamicComponent(feature.icon), { class: "h-6 w-6 text-primaryDark" }, null), _parent3, _scopeId2);
+                    _push3(`</div><h2 class="text-xl lg:text-2xl font-extrabold mb-3"${_scopeId2}>${ssrInterpolate(feature.title)}</h2><p class="font-semibold text-white/80 lg:text-xl"${_scopeId2}>${ssrInterpolate(feature.description)}</p>`);
                   } else {
                     return [
-                      createVNode("div", { class: "mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 transition-colors bg-white" }, [
-                        (openBlock(), createBlock(resolveDynamicComponent(feature.icon), { class: "h-6 w-6 text-primary" }))
+                      createVNode("div", { class: "h-14 w-14 mb-6 flex items-center justify-center bg-white rounded-2xl shadow-sm" }, [
+                        (openBlock(), createBlock(resolveDynamicComponent(feature.icon), { class: "h-6 w-6 text-primaryDark" }))
                       ]),
-                      createVNode("h1", { class: "mb-3 font-extrabold lg:text-2xl" }, toDisplayString(feature.title), 1),
-                      createVNode("p", { class: "font-extrabold leading-relaxed text-muted-foreground text-white lg:text-xl" }, toDisplayString(feature.description), 1)
+                      createVNode("h2", { class: "text-xl lg:text-2xl font-extrabold mb-3" }, toDisplayString(feature.title), 1),
+                      createVNode("p", { class: "font-semibold text-white/80 lg:text-xl" }, toDisplayString(feature.description), 1)
                     ];
                   }
                 }),
                 _: 2
               }, _parent2, _scopeId));
             });
-            _push2(`<!--]--></div></div></section><section id="about" class="bg-primaryDark flex items-center justify-between gap-10 px-10 text-white py-24"${_scopeId}><div class="container mx-auto px-4 sm:px-6 lg:px-8"${_scopeId}><div class="mx-auto max-w-4xl"${_scopeId}><h1 class="mb-8 text-center text-4xl font-extrabold sm:text-7xl 2xl:text-7xl"${_scopeId}> About Us </h1><p class="mb-6 text-lg font-extrabold leading-relaxed 2xl:text-2xl"${_scopeId}> Oodo Medlink is a digital platform that helps medical laboratories send test results to patients instantly. The idea was inspired by real challenges many Nigerians face—long wait times, repeated visits to collect printed results, and outdated systems that slow down treatment. </p><p class="text-lg font-extrabold leading-relaxed 2xl:text-2xl"${_scopeId}> We make result delivery fast, secure, and stress-free. With Oodo Medlink, labs upload results in seconds, patients receive them instantly, and healthcare becomes more efficient for everyone. </p></div></div><img src="/assets/med2.jpg" alt="about" class="w-full rounded-xl"${_scopeId}></section><section id="security" class="bg-primaryLight py-24"${_scopeId}><div class="container mx-auto px-4 sm:px-6 lg:px-8"${_scopeId}><h1 class="mb-8 text-center text-4xl font-extrabold sm:text-5xl 2xl:text-7xl"${_scopeId}> We protect every file and message with </h1><div class="mx-auto max-w-4xl"${_scopeId}><div class="grid gap-6 md:grid-cols-2"${_scopeId}><!--[-->`);
+            _push2(`<!--]--></div></div></section><section id="about" class="bg-primaryDark py-24 text-white"${_scopeId}><div class="container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center gap-12"${_scopeId}><div class="max-w-3xl"${_scopeId}><h1 class="text-4xl sm:text-6xl font-extrabold text-center lg:text-left mb-8"${_scopeId}> About Us </h1><p class="text-lg sm:text-xl 2xl:text-2xl font-semibold mb-6"${_scopeId}> Oodo Medlink is a digital platform that helps medical laboratories send test results to patients instantly. Inspired by real challenges many Nigerians face — long wait times, repeated visits to collect printed results, and outdated systems that slow down treatment. </p><p class="text-lg sm:text-xl 2xl:text-2xl font-semibold"${_scopeId}> We make result delivery fast, secure and stress-free. With Oodo Medlink, labs upload results in seconds and patients receive them instantly. </p></div><div class="w-full lg:w-1/2"${_scopeId}><img src="/assets/med2.jpg" alt="about" class="rounded-xl shadow-lg w-full object-cover max-h-[450px]"${_scopeId}></div></div></section><section id="security" class="bg-primaryLight py-24"${_scopeId}><div class="container mx-auto px-4 sm:px-6 lg:px-8"${_scopeId}><h1 class="text-center text-3xl sm:text-5xl 2xl:text-7xl font-extrabold mb-12"${_scopeId}> We protect every file and message with </h1><div class="max-w-3xl mx-auto"${_scopeId}><div class="grid gap-6 md:grid-cols-2"${_scopeId}><!--[-->`);
             ssrRenderList(securityFeatures.value, (item, index) => {
-              _push2(`<div class="flex items-center bg-primaryDark gap-3 rounded-lg p-4"${_scopeId}>`);
-              _push2(ssrRenderComponent(unref(CheckCircle), { class: "h-5 w-5 flex-shrink-0 text-white" }, null, _parent2, _scopeId));
-              _push2(`<span class="font-extrabold text-white"${_scopeId}>${ssrInterpolate(item)}</span></div>`);
+              _push2(`<div class="flex items-center bg-primaryDark text-white gap-3 rounded-lg p-4 shadow"${_scopeId}>`);
+              _push2(ssrRenderComponent(unref(CheckCircle), { class: "h-6 w-6" }, null, _parent2, _scopeId));
+              _push2(`<span class="font-bold"${_scopeId}>${ssrInterpolate(item)}</span></div>`);
             });
-            _push2(`<!--]--></div><p class="mt-8 text-center text-lg font-extrabold text-gray-700 2xl:text-2xl"${_scopeId}> Patient data stays private, safe, and fully controlled by the lab. </p></div></div></section>`);
+            _push2(`<!--]--></div><p class="mt-8 text-center text-lg sm:text-xl 2xl:text-2xl font-semibold text-gray-700"${_scopeId}> Patient data stays private, safe and fully controlled by the lab. </p></div></div></section>`);
             _push2(ssrRenderComponent(_sfc_main$9, null, null, _parent2, _scopeId));
           } else {
             return [
-              createVNode("div", { class: "my-20 flex w-full flex-col items-center justify-center gap-8 px-4 sm:my-32 sm:px-6 lg:my-40 lg:flex-row lg:gap-16 lg:px-12 2xl:my-44 2xl:gap-32 2xl:px-10" }, [
-                createVNode("div", { class: "flex w-full max-w-2xl flex-col space-y-4 sm:space-y-6 lg:w-1/2" }, [
-                  createVNode("h1", { class: "text-3xl font-bold leading-tight text-black sm:text-4xl md:text-5xl lg:text-6xl 2xl:text-8xl" }, [
+              createVNode("div", { class: "flex flex-col-reverse lg:flex-row items-center justify-between gap-10 px-4 py-20 sm:px-6 lg:px-12 2xl:px-20" }, [
+                createVNode("div", { class: "w-full max-w-xl space-y-5 text-center lg:text-left lg:max-w-2xl" }, [
+                  createVNode("h1", { class: "text-3xl sm:text-5xl md:text-6xl lg:text-6xl 2xl:text-8xl font-extrabold text-black leading-tight" }, [
                     createTextVNode(" Fast,"),
                     createVNode("br"),
                     createTextVNode(" Secure and"),
@@ -932,133 +885,106 @@ const _sfc_main = {
                     createVNode("br"),
                     createTextVNode(" Test Results ")
                   ]),
-                  createVNode("p", { class: "text-sm font-bold leading-relaxed text-gray-700 sm:text-base md:text-lg lg:text-xl 2xl:text-2xl" }, " Your health and peace of mind should not be a gamble. Oodo Medlink gives you fast, secure and convenient access to your lab test results anytime, anywhere. "),
-                  createVNode("div", { class: "w-full pt-2" }, [
-                    createVNode("div", { class: "flex flex-col gap-3 sm:flex-row sm:gap-4" }, [
-                      createVNode("label", {
-                        for: "email-input",
-                        class: "sr-only"
-                      }, "Email address"),
-                      withDirectives(createVNode("input", {
-                        type: "email",
-                        id: "email-input",
-                        "onUpdate:modelValue": ($event) => email.value = $event,
-                        required: "",
-                        class: "flex-1 rounded-md border border-gray-300 px-3 py-2.5 text-base font-extrabold focus:border-transparent focus:outline-none focus:ring-2 focus:ring-primaryDark sm:px-4 sm:py-3 sm:text-lg lg:text-xl",
-                        placeholder: "Enter your email",
-                        "aria-label": "Enter your email address"
-                      }, null, 8, ["onUpdate:modelValue"]), [
-                        [vModelText, email.value]
-                      ]),
-                      createVNode("button", {
-                        onClick: startNow,
-                        class: "whitespace-nowrap rounded-md bg-primaryDark px-5 py-2.5 text-base font-extrabold text-white transition-opacity duration-300 hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-primaryDark sm:px-6 sm:py-3 sm:text-lg lg:text-xl",
-                        "aria-label": "Start now"
-                      }, " Start Now ")
-                    ])
+                  createVNode("p", { class: "text-sm sm:text-lg lg:text-xl 2xl:text-2xl font-semibold text-gray-700 leading-relaxed" }, " Your health and peace of mind should not be a gamble. Oodo Medlink gives you fast, secure and convenient access to your lab test results anytime, anywhere. "),
+                  createVNode("div", { class: "flex flex-col sm:flex-row items-center gap-3 pt-2 w-full" }, [
+                    withDirectives(createVNode("input", {
+                      type: "email",
+                      id: "email-input",
+                      "onUpdate:modelValue": ($event) => email.value = $event,
+                      class: "w-full rounded-md border border-gray-300 px-3 py-2.5 sm:px-4 sm:py-3 text-base sm:text-lg lg:text-xl font-semibold focus:ring-2 focus:ring-primaryDark focus:outline-none",
+                      placeholder: "Enter your email"
+                    }, null, 8, ["onUpdate:modelValue"]), [
+                      [vModelText, email.value]
+                    ]),
+                    createVNode("button", {
+                      onClick: startNow,
+                      class: "w-full sm:w-auto whitespace-nowrap rounded-md bg-primaryDark px-5 py-2.5 sm:px-6 sm:py-3 text-base sm:text-lg lg:text-xl font-bold text-white hover:opacity-90 transition"
+                    }, " Start Now ")
                   ])
                 ]),
-                createVNode("div", { class: "flex w-full justify-center lg:w-1/2" }, [
-                  createVNode("div", { class: "w-full max-w-2xl space-y-4" }, [
-                    createVNode(unref(_sfc_main$7), {
-                      plugins: [unref(Autoplay)({ delay: 5e3 })],
-                      class: "w-full overflow-hidden rounded-lg shadow-lg",
-                      onInitApi: (val) => emblaMainApi.value = val,
-                      "aria-label": "Featured images carousel"
-                    }, {
-                      default: withCtx(() => [
-                        createVNode(unref(_sfc_main$6), null, {
-                          default: withCtx(() => [
-                            (openBlock(true), createBlock(Fragment, null, renderList(images.value, (image) => {
-                              return openBlock(), createBlock(unref(_sfc_main$5), {
-                                key: image.id,
-                                class: "rounded-lg"
-                              }, {
-                                default: withCtx(() => [
-                                  createVNode("img", {
-                                    src: image.src,
-                                    alt: image.alt,
-                                    class: "h-full w-full rounded-lg object-cover"
-                                  }, null, 8, ["src", "alt"])
-                                ]),
-                                _: 2
-                              }, 1024);
-                            }), 128))
-                          ]),
-                          _: 1
-                        })
-                      ]),
-                      _: 1
-                    }, 8, ["plugins", "onInitApi"]),
-                    createVNode(unref(_sfc_main$7), {
-                      class: "relative w-full",
-                      onInitApi: (val) => emblaThumbnailApi.value = val,
-                      "aria-label": "Carousel navigation"
-                    }, {
-                      default: withCtx(() => [
-                        createVNode(unref(_sfc_main$6), { class: "ml-0 flex justify-center gap-2" }, {
-                          default: withCtx(() => [
-                            (openBlock(true), createBlock(Fragment, null, renderList(images.value.length, (_2, index) => {
-                              return openBlock(), createBlock(unref(_sfc_main$5), {
-                                key: index,
-                                class: "basis-auto cursor-pointer pl-0",
-                                onClick: ($event) => onThumbClick(index),
-                                "aria-label": `Go to slide ${index + 1}`,
-                                role: "button",
-                                tabindex: "0",
-                                onKeydown: [
-                                  withKeys(($event) => onThumbClick(index), ["enter"]),
-                                  withKeys(withModifiers(($event) => onThumbClick(index), ["prevent"]), ["space"])
-                                ]
-                              }, {
-                                default: withCtx(() => [
+                createVNode("div", { class: "w-full max-w-2xl mx-auto lg:w-1/2" }, [
+                  createVNode(unref(_sfc_main$7), {
+                    plugins: [unref(Autoplay)({ delay: 5e3 })],
+                    class: "w-full rounded-xl shadow-lg overflow-hidden",
+                    onInitApi: (val) => emblaMainApi.value = val
+                  }, {
+                    default: withCtx(() => [
+                      createVNode(unref(_sfc_main$6), null, {
+                        default: withCtx(() => [
+                          (openBlock(true), createBlock(Fragment, null, renderList(images.value, (image) => {
+                            return openBlock(), createBlock(unref(_sfc_main$5), {
+                              key: image.id
+                            }, {
+                              default: withCtx(() => [
+                                createVNode("img", {
+                                  src: image.src,
+                                  alt: image.alt,
+                                  class: "w-full h-64 sm:h-80 md:h-[26rem] object-cover rounded-xl"
+                                }, null, 8, ["src", "alt"])
+                              ]),
+                              _: 2
+                            }, 1024);
+                          }), 128))
+                        ]),
+                        _: 1
+                      })
+                    ]),
+                    _: 1
+                  }, 8, ["plugins", "onInitApi"]),
+                  createVNode(unref(_sfc_main$7), {
+                    class: "mt-4 w-full",
+                    onInitApi: (val) => emblaThumbnailApi.value = val
+                  }, {
+                    default: withCtx(() => [
+                      createVNode(unref(_sfc_main$6), { class: "flex justify-center gap-2" }, {
+                        default: withCtx(() => [
+                          (openBlock(true), createBlock(Fragment, null, renderList(images.value.length, (_2, index) => {
+                            return openBlock(), createBlock(unref(_sfc_main$5), {
+                              key: index,
+                              class: "basis-auto cursor-pointer pl-0",
+                              onClick: ($event) => onThumbClick(index)
+                            }, {
+                              default: withCtx(() => [
+                                createVNode("div", {
+                                  class: [index === selectedIndex.value ? "opacity-100" : "opacity-40", "transition"]
+                                }, [
                                   createVNode("div", {
-                                    class: [
-                                      "transition-opacity duration-300",
-                                      index === selectedIndex.value ? "opacity-100" : "opacity-50"
-                                    ]
-                                  }, [
-                                    createVNode("div", {
-                                      class: [
-                                        "h-2 rounded-full transition-all duration-300",
-                                        index === selectedIndex.value ? "w-16 bg-primaryDark sm:w-20" : "w-6 bg-gray-400 sm:w-8"
-                                      ]
-                                    }, null, 2)
-                                  ], 2)
-                                ]),
-                                _: 2
-                              }, 1032, ["onClick", "aria-label", "onKeydown"]);
-                            }), 128))
-                          ]),
-                          _: 1
-                        })
-                      ]),
-                      _: 1
-                    }, 8, ["onInitApi"])
-                  ])
+                                    class: [index === selectedIndex.value ? "w-12 sm:w-16 bg-primaryDark" : "w-5 bg-gray-400", "h-2 rounded-full transition-all"]
+                                  }, null, 2)
+                                ], 2)
+                              ]),
+                              _: 2
+                            }, 1032, ["onClick"]);
+                          }), 128))
+                        ]),
+                        _: 1
+                      })
+                    ]),
+                    _: 1
+                  }, 8, ["onInitApi"])
                 ])
               ]),
               createVNode("section", {
                 id: "features",
-                class: "bg-gradient-to-b from-background to-secondary/20 py-24"
+                class: "bg-white/70 py-20"
               }, [
                 createVNode("div", { class: "container mx-auto px-4 sm:px-6 lg:px-8" }, [
-                  createVNode("div", { class: "mx-auto mb-16 max-w-3xl text-center" }, [
-                    createVNode("h1", { class: "mb-4 text-4xl font-extrabold sm:text-5xl 2xl:text-7xl" }, " Everything You Need "),
-                    createVNode("p", { class: "text-xl font-extrabold text-muted-foreground 2xl:text-2xl" }, " Powerful features designed specifically for modern clinics ")
+                  createVNode("div", { class: "text-center max-w-3xl mx-auto mb-16" }, [
+                    createVNode("h1", { class: "text-3xl sm:text-5xl 2xl:text-7xl font-extrabold mb-4" }, "Everything You Need"),
+                    createVNode("p", { class: "text-lg sm:text-xl 2xl:text-2xl text-muted-foreground font-semibold" }, " Powerful features designed specifically for modern clinics ")
                   ]),
                   createVNode("div", { class: "grid gap-8 md:grid-cols-2 lg:grid-cols-3" }, [
                     (openBlock(true), createBlock(Fragment, null, renderList(features.value, (feature, index) => {
                       return openBlock(), createBlock(_sfc_main$8, {
                         key: index,
-                        class: "group border-none p-8 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 bg-primaryDark text-white hover:shadow-lg"
+                        class: "group border-none p-8 bg-primaryDark text-white rounded-xl hover:-translate-y-1 hover:shadow-xl transition-all backdrop-blur-sm"
                       }, {
                         default: withCtx(() => [
-                          createVNode("div", { class: "mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 transition-colors bg-white" }, [
-                            (openBlock(), createBlock(resolveDynamicComponent(feature.icon), { class: "h-6 w-6 text-primary" }))
+                          createVNode("div", { class: "h-14 w-14 mb-6 flex items-center justify-center bg-white rounded-2xl shadow-sm" }, [
+                            (openBlock(), createBlock(resolveDynamicComponent(feature.icon), { class: "h-6 w-6 text-primaryDark" }))
                           ]),
-                          createVNode("h1", { class: "mb-3 font-extrabold lg:text-2xl" }, toDisplayString(feature.title), 1),
-                          createVNode("p", { class: "font-extrabold leading-relaxed text-muted-foreground text-white lg:text-xl" }, toDisplayString(feature.description), 1)
+                          createVNode("h2", { class: "text-xl lg:text-2xl font-extrabold mb-3" }, toDisplayString(feature.title), 1),
+                          createVNode("p", { class: "font-semibold text-white/80 lg:text-xl" }, toDisplayString(feature.description), 1)
                         ]),
                         _: 2
                       }, 1024);
@@ -1068,40 +994,42 @@ const _sfc_main = {
               ]),
               createVNode("section", {
                 id: "about",
-                class: "bg-primaryDark flex items-center justify-between gap-10 px-10 text-white py-24"
+                class: "bg-primaryDark py-24 text-white"
               }, [
-                createVNode("div", { class: "container mx-auto px-4 sm:px-6 lg:px-8" }, [
-                  createVNode("div", { class: "mx-auto max-w-4xl" }, [
-                    createVNode("h1", { class: "mb-8 text-center text-4xl font-extrabold sm:text-7xl 2xl:text-7xl" }, " About Us "),
-                    createVNode("p", { class: "mb-6 text-lg font-extrabold leading-relaxed 2xl:text-2xl" }, " Oodo Medlink is a digital platform that helps medical laboratories send test results to patients instantly. The idea was inspired by real challenges many Nigerians face—long wait times, repeated visits to collect printed results, and outdated systems that slow down treatment. "),
-                    createVNode("p", { class: "text-lg font-extrabold leading-relaxed 2xl:text-2xl" }, " We make result delivery fast, secure, and stress-free. With Oodo Medlink, labs upload results in seconds, patients receive them instantly, and healthcare becomes more efficient for everyone. ")
+                createVNode("div", { class: "container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center gap-12" }, [
+                  createVNode("div", { class: "max-w-3xl" }, [
+                    createVNode("h1", { class: "text-4xl sm:text-6xl font-extrabold text-center lg:text-left mb-8" }, " About Us "),
+                    createVNode("p", { class: "text-lg sm:text-xl 2xl:text-2xl font-semibold mb-6" }, " Oodo Medlink is a digital platform that helps medical laboratories send test results to patients instantly. Inspired by real challenges many Nigerians face — long wait times, repeated visits to collect printed results, and outdated systems that slow down treatment. "),
+                    createVNode("p", { class: "text-lg sm:text-xl 2xl:text-2xl font-semibold" }, " We make result delivery fast, secure and stress-free. With Oodo Medlink, labs upload results in seconds and patients receive them instantly. ")
+                  ]),
+                  createVNode("div", { class: "w-full lg:w-1/2" }, [
+                    createVNode("img", {
+                      src: "/assets/med2.jpg",
+                      alt: "about",
+                      class: "rounded-xl shadow-lg w-full object-cover max-h-[450px]"
+                    })
                   ])
-                ]),
-                createVNode("img", {
-                  src: "/assets/med2.jpg",
-                  alt: "about",
-                  class: "w-full rounded-xl"
-                })
+                ])
               ]),
               createVNode("section", {
                 id: "security",
                 class: "bg-primaryLight py-24"
               }, [
                 createVNode("div", { class: "container mx-auto px-4 sm:px-6 lg:px-8" }, [
-                  createVNode("h1", { class: "mb-8 text-center text-4xl font-extrabold sm:text-5xl 2xl:text-7xl" }, " We protect every file and message with "),
-                  createVNode("div", { class: "mx-auto max-w-4xl" }, [
+                  createVNode("h1", { class: "text-center text-3xl sm:text-5xl 2xl:text-7xl font-extrabold mb-12" }, " We protect every file and message with "),
+                  createVNode("div", { class: "max-w-3xl mx-auto" }, [
                     createVNode("div", { class: "grid gap-6 md:grid-cols-2" }, [
                       (openBlock(true), createBlock(Fragment, null, renderList(securityFeatures.value, (item, index) => {
                         return openBlock(), createBlock("div", {
                           key: index,
-                          class: "flex items-center bg-primaryDark gap-3 rounded-lg p-4"
+                          class: "flex items-center bg-primaryDark text-white gap-3 rounded-lg p-4 shadow"
                         }, [
-                          createVNode(unref(CheckCircle), { class: "h-5 w-5 flex-shrink-0 text-white" }),
-                          createVNode("span", { class: "font-extrabold text-white" }, toDisplayString(item), 1)
+                          createVNode(unref(CheckCircle), { class: "h-6 w-6" }),
+                          createVNode("span", { class: "font-bold" }, toDisplayString(item), 1)
                         ]);
                       }), 128))
                     ]),
-                    createVNode("p", { class: "mt-8 text-center text-lg font-extrabold text-gray-700 2xl:text-2xl" }, " Patient data stays private, safe, and fully controlled by the lab. ")
+                    createVNode("p", { class: "mt-8 text-center text-lg sm:text-xl 2xl:text-2xl font-semibold text-gray-700" }, " Patient data stays private, safe and fully controlled by the lab. ")
                   ])
                 ])
               ]),
