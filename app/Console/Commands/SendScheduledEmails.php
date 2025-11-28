@@ -83,6 +83,7 @@ class SendScheduledEmails extends Command
                     'status' => 'sent',
                     'sent_at' => Carbon::now(),
                     'error_message' => null, // Clear any previous errors
+                    'delivery_attempts' => $email->delivery_attempts + 1,
                 ]);
 
                 $sent++;
