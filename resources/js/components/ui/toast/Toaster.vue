@@ -17,15 +17,19 @@ const { toasts } = useToast();
     <ToastProvider>
         <Toast v-for="toast in toasts" :key="toast.id" v-bind="toast">
             <div class="grid gap-1">
-                <ToastTitle v-if="toast.title">
-                    {{ toast.title }}
+                <ToastTitle class="text-md lg:text-xl xl:text-2xl font-extrabold" v-if="toast.title">
+                    <h1>
+                        {{ toast.title }}
+                    </h1>
                 </ToastTitle>
                 <template v-if="toast.description">
                     <ToastDescription v-if="isVNode(toast.description)">
                         <component :is="toast.description" />
                     </ToastDescription>
                     <ToastDescription v-else>
-                        {{ toast.description }}
+                        <h1>
+                            {{ toast.description }}
+                        </h1>
                     </ToastDescription>
                 </template>
                 <ToastClose />

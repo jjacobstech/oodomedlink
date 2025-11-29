@@ -7,6 +7,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Mail\Mailables\Envelope;
@@ -46,10 +47,18 @@ class ResultMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: config('mail.from.address'),
-            metadata: ['oodomedlink', 'digital medical lab system'],
+            from: new Address(
+                config('mail.from.address'),
+                $this->clinic->name . ' from OodoMedlink'
+            ),
+            tags: ['Oodomedlink Support'],
+            metadata: ['oodomedlink', 'digital medical lab system', 'oodomedlink.com', config('mail.from.address')],
             subject: $this->subject,
-            to: $this->receipient->email
+            to: $this->receipient->email,
+            replyTo: [new Address(
+                $this->clinic->email,
+                $this->clinic->name
+            )]
         );
 
     }

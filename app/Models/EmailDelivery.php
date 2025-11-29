@@ -7,8 +7,10 @@
 namespace App\Models;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * Class EmailDelivery
@@ -72,13 +74,18 @@ class EmailDelivery extends Model
 		'scheduled_at'
 	];
 
-	public function patient()
+	public function patient(): HasOne
 	{
 		return $this->hasOne(Patient::class, 'email', 'patient_email');
 	}
 
-	public function result()
+	public function result(): HasOne
 	{
 		return $this->hasOne(PatientResult::class, 'id', 'patient_result_id');
+	}
+
+	public function sentByClinic(): BelongsTo
+	{
+		return $this->belongsTo(Clinic::class, 'sent_by');
 	}
 }

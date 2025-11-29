@@ -77,6 +77,10 @@ class SettingsController extends Controller
                   $validated['avatar'] = $url;
             }
 
+            if (is_null($validated['avatar'] ?? null)) {
+                  unset($validated['avatar']);
+            }
+
             // Handle password change
             if ($request->filled('password')) {
                   // Verify current password

@@ -7,8 +7,6 @@ import Toaster from '@/components/ui/toast/Toaster.vue';
 import Notifications from '@/Components/Dashboard/Notifications.vue';
 
 const auth = usePage().props.auth;
-
-console.log(auth.user)
 </script>
 
 <template class="fixed h-screen bg-primaryLight">

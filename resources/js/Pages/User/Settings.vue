@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head, useForm } from '@inertiajs/vue3';
+import { Head, router, useForm } from '@inertiajs/vue3';
 import { ref, computed } from 'vue';
 import { useToast } from '@/components/ui/toast';
 
@@ -22,6 +22,7 @@ interface Props {
 const props = defineProps<Props>();
 const { toast } = useToast();
 
+console.log(props.user.avatar)
 const form = useForm({
     name: props.user.name,
     email: props.user.email,
@@ -35,7 +36,8 @@ const form = useForm({
     country: props.user.country || '',
 });
 
-const avatarPreview = ref(props.user.avatar || '/assets/doctor.jpeg');
+console.log(form.avatar)
+const avatarPreview = ref(props.user.avatar ?? '/assets/doctor.jpeg');
 const showPasswordFields = ref(false);
 
 const handleAvatarChange = (event: Event) => {
@@ -75,9 +77,10 @@ const submitForm = () => {
                 open: true,
                 class: 'text-primaryDark bg-white shadow-lg bottom-96',
             });
+            router.get(route('user.settings'));
         },
         onError: (errors) => {
-        // console.error('Update errors:', errors);
+            // console.error('Update errors:', errors);
         },
     });
 };

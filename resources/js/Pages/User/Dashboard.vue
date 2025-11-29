@@ -28,7 +28,7 @@ interface PatientResult {
       file_path: string;
       file_type: 'pdf' | 'image' | 'csv';
       uploaded_at: string;
-      status: 'pending' | 'sent' | 'failed';
+      status: 'pending' | 'sent' | 'failed' | 'uploaded' | 'archived';
       files: file[];
 }
 
@@ -119,11 +119,11 @@ const selectionFilter = ['all', 'pending', 'sent', 'failed'];
 
 // Upload form
 const uploadForm = useForm<FormData>({
-      patient_name: '',
-      patient_email: '',
-      test_date: '',
-      test_name: '',
-      result_type: '',
+      patient_name: 'Jake',
+      patient_email: 'jake2@gmail.com',
+      test_date: '2025-10-25',
+      test_name: 'Blood Test',
+      result_type: 'Blood Test',
       file: [],
       notes: '',
       sendViaEmail: true,
@@ -167,6 +167,8 @@ const submitUpload = () => {
                         open: true,
 
                   });
+                  router.get(route('user.dashboard'));
+
 
             },
             onError: (errors) => {
@@ -329,11 +331,10 @@ const handleSearchKeydown = (event: KeyboardEvent) => {
                                                       @click="applyFilters(selection)" :class="selectedFilter === selection
                                                             ? 'bg-primaryDark text-white'
       : 'bg-gray-200 text-gray-700'
-      "
-                                                      class="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm lg:text-base font-medium rounded-lg transition-all hover:shadow-md">
+      " class="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm lg:text-base font-medium rounded-lg transition-all hover:shadow-md">
                                                       {{
-                                                            selection.charAt(0).toUpperCase() +
-                                                            selection.slice(1)
+                                                      selection.charAt(0).toUpperCase() +
+                                                      selection.slice(1)
                                                       }}
                                                 </button>
                                           </div>
@@ -414,7 +415,7 @@ const handleSearchKeydown = (event: KeyboardEvent) => {
                                                                         <div
                                                                               class="text-xs sm:text-sm lg:text-base font-medium text-gray-900">
                                                                               {{
-                                                                                    result.patient.full_name
+                                                                              result.patient.full_name
                                                                               }}
                                                                         </div>
                                                                         <!-- Show result type on mobile -->
@@ -442,13 +443,13 @@ const handleSearchKeydown = (event: KeyboardEvent) => {
                                                                                     class="flex items-center gap-2 text-xs sm:text-sm text-gray-700">
                                                                                     <span>{{
                                                                                           getFileIcon(
-                                                                                                result.file_type
+                                                                                          result.file_type
                                                                                           )
-                                                                                    }}</span>
+                                                                                          }}</span>
                                                                                     <span
                                                                                           class="truncate max-w-[150px] xl:max-w-[200px]">
                                                                                           {{
-                                                                                                file.original_file_name
+                                                                                          file.original_file_name
                                                                                           }}
                                                                                     </span>
                                                                               </span>
@@ -459,9 +460,9 @@ const handleSearchKeydown = (event: KeyboardEvent) => {
                                                                   <td
                                                                         class="hidden xl:table-cell px-3 sm:px-4 lg:px-6 py-3 sm:py-4 text-xs sm:text-sm text-gray-700">
                                                                         {{
-                                                                              formatDate(
-                                                                                    result.uploaded_at
-                                                                              )
+                                                                        formatDate(
+                                                                        result.uploaded_at
+                                                                        )
                                                                         }}
                                                                   </td>
 
@@ -473,7 +474,7 @@ const handleSearchKeydown = (event: KeyboardEvent) => {
                                                                                     'pending',
                                                                               'bg-green-100 text-green-800':
                                                                                     result.status ===
-                                                                                    'sent',
+                                                                                    'uploaded',
                                                                               'bg-red-100 text-red-800':
                                                                                     result.status ===
                                                                                     'failed',
@@ -665,18 +666,20 @@ const handleSearchKeydown = (event: KeyboardEvent) => {
                                                 </div>
                                           </div>
 
-                                          <div v-if="uploadForm.sendViaEmail" class="space-y-2">
+                                          <div v-if="!uploadForm.sendViaEmail" class="space-y-2">
                                                 <label
                                                       class="block mb-2 text-sm sm:text-base font-extrabold text-gray-700">
                                                       Schedule Date
                                                 </label>
                                                 <input v-model="uploadForm.scheduleDate" type="date"
+                                                      :required="!uploadForm.sendViaEmail"
                                                       class="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all" />
                                                 <label
                                                       class="block mb-2 text-sm sm:text-base font-extrabold text-gray-700">
                                                       Schedule Time
                                                 </label>
                                                 <input v-model="uploadForm.scheduleTime" type="time"
+                                                      :required="!uploadForm.sendViaEmail"
                                                       class="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all" />
                                           </div>
 
@@ -694,7 +697,7 @@ const handleSearchKeydown = (event: KeyboardEvent) => {
 
                                                 <!-- Buttons -->
                                                 <div class="flex gap-2 sm:gap-3 w-full sm:w-auto">
-                                                      <button type="submit" :disabled="uploadForm.processing ||
+                                                      <button type="submit" :disabled="(!uploadForm.sendViaEmail && (!uploadForm.scheduleDate && !uploadForm.scheduleTime)) || uploadForm.processing ||
                                                             uploadedFiles.length === 0
                                                             "
                                                             class="flex-1 sm:flex-none sm:min-w-[100px] hover:-translate-y-1 duration-150 px-4 py-2 sm:py-2.5 text-sm sm:text-base font-semibold text-white transition-all bg-blue-600 rounded-lg hover:bg-blue-700 hover:shadow-lg disabled:bg-gray-400 disabled:cursor-not-allowed disabled:hover:transform-none">
@@ -757,7 +760,7 @@ const handleSearchKeydown = (event: KeyboardEvent) => {
                                                       'text-orange-700':
                                                             previewFile.status === 'pending',
                                                       'text-green-700':
-                                                            previewFile.status === 'sent',
+                                                            previewFile.status === 'uploaded',
                                                       'text-red-700':
                                                             previewFile.status === 'failed',
                                                 }" class="font-semibold capitalize">

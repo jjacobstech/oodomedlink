@@ -7,8 +7,9 @@
 namespace App\Models;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * Class File
@@ -60,7 +61,7 @@ class File extends Model
 		'original_file_name'
 	];
 
-	public function patient_result()
+	public function patient_result(): BelongsTo
 	{
 		return $this->belongsTo(PatientResult::class, 'result');
 	}

@@ -131,6 +131,8 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Clinic whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Clinic whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\EmailDelivery> $emailDeliveries
+ * @property-read int|null $email_deliveries_count
  */
 	class Clinic extends \Eloquent {}
 }
@@ -172,6 +174,9 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EmailDelivery whereSubject($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EmailDelivery whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property string|null $deleted_at
+ * @property-read \App\Models\Clinic $sentByClinic
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|EmailDelivery whereDeletedAt($value)
  */
 	class EmailDelivery extends \Eloquent {}
 }
@@ -363,6 +368,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient wherePhoneNo($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Patient whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read int|null $latest_result_count
  */
 	class Patient extends \Eloquent {}
 }
@@ -404,6 +410,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PatientResult whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PatientResult whereUploadedAt($value)
  * @mixin \Eloquent
+ * @property-read \App\Models\EmailDelivery|null $emailDelivery
  */
 	class PatientResult extends \Eloquent {}
 }

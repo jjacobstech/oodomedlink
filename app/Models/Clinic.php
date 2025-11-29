@@ -9,8 +9,9 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
@@ -88,9 +89,14 @@ class Clinic extends Authenticatable
 		'remember_token'
 	];
 
-	public function patient_results()
+	public function patient_results(): HasMany
 	{
 		return $this->hasMany(PatientResult::class);
+	}
+
+	public function emailDeliveries(): HasMany
+	{
+		return $this->hasMany(EmailDelivery::class, 'sent_by');
 	}
 
 }

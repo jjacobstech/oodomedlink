@@ -7,9 +7,12 @@
 namespace App\Models;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * Class PatientResult
@@ -66,6 +69,7 @@ class PatientResult extends Model
 	protected $fillable = [
 		'clinic_id',
 		'patient_id',
+		'email_id',
 		'result_type',
 		'test_name',
 		'test_date',
@@ -76,18 +80,23 @@ class PatientResult extends Model
 		'uploaded_at'
 	];
 
-	public function clinic()
+	public function clinic(): BelongsTo
 	{
 		return $this->belongsTo(Clinic::class);
 	}
 
-	public function patient()
+	public function patient(): BelongsTo
 	{
 		return $this->belongsTo(Patient::class);
 	}
 
-	public function files()
+	public function files(): HasMany
 	{
 		return $this->hasMany(File::class, 'result');
+	}
+
+	public function emailDelivery(): HasOne
+	{
+		return $this->hasOne(EmailDelivery::class);
 	}
 }

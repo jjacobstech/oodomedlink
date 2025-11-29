@@ -16,7 +16,7 @@ class EmailController extends Controller
 {
     public function index(Request $request)
     {
-        $user = Auth::user()->name;
+        $user = Auth::user()->id;
 
         $validated = $request->validate([
             'filter' => 'nullable|string|in:all,pending,sent,failed,scheduled',

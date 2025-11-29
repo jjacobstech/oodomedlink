@@ -4,7 +4,7 @@
 <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>Email verification</title>
+      <title>Oodomedlink</title>
       <style>
             /* CLIENT-SAFE INLINE STYLES RECOMMENDED — keep this block minimal for preview clients */
             body,
@@ -81,14 +81,14 @@
                                                 </p>
                                                 </td>
                                                 </tr>
-                                                
+
                                                 <!-- Content -->
                                                 <tr>
                                                       <td style="padding:28px;color:#0f1724;">
-                                                
+
                                                             <p style="margin:0 0 16px;font-size:15px;">Hello {{ $receipient->full_name }},
                                                             </p>
-                                                
+
                                                             <p style="margin:0 0 24px;font-size:15px;color:#334155;line-height:1.45;">
                                                                   Thank you for visiting {{ Str::ucfirst($clinic->name) ?? '' }}, here is your test result
                                                 attaches to this mail.

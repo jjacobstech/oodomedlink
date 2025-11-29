@@ -374,7 +374,7 @@ const formatFileSize = (bytes: number) => {
                                     {{ email.subject }}
                                 </td>
                                 <td class="px-4 py-3 text-gray-600">
-                                    {{ email.sent_at ? (email.sent_at) : 'N/A' }}
+                                    {{ email.sent_at ? formatDate(email.sent_at) : 'N/A' }}
                                 </td>
                                 <td class="px-4 py-3">
                                     <span :class="{

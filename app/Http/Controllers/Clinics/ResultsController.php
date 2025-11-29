@@ -46,9 +46,8 @@ class ResultsController extends Controller
             $schedule = Carbon::parse($validated['scheduleDate'] . ' ' . $validated['scheduleTime'], $timezone);
         }
 
+
         $uploadedFiles = [];
-        $delayInSeconds = now()->diffInSeconds($schedule, false);
-        $time = ceil($delayInSeconds);
 
         try {
             DB::beginTransaction();
@@ -66,9 +65,6 @@ class ResultsController extends Controller
 
             // Determine initial status
             $sendEmail = $validated['sendViaEmail'] ?? false;
-            if ($sendEmail) {
-                $status = 'sent';
-            }
 
             // Create result record
             $result = PatientResult::create([
@@ -77,7 +73,7 @@ class ResultsController extends Controller
                 'result_type' => $validated['result_type'],
                 'test_name' => $validated['test_name'],
                 'test_date' => $validated['test_date'],
-                'status' => $status
+                'status' => 'uploaded',
             ]);
 
             // Process and store files
@@ -116,14 +112,13 @@ class ResultsController extends Controller
             }
 
             // Handle email delivery
-            if ($sendEmail) {
                 $subject = "{$patient->full_name} Test Result";
                 $notes = $validated['notes'] ?? '';
 
                 $emailDelivery = EmailDelivery::create([
                     'patient_result_id' => $result->id,
                     'patient_email' => $patient->email,
-                    'sent_by' => Str::lower($user->name),
+                'sent_by' => $user->id,
                     'subject' => $subject,
                     'body' => $notes,
                     'status' => $schedule ? 'scheduled' : 'pending',
@@ -131,7 +126,9 @@ class ResultsController extends Controller
                     'scheduled_at' => $schedule ?? now(),
                 ]);
 
-                // Dispatch email job
+            // Dispatch email job
+            if (is_null($schedule)) {
+
                 ResultJob::dispatch(
                     $subject,
                     $patient,
@@ -139,14 +136,14 @@ class ResultsController extends Controller
                     $notes,
                     $emailDelivery->id,
                     $user
-                )->delay($time);
+                )->delay($schedule);
+            }
 
                 $message = 'Result uploaded and email ' .
                     ($schedule ? 'scheduled for ' . $schedule->format('d M Y h:ia') : 'sent') .
                     ' successfully';
 
-                $user->notify(new EmailNotification($message));
-            }
+            $user->notify(new EmailNotification($message));
 
             DB::commit();
 

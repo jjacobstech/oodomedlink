@@ -5,6 +5,7 @@ namespace App\Mail;
 use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Mail\Mailables\Envelope;
@@ -38,8 +39,13 @@ class EmailVerification extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
+            from: new Address(
+                $this->support,
+                'Email Verification'
+            ),
+            tags: ['Oodomedlink Support', 'Email Verification'],
+            metadata: ['oodomedlink', 'digital medical lab system', 'oodomedlink.com', config('mail.from.address')],
             subject: 'Email Verification',
-            from: $this->support,
             to: [$this->email]
         );
     }

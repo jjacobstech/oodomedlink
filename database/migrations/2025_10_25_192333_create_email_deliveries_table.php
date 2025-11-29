@@ -13,18 +13,21 @@ return new class extends Migration
     {
         Schema::create('email_deliveries', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('patient_result_id')->references('id')->on('patient_results')->cascadeOnDelete();
-            $table->string('patient_email', 225)->references('email')->on('patients')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->string('sent_by', 225);
+            $table->uuid('patient_result_id');
+            $table->string('patient_email', 225);
+            $table->uuid('sent_by');
             $table->string('subject', 225);
             $table->longText('body')->nullable();
             $table->enum('status', ['sent', 'pending', 'failed', 'bounced', 'scheduled'])->default('pending');
             $table->timestamp('sent_at')->nullable();
-            $table->timestamp('scheduled_at');
+            $table->timestamp('scheduled_at')->nullable();
             $table->integer('delivery_attempts')->default(0);
             $table->longText('error_message')->nullable();
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('patient_result_id')->references('id')->on('patient_results')->onDelete('cascade');
+            $table->foreign('sent_by')->references('id')->on('clinics')->onDelete('cascade');
 
             $table->index('patient_result_id', 'idx_email_deliveries_patient_result_id');
             $table->index('status', 'idx_email_deliveries_status');

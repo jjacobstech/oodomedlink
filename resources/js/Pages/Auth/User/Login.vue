@@ -127,7 +127,7 @@ const handleLogin = async () => {
                 description: inputError,
                 variant: 'destructive',
                 open: true,
-                class: 'text-primaryDark bg-white shadow-lg bottom-96',
+                class: 'text-primaryDark bg-white shadow-lg',
             });
         }
         isLoading.value = false;
@@ -146,7 +146,7 @@ const handleLogin = async () => {
                     description: inputError,
                     variant: 'destructive',
                     open: true,
-                    class: 'text-primaryDark bg-white shadow-lg bottom-96',
+                    class: 'text-primaryDark bg-white shadow-lg ',
                 });
             }
         },
@@ -155,7 +155,7 @@ const handleLogin = async () => {
                 title: 'Login Successful',
                 variant: 'destructive',
                 open: true,
-                class: 'text-primaryDark bg-white shadow-lg bottom-96',
+                class: 'text-primaryDark bg-white shadow-lg ',
             });
         },
     });

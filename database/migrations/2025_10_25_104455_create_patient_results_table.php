@@ -21,12 +21,12 @@ return new class extends Migration
             $table->json('data')->nullable();
             $table->boolean('encrypted')->default(true);
             $table->longText('notes')->nullable();
-            $table->enum('status', ['pending', 'processed', 'sent', 'archived'])->default('pending');
+            $table->enum('status', ['pending', 'processed', 'sent', 'uploaded', 'archived'])->default('pending');
             $table->timestamp('uploaded_at')->useCurrent();
-            $table->timestamp('updated_at')->useCurrentOnUpdate()->default(now());
+            $table->timestamp('updated_at')->useCurrentOnUpdate()->nullable()->default(now());
 
-            $table->foreign('clinic_id')->on('clinics')->references('id')->cascadeOnDelete();
-            $table->foreign('patient_id')->on('patients')->references('id')->cascadeOnDelete();
+            $table->foreign('clinic_id')->references('id')->on('clinics')->onDelete('cascade');
+            $table->foreign('patient_id')->references('id')->on('patients')->onDelete('cascade');
 
             $table->index(['patient_id'], 'idx_patient_id');
             $table->index(['clinic_id'], 'idx_clinic_id');

@@ -11,6 +11,8 @@ use App\Models\Clinic;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * Class Patient
@@ -72,7 +74,7 @@ class Patient extends Model
 	];
 
 
-	public function clinic()
+	public function clinic(): BelongsTo
 	{
 		return $this->belongsTo(Clinic::class, 'clinic_id');
 	}
@@ -80,7 +82,7 @@ class Patient extends Model
 	/**
 	 * Get all results for the patient.
 	 */
-	public function results()
+	public function results(): HasMany
 	{
 		return $this->hasMany(PatientResult::class);
 	}
@@ -88,7 +90,7 @@ class Patient extends Model
 	/**
 	 * Get the latest result for the patient.
 	 */
-	public function latestResult()
+	public function latestResult(): HasMany
 	{
 		return $this->hasMany(PatientResult::class, 'patient_id')->latest('uploaded_at');
 	}
@@ -108,7 +110,7 @@ class Patient extends Model
 	/**
 	 * Scope a query to only include patients from a specific clinic.
 	 */
-	public function scopeForClinic($query, $clinicId)
+	public function scopeForClinic($query, $clinicId): mixed
 	{
 		return $query->where('clinic_id', $clinicId);
 	}
@@ -116,7 +118,7 @@ class Patient extends Model
 	/**
 	 * Scope a query to search patients.
 	 */
-	public function scopeSearch($query, $search)
+	public function scopeSearch($query, $search): mixed
 	{
 		if (empty($search)) {
 			return $query;
@@ -132,7 +134,7 @@ class Patient extends Model
 	/**
 	 * Scope a query to filter by gender.
 	 */
-	public function scopeByGender($query, $gender)
+	public function scopeByGender($query, $gender): mixed
 	{
 		if (empty($gender)) {
 			return $query;
