@@ -119,11 +119,11 @@ const selectionFilter = ['all', 'pending', 'sent', 'failed'];
 
 // Upload form
 const uploadForm = useForm<FormData>({
-      patient_name: 'Jake',
-      patient_email: 'jake2@gmail.com',
-      test_date: '2025-10-25',
-      test_name: 'Blood Test',
-      result_type: 'Blood Test',
+      patient_name: '',
+      patient_email: '',
+      test_date: '',
+      test_name: '',
+      result_type: '',
       file: [],
       notes: '',
       sendViaEmail: true,

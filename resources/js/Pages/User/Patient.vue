@@ -332,8 +332,8 @@ const formatFileSize = (bytes: number) => {
                                     class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-4 pb-2 border-b">
                                     <h2 class="text-lg sm:text-xl font-bold text-gray-800">
                                           Medical Results ({{
-                                          patient.results?.length || 0
-                                          }})
+      patient.results?.length || 0
+}})
                                     </h2>
                                     <button @click="showUploadModal = true"
                                           class="w-full sm:w-auto rounded-md bg-primaryDark px-4 py-2 text-sm font-semibold text-white transition-all duration-150 hover:shadow-lg">
@@ -659,18 +659,20 @@ const formatFileSize = (bytes: number) => {
                                                 </div>
                                           </div>
 
-                                          <div v-if="uploadForm.sendViaEmail" class="space-y-2">
+                                          <div v-if="!uploadForm.sendViaEmail" class="space-y-2">
                                                 <label
                                                       class="block mb-2 text-sm sm:text-base font-extrabold text-gray-700">
                                                       Schedule Date
                                                 </label>
                                                 <input v-model="uploadForm.scheduleDate" type="date"
+                                                      :required="!uploadForm.sendViaEmail"
                                                       class="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all" />
                                                 <label
                                                       class="block mb-2 text-sm sm:text-base font-extrabold text-gray-700">
                                                       Schedule Time
                                                 </label>
                                                 <input v-model="uploadForm.scheduleTime" type="time"
+                                                      :required="!uploadForm.sendViaEmail"
                                                       class="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all" />
                                           </div>
 
@@ -688,14 +690,14 @@ const formatFileSize = (bytes: number) => {
 
                                                 <!-- Buttons -->
                                                 <div class="flex gap-2 sm:gap-3 w-full sm:w-auto">
-                                                      <button type="submit" :disabled="uploadForm.processing ||
+                                                      <button type="submit" :disabled="(!uploadForm.sendViaEmail && (!uploadForm.scheduleDate && !uploadForm.scheduleTime)) || uploadForm.processing ||
                                                             uploadedFiles.length === 0
                                                             "
                                                             class="flex-1 sm:flex-none sm:min-w-[100px] hover:-translate-y-1 duration-150 px-4 py-2 sm:py-2.5 text-sm sm:text-base font-semibold text-white transition-all bg-blue-600 rounded-lg hover:bg-blue-700 hover:shadow-lg disabled:bg-gray-400 disabled:cursor-not-allowed disabled:hover:transform-none">
                                                             {{
-                                                                  uploadForm.processing
-                                                                        ? 'Uploading...'
-                                                                        : 'Upload'
+                                                            uploadForm.processing
+                                                            ? 'Uploading...'
+                                                            : 'Upload'
                                                             }}
                                                       </button>
                                                       <button type="button" @click="
