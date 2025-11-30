@@ -30,7 +30,7 @@ class SendScheduledEmails extends Command
                 'patient:id,full_name,email',
                 'result:id'
             ])
-            ->where('scheduled_at', '<=', Carbon::now())
+            ->where('scheduled_at', '<=', Carbon::now(config('app.timezone')))
             ->whereNull('sent_at')
             // Skip emails that have failed too many times
             ->where('delivery_attempts', '<', $attempts)
