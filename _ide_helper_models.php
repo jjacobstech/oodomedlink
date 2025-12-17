@@ -453,3 +453,52 @@ namespace App\Models{
 	class User extends \Eloquent {}
 }
 
+namespace App\Models{
+/**
+ * Class WhatsappMessage
+ *
+ * @property string $id
+ * @property string $patient_result_id
+ * @property string $patient_email
+ * @property string $sent_by
+ * @property string $subject
+ * @property string|null $body
+ * @property string $status
+ * @property Carbon|null $sent_at
+ * @property Carbon|null $scheduled_at
+ * @property int $delivery_attempts
+ * @property string|null $error_message
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property string|null $deleted_at
+ * @property PatientResult $patient_result
+ * @property Clinic $clinic
+ * @package App\Models
+ * @property string $patient_id
+ * @property-read \App\Models\Patient $patient
+ * @property-read \App\Models\PatientResult|null $result
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|WhatsappMessage newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|WhatsappMessage newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|WhatsappMessage onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|WhatsappMessage query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|WhatsappMessage whereBody($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|WhatsappMessage whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|WhatsappMessage whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|WhatsappMessage whereDeliveryAttempts($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|WhatsappMessage whereErrorMessage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|WhatsappMessage whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|WhatsappMessage wherePatientEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|WhatsappMessage wherePatientId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|WhatsappMessage wherePatientResultId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|WhatsappMessage whereScheduledAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|WhatsappMessage whereSentAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|WhatsappMessage whereSentBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|WhatsappMessage whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|WhatsappMessage whereSubject($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|WhatsappMessage whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|WhatsappMessage withTrashed(bool $withTrashed = true)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|WhatsappMessage withoutTrashed()
+ */
+	class WhatsappMessage extends \Eloquent {}
+}
+

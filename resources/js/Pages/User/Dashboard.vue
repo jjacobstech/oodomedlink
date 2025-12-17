@@ -1,9 +1,16 @@
 <script setup lang="ts">
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, useForm, router } from '@inertiajs/vue3';
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { CloseCircle } from '@solar-icons/vue';
 import { useToast } from '@/components/ui/toast';
+import { Spinner } from '@/components/ui/spinner';
+import Checkbox from '@/components/ui/checkbox/Checkbox.vue';
+import Label from '@/components/ui/label/Label.vue';
+import { CheckCircle } from '@solar-icons/vue';
+import axios from 'axios';
+import Toaster from '@/components/ui/toast/Toaster.vue';
+
 
 interface file {
       id: string;
@@ -70,12 +77,14 @@ interface Props {
 interface FormData {
       patient_name: string;
       patient_email: string;
+      patient_phone_no: string;
       test_date: string;
       test_name: string;
       result_type: string;
       file: File[];
       notes: string;
       sendViaEmail: boolean;
+      sendViaWhatsapp: boolean;
       scheduleDate: string;
       scheduleTime: string;
 }
@@ -87,6 +96,13 @@ const selectedFilter = ref(props.filters?.filter || 'all');
 const searchQuery = ref(props.filters?.search || '');
 const previewFile = ref<PatientResult | null>(null);
 const { toast } = useToast();
+const noErrors = ref<boolean>(false);
+const foundError = ref<boolean>(false);
+const checking = ref(false);
+
+const file = ref(null);
+const error = ref(null);
+const dragActive = ref(false);
 
 const stats = [
       {
@@ -119,14 +135,16 @@ const selectionFilter = ['all', 'pending', 'sent', 'failed'];
 
 // Upload form
 const uploadForm = useForm<FormData>({
-      patient_name: '',
-      patient_email: '',
-      test_date: '',
-      test_name: '',
-      result_type: '',
+      patient_name: 'Jacobs',
+      patient_email: 'jacobs@gmail.com',
+      patient_phone_no: '07059579655',
+      test_date: '2025-12-06',
+      test_name: 'Software Engineer',
+      result_type: 'Blood Test',
       file: [],
       notes: '',
       sendViaEmail: true,
+      sendViaWhatsapp: false,
       scheduleDate: '',
       scheduleTime: '',
 });
@@ -143,12 +161,112 @@ const handleFileChange = (event: Event) => {
                   uploadForm.file.push(file);
             }
       }
+
+      checkDocument();
+      return 1;
 };
 
 const handleFileRemove = (index: number) => {
       uploadedFiles.value.splice(index, 1);
       uploadForm.file.splice(index, 1);
 };
+
+const handleDrop = (e: any) => {
+      dragActive.value = false;
+      if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+            uploadedFiles.value.push(e.dataTransfer.files[0]);
+            uploadForm.file.push(e.dataTransfer.files[0]);
+            error.value = null;
+      }
+};
+
+
+
+const checkDocument = async () => {
+
+      checking.value = true;
+      noErrors.value = false;
+      foundError.value = false;
+
+      const formData = new FormData();
+
+      formData.append('patient_name', uploadForm.patient_name);
+      formData.append('test_date', uploadForm.test_date);
+      formData.append('test_name', uploadForm.test_name);
+      formData.append('result_type', uploadForm.result_type);
+
+
+      if (uploadForm.file && uploadForm.file.length > 0) {
+            for (let i = 0; i < uploadForm.file.length; i++) {
+                  formData.append('file[]', uploadForm.file[i]);
+            }
+      } else {
+            // console.error("No files selected for upload.");
+            return; // Exit if no files are present
+      }
+
+      try {
+
+            const check = await axios.post(route('user.result.check'), formData);
+
+            console.log("Upload successful:", check.data.error);
+
+            if (!check.data.status) {
+                  toast({
+                        title: 'Connection Error',
+                        description: 'Document Check failed , check your connection',
+                        type: 'foreground',
+                        variant: 'default',
+                        class: 'text-primaryDark bg-white shadow-lg',
+                        open: true,
+
+                  });
+                  checking.value = false;
+                  noErrors.value = false;
+                  foundError.value = true;
+                  // console.log('error', check.data.status);
+                  return 0;
+            }
+
+            if (check.data.status) {
+                  checking.value = false;
+                  noErrors.value = true;
+                  foundError.value = false;
+                  return 1;
+            }
+
+            else if (!check.data.status) {
+                  checking.value = false;
+                  noErrors.value = false;
+                  foundError.value = true;
+                  // console.log('failed', check.data.status);
+                  return;
+            }
+            else {
+                  toast({
+                        title: 'Connection Error',
+                        description: 'Document Check failed , check your connection',
+                        type: 'foreground',
+                        variant: 'default',
+                        class: 'text-primaryDark bg-white shadow-lg',
+                        open: true,
+
+                  });
+                  checking.value = false;
+                  noErrors.value = false;
+                  foundError.value = true;
+                  // console.log('error', check.data.status);
+                  return 0;
+            }
+
+      } catch (error: unknown) {
+            // console.error("Error during upload:", error);
+
+      }
+      checking.value = false;
+      foundError.value = true;
+      return 0;
+}
 
 // Submit upload
 const submitUpload = () => {
@@ -163,7 +281,7 @@ const submitUpload = () => {
                         description: response.props.error ? response.props.error : 'Upload successful',
                         type: 'foreground',
                         variant: 'default',
-                        class: 'text-primaryDark bg-white shadow-lg bottom-96',
+                        class: 'text-primaryDark bg-white shadow-lg',
                         open: true,
 
                   });
@@ -176,6 +294,7 @@ const submitUpload = () => {
             },
       });
 };
+
 
 // Filter and search results
 const applyFilters = (filterValue?: string) => {
@@ -274,6 +393,9 @@ const handleSearchKeydown = (event: KeyboardEvent) => {
       <Head title="Clinic Dashboard" />
 
       <AuthenticatedLayout>
+
+            <Toaster />
+
             <div class="flex w-full gap-1 overflow-y-hidden bg-primaryLight">
                   <!-- Main Content -->
                   <div
@@ -330,11 +452,12 @@ const handleSearchKeydown = (event: KeyboardEvent) => {
                                                 <button v-for="selection in selectionFilter" :key="selection"
                                                       @click="applyFilters(selection)" :class="selectedFilter === selection
                                                             ? 'bg-primaryDark text-white'
-      : 'bg-gray-200 text-gray-700'
-      " class="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm lg:text-base font-medium rounded-lg transition-all hover:shadow-md">
+                                                            : 'bg-gray-200 text-gray-700'
+                                                            "
+                                                      class="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm lg:text-base font-medium rounded-lg transition-all hover:shadow-md">
                                                       {{
-                                                      selection.charAt(0).toUpperCase() +
-                                                      selection.slice(1)
+                                                            selection.charAt(0).toUpperCase() +
+                                                            selection.slice(1)
                                                       }}
                                                 </button>
                                           </div>
@@ -415,7 +538,7 @@ const handleSearchKeydown = (event: KeyboardEvent) => {
                                                                         <div
                                                                               class="text-xs sm:text-sm lg:text-base font-medium text-gray-900">
                                                                               {{
-                                                                              result.patient.full_name
+                                                                                    result.patient.full_name
                                                                               }}
                                                                         </div>
                                                                         <!-- Show result type on mobile -->
@@ -443,13 +566,13 @@ const handleSearchKeydown = (event: KeyboardEvent) => {
                                                                                     class="flex items-center gap-2 text-xs sm:text-sm text-gray-700">
                                                                                     <span>{{
                                                                                           getFileIcon(
-                                                                                          result.file_type
+                                                                                                result.file_type
                                                                                           )
-                                                                                          }}</span>
+                                                                                    }}</span>
                                                                                     <span
                                                                                           class="truncate max-w-[150px] xl:max-w-[200px]">
                                                                                           {{
-                                                                                          file.original_file_name
+                                                                                                file.original_file_name
                                                                                           }}
                                                                                     </span>
                                                                               </span>
@@ -460,9 +583,9 @@ const handleSearchKeydown = (event: KeyboardEvent) => {
                                                                   <td
                                                                         class="hidden xl:table-cell px-3 sm:px-4 lg:px-6 py-3 sm:py-4 text-xs sm:text-sm text-gray-700">
                                                                         {{
-                                                                        formatDate(
-                                                                        result.uploaded_at
-                                                                        )
+                                                                              formatDate(
+                                                                                    result.uploaded_at
+                                                                              )
                                                                         }}
                                                                   </td>
 
@@ -566,6 +689,17 @@ const handleSearchKeydown = (event: KeyboardEvent) => {
                                                       placeholder="Enter patient email" autocomplete="email" />
                                           </div>
 
+                                          <!-- Patient Phone No-->
+                                          <div>
+                                                <label
+                                                      class="block mb-2 text-sm sm:text-base font-extrabold text-gray-700">
+                                                      Patient Phone Number
+                                                </label>
+                                                <input v-model="uploadForm.patient_phone_no" type="tel" required
+                                                      class="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                                                      placeholder="Enter patient email" autocomplete="phone number" />
+                                          </div>
+
                                           <!-- Test Name -->
                                           <div>
                                                 <label
@@ -621,8 +755,10 @@ const handleSearchKeydown = (event: KeyboardEvent) => {
                                           </div>
 
                                           <!-- File Upload Dropzone -->
-                                          <div class="flex items-center justify-center w-full">
-                                                <label for="dropzone-file"
+                                          <div class="flex flex-col items-center justify-center w-full">
+                                                <label @dragenter.prevent="dragActive = true"
+                                                      @dragleave.prevent="dragActive = false" @dragover.prevent
+                                                      @drop.prevent="handleDrop"
                                                       class="flex flex-col items-center justify-center w-full h-48 sm:h-56 lg:h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-primaryLight/30 transition-colors group">
                                                       <div class="flex flex-col items-center justify-center px-4">
                                                             <svg class="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 mb-3 sm:mb-4 text-gray-500 group-hover:text-gray-600 transition-colors"
@@ -632,7 +768,12 @@ const handleSearchKeydown = (event: KeyboardEvent) => {
                                                                         stroke-linejoin="round" stroke-width="2"
                                                                         d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
                                                             </svg>
-                                                            <p
+                                                            <p v-if="!dragActive"
+                                                                  class="mb-2 text-sm sm:text-base lg:text-lg text-gray-500 text-center">
+                                                                  <span class="font-semibold">Click to upload</span>
+                                                                  or drag and drop
+                                                            </p>
+                                                            <p v-if="dragActive"
                                                                   class="mb-2 text-sm sm:text-base lg:text-lg text-gray-500 text-center">
                                                                   <span class="font-semibold">Click to upload</span>
                                                                   or drag and drop
@@ -641,10 +782,33 @@ const handleSearchKeydown = (event: KeyboardEvent) => {
                                                                   PDF, PNG, JPG (MAX. 10MB per file)
                                                             </p>
                                                       </div>
-                                                      <input id="dropzone-file" type="file" multiple
+                                                      <input id="dropzone-file" type="file"
+                                                            :disabled="uploadForm.file.length > 0"
                                                             accept=".pdf,.png,.jpg,.jpeg" @change="handleFileChange"
                                                             class="hidden" />
                                                 </label>
+                                                <div class="py-5 flex items-center justify-start gap-2 w-full">
+
+                                                      <button v-if="checking"
+                                                            class="flex items-center gap-1 bg-primaryDark text-white px-4 py-2 text-sm font-semibold rounded-lg hover:bg-primaryDark/90  disabled:cursor-not-allowed"
+                                                            disabled size="md">
+                                                            <Spinner />
+                                                            Checking for errors...
+                                                      </button>
+
+                                                      <button v-if="noErrors"
+                                                            class="flex items-center gap-1 bg-primaryDark text-white px-4 py-2 text-sm font-semibold rounded-lg hover:bg-primaryDark/90  disabled:cursor-not-allowed"
+                                                            disabled size="md">
+                                                            <CheckCircle size="20" />
+                                                            No Errors Found
+                                                      </button>
+                                                      <button v-if="foundError"
+                                                            class="flex items-center gap-1 bg-primaryDark text-white px-4 py-2 text-sm font-semibold rounded-lg hover:bg-primaryDark/90  disabled:cursor-not-allowed"
+                                                            disabled size="md">
+                                                            <CheckCircle size="20" />
+                                                            Errors Found. Please check the results.
+                                                      </button>
+                                                </div>
                                           </div>
 
                                           <!-- Uploaded Files List -->
@@ -666,46 +830,95 @@ const handleSearchKeydown = (event: KeyboardEvent) => {
                                                 </div>
                                           </div>
 
-                                          <div v-if="!uploadForm.sendViaEmail" class="space-y-2">
-                                                <label
-                                                      class="block mb-2 text-sm sm:text-base font-extrabold text-gray-700">
-                                                      Schedule Date
-                                                </label>
-                                                <input v-model="uploadForm.scheduleDate" type="date"
-                                                      :required="!uploadForm.sendViaEmail"
-                                                      class="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all" />
-                                                <label
-                                                      class="block mb-2 text-sm sm:text-base font-extrabold text-gray-700">
-                                                      Schedule Time
-                                                </label>
-                                                <input v-model="uploadForm.scheduleTime" type="time"
-                                                      :required="!uploadForm.sendViaEmail"
-                                                      class="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all" />
+                                          <!-- Selections -->
+                                          <div class="lg:flex space-y-2 items-center justify-between gap-2 sm:gap-3">
+
+                                                <Label class="hover:bg-accent/50 flex items-start gap-3 rounded-lg border p-3 has-[[aria-checked=true]]:border-primaryDark has-[[aria-checked=true]]:bg-blue-50 dark:has-[[aria-checked=true]]:border-primaryDark dark:has-[[aria-checked=true]]:bg-primaryDark"
+                                                      for="whatsappToogle">
+                                                      <Checkbox id="whatsappToogle" v-model="uploadForm.sendViaWhatsapp"
+                                                            :default-value="uploadForm.sendViaWhatsapp"
+                                                            class="data-[state=checked]:border-primaryDark data-[state=checked]:bg-primaryDark border-primaryDark data-[state=checked]:text-white dark:data-[state=checked]:border-primaryDark dark:data-[state=checked]:bg-primaryDark" />
+                                                      <div class="grid gap-1.5 font-normal">
+                                                            <p
+                                                                  class="text-md text-gray-600 leading-none font-extrabold">
+                                                                  Send via Whatsapp
+                                                            </p>
+                                                            <p class="text-muted-foreground font-bold text-md">
+                                                                  Select this option if you want to send the result
+                                                                  through Whatsapp
+                                                            </p>
+                                                      </div>
+                                                </Label>
+
+                                                <Label class="hover:bg-accent/50 flex items-start gap-3 rounded-lg border p-3 has-[[aria-checked=true]]:border-primaryDark has-[[aria-checked=true]]:bg-blue-50 dark:has-[[aria-checked=true]]:border-primaryDark dark:has-[[aria-checked=true]]:bg-primaryDark"
+                                                      for="emailToogle">
+                                                      <Checkbox id="emailToogle" v-model="uploadForm.sendViaEmail"
+                                                            :default-value="uploadForm.sendViaEmail"
+                                                            class="data-[state=checked]:border-primaryDark data-[state=checked]:bg-primaryDark border-primaryDark data-[state=checked]:text-white dark:data-[state=checked]:border-primaryDark dark:data-[state=checked]:bg-primaryDark" />
+                                                      <div class="grid gap-1.5 font-normal">
+                                                            <p
+                                                                  class="text-md text-gray-600 leading-none font-extrabold">
+                                                                  Upload and send result immediately
+                                                            </p>
+                                                            <p class="text-muted-foreground font-bold text-md">
+                                                                  Select this option if you want to send the result
+                                                                  immediately after uploading
+                                                            </p>
+                                                      </div>
+                                                </Label>
+
+
+
+
+
                                           </div>
 
-                                          <!-- Actions Section -->
-                                          <div class="flex flex-col sm:flex-row sm:justify-between gap-4 pt-2 sm:pt-4">
-                                                <!-- Checkbox -->
-                                                <div class="flex items-center gap-2 sm:gap-3">
-                                                      <input type="checkbox" v-model="uploadForm.sendViaEmail"
-                                                            class="w-4 h-4 sm:w-5 sm:h-5 text-primaryDark bg-gray-100 border-gray-300 rounded focus:ring-primaryDark focus:ring-2 transition-all flex-shrink-0" />
-                                                      <span
-                                                            class="text-xs font-extrabold sm:text-sm lg:text-base text-gray-700">
-                                                            Upload and send result immediately
-                                                      </span>
+                                          <!-- Scheduler -->
+                                          <transition enter-active-class="transition-all duration-700 ease-out"
+                                                enter-from-class="opacity-0 max-h-0 scale-y-95"
+                                                enter-to-class="opacity-100 max-h-[500px] scale-y-100"
+                                                leave-active-class="transition-all duration-500 ease-in"
+                                                leave-from-class="opacity-100 max-h-[500px] scale-y-100"
+                                                leave-to-class="opacity-0 max-h-0 scale-y-95">
+
+                                                <div v-if="!uploadForm.sendViaEmail"
+                                                      class="space-y-2 origin-top overflow-hidden">
+
+                                                      <div>
+                                                            <label
+                                                                  class="block mb-2 text-sm sm:text-base font-extrabold text-gray-700">
+                                                                  Schedule Date
+                                                            </label>
+                                                            <input v-model="uploadForm.scheduleDate" type="date"
+                                                                  :required="!uploadForm.sendViaEmail" class="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 rounded-lg
+                    focus:ring-2 focus:ring-blue-500 focus:border-transparent focus:shadow-lg
+                    transition-all duration-300 ease-in-out hover:border-blue-400 hover:shadow-md" />
+                                                      </div>
+
+                                                      <div>
+                                                            <label
+                                                                  class="block mb-2 text-sm sm:text-base font-extrabold text-gray-700">
+                                                                  Schedule Time
+                                                            </label>
+                                                            <input v-model="uploadForm.scheduleTime" type="time"
+                                                                  :required="!uploadForm.sendViaEmail" class="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 rounded-lg
+                    focus:ring-2 focus:ring-blue-500 focus:border-transparent focus:shadow-lg
+                    transition-all duration-300 ease-in-out hover:border-blue-400 hover:shadow-md" />
+                                                      </div>
                                                 </div>
+                                          </transition>
+
+
+
+                                          <!-- Actions Section -->
+                                          <div class="flex flex-col sm:flex-row sm:justify-end gap-4 pt-2 sm:pt-4">
 
                                                 <!-- Buttons -->
                                                 <div class="flex gap-2 sm:gap-3 w-full sm:w-auto">
-                                                      <button type="submit" :disabled="(!uploadForm.sendViaEmail && (!uploadForm.scheduleDate && !uploadForm.scheduleTime)) || uploadForm.processing ||
-                                                            uploadedFiles.length === 0
-                                                            "
+                                                      <button type="submit"
+                                                            :disabled="(!uploadForm.sendViaEmail && (!uploadForm.scheduleDate || !uploadForm.scheduleTime)) || uploadedFiles.length === 0 || uploadForm.processing || foundError || checking"
                                                             class="flex-1 sm:flex-none sm:min-w-[100px] hover:-translate-y-1 duration-150 px-4 py-2 sm:py-2.5 text-sm sm:text-base font-semibold text-white transition-all bg-blue-600 rounded-lg hover:bg-blue-700 hover:shadow-lg disabled:bg-gray-400 disabled:cursor-not-allowed disabled:hover:transform-none">
-                                                            {{
-                                                                  uploadForm.processing
-                                                                        ? 'Uploading...'
-                                                                        : 'Upload'
-                                                            }}
+                                                            {{ uploadForm.processing ? 'Uploading...' : 'Upload' }}
                                                       </button>
                                                       <button type="button" @click="
                                                             () => {

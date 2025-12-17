@@ -35,4 +35,35 @@ return [
         ],
     ],
 
+    'twilio' => [
+        'sid' => env('TWILIO_SID'),
+        'auth_token' => env('TWILIO_AUTH_TOKEN'),
+        'phone_number' => env('TWILIO_PHONE_NUMBER'),
+        'content_Sid'
+    ],
+
+    'google' => [
+        'client_id' => env('GOOGLE_CLIENT_ID'),
+        'client_secret' => env('GOOGLE_CLIENT_SECRET'),
+        'redirect_uri' => env('GOOGLE_REDIRECT_URI'),
+        'credentials' => env('GOOGLE_CLIENT_CREDENTIALS'),
+
+        'project' => [
+            'id' => env('GOOGLE_PROJECT_ID'),
+            'processor' => [
+                'id' => env('GOOGLE_PROCESSOR_ID'),
+                'name' => env('GOOGLE_PROCESSOR_NAME'),
+                'location' => env('GOOGLE_PROCESSOR_LOCATION'),
+            ]
+        ]
+    ],
+
+    'claude' => [
+        'api_key' => env('CLAUDE_API_KEY'),
+    ],
+    'gemini' => [
+        'api_key' => env('GEMINI_API_KEY'),
+        'api_url' => env('GEMINI_API_URL')
+    ]
+
 ];

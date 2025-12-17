@@ -3,6 +3,7 @@
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ChatBotController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Clinics\EmailController;
 use App\Http\Controllers\Clinics\ResultsController;
@@ -84,4 +85,9 @@ Route::prefix('clinic')->middleware(['auth:clinic'])->name('user.')->group(funct
       // Get notification count
       Route::get('/notifications/count', [NotificationController::class, 'getCount'])
             ->name('notifications.count');
+
+      Route::post('/ocr/send', [ResultsController::class, 'sendToOcr'])
+            ->name('result.check');
+
+      Route::post('/chat', [ChatBotController::class, 'index'])->name('chat');
 });

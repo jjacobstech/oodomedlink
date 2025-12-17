@@ -214,7 +214,7 @@ class NotificationController extends Controller
     /**
      * Get notification count
      */
-    public function getCount(Request $request): JsonResponse
+    public function getCount(): JsonResponse
     {
         try {
             $user = Auth::user();

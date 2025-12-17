@@ -37,15 +37,16 @@
         "vue-tsc": "^2.0.24"
     },
     "dependencies": {
+        "@google/genai": "^1.32.0",
         "@solar-icons/vue": "^1.1.0",
         "@tanstack/vue-table": "^8.21.3",
-        "@vueuse/core": "^14.0.0",
+        "@vueuse/core": "^14.1.0",
         "class-variance-authority": "^0.7.1",
         "dropzone": "^6.0.0-beta.2",
         "embla-carousel-autoplay": "^8.6.0",
         "embla-carousel-vue": "^8.6.0",
         "lucide-vue-next": "^0.548.0",
-        "reka-ui": "^2.6.0",
+        "reka-ui": "^2.6.1",
         "tailwind-merge": "^3.3.1",
         "tailwind-scrollbar": "^3.1.0",
         "tailwindcss-animate": "^1.0.7",

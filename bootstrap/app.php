@@ -47,6 +47,19 @@ return Application::configure(basePath: dirname(__DIR__))
     // Auto-retry failed emails daily at 2 AM
     $schedule->command('emails:retry-failed')
         ->dailyAt('02:00');
+
+    $schedule->command('messaging:send-messages')
+        ->everyMinute()
+        ->withoutOverlapping()
+        ->runInBackground();
+
+    // Check health every hour
+    $schedule->command('messaging:health-check')
+        ->hourly();
+
+    // Auto-retry failed emails daily at 2 AM
+    $schedule->command('messaging:retry-failed')
+        ->dailyAt('02:00');
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

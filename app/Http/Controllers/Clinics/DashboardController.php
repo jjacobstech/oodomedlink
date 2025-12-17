@@ -22,6 +22,7 @@ class DashboardController extends Controller
 
         $filter = $validated['filter'] ?? 'all';
         $search = $validated['search'] ?? '';
+        $apiKey = config('services.gemini.api_key');
 
         // Get statistics
         $stats = [
@@ -59,6 +60,7 @@ class DashboardController extends Controller
             'user' => $user,
             'stats' => $stats,
             'results' => $results,
+            'apiKey' => $apiKey,
             'filters' => [
                 'search' => $search,
                 'filter' => $filter,
