@@ -42,6 +42,14 @@ class WhatsappMessaging implements Messaging
                 'year' => $data->year  ?? '',
             ];
 
+            //             Hello {{patient_name}},
+
+            // Thank you for visiting {{clinic_name}}, here is your test result attaches to this mail.
+
+            // If you didn't request this, you can safely ignore this message.
+
+            // Need help? Send a mail to {{clinic_name}} at {{clinic_email}} or contact {{clinic_number}} for support.
+
             $params = array_merge(
                 [
                     'from' =>  "whatsapp:$this->phone_number",

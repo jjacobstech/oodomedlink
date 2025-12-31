@@ -52,6 +52,8 @@ const sendMessage = async () => {
         });
 
         if (!response.data) {
+
+            console.log(response.data)
             toast({
                 title: 'Connection Error',
                 description: '',

@@ -18,6 +18,7 @@ class ChatBotController extends Controller
 
             $geminiChat = new GeminiChat();
             $response =  $geminiChat->init($validated['prompt'] ?? '');
+            file_put_contents(public_path('AIlogs.txt'), $response);
             return str_replace('*', '', $response->getData()->data->candidates[0]->content->parts[0]->text ?? false);
       }
 }
