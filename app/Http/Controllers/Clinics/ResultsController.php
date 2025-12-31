@@ -253,6 +253,7 @@ class ResultsController extends Controller
 
         $files = $validated['file'];
         $name = $validated['patient_name'];
+        $nameArray = explode(' ', $name);
         foreach ($files as $file) {
 
             $extension = $file->getClientOriginalExtension();
@@ -271,7 +272,7 @@ class ResultsController extends Controller
 
             $extractor = new TextExtractor();
             $document =  $extractor->processDocument($path, $mimeType);
-            $inputs = [$validated['patient_name'], $validated['result_type'], $validated['test_name'], $validated['test_date']];
+            $inputs = [...$nameArray, $validated['result_type'], $validated['test_name'], $validated['test_date']];
 
             $check = $this->validateText($document, $inputs);
             $text = $extractor->extractText($document);
