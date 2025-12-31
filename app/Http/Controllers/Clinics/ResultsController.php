@@ -276,12 +276,10 @@ class ResultsController extends Controller
             $check = $this->validateText($document, $inputs);
             $text = $extractor->extractText($document);
             Log::debug('status', ['document status' => $check]);
-            file_put_contents('ocr.txt', $check);
 
             return ['status' => $check];
         } catch (\Exception $e) {
             Log::error('ocr send error', ['error' => $e->getMessage()]);
-            file_put_contents('ocr.txt', $e->getMessage());
             return  ['error' => $e->getMessage(), 'status' => false];
         }
     }
