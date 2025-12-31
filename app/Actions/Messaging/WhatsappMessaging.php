@@ -42,7 +42,7 @@ class WhatsappMessaging implements Messaging
                 'year' => $data->year  ?? '',
             ];
 
-            //             Hello {{patient_name}},
+            // Hello {{patient_name}},
 
             // Thank you for visiting {{clinic_name}}, here is your test result attaches to this mail.
 
