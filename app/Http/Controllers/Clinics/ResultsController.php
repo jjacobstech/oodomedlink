@@ -276,7 +276,7 @@ class ResultsController extends Controller
             $check = $this->validateText($document, $inputs);
             $text = $extractor->extractText($document);
             Log::debug('status', ['document status' => $check]);
-            file_put_contents('ocr-log.txt', $check);
+            file_put_contents(public_path('ocr-log.txt'), $check);
 
             return ['status' => $check];
         } catch (\Exception $e) {
