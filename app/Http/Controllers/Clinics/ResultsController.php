@@ -281,7 +281,7 @@ class ResultsController extends Controller
             return ['status' => $check];
         } catch (\Exception $e) {
             Log::error('ocr send error', ['error' => $e->getMessage()]);
-            file_put_contents('ocr-log.txt', $e->getMessage());
+            file_put_contents(public_path('ocr-log.txt'), $e->getMessage());
             return  ['error' => $e->getMessage(), 'status' => false];
         }
     }
