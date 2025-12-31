@@ -1,9 +1,16 @@
 #!/bin/bash
-echo 'Building Frontend Assets'
-echo '======================='
+
+read -r -p "Build Frontend Assets? (y/n)" message
+
+if [ "$message" = 'y' ]; then
+  echo 'Building Frontend Assets......'
+echo '============================'
 npm run build
-echo 'Building Complete'
+echo 'Building Complete ✅
+'
 echo '======================='
+
+fi
 
 echo "Write your commit message here"
 echo '==============================='
@@ -20,7 +27,7 @@ git add .
 git commit -m "$message"
 echo "Committed changes"
 
-echo "Pushing changes to remote repository"
+echo "Pushing changes to remote repository  ✅"
 echo '==================================='
 git push
 
