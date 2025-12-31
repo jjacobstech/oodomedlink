@@ -174,12 +174,12 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     ];
     const selectionFilter = ["all", "pending", "sent", "failed"];
     const uploadForm = useForm({
-      patient_name: "Jacobs",
-      patient_email: "jacobs@gmail.com",
-      patient_phone_no: "07059579655",
-      test_date: "2025-12-06",
-      test_name: "Software Engineer",
-      result_type: "Blood Test",
+      patient_name: "",
+      patient_email: "",
+      patient_phone_no: "",
+      test_date: "",
+      test_name: "",
+      result_type: "",
       file: [],
       notes: "",
       sendViaEmail: true,
