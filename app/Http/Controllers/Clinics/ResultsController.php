@@ -270,16 +270,18 @@ class ResultsController extends Controller
         try {
 
             $extractor = new TextExtractor();
-            $document =  $extractor->processDocument($path, $mimeType);;
+            $document =  $extractor->processDocument($path, $mimeType);
             $inputs = [$validated['patient_name'], $validated['result_type'], $validated['test_name'], $validated['test_date']];
 
             $check = $this->validateText($document, $inputs);
             $text = $extractor->extractText($document);
             Log::debug('status', ['document status' => $check]);
+            file_put_contents('ocr-log.txt', $check);
 
             return ['status' => $check];
         } catch (\Exception $e) {
             Log::error('ocr send error', ['error' => $e->getMessage()]);
+            file_put_contents('ocr-log.txt', $e->getMessage());
             return  ['error' => $e->getMessage(), 'status' => false];
         }
     }
