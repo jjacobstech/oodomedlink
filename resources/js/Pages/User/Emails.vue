@@ -151,6 +151,8 @@ const formatDate = (dateString: string) => {
 const retryEmail = (email: PatientEmail) => {
     if (retrying.value) return;
 
+    console.log(email.id)
+
     retrying.value = email.id;
     const retryForm = useForm({
         id: email.id,
@@ -166,7 +168,7 @@ const retryEmail = (email: PatientEmail) => {
             })
         },
         onError: (errors) => {
-          //  console.error('Retry error:', errors);
+            console.error('Retry error:', errors);
             retrying.value = null;
         },
         preserveScroll: true,

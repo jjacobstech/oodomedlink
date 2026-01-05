@@ -55,10 +55,12 @@ class EmailController extends Controller
             'id' => 'required|exists:email_deliveries,id'
         ]);
 
+
         $email = EmailDelivery::find($validated['id']);
 
+
         // Verify the email belongs to the current user
-        if (Str::lower($email->sent_by) !== Str::lower(Auth::user()->name)) {
+        if (Str::lower($email->sent_by) !== Str::lower(Auth::id())) {
             abort(403, 'Unauthorized action.');
         }
 

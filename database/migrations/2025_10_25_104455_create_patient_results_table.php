@@ -21,7 +21,7 @@ return new class extends Migration
             $table->json('data')->nullable();
             $table->boolean('encrypted')->default(true);
             $table->longText('notes')->nullable();
-            $table->enum('status', ['pending', 'processed', 'sent', 'uploaded', 'archived'])->default('pending');
+            $table->enum('status', ['pending', 'processed', 'sent', 'uploaded', 'archived', 'failed'])->default('pending');
             $table->timestamp('uploaded_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrentOnUpdate()->nullable()->default(now());
 

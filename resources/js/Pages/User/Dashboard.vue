@@ -10,7 +10,7 @@ import Label from '@/components/ui/label/Label.vue';
 import { CheckCircle } from '@solar-icons/vue';
 import axios from 'axios';
 import Toaster from '@/components/ui/toast/Toaster.vue';
-
+import { Refresh } from '@solar-icons/vue';
 
 interface file {
       id: string;
@@ -87,6 +87,13 @@ interface FormData {
       sendViaWhatsapp: boolean;
       scheduleDate: string;
       scheduleTime: string;
+      summary: string;
+}
+
+interface Trace {
+      name: boolean;
+      result_type: boolean;
+      test_name: boolean;
 }
 
 const props = defineProps<Props>();
@@ -99,10 +106,15 @@ const { toast } = useToast();
 const noErrors = ref<boolean>(false);
 const foundError = ref<boolean>(false);
 const checking = ref(false);
+const connectionError = ref(false);
+const errorTrace = ref<Trace>();
 
 const file = ref(null);
 const error = ref(null);
 const dragActive = ref(false);
+const documentText = ref('');
+const summary = ref()
+const summarizing = ref(false);
 
 const stats = [
       {
@@ -135,22 +147,81 @@ const selectionFilter = ['all', 'pending', 'sent', 'failed'];
 
 // Upload form
 const uploadForm = useForm<FormData>({
-      patient_name: 'Jacobs',
-      patient_email: 'jacobs@gmail.com',
-      patient_phone_no: '07059579655',
-      test_date: '2025-12-06',
-      test_name: 'Software Engineer',
-      result_type: 'Blood Test',
+      patient_name: '',
+      patient_email: '',
+      patient_phone_no: '',
+      test_date: '',
+      test_name: '',
+      result_type: '',
       file: [],
       notes: '',
       sendViaEmail: true,
       sendViaWhatsapp: false,
       scheduleDate: '',
       scheduleTime: '',
+      summary: ''
 });
 
 
 const uploadedFiles = ref<File[]>([]);
+const resultTypes = ref<string[]>([
+      'Blood Test',
+      'Complete Blood Count (CBC)',
+      'Blood Chemistry Panel',
+      'Lipid Panel',
+      'Liver Function Tests',
+      'Kidney Function Tests',
+      'Thyroid Function Tests',
+      'Glucose Test',
+      'Coagulation Tests',
+      'Urinalysis',
+      'Urine Culture',
+      '24-Hour Urine Collection',
+      'X-Ray',
+      'CT Scan',
+      'MRI',
+      'Ultrasound',
+      'Mammography',
+      'PET Scan',
+      'Tissue Biopsy',
+      'Bone Marrow Biopsy',
+      'Skin Biopsy',
+      'Lumbar Puncture (CSF)',
+      'Bacterial Culture',
+      'Viral Culture',
+      'Fungal Culture',
+      'Parasite Test',
+      'Allergy Test',
+      'Antibody Test',
+      'Autoimmune Panel',
+      'Genetic Test',
+      'DNA Test',
+      'PCR Test',
+      'Drug Screening',
+      'Toxicology Screen',
+      'Hormone Panel',
+      'Pregnancy Test',
+      'STI Test',
+      'COVID-19 Test',
+      'Flu Test',
+      'Strep Test',
+      'Helicobacter Pylori Test',
+      'Tuberculosis Test',
+      'Bone Density (DEXA)',
+      'EKG/ECG',
+      'Echocardiogram',
+      'Stress Test',
+      'Holter Monitor',
+      'Sleep Study',
+      'Pulmonary Function Test',
+      'Endoscopy',
+      'Colonoscopy',
+      'Gastroscopy',
+      'Bronchoscopy',
+      'Vision Test',
+      'Hearing Test',
+      'Other'
+])
 
 // File input handling
 const handleFileChange = (event: Event) => {
@@ -201,7 +272,14 @@ const checkDocument = async () => {
                   formData.append('file[]', uploadForm.file[i]);
             }
       } else {
-            // console.error("No files selected for upload.");
+            toast({
+                  title: 'No Files Selected',
+                  description: 'Please select at least one document to upload and continue.',
+                  type: 'foreground',
+                  variant: 'default',
+                  class: 'text-primaryDark bg-white shadow-lg',
+                  open: true,
+            });
             return; // Exit if no files are present
       }
 
@@ -209,38 +287,27 @@ const checkDocument = async () => {
 
             const check = await axios.post(route('user.result.check'), formData);
 
-            console.log("Upload successful:", check.data.error);
+            errorTrace.value = check.data.trace
 
-            if (!check.data.status) {
-                  toast({
-                        title: 'Connection Error',
-                        description: 'Document Check failed , check your connection',
-                        type: 'foreground',
-                        variant: 'default',
-                        class: 'text-primaryDark bg-white shadow-lg',
-                        open: true,
 
-                  });
-                  checking.value = false;
-                  noErrors.value = false;
-                  foundError.value = true;
-                  // console.log('error', check.data.status);
-                  return 0;
-            }
-
-            if (check.data.status) {
+            if (check.data.status === true) {
                   checking.value = false;
                   noErrors.value = true;
                   foundError.value = false;
+
+                  documentText.value = check.data.document
+
                   return 1;
             }
 
-            else if (!check.data.status) {
+            else if (check.data.status === false) {
+
                   checking.value = false;
                   noErrors.value = false;
                   foundError.value = true;
-                  // console.log('failed', check.data.status);
+                  documentText.value = check.data.document
                   return;
+
             }
             else {
                   toast({
@@ -252,19 +319,32 @@ const checkDocument = async () => {
                         open: true,
 
                   });
+                  connectionError.value = true
                   checking.value = false;
                   noErrors.value = false;
-                  foundError.value = true;
-                  // console.log('error', check.data.status);
+                  foundError.value = false;
+                  documentText.value = check.data.document
                   return 0;
+
             }
 
       } catch (error: unknown) {
-            // console.error("Error during upload:", error);
+            console.error("Error during upload:", error);
+            toast({
+                  title: 'Connection Error',
+                  description: 'Document Check failed , check your connection',
+                  type: 'foreground',
+                  variant: 'default',
+                  class: 'text-primaryDark bg-white shadow-lg',
+                  open: true,
+
+            });
+            connectionError.value = true
+
 
       }
       checking.value = false;
-      foundError.value = true;
+      foundError.value = false;
       return 0;
 }
 
@@ -320,6 +400,73 @@ const applyFilters = (filterValue?: string) => {
             preserveState: true,
       });
 };
+
+const summarize = async () => {
+
+      summarizing.value = true
+      const formData = new FormData();
+
+      formData.append('text', documentText.value)
+
+      try {
+
+            const resultSummary = await axios.post(route('user.result.summarize'), formData);
+
+
+
+
+            if (resultSummary.data) {
+                  summary.value = resultSummary.data
+                  uploadForm.summary = summary.value
+                  summarizing.value = false
+
+            }
+
+            else if (resultSummary.data === false) {
+                  toast({
+                        title: 'Server error',
+                        description: 'Summary failed , an error has occured',
+                        type: 'foreground',
+                        variant: 'default',
+                        class: 'text-primaryDark bg-white shadow-lg',
+                        open: true,
+
+                  });
+                  summarizing.value = false
+
+                  return;
+            }
+            else {
+                  toast({
+                        title: 'Connection Error',
+                        description: 'Summary failed , check your connection',
+                        type: 'foreground',
+                        variant: 'default',
+                        class: 'text-primaryDark bg-white shadow-lg',
+                        open: true,
+
+                  });
+                  summarizing.value = false
+
+
+                  return 0;
+            }
+
+      } catch (error: unknown) {
+            summarizing.value = false
+            // console.error("Error during upload:", error);
+            toast({
+                  title: 'Connection Error',
+                  description: 'Document Check failed , check your connection',
+                  type: 'foreground',
+                  variant: 'default',
+                  class: 'text-primaryDark bg-white shadow-lg',
+                  open: true,
+
+            });
+
+      }
+}
 
 // Clear all filters
 const clearFilters = () => {
@@ -456,8 +603,8 @@ const handleSearchKeydown = (event: KeyboardEvent) => {
                                                             "
                                                       class="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm lg:text-base font-medium rounded-lg transition-all hover:shadow-md">
                                                       {{
-                                                            selection.charAt(0).toUpperCase() +
-                                                            selection.slice(1)
+                                                      selection.charAt(0).toUpperCase() +
+                                                      selection.slice(1)
                                                       }}
                                                 </button>
                                           </div>
@@ -538,7 +685,7 @@ const handleSearchKeydown = (event: KeyboardEvent) => {
                                                                         <div
                                                                               class="text-xs sm:text-sm lg:text-base font-medium text-gray-900">
                                                                               {{
-                                                                                    result.patient.full_name
+                                                                              result.patient.full_name
                                                                               }}
                                                                         </div>
                                                                         <!-- Show result type on mobile -->
@@ -566,13 +713,13 @@ const handleSearchKeydown = (event: KeyboardEvent) => {
                                                                                     class="flex items-center gap-2 text-xs sm:text-sm text-gray-700">
                                                                                     <span>{{
                                                                                           getFileIcon(
-                                                                                                result.file_type
+                                                                                          result.file_type
                                                                                           )
-                                                                                    }}</span>
+                                                                                          }}</span>
                                                                                     <span
                                                                                           class="truncate max-w-[150px] xl:max-w-[200px]">
                                                                                           {{
-                                                                                                file.original_file_name
+                                                                                          file.original_file_name
                                                                                           }}
                                                                                     </span>
                                                                               </span>
@@ -583,9 +730,9 @@ const handleSearchKeydown = (event: KeyboardEvent) => {
                                                                   <td
                                                                         class="hidden xl:table-cell px-3 sm:px-4 lg:px-6 py-3 sm:py-4 text-xs sm:text-sm text-gray-700">
                                                                         {{
-                                                                              formatDate(
-                                                                                    result.uploaded_at
-                                                                              )
+                                                                        formatDate(
+                                                                        result.uploaded_at
+                                                                        )
                                                                         }}
                                                                   </td>
 
@@ -720,14 +867,9 @@ const handleSearchKeydown = (event: KeyboardEvent) => {
                                                 <select v-model="uploadForm.result_type" required
                                                       class="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
                                                       <option value="">Select result type</option>
-                                                      <option value="Blood Test">Blood Test</option>
-                                                      <option value="X-Ray">X-Ray</option>
-                                                      <option value="MRI">MRI</option>
-                                                      <option value="CT Scan">CT Scan</option>
-                                                      <option value="Lab Analysis">
-                                                            Lab Analysis
+                                                      <option v-for="type in resultTypes" :key="type" :value="type">
+                                                            {{ type }}
                                                       </option>
-                                                      <option value="Other">Other</option>
                                                 </select>
                                           </div>
 
@@ -787,27 +929,87 @@ const handleSearchKeydown = (event: KeyboardEvent) => {
                                                             accept=".pdf,.png,.jpg,.jpeg" @change="handleFileChange"
                                                             class="hidden" />
                                                 </label>
-                                                <div class="py-5 flex items-center justify-start gap-2 w-full">
 
-                                                      <button v-if="checking"
-                                                            class="flex items-center gap-1 bg-primaryDark text-white px-4 py-2 text-sm font-semibold rounded-lg hover:bg-primaryDark/90  disabled:cursor-not-allowed"
-                                                            disabled size="md">
-                                                            <Spinner />
-                                                            Checking for errors...
-                                                      </button>
+                                                <div class="flex items-center justify-between w-full"
+                                                      v-if="checking || noErrors">
 
-                                                      <button v-if="noErrors"
-                                                            class="flex items-center gap-1 bg-primaryDark text-white px-4 py-2 text-sm font-semibold rounded-lg hover:bg-primaryDark/90  disabled:cursor-not-allowed"
-                                                            disabled size="md">
-                                                            <CheckCircle size="20" />
-                                                            No Errors Found
-                                                      </button>
-                                                      <button v-if="foundError"
-                                                            class="flex items-center gap-1 bg-primaryDark text-white px-4 py-2 text-sm font-semibold rounded-lg hover:bg-primaryDark/90  disabled:cursor-not-allowed"
+                                                      <div class="py-3 w-1/2 flex items-center justify-start gap-2 ">
+
+                                                            <button v-if="checking"
+                                                                  class="flex items-center gap-1 bg-primaryDark text-white px-4 py-2 text-sm font-semibold rounded-lg hover:bg-primaryDark/90  disabled:cursor-not-allowed"
+                                                                  disabled size="md">
+                                                                  <Spinner />
+                                                                  Checking for errors...
+                                                            </button>
+
+                                                            <button v-if="noErrors"
+                                                                  class="flex items-center gap-1 bg-green-500 text-white px-4 py-2 text-sm font-semibold rounded-lg hover:bg-green-500/90  disabled:cursor-not-allowed"
+                                                                  disabled size="md">
+                                                                  <CheckCircle size="20" />
+                                                                  No Errors Found
+                                                            </button>
+                                                      </div>
+
+                                                      <div class="flex w-1/2 py-3 justify-end items-center">
+                                                            <div @click="summarize" v-if="noErrors"
+                                                                  class=" flex items-center gap-2 bg-green-500 text-white px-4 py-2 cursor-pointer  text-sm font-semibold rounded-lg hover:bg-green-500/90  disabled:cursor-not-allowed ">
+                                                                  <Spinner v-show="summarizing" />
+                                                                  {{ summarizing ? 'Summarizing' : 'Summarize Result' }}
+                                                            </div>
+                                                      </div>
+
+                                                </div>
+
+                                                <div class="w-full flex justify-between my-3  items-center"
+                                                      v-if="foundError">
+                                                      <button
+                                                            class="flex items-center gap-1 bg-red-500 text-white px-4 py-2 text-sm font-semibold rounded-lg hover:bg-red-500/90  disabled:cursor-not-allowed"
                                                             disabled size="md">
                                                             <CheckCircle size="20" />
                                                             Errors Found. Please check the results.
                                                       </button>
+
+                                                      <button @click="handleFileChange"
+                                                            class="flex items-center gap-1 bg-primaryDark text-white px-4 py-2 text-sm font-semibold rounded-lg hover:bg-red-500/90  disabled:cursor-not-allowed"
+                                                            size="md">
+                                                            <Refresh size="20" />
+                                                            Retry
+                                                      </button>
+                                                </div>
+
+                                                <div class="w-full flex justify-end my-3  items-center"
+                                                      v-if="connectionError">
+                                                      <button @click="handleFileChange"
+                                                            class="flex items-center gap-1 bg-red-500 text-white px-4 py-2 text-sm font-semibold rounded-lg hover:bg-red-500/90  disabled:cursor-not-allowed"
+                                                            size="md">
+                                                            <Refresh size="20" />
+                                                            Retry
+                                                      </button>
+                                                </div>
+
+                                                <div class="w-full flex gap-5 my-3  items-center" v-if="errorTrace">
+                                                      <button v-if="!errorTrace.name"
+                                                            class="flex justify-between items-center gap-1 bg-red-500 text-white px-4 py-2 text-sm font-semibold rounded-lg hover:bg-red-500/90  disabled:cursor-not-allowed"
+                                                            disabled size="md">
+                                                            <CloseCircle size="20" />
+                                                            Name
+                                                      </button>
+
+                                                      <button v-if="!errorTrace.result_type"
+                                                            class="flex justify-between items-center gap-1 bg-red-500 text-white px-4 py-2 text-sm font-semibold rounded-lg hover:bg-red-500/90  disabled:cursor-not-allowed"
+                                                            disabled size="md">
+                                                            <CloseCircle size="20" />
+                                                            Result Type
+                                                      </button>
+
+                                                      <button v-if="!errorTrace.test_name"
+                                                            class="flex justify-between items-center gap-1 bg-red-500 text-white px-4 py-2 text-sm font-semibold rounded-lg hover:bg-red-500/90  disabled:cursor-not-allowed"
+                                                            disabled size="md">
+                                                            <CloseCircle size="20" />
+                                                            Test Name
+                                                      </button>
+
+
                                                 </div>
                                           </div>
 
@@ -829,6 +1031,14 @@ const handleSearchKeydown = (event: KeyboardEvent) => {
                                                       </button>
                                                 </div>
                                           </div>
+
+                                          <!-- Summary -->
+                                          <div v-show="summary">
+                                                <textarea v-model="summary" rows="8"
+                                                      class="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm sm:text-base border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
+                                                 </textarea>
+                                          </div>
+
 
                                           <!-- Selections -->
                                           <div class="lg:flex space-y-2 items-center justify-between gap-2 sm:gap-3">
@@ -956,7 +1166,7 @@ const handleSearchKeydown = (event: KeyboardEvent) => {
                                           <p class="text-sm text-gray-600">
                                                 <strong>Patient:</strong>
                                                 {{ previewFile.patient.full_name }} ({{
-                                                      previewFile.patient.email
+                                                previewFile.patient.email
                                                 }})
                                           </p>
                                           <p class="text-sm text-gray-600">

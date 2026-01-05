@@ -1,0 +1,111 @@
+{
+    "test_map": [true, true, false, true, false],
+    "exists_map": {
+        "Emily": true,
+        "Johnson": true,
+        "Blood Test": false,
+        "Cardiology": true,
+        "02\/02\/2025": false
+    },
+    "validation": {
+        "summary": {
+            "total_lines": 27,
+            "non_empty_lines": 26,
+            "total_characters": 1208,
+            "word_count": 163,
+            "terms_searched": 5,
+            "terms_found": 3,
+            "all_terms_exist": false
+        },
+        "term_analysis": {
+            "Emily": {
+                "exists": true,
+                "count": 0,
+                "matches": [],
+                "confidence": 1
+            },
+            "Johnson": {
+                "exists": true,
+                "count": 0,
+                "matches": [],
+                "confidence": 1
+            },
+            "Blood Test": {
+                "exists": false,
+                "count": 0,
+                "matches": [],
+                "confidence": 0
+            },
+            "Cardiology": {
+                "exists": true,
+                "count": 0,
+                "matches": [],
+                "confidence": 1
+            },
+            "02\/02\/2025": {
+                "exists": false,
+                "count": 0,
+                "matches": [],
+                "confidence": 0
+            }
+        },
+        "lines_with_terms": [
+            {
+                "line_number": 3,
+                "content": "Name: Emily Johnson",
+                "length": 19,
+                "is_empty": false,
+                "found_terms": ["Emily", "Johnson"]
+            },
+            {
+                "line_number": 8,
+                "content": "Specialty: Cardiology",
+                "length": 21,
+                "is_empty": false,
+                "found_terms": ["Cardiology"]
+            },
+            {
+                "line_number": 11,
+                "content": "This medical report is prepared for Emily Johnson, following her consultation and",
+                "length": 81,
+                "is_empty": false,
+                "found_terms": ["Emily", "Johnson"]
+            },
+            {
+                "line_number": 13,
+                "content": "this report is to document Ms. Johnson's current cardiac health status and outline the",
+                "length": 86,
+                "is_empty": false,
+                "found_terms": ["Johnson"]
+            },
+            {
+                "line_number": 16,
+                "content": "Ms. Johnson has a history of hypertension, diagnosed three years ago, which she has",
+                "length": 83,
+                "is_empty": false,
+                "found_terms": ["Johnson"]
+            },
+            {
+                "line_number": 21,
+                "content": "Ms. Johnson presented with intermittent chest pain, primarily on exertion, and",
+                "length": 78,
+                "is_empty": false,
+                "found_terms": ["Johnson"]
+            }
+        ],
+        "exists_map": {
+            "Emily": true,
+            "Johnson": true,
+            "Blood Test": false,
+            "Cardiology": true,
+            "02\/02\/2025": false
+        },
+        "match_map": {
+            "Emily": [],
+            "Johnson": [],
+            "Blood Test": [],
+            "Cardiology": [],
+            "02\/02\/2025": []
+        }
+    }
+}

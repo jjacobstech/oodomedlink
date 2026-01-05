@@ -101,7 +101,7 @@ const handleNotificationClick = (notification: Notification) => {
                   </div>
             </DropdownMenuTrigger>
 
-            <DropdownMenuContent align="end" class="w-80 max-w-[calc(100vw-2rem)] p-0 md:w-96">
+            <DropdownMenuContent align="start" class="w-80 mr-5 max-w-[calc(100vw-2rem)] p-0 md:w-96">
 
                   <!-- Header -->
                   <DropdownMenuLabel class="border-b px-4 py-3">

@@ -18,14 +18,72 @@ const auth = usePage().props.auth;
 const chat = ref(false);
 const { toast } = useToast();
 
+interface Messages {
+    id: string | number
+    text: string
+    sender: string
+}
+
 // The array that holds all messages
-const messages = ref([
-    { id: 1, text: 'Hello! How can I help you?', sender: 'AI' },
-]);
+const messages = ref<Messages[]>([]);
 
 const newMessageText = ref('');
 const messageContainer = ref<HTMLDivElement | null>(null);
 const loading = ref(false);
+
+const initMessage = async () => {
+
+    chat.value = !chat.value
+
+    if (messages.value.length > 0) return;
+    const newId = Date.now();
+
+    try {
+        // Send the message to the server
+        const response = await axios.post(route('user.chat'), {
+            prompt: 'Hello'
+        });
+
+        if (!response.data) {
+
+            console.log(response.data)
+            toast({
+                title: 'Connection Error',
+                description: '',
+                type: 'foreground',
+                variant: 'default',
+                class: 'text-primaryDark bg-white shadow-lg',
+                open: true,
+            });
+            loading.value = false;
+
+            return 0;
+        }
+
+
+        // Add the new message to the messages array
+        messages.value.push({
+            id: newId,
+            text: response.data,
+            sender: 'AI',
+        });
+
+        loading.value = false;
+
+
+        // Optional: Auto-scroll to the bottom of the chat after the DOM updates
+        await nextTick();
+        if (messageContainer.value) {
+            messageContainer.value.scrollTop = messageContainer.value.scrollHeight;
+        }
+    }
+    catch (error) {
+        console.log(error);
+        loading.value = false;
+        return;
+    }
+};
+
 
 const sendMessage = async () => {
 
@@ -98,11 +156,13 @@ const sendMessage = async () => {
         <Toaster />
         <AppSidebar />
         <main class="relative h-screen w-full bg-primaryLight">
-            <div class="flex items-center justify-between bg-primaryDark/50 p-5 px-10">
-                <SidebarTrigger
-                    class="text-white transition-all duration-150 hover:-translate-y-1 hover:bg-white hover:text-primaryDark" />
+            <div class="flex w-full items-center justify-between bg-primaryDark/50 p-5  md:px-10">
+                <div class="flex justify-start">
+                    <SidebarTrigger
+                        class="text-white transition-all duration-150 hover:-translate-y-1 hover:bg-white hover:text-primaryDark" />
+                </div>
 
-                <div class="flex items-center justify-between gap-16">
+                <div class="flex items-center w-[25%] md:w-1/2 justify-end gap-5 md:gap-12">
                     <Notifications />
                     <Avatar>
                         <AvatarImage :src="auth.user.avatar" alt="@unovue" />
@@ -129,12 +189,13 @@ const sendMessage = async () => {
     </SidebarProvider>
 
     <transition name="fade-slide">
-        <div v-if="!chat" @click="chat = !chat"
+        <div v-if="!chat" @click="initMessage"
             class="fixed bottom-10 right-5 cursor-pointer bg-primaryDark rounded-md text-center shadow-lg p-2">
-            <div class="flex w-full justify-center items-center">
-                <MessageCircleDashed :size="50" class="text-white shadow-lg" />
+            <div class="flex w-full justify-center md:px-4 items-center">
+                <MessageCircleDashed :size="50" class="text-white md:block hidden shadow-lg" />
+                <MessageCircleDashed :size="30" class="text-white shadow-lg block md:hidden" />
             </div>
-            <p class="text-white text-md font-extrabold px-2 py-1">Chat with us</p>
+            <p class="text-white text-md font-extrabold px-2 py-1">Chat</p>
         </div>
     </transition>
 
@@ -166,6 +227,9 @@ const sendMessage = async () => {
                     {{ message.text ?? 'hello' }}
                 </h1>
                 <div v-if="loading" class="flex justify-center items-center">
+                    <Spinner class="w-6 h-6 text-primaryDark mr-auto " />
+                </div>
+                <div v-if="messages.length === 0" class="flex justify-center items-center">
                     <Spinner class="w-6 h-6 text-primaryDark mr-auto " />
                 </div>
             </div>

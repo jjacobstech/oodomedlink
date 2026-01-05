@@ -54,6 +54,9 @@ Route::prefix('clinic')->middleware(['auth:clinic'])->name('user.')->group(funct
             Route::post('send', [ResultsController::class, 'send'])->name('result.send');
             Route::post('/user/emails/{email}/retry', [EmailController::class, 'retry'])
                   ->name('emails.retry');
+
+            Route::post('/summarize', [ResultsController::class, 'summarizeResult'])
+                  ->name('result.summarize');
       });
 
       Route::prefix('/email')->group(function () {
@@ -88,6 +91,7 @@ Route::prefix('clinic')->middleware(['auth:clinic'])->name('user.')->group(funct
 
       Route::post('/ocr/send', [ResultsController::class, 'sendToOcr'])
             ->name('result.check');
+
 
       Route::post('/chat', [ChatBotController::class, 'index'])->name('chat');
 });

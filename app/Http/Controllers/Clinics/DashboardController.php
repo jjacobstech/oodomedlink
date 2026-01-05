@@ -24,6 +24,7 @@ class DashboardController extends Controller
         $search = $validated['search'] ?? '';
         $apiKey = config('services.gemini.api_key');
 
+        // dd($filter);
         // Get statistics
         $stats = [
             'total_uploads' => PatientResult::where('clinic_id', $user->id)->count(),
@@ -32,7 +33,7 @@ class DashboardController extends Controller
                 ->where('status', 'pending')
                 ->count(),
             'completed_result' => PatientResult::where('clinic_id', $user->id)
-                ->where('status', 'sent') // Changed from 'completed' to match frontend expectations
+                ->where('status', 'uploaded') // Changed from 'completed' to match frontend expectations
                 ->count(),
         ];
 
