@@ -4,9 +4,8 @@
 <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>Oodomedlink</title>
+      <title>Lab Test Results - OodoMedlink</title>
       <style>
-            /* CLIENT-SAFE INLINE STYLES RECOMMENDED — keep this block minimal for preview clients */
             body,
             table,
             td {
@@ -30,7 +29,8 @@
             body {
                   margin: 0;
                   padding: 0;
-                  width: 100% !important
+                  width: 100% !important;
+                  background-color: #f4f6f8;
             }
 
             a[x-apple-data-detectors] {
@@ -56,10 +56,7 @@
 </head>
 
 <body
-      style="background:#f4f6f8;margin:0;padding:24px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;">
-
-      <!-- Hidden preheader text : shows in inbox preview -->
-
+      style="background-color:#f4f6f8;margin:0;padding:24px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;">
 
       <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
             <tr>
@@ -67,50 +64,55 @@
 
                         <!-- Outer container -->
                         <table class="container" width="600" cellpadding="0" cellspacing="0" role="presentation"
-                              style="width:600px;background:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 6px 18px rgba(10,15,30,0.08);">
+                              style="width:600px;background-color:#ffffff;border-radius:12px;box-shadow:0 2px 8px rgba(10,15,30,0.1);overflow:hidden;">
 
                               <!-- Header -->
                               <tr>
                                     <td
-                                          style="padding:24px 28px ;background:linear-gradient(90deg,#0466fc 0%,#4CAF50 100%);color:white;">
-                                          <h1 style="margin:0;font-size:20px;letter-spacing:0.2px;">
-                                                {{ $receipient->full_name }}'s' Test Result
+                                          style="padding:24px 28px;background:linear-gradient(90deg,#0466fc 0%,#4CAF50 100%);color:white;">
+                                          <h1
+                                                style="margin:0;font-size:20px;font-weight:600;letter-spacing:0.2px;line-height:1.4;">
+                                                {{ $receipient->full_name }} Test Result
                                           </h1>
-                                          <p style="margin:6px 0 0;font-size:13px;opacity:0.95">Thank you for visiting
-                                                {{ $clinic->name ?? '' }}
+                                          <p style="margin:8px 0 0;font-size:13px;color:white;">
+                                                Thank you for visiting {{ $clinic->name ?? 'OodoMedlink' }}
                                           </p>
-                                          </td>
-                                          </tr>
+                                    </td>
+                                    </tr>
 
                               <!-- Content -->
                               <tr>
-                                    <td style="padding:28px;color:#0f1724;">
+                                    <td style="padding:28px;color:#0f1724;font-size:15px;line-height:1.6;">
 
-                                          <p style="margin:0 0 16px;font-size:15px;">Hello {{ $receipient->full_name }},
+                                          <p style="margin:0 0 16px;font-size:15px;color:#0f1724;">
+                                                Hello {{ $receipient->full_name }},
                                           </p>
 
-                                          <p style="margin:0 0 24px;font-size:15px;color:#334155;line-height:1.45;">
-                                                Thank you for visiting {{ Str::ucfirst($clinic->name) ?? '' }}, here is
-                                                your test result
-                                                attaches to this mail.
-
+                                          <p style="margin:0 0 24px;font-size:15px;color:#334155;line-height:1.6;">
+                                                Thank you for visiting
+                                                {{ Str::ucfirst($clinic->name) ?? 'OodoMedlink' }}. Your test results
+                                                are attached to this email.
                                           </p>
 
                                           @if ($notes)
-                                                <p style="margin:0 0 24px;font-size:15px;color:#334155;line-height:1.45;">
-                                                      {!! $notes !!}
-                                                      </p>
+                                                                    <div style="margin:20px 0;padding:16px;background-color:#f9fafb;border-left:4px solid #0466fc;border-radius:4px;">
+                                                                              <p style="margin:0;font-size:15px;color:#334155;line-height:1.6;">
+                                                                                      {{ strip_tags($notes) }}
+                                                                              </p>
+                                                                    </div>
+                                                              @endif
+<p style="margin:24px 0 0;font-size:13px;color:#64748b;line-height:1.5;">
+      If you didn't request this, you can safely ignore this email.
+</p>
 
-                                          @endif
-                                          <p style="margin:20px 0 0;font-size:13px;color:#64748b;">If you didn't request
-                                                this, you can
-                                                safely ignore this email.</p>
+                                          <hr style="border:none;border-top:1px solid #eef2f7;margin:24px 0;" />
 
-                                          <hr style="border:none;border-top:1px solid #eef2f7;margin:20px 0;" />
-
-                                          <p style="margin:0;font-size:13px;color:#94a3b8;">Need help? Send a mail to
-                                                <a href="mailto:{{ $clinic->email }} ">{{ Str::ucfirst($clinic->name) }}</a>
-                                                or contact {{ $clinic->phone_no }} for support.
+                                          <p style="margin:0;font-size:13px;color:#94a3b8;line-height:1.6;">
+                                                <strong style="color:#0f1724;">Need help?</strong><br>
+                                                Email: <a href="mailto:{{ $clinic->email }}"
+                                                      style="color:#0466fc;text-decoration:none;">{{ $clinic->email }}</a><br>
+                                                Phone: {{ $clinic->phone_no }}<br>
+                                                Organization: {{ Str::ucfirst($clinic->name) }}
                                           </p>
 
                                     </td>
@@ -118,14 +120,16 @@
 
                               <!-- Footer -->
                               <tr>
-                                    <td style="background:#fbfdff;padding:18px 24px 28px;color:#94a3b8;font-size:12px;">
+                                    <td style="background-color:#fbfdff;padding:18px 24px 28px;color:#94a3b8;font-size:12px;border-top:1px solid #eef2f7;">
                                           <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
                                                 <tr>
                                                       <td style="vertical-align:middle;">
-                                                            <strong style="color:#0f1724;font-size:13px">{{ Str::ucfirst($clinic->name) }}</strong>
-                                                            <div style="font-size:12px;margin-top:6px;">This email was
-                                                                  sent to
-                                                                  {{$receipient->full_name}}. © {{$year}} OodoMedlink
+                                                            <strong style="color:#0f1724;font-size:13px;display:block;margin-bottom:6px;">
+                                                                  {{ Str::ucfirst($clinic->name) }}
+                                                            </strong>
+                                                            <div style="font-size:12px;line-height:1.6;color:#94a3b8;">
+                                                                  This email was sent to {{ $receipient->email }}<br>
+                                                                  &copy; {{ $year }} OodoMedlink. All rights reserved.
                                                             </div>
                                                       </td>
                                                 </tr>

@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Support\Facades\RateLimiter;
+use Symfony\Component\Mailer\Transport\Smtp\SmtpTransport;
 
 Route::middleware(['throttle:6,1'])->prefix('system')->group(function () {
 
@@ -87,7 +88,17 @@ Route::middleware(['throttle:6,1'])->prefix('system')->group(function () {
       })->name('db.migrate.fresh');
 });
 
-// In RouteServiceProvider or bootstrap/app.php, add rate limiter
-// RateLimiter::for('system', function (Request $request) {
-//       return Limit::perMinute(5)->by($request->ip());
-// });
+
+
+Route::get('/test-send', function () {
+      try {
+            \Mail::raw('This is a test email', function ($message) {
+                  $message->to('jacobsjoshua81@gmail.com')
+                        ->from(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'))
+                        ->subject('SMTP Test');
+            });
+            return 'Email sent!';
+      } catch (\Exception $e) {
+            return 'Error: ' . $e->getMessage();
+      }
+});
