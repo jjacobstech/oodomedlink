@@ -1,6 +1,0 @@
-HTTP/1.0 200 OK
-Cache-Control: no-cache, private
-Content-Type:  application/json
-Date:          Mon, 05 Jan 2026 19:55:07 GMT
-
-{"data":{"candidates":[{"content":{"parts":[{"text":"Hello! How can I help you today?"}],"role":"model"},"finishReason":"STOP","index":0}],"usageMetadata":{"promptTokenCount":1,"candidatesTokenCount":9,"totalTokenCount":33,"promptTokensDetails":[{"modality":"TEXT","tokenCount":1}],"thoughtsTokenCount":23},"modelVersion":"gemini-2.5-flash","responseId":"ExdcabzfIvqnnsEPn6ux2Ao"}}
