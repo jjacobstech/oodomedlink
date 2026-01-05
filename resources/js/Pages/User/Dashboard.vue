@@ -1244,6 +1244,7 @@ const handleSearchKeydown = (event: KeyboardEvent) => {
                                     </div>
                               </div>
                         </div>
+
                   </div>
             </div>
       </AuthenticatedLayout>

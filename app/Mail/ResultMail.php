@@ -25,6 +25,8 @@ class ResultMail extends Mailable
 
     public $clinic;
 
+    public $mail_subject;
+
 
 
 
@@ -34,7 +36,7 @@ class ResultMail extends Mailable
     public function __construct(object $receipient, string $subject, array $attachments,  string $notes, $clinic)
     {
         $this->receipient = $receipient;
-        $this->subject($subject);
+        $this->mail_subject = $subject;
         $this->mailAttachments = $attachments;
         $this->notes = $notes;
         $this->clinic = $clinic;
@@ -51,9 +53,19 @@ class ResultMail extends Mailable
                 config('mail.from.address'),
                 $this->clinic->name . ' from OodoMedlink'
             ),
-            tags: ['Oodomedlink Support'],
-            metadata: ['oodomedlink', 'digital medical lab system', 'oodomedlink.com', config('mail.from.address')],
-            subject: $this->subject,
+            tags: [
+                'Oodomedlink Support',
+                'lab-results'
+            ],
+            metadata: [
+                'oodomedlink',
+                'digital medical lab system',
+                'oodomedlink.com',
+                config('mail.from.address'),
+                'clinic_id' => $this->clinic->id,
+                'recipient_id' => $this->receipient->id
+            ],
+            subject: $this->mail_subject,
             to: $this->receipient->email,
             replyTo: [new Address(
                 $this->clinic->email,
